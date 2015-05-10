@@ -1,0 +1,1 @@
+﻿var EASING_NAME = "easeInOutCubic";
