@@ -957,7 +957,7 @@ header {
 header nav {
     margin: 0 auto;
     text-align: center;
-    line-height: 50px;
+    line-height: 20px;
 }
 header nav ul {
     list-style: none;
@@ -970,7 +970,20 @@ header nav ul li {
 header nav ul li a {
     color: #000;
     display: block;
-    padding: 0 20px;
+    padding: 14px 20px;
+}
+header nav ul li a span{
+    display:inline-block;
+    border-bottom:2px solid #ffffff;
+    -webkit-transition: border-color 500ms ease;
+    -moz-transition: border-color 500ms ease;
+    transition: border-color 500ms ease;
+}
+header nav ul li a:hover{
+    text-decoration:none;
+}
+header nav ul li a:hover span{
+    border-bottom-color:#c5baa6;
 }
 header .logo {
     display: block;
