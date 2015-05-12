@@ -9,6 +9,7 @@
 }
 body {
     margin: 0;
+    padding-top:50px;
 }
 * {
     -webkit-box-sizing: border-box;
@@ -298,8 +299,6 @@ h6,
    col
    ========================================================================== */
 .row {
-    margin-right: -15px;
-    margin-left: -15px;
 }
 .row:before,
 .row:after {
@@ -949,52 +948,67 @@ h6,
    Navigator
    ========================================================================== */
 header {
+    position: fixed;
+    top:0;
+    left:0;
     width: 100%;
     height: 50px;
-    position: relative;
+    background-color:#fff;
     font-size: 16px;
+    z-index:1;
 }
-header nav {
+header .header-container{
+    width: 100%;
+    height: 50px;
+    position:relative;
+}
+header .header-container nav {
     margin: 0 auto;
     text-align: center;
     line-height: 20px;
 }
-header nav ul {
+header .header-container nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-header nav ul li {
+header .header-container nav ul li {
     display: inline-block;
 }
-header nav ul li a {
+header .header-container nav ul li a {
     color: #000;
     display: block;
     padding: 14px 20px;
 }
-header nav ul li a span{
+header .header-container nav ul li a span{
     display:inline-block;
     border-bottom:2px solid #ffffff;
     -webkit-transition: border-color 500ms ease;
     -moz-transition: border-color 500ms ease;
     transition: border-color 500ms ease;
 }
-header nav ul li a:hover{
+header .header-container nav ul li a:hover{
     text-decoration:none;
 }
-header nav ul li a:hover span{
+header .header-container nav ul li a:hover span{
     border-bottom-color:#c5baa6;
 }
-header .logo {
+header .header-container .menu-btn{
+    display:none;
+    width:30px;
+    height:25px;
+    padding:12px 10px;
+}
+header .header-container .logo {
     display: block;
     position: absolute;
     top: 15px;
     left: 30px;
     width: 160px;
     height: 20px;
-    background-color: #fff;
+    background-color:#fff;
 }
-header .btn-group {
+header .header-container .btn-group {
     position: absolute;
     top: 0;
     right: 0;
@@ -1004,7 +1018,7 @@ header .btn-group {
     background-color: #fff;
     line-height: 50px;
 }
-header .btn-group a {
+header .header-container .btn-group a {
     display: inline-block;
     height: 50px;
     text-align: center;
@@ -1014,23 +1028,84 @@ header .btn-group a {
     -webkit-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
 }
-header .btn-group a:hover {
+header .header-container .btn-group a:hover {
     text-decoration: none;
 }
-header .btn-group a.login {
+header .header-container .btn-group a.login {
     width: 150px;
     color: #fff;
     background-color: #c5baa6;
 }
-header .btn-group a.login:hover {
+header .header-container .btn-group a.login:hover {
     background-color: #b1a590;
 }
-header .btn-group a.register {
+header .header-container .btn-group a.register {
     width: 100px;
     background-color: #f5f5f5;
 }
-header .btn-group a.register:hover {
+header .header-container .btn-group a.register:hover {
     background-color: #dfe4de;
+}
+/* ==========================================================================
+   Aside
+   ========================================================================== */
+aside{
+    position:fixed;
+    top:0;
+    display:none;
+    left:-285px;
+    width:250px;
+    height:100%;
+    overflow:visible;
+    z-index:2;
+    -webkit-transition: all 400ms ease;
+    -moz-transition: all 400ms ease;
+    transition: all 400ms ease;
+    z-index:11;
+}
+aside.opened{
+    left:0;
+}
+aside .btn-close{
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: -35px;
+    top: 10px;
+}
+aside ul{
+    height: 100%;
+    margin: 0;
+    padding:0;
+    background: #f6f6f6;
+    overflow: scroll;
+}
+aside ul li{
+    list-style:none;
+}
+aside ul li a{
+    display:block;
+    padding: 15px 20px;
+    background: #f6f6f6;
+    border-bottom: 1px solid white;
+    font-size:16px;
+    line-height:20px;
+}
+aside ul li a.menu-button{
+    margin:20px 10px;
+    padding: 15px 20px;
+    background-color: #c5baa6;
+    border-bottom: none;
+    text-align:center;
+    color:#fff;
+    border-radius:5px;
+    -webkit-transition: background 500ms ease, color 500ms ease;
+    -moz-transition: background 500ms ease, color 500ms ease;
+    transition: background 500ms ease, color 500ms ease;
+}
+aside ul li a.menu-button:hover{
+    background-color: #b1a590;
+    text-decoration:none;
 }
 /* ==========================================================================
    Footer
@@ -1116,4 +1191,54 @@ footer .logo {
     left: 30px;
     width: 132px;
     height: 100px;
+}
+@media(max-width:768px) {
+    div.cover-small-black{
+        position:fixed;
+        top:0;
+        left:0;
+        display:none;
+        width:100%;
+        height:100%;
+        background-color:#000;
+        opacity:0.5;
+        z-index:10;
+    }
+    div.cover-small-black.opened{
+        display:block;
+    }
+    .hide-on-small{
+        display:none!important;
+    }
+    .show-on-small{
+        display:inherit!important;
+    }
+    .no-float-on-small{
+        float:none!important;
+    }
+    .text-center-on-small{
+        text-align:center!important;
+    }
+    header .header-container .logo {
+        left: 50%;
+        margin-left:-80px;
+    }
+    footer .logo {
+        position: static;
+        top: 0;
+        left: 0;
+        width: 132px;
+        height: 100px;
+        margin:10px auto 0;
+    }
+    footer .contact {
+        position: static;
+        top: 0;
+        right: 0;
+        width: 290px;
+        margin:0 auto;
+    }
+    footer .links {
+        margin: 0 auto;
+    }
 }

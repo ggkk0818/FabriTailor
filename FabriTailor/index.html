@@ -13,29 +13,43 @@
 </head>
 <body>
     <header>
-        <div class="logo">
-            <img src="img/logo.png" />
-        </div>
-        <nav>
-            <ul>
-                <li><a href="javascript:void(0);"><span>在线定制</span></a></li>
-                <li><a href="javascript:void(0);"><span>关于我们</span></a></li>
-                <li><a href="javascript:void(0);"><span>凡布风尚</span></a></li>
-                <li><a href="javascript:void(0);"><span>休闲衬衫</span></a></li>
-                <li><a href="javascript:void(0);"><span>我们的凡布</span></a></li>
-            </ul>
-        </nav>
-        <div class="btn-group">
-            <a href="javascript:void(0);" class="login">从这里开始</a><a href="javascript:void(0);" class="register">注册</a>
+        <div class="header-container">
+            <a class="menu-btn show-on-small" href="javascript:void(0);"><img src="img/menu-btn.png" /></a>
+            <div class="logo">
+                <img src="img/logo.png" />
+            </div>
+            <nav class="hide-on-small">
+                <ul>
+                    <li><a href="javascript:void(0);"><span>在线定制</span></a></li>
+                    <li><a href="javascript:void(0);"><span>关于我们</span></a></li>
+                    <li><a href="javascript:void(0);"><span>凡布风尚</span></a></li>
+                    <li><a href="javascript:void(0);"><span>休闲衬衫</span></a></li>
+                    <li><a href="javascript:void(0);"><span>我们的凡布</span></a></li>
+                </ul>
+            </nav>
+            <div class="btn-group hide-on-small">
+                <a href="javascript:void(0);" class="login">从这里开始</a><a href="javascript:void(0);" class="register">注册</a>
+            </div>
         </div>
     </header>
+    <aside class="show-on-small opened">
+        <a href="javascript:void(0);" class="btn-close"><img src="img/menu-btn-close.png" /></a>
+        <ul>
+            <li><a href="javascript:void(0);"><span>在线定制</span></a></li>
+            <li><a href="javascript:void(0);"><span>关于我们</span></a></li>
+            <li><a href="javascript:void(0);"><span>凡布风尚</span></a></li>
+            <li><a href="javascript:void(0);"><span>休闲衬衫</span></a></li>
+            <li><a href="javascript:void(0);"><span>我们的凡布</span></a></li>
+            <li><a class="menu-button" href="javascript:void(0);">从这里开始</a></li>
+        </ul>
+    </aside>
     <div class="main-container">
         <section class="index-image-container">
             <img src="img/lazyload.png" data-src="img/index1.jpg" style="height:900px;" />
             <div class="text">
                 <h2>完美定制你的衬衫</h2>
                 <p>无可挑剔的设计<br />和准确无误的上门量体</p>
-                <a href="javascript:void(0);" class="button">从这里开始</a>
+                <a href="javascript:void(0);" class="button hide-on-small">从这里开始</a>
             </div>
         </section>
         <section class="index-text-container">
@@ -90,25 +104,25 @@
             <img src="img/lazyload.png" data-src="img/index6.jpg" style="height:600px;" />
             <div class="text" style="height: 200px;margin-top:-50px;">
                 <h3>量体裁衣 只为懂得品质的你</h3>
-                <a href="javascript:void(0);" class="button" style="margin-top:60px;">从这里开始</a>
+                <a href="javascript:void(0);" class="button hide-on-small" style="margin-top:60px;">从这里开始</a>
             </div>
         </section>
     </div>
     <footer>
         <div class="contact">
-            <h3>与凡布保持联系</h3>
-            <div class="input-group">
+            <h3 class="hide-on-small">与凡布保持联系</h3>
+            <div class="input-group hide-on-small">
                 <input class="input" type="text" placeholder="请输入您的邮件地址" />
                 <a href="javascript:void(0);" class="btn">»</a>
             </div>
-            <div class="ico-link">
+            <div class="ico-link text-center-on-small">
                 <a href="javascript:void(0);"><img src="img/ico-email.jpg" /></a>
                 <a href="javascript:void(0);"><img src="img/ico-weibo.png" /></a>
                 <a href="javascript:void(0);"><img src="img/ico-weixin.png" /></a>
                 <a href="javascript:void(0);"><img src="img/ico-taobao.png" /></a>
             </div>
         </div>
-        <div class="links">
+        <div class="links text-center-on-small">
             <div class="row">
                 <div class="col-lg-3 col-sm-12">
                     <h6>FabriTailor.com</h6>
@@ -156,6 +170,7 @@
             <img src="img/logo-footer.png" />
         </div>
     </footer>
+    <div class="cover-small-black opened"></div>
     <script type="text/javascript">
         //分屏加载
         $(".index-image-container > img[data-src]").lazyload({
