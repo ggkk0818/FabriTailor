@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=devicewidth;initial-scale=1.0" />
-    <title></title>
+    <title>FabriTailor</title>
     <link href="css/style.css" rel="stylesheet" />
     <link href="css/index.css" rel="stylesheet" />
     <script src="js/modernizr.js"></script>
@@ -33,7 +33,7 @@
             </div>
         </div>
     </header>
-    <aside class="show-on-small opened">
+    <aside class="show-on-small">
         <a href="javascript:void(0);" class="btn-close"><img src="img/menu-btn-close.png" /></a>
         <ul>
             <li><a href="javascript:void(0);"><span>在线定制</span></a></li>
@@ -41,7 +41,7 @@
             <li><a href="javascript:void(0);"><span>凡布风尚</span></a></li>
             <li><a href="javascript:void(0);"><span>休闲衬衫</span></a></li>
             <li><a href="javascript:void(0);"><span>我们的凡布</span></a></li>
-            <li><a class="menu-button" href="javascript:void(0);">从这里开始</a></li>
+            <li><a class="button" href="javascript:void(0);">从这里开始</a></li>
         </ul>
     </aside>
     <div class="main-container">
@@ -50,7 +50,7 @@
             <div class="text">
                 <h2>完美定制你的衬衫</h2>
                 <p>无可挑剔的设计<br />和准确无误的上门量体</p>
-                <a href="javascript:void(0);" class="button hide-on-small">从这里开始</a>
+                <a href="javascript:void(0);" class="button-hollow hide-on-small">从这里开始</a>
             </div>
         </section>
         <section class="index-text-container">
@@ -105,7 +105,7 @@
             <img src="img/lazyload.png" data-src="img/index6.jpg" style="height:600px;" />
             <div class="text" style="height: 200px;margin-top:-50px;">
                 <h3>量体裁衣 只为懂得品质的你</h3>
-                <a href="javascript:void(0);" class="button hide-on-small" style="margin-top:60px;">从这里开始</a>
+                <a href="javascript:void(0);" class="button-hollow hide-on-small" style="margin-top:60px;">从这里开始</a>
             </div>
         </section>
     </div>
@@ -125,7 +125,7 @@
         </div>
         <div class="links text-center-on-small">
             <div class="row">
-                <div class="col-lg-3 col-sm-12">
+                <div class="col-md-3 col-sm-12">
                     <h6>FabriTailor.com</h6>
                     <ul>
                         <li>
@@ -138,7 +138,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-lg-3 col-sm-12">
+                <div class="col-md-3 col-sm-12">
                     <h6>凡布制衣</h6>
                     <ul>
                         <li><a href="javascript:void(0);">关于我们</a></li>
@@ -148,7 +148,7 @@
                         <li><a href="javascript:void(0);">隐私声明</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-3 col-sm-12">
+                <div class="col-md-3 col-sm-12">
                     <h6>帮助</h6>
                     <ul>
                         <li><a href="javascript:void(0);">购物指南</a></li>
@@ -158,7 +158,7 @@
                         <li><a href="javascript:void(0);">退换货信息</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-3 col-sm-12">
+                <div class="col-md-3 col-sm-12">
                     <h6>在线商店</h6>
                     <ul>
                         <li><a href="javascript:void(0);">衬衫</a></li>
@@ -171,7 +171,37 @@
             <img src="img/logo-footer.png" />
         </div>
     </footer>
-    <div class="cover-small-black opened"></div>
+    <div class="login-panel">
+        <h2>登录</h2>
+        <input class="input" type="text" placeholder="请输入电子邮件地址" />
+        <input class="input" type="password" placeholder="请输入密码" />
+        <a class="button" href="javascript:void(0);">登陆</a>
+        <a href="javascript:void(0);">忘记密码，或立即免费注册成为会员？</a>
+    </div>
+    <div class="cover-small-black"></div>
+    <div class="login-cover-black"></div>
+    <script type="text/javascript">
+        //侧边栏
+        $("header .menu-btn").click(function () {
+            $("aside").addClass("opened");
+            $("div.cover-small-black").addClass("opened").fadeTo("normal", 0.5, EASING_NAME);
+        });
+        $("aside .btn-close").click(function () {
+            $("aside").removeClass("opened");
+            $("div.cover-small-black").fadeTo("normal", 0, EASING_NAME, function () { $(this).removeClass("opened"); });
+        });
+        //登陆
+        var showLogin = function () {
+            $(".login-panel").show();
+            $("div.login-cover-black").addClass("opened").fadeTo("normal", 0.5, EASING_NAME);
+        };
+        var hideLogin = function () {
+            $(".login-panel").hide();
+            $("div.login-cover-black").fadeTo("normal", 0, EASING_NAME, function () { $(this).removeClass("opened"); });
+        };
+        $("div.login-cover-black").click(hideLogin);
+        $("header .btn-group .login").click(showLogin);
+    </script>
     <script type="text/javascript">
         //分屏加载
         $(".index-image-container > img[data-src]").lazyload({

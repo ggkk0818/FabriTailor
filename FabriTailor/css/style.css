@@ -154,6 +154,7 @@ input::-moz-focus-inner {
 }
 input.input {
     width: 100%;
+    height:50px;
     border-radius: 0px;
     background-color: #f5f5f5;
     color: #333d30;
@@ -161,6 +162,8 @@ input.input {
     box-shadow: none;
     display: block;
     padding:15px 15px;
+    margin: 0;
+    font-size:1rem;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -194,7 +197,24 @@ input[type="radio"] {
     box-sizing: border-box;
     padding: 0;
 }
-
+input.button,
+a.button{
+    margin:20px 10px;
+    padding: 15px 20px;
+    background-color: #c5baa6;
+    border-bottom: none;
+    text-align:center;
+    color:#fff;
+    border-radius:5px;
+    -webkit-transition: background 500ms ease, color 500ms ease;
+    -moz-transition: background 500ms ease, color 500ms ease;
+    transition: background 500ms ease, color 500ms ease;
+}
+input.button:hover,
+a.button:hover{
+    background-color: #b1a590;
+    text-decoration:none;
+}
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     height: auto;
@@ -470,7 +490,7 @@ h6,
 .col-xs-offset-0 {
     margin-left: 0;
 }
-@media (min-width: 768px) {
+@media (min-width: 300px) {
     .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
         float: left;
     }
@@ -628,7 +648,7 @@ h6,
         margin-left: 0;
     }
 }
-@media (min-width: 992px) {
+@media (min-width: 1000px) {
     .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
         float: left;
     }
@@ -786,7 +806,7 @@ h6,
         margin-left: 0;
     }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1600px) {
     .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
         float: left;
     }
@@ -1092,20 +1112,8 @@ aside ul li a{
     line-height:20px;
 }
 aside ul li a.menu-button{
-    margin:20px 10px;
-    padding: 15px 20px;
-    background-color: #c5baa6;
-    border-bottom: none;
-    text-align:center;
-    color:#fff;
-    border-radius:5px;
-    -webkit-transition: background 500ms ease, color 500ms ease;
-    -moz-transition: background 500ms ease, color 500ms ease;
-    transition: background 500ms ease, color 500ms ease;
 }
 aside ul li a.menu-button:hover{
-    background-color: #b1a590;
-    text-decoration:none;
 }
 /* ==========================================================================
    Footer
@@ -1128,11 +1136,7 @@ footer .contact .input-group{
     position:relative;
 }
 footer .contact .input-group .input{
-    height:50px;
-    font-size:14px;
-    line-height:20px;
     padding-right: 60px;  
-    margin: 0;
 }
 footer .contact .input-group .btn{
     display:block;
@@ -1167,7 +1171,7 @@ footer .contact .ico-link a{
     margin-right:20px;
 }
 footer .links {
-    margin: 0 340px 0 14%;
+    margin: 0 340px 0 15%;
 }
 footer .links h6 {
     color: #cccccc;
@@ -1192,7 +1196,49 @@ footer .logo {
     width: 132px;
     height: 100px;
 }
-@media(max-width:768px) {
+/* ==========================================================================
+   Login Panel
+   ========================================================================== */
+div.login-panel{
+    position:fixed;
+    top:50%;
+    left:50%;
+    display:none;
+    width:500px;
+    height:400px;
+    margin:-200px 0 0 -250px;
+    background-color:#fff;
+    text-align:center;
+    z-index:101;
+}
+div.login-panel h2{
+    margin-top: 55px;
+}
+div.login-panel input.input{
+    display:block;
+    width:400px;
+    margin:10px auto 0;
+}
+div.login-panel a.button{
+    display:block;
+    width:400px;
+    margin:10px auto 25px;
+}
+div.login-cover-black{
+    position:fixed;
+    top:0;
+    left:0;
+    display:none;
+    width:100%;
+    height:100%;
+    background-color:#000;
+    opacity:0;
+    z-index:100;
+}
+div.login-cover-black.opened{
+    display:block;
+}
+@media(max-width:1000px) {
     div.cover-small-black{
         position:fixed;
         top:0;
@@ -1201,7 +1247,7 @@ footer .logo {
         width:100%;
         height:100%;
         background-color:#000;
-        opacity:0.5;
+        opacity:0;
         z-index:10;
     }
     div.cover-small-black.opened{
