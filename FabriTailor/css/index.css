@@ -33,6 +33,7 @@
 }
 .index-image-container .text h3{
     margin: 20px 0;
+    line-height:1.75;
 }
 .index-image-container .text p{
     line-height:35px;
@@ -79,4 +80,31 @@
     width:600px;
     margin:0 auto;
     text-align:left;
+}
+
+@media(max-width:700px) {
+    .index-image-container .text{
+        width:320px;
+        height:400px;
+        margin:-200px 0 0 -160px;
+        font-size:12px;
+    }
+    .index-image-container h2, .index-text-container h2{
+        font-size:20px;
+    }
+    .index-image-container h3, .index-text-container h3{
+        font-size:16px;
+    }
+    .index-image-container .text p{
+        line-height:35px;
+    }
+    .index-text-container{
+        font-size:12px;
+    }
+    .index-text-container ol{
+        padding:0 50px 0 80px;
+    }
+    .index-text-container p{
+        width:260px;
+    }
 }
