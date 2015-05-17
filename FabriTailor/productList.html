@@ -45,6 +45,50 @@
         </ul>
     </aside>
     <div class="main-container">
+        <div class="product-carousel">
+            <div class="images">
+                <div class="image" style="background-image: url(./img/product-carousel1.jpg); ">
+                    <div class="text left">
+                        <h2>Seriously casual.</h2>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="image" style="background-image: url(./img/product-carousel2.jpg);">
+                    <div class="text right">
+                        <h2>New sweaters.</h2>
+                        <p>Original lambswool blend and cashmere sweaters are here. A sweater makes it better.</p>
+                    </div>
+                </div>
+                <div class="image" style="background-image: url(./img/product-carousel3.jpg);">
+                    <div class="text left black">
+                        <h2>Tie one on.</h2>
+                        <p>Trumaker ties are distinctive, versatile, and a great way to turn your outfit up a notch.</p>
+                    </div>
+                </div>
+                <div class="image" style="background-image: url(./img/product-carousel4.jpg);">
+                    <div class="text left">
+                        <h2>It's the little things.</h2>
+                        <p>Leather goods, belts, scarves. Even a bottle opener. Great gifts from Trumaker.</p>
+                    </div>
+                </div>
+                <div class="image" style="background-image: url(./img/product-carousel5.jpg);">
+                    <div class="text left">
+                        <h2>Seriously casual.</h2>
+                        <p>Original lambswool blend and cashmere sweaters are here. A sweater makes it better.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="direction">
+                <a class="arrow-left" href="javascript:void(0);"></a>
+                <a class="arrow-right" href="javascript:void(0);"></a>
+            </div>
+            <ul class="control">
+                <li class="active"><a href="javascript:void(0);"></a></li>
+                <li><a href="javascript:void(0);"></a></li>
+                <li><a href="javascript:void(0);"></a></li>
+                <li><a href="javascript:void(0);"></a></li>
+            </ul>
+        </div>
         <div class="product-categories">
             <ul>
                 <li class="active"><a href="javascript:void(0);">查看全部</a></li>
@@ -194,6 +238,84 @@
         };
         $("div.login-cover-black").click(hideLogin);
         $("header .btn-group .login").click(showLogin);
+    </script>
+    <script type="text/javascript">
+        //图片轮播
+        var $productCarousel = $(".main-container .product-carousel"),
+            productCarouselTimer = null;
+        var productCarouselCheck = function () {
+            var $window = $(window);;
+            if ($window.height() > 480 && $window.width() >= 1600) {
+                $productCarousel.removeClass("middle").addClass("large");
+            }
+            else if ($window.height() > 480 && $window.width() >= 768) {
+                $productCarousel.removeClass("large").addClass("middle");
+            }
+            else {
+                $productCarousel.removeClass("middle large");
+            }
+        };
+        var productCarouselShow = function (index) {
+            if (typeof index !== "number")
+                index = parseInt(index, 10);
+            if (index < 0 || $productCarousel.hasClass("loading")
+                || $productCarousel.find(".images .image").length <= index
+                || $productCarousel.find(".images .image").eq(index).hasClass("active")) {
+                return;
+            }
+            $productCarousel.find(".images .image.active").removeClass("active").fadeTo("slow", 0, EASING_NAME);
+            $productCarousel.addClass("loading").find(".images .image").eq(index).addClass("active").fadeTo("slow", 1, EASING_NAME, function () {
+                $productCarousel.removeClass("loading");
+            });
+            $productCarousel.find("ul.control li").removeClass("active").eq(index).addClass("active");
+        };
+        var productCarouselPrev = function () {
+            var index = 0;
+            if ($productCarousel.find(".images .image.active").length) {
+                index = $productCarousel.find(".images .image.active").first().prevAll().length - 1;
+                if (index < 0)
+                    index = $productCarousel.find(".images .image").length - 1;
+            }
+            productCarouselShow(index);
+        };
+        var productCarouselNext = function () {
+            var index = 0;
+            if ($productCarousel.find(".images .image.active").length) {
+                index = $productCarousel.find(".images .image.active").first().prevAll().length + 1;
+                if (index >= $productCarousel.find(".images .image").length)
+                    index = 0;
+            }
+            productCarouselShow(index);
+        };
+        var productCarouselControlClick = function () {
+            productCarouselShow($(this).parent().prevAll().length);
+        };
+        var productCarouselInit = function () {
+            var controlItemTemplate = '<li><a href="javascript:void(0);"></a></li>';
+            if ($productCarousel.find(".images .image").length) {
+                $productCarousel.find(".images .image").each(function (i, e) {
+                    if ($productCarousel.find("ul.control li").length <= i) {
+                        $productCarousel.find("ul.control").append($(controlItemTemplate));
+                    }
+                });
+                $productCarousel.find("ul.control li a").click(productCarouselControlClick);
+                $productCarousel.find(".direction .arrow-left").click(productCarouselPrev);
+                $productCarousel.find(".direction .arrow-right").click(productCarouselNext);
+                productCarouselShow(0);
+            }
+        };
+        $(window).on("resize.product-carousel", productCarouselCheck).resize();
+        $productCarousel.mouseenter(function () {
+            if (productCarouselTimer) {
+                clearInterval(productCarouselTimer);
+                productCarouselTimer = null;
+            }
+        }).mouseleave(function () {
+            if (!productCarouselTimer) {
+                productCarouselTimer = setInterval(productCarouselNext, 5000);
+            }
+        }).mouseleave();
+        productCarouselInit();
     </script>
 </body>
 </html>

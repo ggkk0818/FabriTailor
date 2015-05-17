@@ -1,4 +1,114 @@
 ﻿/* ==========================================================================
+   Product Carousel
+   ========================================================================== */
+.product-carousel{
+    display:none;
+    position: relative;
+    max-width:1920px;
+    margin: 0 auto;
+}
+.product-carousel.middle{
+    display:block;
+    height:414px;
+}
+.product-carousel.large{
+    display:block;
+    height:600px;
+}
+.product-carousel .images{
+    width:100%;
+    height:100%;
+}
+.product-carousel .images .image{
+    display:none;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-size:cover;
+    background-position:50% 50%;
+    background-repeat:no-repeat;
+}
+.product-carousel .images .image .text{
+    position:absolute;
+    top: 39%;
+    left:50%;
+    width: 400px;
+    margin-left:-200px;
+    text-align: center;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+}
+.product-carousel .images .image .text.left{
+    left: 5.9%;
+    margin-left:0;
+}
+.product-carousel .images .image .text.right{
+    left:auto;
+    right: 4.5%;
+    margin-left:0;
+}
+.product-carousel .images .image .text.black{
+    color:#000;
+}
+.product-carousel .images .image .text h2{
+    font-size:45px;
+    margin: 20px auto 14px;
+}
+.product-carousel .images .image .text p{
+    font-size:18px;
+    margin: 0 0 10px;
+}
+.product-carousel .direction{
+    overflow:visible;
+}
+.product-carousel .direction a{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 53px;
+    text-indent: -99999px;
+    overflow: hidden;
+}
+.product-carousel .direction a.arrow-left{
+    left: 0;
+    background: url(../img/arrow-left.png) no-repeat 13px 50%;
+}
+.product-carousel .direction a.arrow-right{
+    right: 0;
+    background: url(../img/arrow-right.png) no-repeat 30px 50%;
+}
+.product-carousel .control{
+    position: absolute;
+    left: 50%;
+    bottom: 21px;
+    margin: -29px 0 0;
+    padding: 0;
+    list-style: none;
+}
+.product-carousel .control li{
+    float: left;
+    position: relative;
+    left: -50%;
+    padding: 0 4px;
+}
+.product-carousel .control li a{
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    text-indent: -99999px;
+    overflow: hidden;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    float: left;
+    opacity: .6;
+}
+.product-carousel .control li.active a{
+    opacity: 1;
+}
+/* ==========================================================================
    Product Navigator
    ========================================================================== */
 .product-categories{
