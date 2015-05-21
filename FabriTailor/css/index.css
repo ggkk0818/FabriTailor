@@ -84,9 +84,9 @@
 
 @media(max-width:700px) {
     .index-image-container .text{
-        width:320px;
+        width:300px;
         height:400px;
-        margin:-200px 0 0 -160px;
+        margin:-200px 0 0 -150px;
         font-size:12px;
     }
     .index-image-container h2, .index-text-container h2{

@@ -228,13 +228,13 @@ section.products ul.list li .label.sold-out{
 }
 @media(max-width:769px){
     section.products{
-        width: 400px;
-        padding: 0 50px;
+        width: 300px;
+        padding: 0;
     }
     section.products ul.list{
-        margin: 0 0 0 -50px;
+        margin: 0;
     }
     section.products ul.list li{
-        margin-left: 50px;
+        margin-left: 0;
     }
 }
