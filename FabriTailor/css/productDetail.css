@@ -1,2 +1,264 @@
-﻿body {
+﻿/* ==========================================================================
+   Breadcrumb
+   ========================================================================== */
+.breadcrumb{
+    background: #d7ded6;
+    padding: 10px 0 9px;
+}
+.breadcrumb-container{
+    max-width: 960px;
+    margin:0 auto;
+}
+.breadcrumb-container ul{
+    list-style:none;
+    padding: 0;
+    margin: 6px 0;
+}
+.breadcrumb-container ul li{
+    float: left;
+    display:inline-block;
+    color: #768075;
+}
+.breadcrumb-container ul li a{
+    text-decoration: none;
+    color: #768075;
+}
+.breadcrumb-container ul li a:hover{
+    color: #333e30;
+}
+.breadcrumb-container ul li .divider{
+    padding: 1px 24px 0 21px;
+}
+/* ==========================================================================
+   Product Detail
+   ========================================================================== */
+.product-detail{
+    padding: 45px 0;
+}
+.product-detail-container{
+    max-width: 1024px;
+    margin:0 auto;
+}
+.product-detail-container .product-image{
+    position:relative;
+}
+.product-detail-container .product-image .images{
+    position:relative;
+    width:450px;
+    height:450px;
+    margin:0 auto;
+}
+.product-detail-container .product-image .images .image{
+    position:absolute;
+    top:0;
+    left:0;
+    display:none;
+    width:100%;
+    height:100%;
+    cursor: pointer;
+    cursor: -webkit-zoom-in;
+    cursor: -moz-zoom-in;
+}
+.product-detail-container .product-image .images .image img{
+    width:100%;
+    height:100%;
+}
+.product-detail-container .product-image a.arrow-left{
+    position: absolute;
+    top: 215px;
+    left: -15px;
+    display: block;
+    width: 10px;
+    height: 20px;
+    text-indent: -9999px;
+    overflow: hidden;
+    outline: 0;
+    background:url(../img/product-detail-arrow.png) no-repeat 0 0;
+}
+.product-detail-container .product-image a.arrow-left:hover{
+    background-position:0 -20px;
+}
+.product-detail-container .product-image a.arrow-right{
+    position: absolute;
+    top: 215px;
+    right: -15px;
+    display: block;
+    width: 10px;
+    height: 20px;
+    text-indent: -9999px;
+    overflow: hidden;
+    outline: 0;
+    background:url(../img/product-detail-arrow.png) no-repeat -10px 0;
+}
+.product-detail-container .product-image a.arrow-right:hover{
+    background-position:-10px -20px;
+}
+.product-detail-container .product-info{
+    margin:0 20px 0 10px;
+}
+.product-detail-container .product-info h2{
+    margin: 0 0 30px;
+    font-size:20px;
+    line-height:26px;
+    text-align:center;
+}
+.product-detail-container .product-info .price{
+    border-top:1px solid #d7ded6;
+    margin: 12px 0 15px;
+    text-align:center;
+    overflow:visible;
+}
+.product-detail-container .product-info .price span{
+    position:relative;
+    top:-12px;
+    padding: 0 22px;
+    font-size:20px;
+    line-height:24px;
+    background-color:#fff;
+}
+.product-detail-container .product-info .consist{
+    padding: 0 0 40px;
+    font-size:14px;
+    text-align:center;
+}
+.product-detail-container .product-info .text{
+    padding: 0 0 30px;
+    font-size:12px;
+}
+.product-detail-container .product-info .build-info{
+    border-top: 1px solid #d7ded6;
+    padding: 30px 0 0;
+    font-size:12px;
+}
+.product-detail-container .product-info .build-btns{
+      padding: 30px 0 0;
+}
+.product-detail-container .product-info .build-btns ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+.product-detail-container .product-info .build-btns ul li{
+    float: left;
+    width: 140px;
+    margin: 5px;
+}
+.product-detail-container .product-info .build-btns ul li a{
+    display:block;
+    background-color:#d7ded6;
+    border:3px solid #d7ded6;
+    border-radius:5px;
+    color:#768075;
+    font-size:16px;
+    line-height:20px;
+    text-align:center;
+    text-decoration:none;
+    padding:12px 0;
+}
+.product-detail-container .product-info .build-btns ul li a:hover{
+    background-color:#fff;
+}
+.product-detail-container .product-info .build-btns ul li.active a{
+    background-color:#fff;
+    color:#000;
+}
+/* ==========================================================================
+   Image Zoom
+   ========================================================================== */
+.product-detail-image-zoom{
+    position:fixed;
+    top:0;
+    left:0;
+    display:none;
+    width:100%;
+    height:100%;
+    overflow:auto;
+    background-color:#fff;
+    z-index:3;
+}
+.product-detail-image-zoom .zoom-container{
+    position:relative;
+    width:950px;
+    margin:0 auto;
+    padding:15px 0 152px;
+}
+.product-detail-image-zoom .zoom-container .btn-close{
+    position:absolute;
+    top:15px;
+    right:-30px;
+    width:25px;
+    height:25px;
+    background:url(../img/product-image-zoom-close.png) no-repeat 0 0;
+}
+.product-detail-image-zoom .zoom-container .btn-close:hover{
+    background-position:-25px 0;
+}
+.product-detail-image-zoom .zoom-container a.arrow-left{
+    position: absolute;
+    top: 300px;
+    left: -15px;
+    display: block;
+    width: 10px;
+    height: 20px;
+    text-indent: -9999px;
+    overflow: hidden;
+    outline: 0;
+    background:url(../img/product-detail-arrow.png) no-repeat 0 0;
+}
+.product-detail-image-zoom .zoom-container a.arrow-left:hover{
+    background-position:0 -20px;
+}
+.product-detail-image-zoom .zoom-container a.arrow-right{
+    position: absolute;
+    top: 300px;
+    right: -15px;
+    display: block;
+    width: 10px;
+    height: 20px;
+    text-indent: -9999px;
+    overflow: hidden;
+    outline: 0;
+    background:url(../img/product-detail-arrow.png) no-repeat -10px 0;
+}
+.product-detail-image-zoom .zoom-container a.arrow-right:hover{
+    background-position:-10px -20px;
+}
+.product-detail-image-zoom .zoom-container .image{
+    width:100%;
+}
+.product-detail-image-zoom-thumbs{
+    position:fixed;
+    bottom:0;
+    left:0;
+    display:none;
+    width:100%;
+    padding: 15px 0;
+    overflow:auto;
+    background-color:#fff;
+    z-index:4;
+}
+.product-detail-image-zoom-thumbs ul{
+    display:block;
+    list-style:none;
+    padding:0;
+    margin:0;
+    text-align:center;
+}
+.product-detail-image-zoom-thumbs ul li{
+    display:inline-block;
+    margin-right:10px;
+}
+.product-detail-image-zoom-thumbs ul li a{
+    display:block;
+    width:120px;
+    height:120px;
+    border:1px solid #fff;
+    overflow:hidden;
+}
+.product-detail-image-zoom-thumbs ul li.active a{
+    border:1px solid #a4652d;
+}
+.product-detail-image-zoom-thumbs ul li a img{
+    width:100%;
+    height:100%;
 }

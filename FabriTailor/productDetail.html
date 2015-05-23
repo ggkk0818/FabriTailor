@@ -45,7 +45,79 @@
         </ul>
     </aside>
     <div class="main-container">
-
+        <div class="breadcrumb">
+            <div class="breadcrumb-container">
+                <ul class="clearfix">
+                    <li><a href="javascript:void(0);">在线定制</a><span class="divider">&gt;</span></li>
+                    <li><a href="javascript:void(0);">衬衫</a><span class="divider">&gt;</span></li>
+                    <li class="active">休斯顿系列</li>
+                </ul>
+            </div>
+        </div>
+        <div class="product-detail">
+            <div class="product-detail-container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="product-image">
+                            <div class="product-image">
+                                <div class="images">
+                                    <div class="image"><img src="img/product-detail1.jpg" /></div>
+                                    <div class="image"><img src="img/product-detail2.jpg" /></div>
+                                    <div class="image"><img src="img/product-detail3.jpg" /></div>
+                                    <div class="image"><img src="img/product-detail4.jpg" /></div>
+                                    <div class="image"><img src="img/product-detail5.jpg" /></div>
+                                </div>
+                            </div>
+                            <a class="arrow-left" href="javascript:void(0);">Prev</a>
+                            <a class="arrow-right" href="javascript:void(0);">Next</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="product-info">
+                            <h2>休斯顿 - 蓝色</h2>
+                            <div class="price">
+                                <span>$500</span>
+                            </div>
+                            <div class="consist">
+                                100％棉牛津，蓝色。
+                            </div>
+                            <div class="text">
+                                同名：山姆，昔日的共和国总统，他的是自己的同名到一个庞大的墨西哥湾沿岸的大都市。<br />
+                                <br />
+                                适用于：任何事情。搭配牛仔裤，西装，或与针织领带西装上衣扔它。这件衬衫行之有效的任何地方，而不必惹它。
+                            </div>
+                            <div class="build-info">
+                                这Trumaker衬衫将会向您的测量。您可以选择三种简单的方式来构建它。点击了解更多。
+                            </div>
+                            <div class="build-btns">
+                                <ul>
+                                    <li class="active"><a href="javascript:void(0);">我的版型</a></li>
+                                    <li><a href="javascript:void(0);">推荐版型</a></li>
+                                    <li><a href="javascript:void(0);">新建版型</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product-detail-image-zoom">
+            <div class="zoom-container">
+                <a class="btn-close" href="javascript:void(0);"></a>
+                <a class="arrow-left" href="javascript:void(0);">Prev</a>
+                <a class="arrow-right" href="javascript:void(0);">Next</a>
+                <img class="image" src="img/product-detail1.jpg" />
+            </div>
+        </div>
+        <div class="product-detail-image-zoom-thumbs">
+            <ul>
+                <li><a href="javascript:void(0);"><img src="img/product-detail-thumb1.jpg" data-origin-src="img/product-detail1.jpg" /></a></li>
+                <li><a href="javascript:void(0);"><img src="img/product-detail-thumb2.jpg" data-origin-src="img/product-detail2.jpg" /></a></li>
+                <li><a href="javascript:void(0);"><img src="img/product-detail-thumb3.jpg" data-origin-src="img/product-detail3.jpg" /></a></li>
+                <li><a href="javascript:void(0);"><img src="img/product-detail-thumb4.jpg" data-origin-src="img/product-detail4.jpg" /></a></li>
+                <li><a href="javascript:void(0);"><img src="img/product-detail-thumb5.jpg" data-origin-src="img/product-detail5.jpg" /></a></li>
+            </ul>
+        </div>
     </div>
     <footer>
         <div class="contact">
@@ -139,6 +211,117 @@
         };
         $("div.login-cover-black").click(hideLogin);
         $("header .btn-group .login").click(showLogin);
+    </script>
+    <script type="text/javascript">
+        //产品图片
+        var $productImage = $(".main-container .product-detail .product-detail-container .product-image");
+
+        var productImageShow = function (index) {
+            if (typeof index !== "number")
+                index = parseInt(index, 10);
+            if (index < 0 || $productImage.hasClass("loading")
+                || $productImage.find(".images .image").length <= index
+                || $productImage.find(".images .image").eq(index).hasClass("active")) {
+                return;
+            }
+            $productImage.find(".images .image.active").removeClass("active").fadeTo("slow", 0, EASING_NAME, function () { $(this).hide(); });
+            $productImage.addClass("loading").find(".images .image").eq(index).addClass("active").fadeTo("slow", 1, EASING_NAME, function () {
+                $productImage.removeClass("loading");
+            });
+        };
+        var productImagePrev = function () {
+            var index = 0;
+            if ($productImage.find(".images .image.active").length) {
+                index = $productImage.find(".images .image.active").first().prevAll().length - 1;
+                if (index < 0)
+                    index = $productImage.find(".images .image").length - 1;
+            }
+            productImageShow(index);
+        };
+        var productImageNext = function () {
+            var index = 0;
+            if ($productImage.find(".images .image.active").length) {
+                index = $productImage.find(".images .image.active").first().prevAll().length + 1;
+                if (index >= $productImage.find(".images .image").length)
+                    index = 0;
+            }
+            productImageShow(index);
+        };
+        $productImage.find(".arrow-left").click(productImagePrev);
+        $productImage.find(".arrow-right").click(productImageNext);
+        productImageShow(0);
+    </script>
+    <script type="text/javascript">
+        //产品图片放大
+        var $productZoom = $(".main-container .product-detail-image-zoom"),
+            $productZoomThumbs = $(".main-container .product-detail-image-zoom-thumbs");
+        var productZoomImageShow = function (index) {
+            if (typeof index !== "number")
+                index = parseInt(index, 10);
+            if (index < 0 || $productZoom.hasClass("loading")
+                || $productZoomThumbs.find("ul li").length <= index
+                || $productZoomThumbs.find("ul li").eq(index).hasClass("active")) {
+                return;
+            }
+            if (!$productZoom.hasClass("active")) {
+                $productZoom.stop(true, false).addClass("active").fadeTo("slow", 1, EASING_NAME).find(".zoom-container .image").remove();
+                $productZoomThumbs.stop(true, false).addClass("active").fadeTo("slow", 1, EASING_NAME);
+                $("body").addClass("noscroll");
+            }
+            var src = $productZoomThumbs.find("ul li").eq(index).find("a img").data("origin-src");
+            if ($productZoom.find(".zoom-container .image").length) {
+                $productZoom.addClass("loading").find(".zoom-container .image").fadeTo("normal", 0, EASING_NAME, function () {
+                    $(this).attr("src", src);
+                    $(this).fadeTo("normal", 1, EASING_NAME, function () { $productZoom.removeClass("loading"); });
+                });
+            }
+            else {
+                var $img = $('<img class="image" />');
+                $img.attr("src", src);
+                $productZoom.find(".zoom-container").append($img);
+            }
+            $productZoomThumbs.find("ul li").removeClass("active").eq(index).addClass("active")
+        };
+        var productZoomImageHide = function () {
+            $productZoom.stop(true, false).fadeTo("slow", 0, EASING_NAME, function () {
+                $(this).removeClass("active").hide();
+                $("body").removeClass("noscroll");
+            });
+            $productZoomThumbs.stop(true, false).fadeTo("slow", 0, EASING_NAME, function () {
+                $(this).removeClass("active").hide();
+            });
+        };
+        var productZoomImagePrev = function () {
+            var index = 0;
+            if ($productZoomThumbs.find("ul li.active").length) {
+                index = $productZoomThumbs.find("ul li.active").first().prevAll().length - 1;
+                if (index < 0)
+                    index = $productZoomThumbs.find("ul li").length - 1;
+            }
+            productZoomImageShow(index);
+        };
+        var productZoomImageNext = function () {
+            var index = 0;
+            if ($productZoomThumbs.find("ul li.active").length) {
+                index = $productZoomThumbs.find("ul li.active").first().prevAll().length + 1;
+                if (index >= $productZoomThumbs.find("ul li").length)
+                    index = 0;
+            }
+            productZoomImageShow(index);
+        };
+        var productZoomImageThumbClick = function () {
+            productZoomImageShow($(this).parent().prevAll().length);
+        };
+        var productZoomImageInit = function () {
+            $(".main-container .product-detail .product-detail-container .product-image .images .image").click(function () {
+                productZoomImageShow($(this).prevAll(".image").length);
+            });
+            $productZoomThumbs.find("ul li a").click(productZoomImageThumbClick);
+            $productZoom.find(".arrow-left").click(productZoomImagePrev);
+            $productZoom.find(".arrow-right").click(productZoomImageNext);
+            $productZoom.find(".btn-close").click(productZoomImageHide);
+        };
+        productZoomImageInit();
     </script>
 </body>
 </html>

@@ -11,6 +11,9 @@ body {
     margin: 0;
     padding-top:50px;
 }
+body.noscroll{
+    overflow:hidden;
+}
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
