@@ -229,10 +229,11 @@
 .product-detail-image-zoom-thumbs{
     position:fixed;
     bottom:0;
-    left:0;
+    right:0;
     display:none;
     width:100%;
     padding: 15px 0;
+    margin-right:20px;
     overflow:auto;
     background-color:#fff;
     z-index:4;
@@ -241,7 +242,7 @@
     display:block;
     list-style:none;
     padding:0;
-    margin:0;
+    margin:0 0 0 20px;
     text-align:center;
 }
 .product-detail-image-zoom-thumbs ul li{
@@ -261,4 +262,373 @@
 .product-detail-image-zoom-thumbs ul li a img{
     width:100%;
     height:100%;
+}
+/* ==========================================================================
+   Customizations
+   ========================================================================== */
+.product-customizations{
+
+}
+.product-customizations .customization{
+    position: relative;
+    display:none;
+    width: 100%;
+    background-color:#f5f5f5;
+}
+.product-customizations .customization h2.description{
+    margin:0;
+    padding-top: 50px;
+    text-align: center;
+    font-size:20px;
+    line-height:30px;
+}
+.product-customizations .customization p.description{
+    width: 600px;
+    text-align: center;
+    margin: 0 auto 10px;
+    padding-top: 10px;
+    font-size:14px;
+    line-height:30px;
+}
+.product-customizations .customization .options{
+    margin: 0 auto;
+    width: 84%;
+    text-align: center;
+}
+.product-customizations .customization .options .option{
+    cursor: pointer;
+    width: 17.5%;
+    margin: 1%;
+    border: 1px solid #d7ded6;
+    display: inline-block;
+    vertical-align: middle;
+}
+.product-customizations .customization .options .option .image{
+    
+}
+.product-customizations .customization .options .option .image img{
+    width:100%;
+    vertical-align: middle;
+}
+.product-customizations .customization .options .option .text{
+    text-align: center;
+    color: #a4652d;
+    border-top: 1px solid #d7ded6;
+    font-size: 16px;
+    line-height:35px;
+    padding: 7px 0;
+    text-transform: uppercase;
+}
+.product-customizations .customization a.btn{
+    display:block;
+    width:250px;
+    margin:38px auto 68px;
+    border-radius:5px;
+    color:#fff;
+    background-color:#768075;
+    padding:15px 0;
+    font-size:16px;
+    line-height:20px;
+    text-decoration:none;
+    text-align:center;
+}
+.product-customizations .customization a.btn:hover{
+    background-color:#a4652d;
+}
+.product-customizations .customization .zoom-container{
+    position:absolute;
+    top:0;
+    left:0;
+    display:none;
+    width:100%;
+    height:100%;
+    background-color:#fff;
+    overflow:hidden;
+}
+.product-customizations .customization .zoom-container .image{
+    height:100%;
+    float:right;
+}
+.product-customizations .customization .zoom-container .btn-close{
+    position:absolute;
+    top:50px;
+    right:50px;
+    width:25px;
+    height:25px;
+    background:url(../img/product-customization-close.png) no-repeat 0 0;
+}
+.product-customizations .customization .zoom-container a.btn{
+    position:absolute;
+    right:50px;
+    bottom:50px;
+    margin:0;
+}
+.product-customizations .customization .zoom-container .btn-close:hover{
+    background-position:-25px 0;
+}
+.product-customizations .customization .zoom-container .description{
+    position: absolute;
+    left: 6%;
+    width: 38%;
+    top: 6%;
+    text-align: center;
+}
+.product-customizations .customization .zoom-container .description h2{
+    margin: 30px 0;
+    font-size:20px;
+    line-height:30px;
+}
+.product-customizations .customization .zoom-container .description p{
+    font-size:14px;
+    line-height:30px;
+}
+.product-customizations .customization .zoom-container .gradient{
+    position:absolute;
+    top:0;
+    left:0;
+    width:50%;
+    height:100%;
+    background:-o-linear-gradient(left,rgba(255,255,255,1), rgba(255,255,255,1) 60%, rgba(255,255,255,0));
+    background:-moz-linear-gradient(left,rgba(255,255,255,1), rgba(255,255,255,1) 60%, rgba(255,255,255,0));
+    background:-webkit-linear-gradient(left,rgba(255,255,255,1), rgba(255,255,255,1) 60%, rgba(255,255,255,0));
+    background:linear-gradient(left,rgba(255,255,255,1), rgba(255,255,255,1) 60%, rgba(255,255,255,0));
+    z-index:0;
+}
+/* ==========================================================================
+   Customization Build
+   ========================================================================== */
+.product-customizations .customization-build{
+    position: relative;
+    display:none;
+    width: 100%;
+    height: 800px;
+    background: #f6f6f6;
+}
+.product-customizations .customization-build a.btn{
+    display:block;
+    width:200px;
+    margin:0;
+    border-radius:5px;
+    color:#fff;
+    background-color:#768075;
+    padding:15px 0;
+    font-size:16px;
+    line-height:20px;
+    text-decoration:none;
+    text-align:center;
+}
+.product-customizations .customization-build a.btn:hover{
+    background-color:#a4652d;
+}
+.product-customizations .customization-build a.btn.disabled{
+    color: #777;
+    background-color: #ececec;
+    cursor: default;
+}
+.product-customizations .customization-build a.btn.prev{
+    position:absolute;
+    top:50%;
+    right:50px;
+    z-index:1;
+}
+.product-customizations .customization-build a.btn.next{
+    position:absolute;
+    top:50%;
+    right:50px;
+    margin-top:70px;
+    z-index:1;
+}
+.product-customizations .customization-build ol{
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    display: block;
+    width:200px;
+    margin: 130px 0 0 -250px;
+    padding:0;
+    list-style: none;
+    text-align: left;
+    z-index:1;
+}
+.product-customizations .customization-build ol li{
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 4px;
+}
+.product-customizations .customization-build ol li a{
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color:#999999;
+    border-radius:50%;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+.product-customizations .customization-build ol li a:hover,
+.product-customizations .customization-build ol li.active a{
+    background-color:#a4652d;
+}
+.product-customizations .customization-build .step{
+    position:absolute;
+    top:0;
+    left:0;
+    display:none;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+.product-customizations .customization-build .step .bg-img{
+    position:absolute;
+    top:0;
+    left:0;
+    height: 100%;
+}
+.product-customizations .customization-build .step .bg-img.right{
+    left:auto;
+    right:0;
+}
+/*intro*/
+.product-customizations .customization-build .step.intro{
+    display:block;
+}
+.product-customizations .customization-build .step.intro .message{
+    position: absolute;
+    top: 25%;
+    right: 25%;
+    width: 500px;
+    margin-right: -250px;
+}
+.product-customizations .customization-build .step.intro .message h2{
+    text-align: center;
+    margin: 0 auto 20px;
+    font-size:20px;
+    line-height:30px;
+}
+.product-customizations .customization-build .step.intro .message p{
+    text-align: center;
+    padding-top: 10px;
+}
+.product-customizations .customization-build .step.intro a.btn.start{
+    position:absolute;
+    top:50%;
+    right:50px;
+    margin-top:70px;
+}
+/*cut*/
+.product-customizations .customization-build .step.cut{
+
+}
+.product-customizations .customization-build .step.cut .message{
+    position:absolute;
+    top:0;
+    left:0;
+    width: 16%;
+    margin: 50px;
+}
+.product-customizations .customization-build .step.cut .message h2{
+    text-align: center;
+    margin: 0 auto 20px;
+    font-size:20px;
+    line-height:30px;
+}
+.product-customizations .customization-build .step.cut .message p{
+    padding-top: 10px;
+}
+.product-customizations .customization-build .step.cut .options{
+    position:absolute;
+    top:10%;
+    left:20%;
+    width:60%;
+}
+.product-customizations .customization-build .step.cut .options .option{
+    position:relative;
+    float:left;
+    width:45%;
+    margin-right:5%;
+    cursor:pointer;
+}
+.product-customizations .customization-build .step.cut .options .option .image{
+    width:100%;
+}
+.product-customizations .customization-build .step.cut .options .option .image img{
+    width:100%;
+}
+.product-customizations .customization-build .step.cut .options .option .text{
+    position:absolute;
+    top:65%;
+    left:50%;
+    margin-left:-50px;
+    display:block;
+    width:100px;
+    padding:15px 0;
+    border:1px solid transparent;
+    color:#666666;
+    font-size:16px;
+    line-height:20px;
+    text-align:center;
+}
+.product-customizations .customization-build .step.cut .options .option.active .text{
+    color:#a4652d;
+    border-color:#a4652d;
+    border-radius:5px;
+}
+/*normal*/
+.product-customizations .customization-build .step.normal{
+
+}
+.product-customizations .customization-build .step.normal .message{
+    position:absolute;
+    top:0;
+    left:32.8125%;
+    width: 16%;
+    margin: 50px 0 0 100px;
+}
+.product-customizations .customization-build .step.normal .message h2{
+    text-align: center;
+    margin: 0 auto 20px;
+    font-size:20px;
+    line-height:30px;
+}
+.product-customizations .customization-build .step.normal .message p{
+    padding-top: 10px;
+}
+.product-customizations .customization-build .step.normal .options{
+    position:absolute;
+    top:50px;
+    left:50px;
+    width:34.375%;
+}
+.product-customizations .customization-build .step.normal .options .option{
+    position:relative;
+    float:left;
+    width:45.4545455%;
+    margin:0 4.5454545% 4.5454545% 0;
+    border: 1px solid #d7ded6;
+    vertical-align: middle;
+    cursor:pointer;
+}
+.product-customizations .customization-build .step.normal .options .option.active{
+    border-color:#a4652d;
+}
+.product-customizations .customization-build .step.normal .options .option .image{
+    width:100%;
+}
+.product-customizations .customization-build .step.normal .options .option .image img{
+    width:100%;
+    vertical-align: middle;
+}
+.product-customizations .customization-build .step.normal .options .option .text{
+    text-align: center;
+    color: #768075;
+    border-top: 1px solid #d7ded6;
+    background-color:#d7ded6;
+    font-size: 16px;
+    line-height:35px;
+    padding: 7px 0;
+    text-transform: uppercase;
+}
+.product-customizations .customization-build .step.normal .options .option.active .text{
+    color: #a4652d;
+    border-color:#a4652d;
+    background-color:#f5f5f5;
 }
