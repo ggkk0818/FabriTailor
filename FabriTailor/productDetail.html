@@ -45,7 +45,7 @@
         </ul>
     </aside>
     <div class="main-container">
-        <div class="breadcrumb">
+        <div class="breadcrumb hide-on-small">
             <div class="breadcrumb-container">
                 <ul class="clearfix">
                     <li><a href="javascript:void(0);">在线定制</a><span class="divider">&gt;</span></li>
@@ -89,7 +89,7 @@
                             <div class="build-info">
                                 这Trumaker衬衫将会向您的测量。您可以选择三种简单的方式来构建它。点击了解更多。
                             </div>
-                            <div class="build-btns">
+                            <div class="build-btns clearfix">
                                 <ul>
                                     <li><a href="javascript:void(0);">我的版型</a></li>
                                     <li><a href="javascript:void(0);">推荐版型</a></li>
@@ -110,10 +110,10 @@
             </div>
         </div>
         <div class="product-customizations">
-            <div class="customization clearfix">
+            <div class="customization clearfix no-login">
                 <h2 class="description">查看我的版型</h2>
                 <p class="description">这是属于你的定制版型组合，点击任意一个选项可以看到详细说明。你可以点击这里修改你的定制版型，或者点击新建版型来建立一个新的衬衫版型。</p>
-                <div class="options">
+                <div class="options" style="display:none;">
                     <div class="option" data-title="直筒型" data-description="这是属于你的定制版型组合，点击任意一个选项可以看到详细说明。你可以点击这里修改你的定制版型，或者点击新建版型来建立一个新的衬衫版型。">
                         <div class="image"><img src="img/product-customizztion1.jpg" /></div>
                         <div class="text">直筒型</div>
@@ -158,10 +158,17 @@
                     <a class="btn-close" href="javascript:void(0);"></a>
                     <a class="btn" href="javascript:void(0);">加入购物车</a>
                 </div>
+                <div class="zoom-container" style="display:block;">
+                    <img class="image" src="img/product-customization-build1.jpg" />
+                    <div class="description">
+                        <h2>我的版型</h2>
+                        <p>我们会在你量体环节帮助你建立属于你的专属衬衫版型。<br />如果你已经是我们的会员，请点击<a href="javascript:void(0);">登录</a></p>
+                    </div>
+                </div>
             </div>
             <div class="customization clearfix">
-                <h2 class="description">查看推荐版型</h2>
-                <p class="description">这是属于你的定制版型组合，点击任意一个选项可以看到详细说明。你可以点击这里修改你的定制版型，或者点击新建版型来建立一个新的衬衫版型。</p>
+                <h2 class="description">查看凡布推荐版型</h2>
+                <p class="description">这是凡布设计师推荐的衬衫版型，点击任意一个选项可以看到详细说明。点击新建版型来建立一个属于你的衬衫版型。</p>
                 <div class="options">
                     <div class="option" data-title="直筒型" data-description="这是属于你的定制版型组合，点击任意一个选项可以看到详细说明。你可以点击这里修改你的定制版型，或者点击新建版型来建立一个新的衬衫版型。">
                         <div class="image"><img src="img/product-customizztion1.jpg" /></div>
@@ -212,7 +219,7 @@
                 <a class="btn prev" href="javascript:void(0);">上一步</a>
                 <a class="btn next" href="javascript:void(0);">下一步</a>
                 <ol>
-                    <li class="active"><a href="javascript:void(0);">1</a></li>
+                    <li><a href="javascript:void(0);">1</a></li>
                     <li><a href="javascript:void(0);">2</a></li>
                     <li><a href="javascript:void(0);">3</a></li>
                     <li><a href="javascript:void(0);">4</a></li>
@@ -639,7 +646,7 @@
                 e.stopPropagation();
             });
         };
-        $(".main-container .product-customizations .customization").not(".customization-build-summary").each(function (i, e) { productCustomizationInit($(e)); });
+        $(".main-container .product-customizations .customization").not(".customization-build-summary,.no-login").each(function (i, e) { productCustomizationInit($(e)); });
     </script>
     <script type="text/javascript">
         //版型tab切换
@@ -673,6 +680,7 @@
         });
     </script>
     <script type="text/javascript">
+        //自定义版型
         var $productCustomizationBuild = $(".main-container .product-customizations .customization-build");
         var productCustomizationBuildShow = function (index) {
             if (typeof index !== "number")
@@ -699,6 +707,7 @@
                 $productCustomizationBuild.removeClass("loading");
             });
             $productCustomizationBuild.find("ol li").removeClass("active").eq(index).addClass("active");
+            productCustomizationBuildCheckHeight(true);
         };
         var productCustomizationBuildPrev = function () {
             var index = 0;
@@ -721,11 +730,39 @@
         var productCustomizationBuildControlClick = function () {
             productCustomizationBuildShow($(this).parent().prevAll().length);
         };
+        var productCustomizationBuildCheckHeight = function (animate) {
+            if ($(window).width() > 1040) {
+                var height = 800;
+                if ($productCustomizationBuild.children(".step.active").hasClass("cut")) {
+                    height = $productCustomizationBuild.outerWidth() / 1024 * 382;
+                }
+                if ($productCustomizationBuild.height() != height) {
+                    if (animate)
+                        $productCustomizationBuild.animate({ height: height }, "normal", EASING_NAME);
+                    else
+                        $productCustomizationBuild.stop(true, false).height(height);
+                }
+            }
+            else {
+                var height = $productCustomizationBuild.children(".step.active").outerHeight();
+                if (height < 330)
+                    height = 330;
+                if ($productCustomizationBuild.height() != height) {
+                    if (animate)
+                        $productCustomizationBuild.animate({ height: height }, "normal", EASING_NAME);
+                    else
+                        $productCustomizationBuild.stop(true, false).height(height);
+                }
+            }
+        };
         var productCustomizationBuildInit = function () {
             $productCustomizationBuild.find("ol li a").click(productCustomizationBuildControlClick);
             $productCustomizationBuild.children(".btn.prev").click(productCustomizationBuildPrev);
             $productCustomizationBuild.children(".btn.next").click(productCustomizationBuildNext);
             $productCustomizationBuild.find(".step.intro .btn.start").click(productCustomizationBuildNext);
+            $(window).on("resize.customizationBuild", function () {
+                productCustomizationBuildCheckHeight(false);
+            });
             productCustomizationBuildShow(0);
         };
         productCustomizationBuildInit();

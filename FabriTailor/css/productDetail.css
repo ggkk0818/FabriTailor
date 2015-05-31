@@ -345,9 +345,16 @@
     background-color:#fff;
     overflow:hidden;
 }
+.product-customizations .customization.no-login .zoom-container{
+    background-color:#f6f6f6;
+}
 .product-customizations .customization .zoom-container .image{
     height:100%;
     float:right;
+}
+.product-customizations .customization.no-login .zoom-container .image{
+    height:100%;
+    float:none;
 }
 .product-customizations .customization .zoom-container .btn-close{
     position:absolute;
@@ -373,6 +380,15 @@
     top: 6%;
     text-align: center;
 }
+.product-customizations .customization.no-login .zoom-container .description{
+    position: absolute;
+    top: 25%;
+    left:auto;
+    right: 25%;
+    width: 500px;
+    margin-right: -250px;
+    text-align: center;
+}
 .product-customizations .customization .zoom-container .description h2{
     margin: 30px 0;
     font-size:20px;
@@ -381,6 +397,9 @@
 .product-customizations .customization .zoom-container .description p{
     font-size:14px;
     line-height:30px;
+}
+.product-customizations .customization .zoom-container .description p a{
+    text-decoration:underline;
 }
 .product-customizations .customization .zoom-container .gradient{
     position:absolute;
@@ -643,18 +662,346 @@
     position:absolute;
     top:0;
     left:0;
-    width:80px;
+    width:26.6666667%;
     height:100px;
     border:1px solid #dae0d9;
     font-size:60px;
-    line-height:100px;
+    line-height:166.6666667%;
     text-align:center;
+    -webkit-transition: height 200ms ease, font-size 200ms ease;
+    -moz-transition: height 200ms ease, font-size 200ms ease;
+    transition: height 200ms ease, font-size 200ms ease;
 }
 .product-customizations .customization-build .step.normal .options .option-monogram .monogram.second{
     left:50%;
-    margin-left:-40px;
+    margin-left:-13.3333333%;
 }
 .product-customizations .customization-build .step.normal .options .option-monogram .monogram.third{
     left:auto;
     right:0;
+}
+@media(max-width:1800px){
+    .product-customizations .customization-build .step.normal .options .option-monogram .monogram {
+        height:93.75px;
+        font-size:56.25px;
+    }
+}
+@media(max-width:1700px){
+    .product-customizations .customization-build .step.normal .options .option-monogram .monogram {
+        height:88.54px;
+        font-size:53.125px;
+    }
+}
+@media(max-width:1600px){
+    .product-customizations .customization-build .step.normal .options .option-monogram .monogram {
+        height:83.33px;
+        font-size:50px;
+    }
+}
+@media(max-width:1500px){
+    .product-customizations .customization-build .step.normal .options .option-monogram .monogram {
+        height:78.125px;
+        font-size:46.875px;
+    }
+}
+@media(max-width:1400px){
+    .product-customizations .customization-build .step.normal .options .option-monogram .monogram {
+        height:72.92px;
+        font-size:43.75px;
+    }
+}
+@media(max-width:1300px){
+    .product-customizations .customization-build .step.normal .options .option-monogram .monogram {
+        height:67.71px;
+        font-size:40.625px;
+    }
+}
+@media(max-width:1200px){
+    .product-customizations .customization-build .step.normal .options .option-monogram .monogram {
+        height:62.5px;
+        font-size:37.5px;
+    }
+}
+@media(max-width:1100px){
+    .product-customizations .customization-build .step.normal .options .option-monogram .monogram {
+        height:57.29px;
+        font-size:34.375px;
+    }
+}
+@media(max-width:1040px){
+    .product-detail-container .row .col-md-6{
+        padding: 0;
+    }
+    .product-detail-container .product-image a.arrow-left{
+        left: 12px;
+    }
+    .product-detail-container .product-image a.arrow-right{
+        right: 12px;
+    }
+    .product-detail-container .product-info{
+        width:450px;
+        margin:0 auto;
+    }
+    .product-detail-container .product-info .build-btns ul li{
+        float: none;
+        width: auto;
+        margin: 0;
+    }
+    .product-detail-container .product-info .build-btns ul li a{
+        width:250px;
+        margin:10px auto 0;
+    }
+    .product-customizations .customization p.description{
+        width: 450px;
+    }
+    .product-customizations .customization .options{
+        width: 100%;
+    }
+    .product-customizations .customization .options .option{
+        width: 44%;
+        margin: 2.5%;
+    }
+    /* ==========================================================================
+       Customization Build
+       ========================================================================== */
+    .product-customizations .customization-build{
+        height:auto;
+    }
+    .product-customizations .customization-build a.btn{
+        width:250px;
+    }
+    .product-customizations .customization-build a.btn.prev{
+        position:absolute;
+        top:auto;
+        left:50%;
+        right:auto;
+        bottom:20px;
+        margin-left:-255px;
+        z-index:1;
+    }
+    .product-customizations .customization-build a.btn.next{
+        position:absolute;
+        top:auto;
+        left:50%;
+        right:auto;
+        bottom:20px;
+        margin-left:5px;
+        z-index:1;
+    }
+    .product-customizations .customization-build ol{
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        display: block;
+        width:auto;
+        margin: 0 0 0 0;
+        padding:0;
+        list-style: none;
+        text-align: left;
+        z-index:1;
+    }
+    .product-customizations .customization-build ol li{
+        position:relative;
+        left:-50%;
+        vertical-align:middle;
+    }
+    .product-customizations .customization-build .step{
+        height:auto;
+        padding-bottom:100px;
+    }
+    .product-customizations .customization-build .step .bg-img{
+        display:none;
+    }
+    /*intro*/
+    .product-customizations .customization-build .step.intro{
+        padding-bottom:20px;
+    }
+    .product-customizations .customization-build .step.intro .message{
+        position: static;
+        top: auto;
+        right: auto;
+        width: 450px;
+        margin: 50px auto;
+    }
+    .product-customizations .customization-build .step.intro a.btn.start{
+        position:static;
+        top:auto;
+        right:auto;
+        display:block;
+        margin:70px auto 0;
+    }
+    /*cut*/
+    .product-customizations .customization-build .step.cut .message{
+        position:static;
+        top:auto;
+        left:auto;
+        width: 450px;
+        margin: 50px auto;
+    }
+    .product-customizations .customization-build .step.cut .options{
+        position:relative;
+        top:auto;
+        left:2.5%;
+        width:100%;
+    }
+    /*normal*/
+    .product-customizations .customization-build .step.normal .message{
+        position:static;
+        top:auto;
+        left:auto;
+        width: 450px;
+        margin: 50px auto 100px;
+    }
+    .product-customizations .customization-build .step.normal .options{
+        position:static;
+        top:auto;
+        left:auto;
+        width:100%;
+    }
+    .product-customizations .customization-build .step.normal .options .option{
+        width: 44%;
+        margin: 2.5%;
+    }
+    .product-customizations .customization-build .step.normal .options .option-monogram{
+        width: 44%;
+        height:138.67px;
+        margin: 2.5%;
+    }
+    .product-customizations .customization-build .step.normal .options .option-monogram .monogram {
+        height:138.67px;
+        font-size:83.2px;
+    }
+}
+@media(max-width:940px){
+    .product-customizations .customization-build .step.normal .options .option-monogram .monogram {
+        height:125.33px;
+        font-size:75.2px;
+    }
+}
+@media(max-width:840px){
+    .product-customizations .customization-build .step.normal .options .option-monogram .monogram {
+        height:112px;
+        font-size:67.2px;
+    }
+}
+@media(max-width:740px){
+    .product-customizations .customization-build .step.normal .options .option-monogram .monogram {
+        height:98.67px;
+        font-size:59.2px;
+    }
+}
+@media(max-width:640px){
+    .product-customizations .customization-build .step.normal .options .option-monogram .monogram {
+        height:85.33px;
+        font-size:51.2px;
+    }
+}
+@media(max-width:530px) {
+    .product-detail-container .product-image .images{
+        width:300px;
+        height:300px;
+    }
+    .product-detail-container .product-image a.arrow-left{
+        top:140px;
+    }
+    .product-detail-container .product-image a.arrow-right{
+        top:140px;
+    }
+    .product-detail-container .product-info{
+        width:auto;
+        margin:0 auto;
+    }
+    .product-detail-container .product-info .text{
+        padding: 0 20px 30px;
+    }
+    .product-detail-container .product-info .build-info{
+        padding: 30px 20px 0;
+    }
+    .product-customizations .customization p.description{
+        width: auto;
+        padding: 10px 20px 0;
+    }
+    .product-customizations .customization.no-login .zoom-container .description{
+        position: absolute;
+        top: 25%;
+        left:20px;
+        right: 20px;
+        width: auto;
+        margin-right: 0;
+        text-align: center;
+    }
+    /* ==========================================================================
+       Customization Build
+       ========================================================================== */
+    .product-customizations .customization-build a.btn.prev{
+        position:absolute;
+        top:auto;
+        left:50%;
+        right:auto;
+        bottom:80px;
+        margin-left:-125px;
+        z-index:1;
+    }
+    .product-customizations .customization-build a.btn.next{
+        position:absolute;
+        top:auto;
+        left:50%;
+        right:auto;
+        bottom:20px;
+        margin-left:-125px;
+        z-index:1;
+    }
+    .product-customizations .customization-build .step{
+        padding-bottom:150px;
+    }
+    .product-customizations .customization-build .step.intro .message{
+        width: auto;
+        margin: 50px 20px;
+    }
+    .product-customizations .customization-build .step.cut .message{
+        width: auto;
+        margin: 50px 20px;
+    }
+    .product-customizations .customization-build .step.cut .options{
+        position:relative;
+        top:auto;
+        left:0;
+        width:100%;
+    }
+    .product-customizations .customization-build .step.cut .options .option{
+        position:relative;
+        float:left;
+        width:95%;
+        margin:2.5%;
+        cursor:pointer;
+    }
+    .product-customizations .customization-build .step.normal .message{
+        width: auto;
+        margin: 50px 20px;
+    }
+    .product-customizations .customization-build .step.normal .options .option{
+        width: 45%;
+        margin: 2.5%;
+    }
+    .product-customizations .customization-build .step.normal .options .option-monogram{
+        width: 95%;
+        height:176.67px;
+        margin: 2.5%;
+    }
+    .product-customizations .customization-build .step.normal .options .option-monogram .monogram {
+        height:176.67px;
+        font-size:108px;
+    }
+}
+@media(max-width:430px){
+    .product-customizations .customization-build .step.normal .options .option-monogram .monogram {
+        height:143.33px;
+        font-size:86px;
+    }
+}
+@media(max-width:330px){
+    .product-customizations .customization-build .step.normal .options .option-monogram .monogram {
+        height:110px;
+        font-size:66px;
+    }
 }
