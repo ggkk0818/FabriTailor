@@ -242,12 +242,12 @@
                         <p>这个简单的工具能够帮助你迅速了解并且建立属于自己的衬衫版型。在每一个衬衫细节选择你喜欢的选项，然后点击下一步即可。保证每个细节都按照你的设想与喜好，一切就绪之后就可以把这件衬衫添加到购物车了。</p>
                     </div>
                     <div class="options">
-                        <div class="option active">
-                            <div class="image"><img src="img/product-customization-build2-0.png" /></div>
+                        <div class="option">
+                            <div class="image"><img src="img/product-customization-build2-0.png" data-hover-image="img/product-customization-build2-0-hover.png" /></div>
                             <div class="text">直筒型</div>
                         </div>
                         <div class="option">
-                            <div class="image"><img src="img/product-customization-build2-1.png" /></div>
+                            <div class="image"><img src="img/product-customization-build2-1.png" data-hover-image="img/product-customization-build2-1-hover.png" /></div>
                             <div class="text">修身型</div>
                         </div>
                     </div>
@@ -259,7 +259,7 @@
                         <p>这个简单的工具能够帮助你迅速了解并且建立属于自己的衬衫版型。在每一个衬衫细节选择你喜欢的选项，然后点击下一步即可。保证每个细节都按照你的设想与喜好，一切就绪之后就可以把这件衬衫添加到购物车了。</p>
                     </div>
                     <div class="options">
-                        <div class="option active">
+                        <div class="option">
                             <div class="image"><img src="img/product-customization-build3-0.jpg" /></div>
                             <div class="text">直筒型</div>
                         </div>
@@ -288,7 +288,7 @@
                         <p>这个简单的工具能够帮助你迅速了解并且建立属于自己的衬衫版型。在每一个衬衫细节选择你喜欢的选项，然后点击下一步即可。保证每个细节都按照你的设想与喜好，一切就绪之后就可以把这件衬衫添加到购物车了。</p>
                     </div>
                     <div class="options">
-                        <div class="option active">
+                        <div class="option">
                             <div class="image"><img src="img/product-customization-build3-0.jpg" /></div>
                             <div class="text">直筒型</div>
                         </div>
@@ -317,7 +317,7 @@
                         <p>这个简单的工具能够帮助你迅速了解并且建立属于自己的衬衫版型。在每一个衬衫细节选择你喜欢的选项，然后点击下一步即可。保证每个细节都按照你的设想与喜好，一切就绪之后就可以把这件衬衫添加到购物车了。</p>
                     </div>
                     <div class="options">
-                        <div class="option active">
+                        <div class="option">
                             <div class="image"><img src="img/product-customization-build3-0.jpg" /></div>
                             <div class="text">直筒型</div>
                         </div>
@@ -346,7 +346,7 @@
                         <p>这个简单的工具能够帮助你迅速了解并且建立属于自己的衬衫版型。在每一个衬衫细节选择你喜欢的选项，然后点击下一步即可。保证每个细节都按照你的设想与喜好，一切就绪之后就可以把这件衬衫添加到购物车了。</p>
                     </div>
                     <div class="options">
-                        <div class="option active">
+                        <div class="option">
                             <div class="image"><img src="img/product-customization-build3-0.jpg" /></div>
                             <div class="text">自定义</div>
                         </div>
@@ -685,6 +685,9 @@
         var productCustomizationBuildShow = function (index) {
             if (typeof index !== "number")
                 index = parseInt(index, 10);
+            if ($productCustomizationBuild.children(".btn.next").hasClass("disabled") && index > $productCustomizationBuild.children(".step.active").first().prevAll(".step").length
+                || index > 1 && $productCustomizationBuild.children(".step").eq(index - 1).find(".options .option.active").length == 0)
+                return;
             if (index + 1 == $productCustomizationBuild.find("ol li").length) {
                 //显示总览
                 productCustomizationTabShow(3);
@@ -706,6 +709,13 @@
             $productCustomizationBuild.addClass("loading").children(".step").eq(index).addClass("active").fadeTo("slow", 1, EASING_NAME, function () {
                 $productCustomizationBuild.removeClass("loading");
             });
+            //更新按钮状态
+            if ($productCustomizationBuild.children(".step").eq(index).find(".options .option.active").length == 0 && !$productCustomizationBuild.children(".step").eq(index).hasClass("intro")) {
+                $productCustomizationBuild.children(".btn.next").addClass("disabled");
+            }
+            else {
+                $productCustomizationBuild.children(".btn.next").removeClass("disabled");
+            }
             $productCustomizationBuild.find("ol li").removeClass("active").eq(index).addClass("active");
             productCustomizationBuildCheckHeight(true);
         };
@@ -755,11 +765,18 @@
                 }
             }
         };
+        var productCustomizationBuildOptionClick = function () {
+            var $step = $(this).parent().parent();
+            $step.find(".options .option").removeClass("active");
+            $(this).addClass("active");
+            $productCustomizationBuild.children(".btn.next").removeClass("disabled");
+        };
         var productCustomizationBuildInit = function () {
             $productCustomizationBuild.find("ol li a").click(productCustomizationBuildControlClick);
             $productCustomizationBuild.children(".btn.prev").click(productCustomizationBuildPrev);
             $productCustomizationBuild.children(".btn.next").click(productCustomizationBuildNext);
             $productCustomizationBuild.find(".step.intro .btn.start").click(productCustomizationBuildNext);
+            $productCustomizationBuild.find(".step .options .option").click(productCustomizationBuildOptionClick);
             $(window).on("resize.customizationBuild", function () {
                 productCustomizationBuildCheckHeight(false);
             });
