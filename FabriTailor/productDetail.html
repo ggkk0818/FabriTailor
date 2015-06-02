@@ -252,7 +252,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="step normal">
+                <div class="step normal" data-bg-img-change="true">
                     <img class="bg-img right" src="img/product-customization-build3-0.jpg" />
                     <div class="message">
                         <h2>新建衬衫版型</h2>
@@ -281,7 +281,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="step normal">
+                <div class="step normal" data-bg-img-change="true">
                     <img class="bg-img right" src="img/product-customization-build3-0.jpg" />
                     <div class="message">
                         <h2>新建衬衫版型</h2>
@@ -310,7 +310,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="step normal">
+                <div class="step normal" data-bg-img-change="true">
                     <img class="bg-img right" src="img/product-customization-build3-0.jpg" />
                     <div class="message">
                         <h2>新建衬衫版型</h2>
@@ -632,6 +632,8 @@
         var productCustomizationInit = function ($customization) {
             var $zoomContainer = $customization.find(".zoom-container");
             $customization.find(".options .option").click(function () {
+                if ($(window).width() < 1040)
+                    return;
                 $zoomContainer.find(".description h2").text($(this).data("title") || "");
                 $zoomContainer.find(".description p").text($(this).data("description") || "");
                 $zoomContainer.fadeTo("normal", 1, EASING_NAME);
@@ -644,6 +646,10 @@
             $zoomContainer.find("a.btn").click(function (e) {
                 e.preventDefault();
                 e.stopPropagation();
+            });
+            $(window).on("resize.productCustomizationImgZoom", function () {
+                if ($(window).width() < 1040 && $zoomContainer.css("display") != "none")
+                    $zoomContainer.fadeTo(0, 0, function () { $(this).hide(); });
             });
         };
         $(".main-container .product-customizations .customization").not(".customization-build-summary,.no-login").each(function (i, e) { productCustomizationInit($(e)); });
@@ -769,6 +775,18 @@
             var $step = $(this).parent().parent();
             $step.find(".options .option").removeClass("active");
             $(this).addClass("active");
+            if ($step.data("bg-img-change")) {
+                var src = $(this).find(".image img").attr("src");
+                $bgImg = $step.children(".bg-img");
+                if ($bgImg.attr("src") != src) {
+                    var $newImg = $('<img class="bg-img" />');
+                    if ($bgImg.hasClass("right"))
+                        $newImg.addClass("right");
+                    $newImg.css({ opacity: 0 }).attr("src", src);
+                    $bgImg.fadeTo("normal", 0, EASING_NAME, function () { $(this).remove(); }).after($newImg);
+                    $newImg.fadeTo("normal", 1, EASING_NAME);
+                }
+            }
             $productCustomizationBuild.children(".btn.next").removeClass("disabled");
         };
         var productCustomizationBuildInit = function () {
