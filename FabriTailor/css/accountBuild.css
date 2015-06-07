@@ -1,0 +1,221 @@
+﻿.accountBuild{
+    margin:0 auto;
+    padding: 50px;
+}
+.accountBuild h1{
+    font-size:30px;
+    text-align: center;
+}
+.accountBuild p{
+    max-width:500px;
+    margin:0 auto;
+    font-size:16px;
+    text-align:left;
+}
+.accountBuild .customization{
+    max-width: 90%;
+    margin: 0 auto;
+}
+.accountBuild .customization .options{
+    width: 100%;
+    text-align: center;
+}
+.accountBuild .customization .options .option{
+    display: inline-block;
+    width: 300px;
+    margin: 15px;
+    padding: 0;
+    cursor: pointer;
+    background-color: #f6f6f6;
+    border: 1px solid #cccccc;
+    vertical-align: middle;
+    -webkit-box-sizing:content-box;
+    -moz-box-sizing:content-box;
+    box-sizing:content-box;
+}
+.accountBuild .customization .options .option:hover{
+    border: 5px solid #6f95a9;
+    margin: 11px;
+}
+.accountBuild .customization .options .option .image{
+    
+}
+.accountBuild .customization .options .option .image img{
+    width:100%;
+    vertical-align: middle;
+}
+.accountBuild .customization .options .option .text{
+    position:relative;
+    text-align: center;
+    color: #333333;
+    border-top: 1px solid #cecece;
+    font-size: 16px;
+    line-height:35px;
+    padding: 7px 0;
+    text-transform: uppercase;
+}
+.accountBuild .customization .options .option .text .edit{
+    position:absolute;
+    top:18px;
+    right:10px;
+    display:none;
+    width:20px;
+    height:15px;
+    background:url(../img/acount-build-edit.png) no-repeat 0 0;
+}
+.accountBuild .customization .options .option:hover .text .edit{
+    display:block;
+}
+/* ==========================================================================
+   Account Builder
+   ========================================================================== */
+.accountBuilder{
+    position:fixed;
+    top:50px;
+    left:0;
+    bottom:0;
+    width:100%;
+    overflow:auto;
+    background-color:#f6f6f6;
+    z-index:3;
+}
+.accountBuilder a.btn-close{
+    position:absolute;
+    top:50px;
+    right:50px;
+    width:25px;
+    height:25px;
+    background:url(../img/account-build-close.png) no-repeat 0 0;
+    z-index:1;
+}
+.accountBuilder a.btn-close:hover{
+    background-position:-25px 0;
+}
+.accountBuilder-sidebar{
+    float: left;
+    width:200px;
+}
+.accountBuilder-sidebar ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+.accountBuilder-sidebar ul li{
+    list-style:none;
+}
+.accountBuilder-sidebar ul li a{
+    display:block;
+    padding: 10px 25px;
+    border-bottom: 1px solid white;
+    font-size:16px;
+    line-height:20px;
+    text-decoration:none;
+    -webkit-transition: all 400ms ease;
+    -moz-transition: all 400ms ease;
+    transition: all 400ms ease;
+}
+.accountBuilder-sidebar ul li a:hover,
+.accountBuilder-sidebar ul li.active a{
+    background: white;
+    padding: 10px 10px 10px 25px;
+    box-shadow: inset 10px 0 0 #6f95a9;
+}
+.accountBuilder-sidebar ul li a span{
+    display:block;
+}
+.accountBuilder-sidebar ul li a span.chosen{
+    color:#999999;
+    font-size:12px;
+    margin-top:5px;
+}
+.accountBuilder-sidebar .btn-save{
+    display:block;
+    width:140px;
+    margin:30px auto 0;
+    background-color:#6f95a9;
+}
+.accountBuilder-sidebar a.reset{
+    display:block;
+    margin-top:10px;
+    text-align:center;
+    color:#999999;
+}
+.accountBuilder-sidebar a.reset:hover{
+    color:#333333;
+}
+.accountBuilder-content{
+    margin-left:200px;
+}
+.accountBuilder-content .step{
+    position:relative;
+    display:none;
+    width:100%;
+    height:875px;
+    overflow:hidden;
+}
+.accountBuilder-content .step .bg-img{
+    position:absolute;
+    top:0;
+    left:0;
+    height: 100%;
+}
+.accountBuilder-content .step .bg-img.right{
+    left:auto;
+    right:0;
+}
+.accountBuilder-content .step.normal .message{
+    position:absolute;
+    top:0;
+    left:710px;
+    width: 500px;
+    margin: 50px 0 0 0;
+}
+.accountBuilder-content .step.normal .message h2{
+    text-align: center;
+    margin: 0 auto 20px;
+    font-size:20px;
+    line-height:30px;
+}
+.accountBuilder-content .step.normal .message p{
+    padding-top: 10px;
+}
+.accountBuilder-content .step.normal .options{
+    position:absolute;
+    top:35px;
+    left:35px;
+    width:664px;
+}
+.accountBuilder-content .step.normal .options .option{
+    position:relative;
+    float:left;
+    width:300px;
+    margin:15px;
+    cursor: pointer;
+    background-color: #f6f6f6;
+    border: 1px solid #cccccc;
+    vertical-align: middle;
+    -webkit-box-sizing:content-box;
+    -moz-box-sizing:content-box;
+    box-sizing:content-box;
+}
+.accountBuilder-content .step.normal .options .option.active{
+    border: 5px solid #6f95a9;
+    margin: 11px;
+}
+.accountBuilder-content .step.normal .options .option .image{
+    width:100%;
+}
+.accountBuilder-content .step.normal .options .option .image img{
+    width:100%;
+    vertical-align: middle;
+}
+.accountBuilder-content .step.normal .options .option .text{
+    text-align: center;
+    color: #333333;
+    border-top: 1px solid #cecece;
+    /*background-color:#d7ded6;*/
+    font-size: 16px;
+    line-height:35px;
+    padding: 7px 0;
+    text-transform: uppercase;
+}

@@ -1,0 +1,71 @@
+﻿.accountDetail{
+    margin:0 auto;
+    padding: 50px;
+}
+.accountDetail h1{
+    font-size:30px;
+    text-align: center;
+}
+.accountDetail p{
+    font-size:16px;
+    text-align:center;
+}
+.accountDetail .detailForm{
+    width:250px;
+    margin:40px auto 0;
+}
+.accountDetail .detailForm .input{
+    margin-bottom:10px;
+}
+.accountDetail .detailForm .control-group{
+
+}
+.accountDetail .detailForm .control-group .input{
+    float:left;
+    width:120px;
+}
+.accountDetail .detailForm .control-group .input:not(:first-child){
+    margin-left:10px;
+}
+.accountDetail .detailForm div.checkbox{
+    height:25px;
+    position:relative;
+    margin-bottom:10px;
+}
+.accountDetail .detailForm div.checkbox input.checkbox{
+    position: absolute;
+    opacity: 0;
+    width: 19px;
+    height: 19px;
+    margin: 3px 0 0;
+    cursor: pointer;
+    z-index:1;
+}
+.accountDetail .detailForm div.checkbox label{
+}
+.accountDetail .detailForm div.checkbox label:before{
+    content: ' ';
+    position:relative;
+    top:3px;
+    display:inline-block;
+    width: 19px;
+    height: 19px;
+    margin-right: 5px;
+    border:1px solid #040000;
+}
+.accountDetail .detailForm div.checkbox input.checkbox:checked+label:before{
+    content: ' ';
+    background:url(../img/checkbox-ok.png) no-repeat center center;
+    background-size:contain;
+}
+.accountDetail .detailForm a.button{
+    display:block;
+    margin:0 0 10px;
+    font-size:16px;
+    line-height:20px;
+}
+@media(max-width:1040px) {
+    .accountDetail{
+        padding: 50px 25px;
+    }
+}
