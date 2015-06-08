@@ -1,0 +1,27 @@
+﻿.accountOrder{
+    margin:0 auto;
+    padding: 50px;
+}
+.accountOrder h1{
+    font-size:30px;
+    text-align: center;
+}
+.accountOrder p{
+    font-size:16px;
+    text-align:center;
+}
+.accountOrder .order-image{
+    width:640px;
+    margin:45px auto 0;
+}
+.accountOrder .order-image img{
+    width:100%;
+}
+@media(max-width:1040px) {
+    .accountOrder{
+        padding: 50px 25px;
+    }
+    .accountOrder .order-image{
+        width:250px;
+    }
+}

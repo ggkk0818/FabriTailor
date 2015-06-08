@@ -7,7 +7,7 @@
     <link href="css/animate.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
     <link href="css/account.css" rel="stylesheet" />
-    <link href="css/accountDetail.css" rel="stylesheet" />
+    <link href="css/accountOrder.css" rel="stylesheet" />
     <script src="js/modernizr.js"></script>
     <script src="js/jquery-1.11.3.min.js"></script>
     <script src="js/jquery.easing.1.3.js"></script>
@@ -46,12 +46,12 @@
             <li><a class="button" href="javascript:void(0);">从这里开始</a></li>
         </ul>
     </aside>
-    <div class="main-container clearfix">
+    <div class="main-container">
         <div class="account-aside">
-            <div class="current">账户信息<i class="showhide"></i></div>
+            <div class="current">我的订单<i class="showhide"></i></div>
             <ul>
-                <li class="active"><a href="javascript:void(0);">账户信息</a></li>
-                <li><a href="javascript:void(0);">我的订单</a></li>
+                <li><a href="javascript:void(0);">账户信息</a></li>
+                <li class="active"><a href="javascript:void(0);">我的订单</a></li>
                 <li><a href="javascript:void(0);">我的尺寸</a></li>
                 <li><a href="javascript:void(0);">我的板型</a></li>
                 <li><a href="javascript:void(0);">分享与学习</a></li>
@@ -60,26 +60,12 @@
             </ul>
             <a href="javascript:void(0);" class="sign-out">退出</a>
         </div>
-        <div class="account-container fadeInDown">
-            <div class="accountDetail">
-                <h1>帐户信息</h1>
-                <p>在下面的信息栏里你可以更改你的名字、邮件地址以及账户密码。</p>
-                <div class="detailForm">
-                    <div class="control-group">
-                        <input class="input" type="text" placeholder="姓" />
-                        <input class="input" type="text" placeholder="名" />
-                    </div>
-                    <input class="input" type="text" placeholder="邮箱" />
-                    <div class="checkbox">
-                        <input id="accountDetailCheckbox" class="checkbox" type="checkbox" />
-                        <label>更改密码</label>
-                    </div>
-                    <div id="accountDetailPwdContainer" class="hidden">
-                        <input class="input" type="text" placeholder="当前密码" />
-                        <input class="input" type="text" placeholder="新的密码" />
-                        <input class="input" type="text" placeholder="确认新密码" />
-                    </div>
-                    <a href="javascript:void(0);" class="button">保存</a>
+        <div class="account-container">
+            <div class="accountOrder">
+                <h1>我的订单</h1>
+                <p>下单后，可以在订单中跟踪其进度。</p>
+                <div class="order-image">
+                    <img src="img/accountOrder.jpg" />
                 </div>
             </div>
         </div>
@@ -182,14 +168,6 @@
         $(".main-container .account-aside .current i.showhide").click(function () {
             $(this).toggleClass("mins");
             $(".main-container .account-aside ul").toggleClass("opened");
-        });
-    </script>
-    <script type="text/javascript">
-        $("#accountDetailCheckbox").click(function () {
-            if (this.checked)
-                $("#accountDetailPwdContainer").removeClass("hidden");
-            else
-                $("#accountDetailPwdContainer").addClass("hidden");
         });
     </script>
 </body>

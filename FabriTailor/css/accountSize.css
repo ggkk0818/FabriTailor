@@ -1,0 +1,27 @@
+﻿.accountSize{
+    margin:0 auto;
+    padding: 50px;
+}
+.accountSize h1{
+    font-size:30px;
+    text-align: center;
+}
+.accountSize p{
+    font-size:16px;
+    text-align:center;
+}
+.accountSize .size-image{
+    width:351px;
+    margin:45px auto 0;
+}
+.accountSize .size-image img{
+    width:100%;
+}
+@media(max-width:1040px) {
+    .accountSize{
+        padding: 50px 25px;
+    }
+    .accountSize .size-image{
+        width:250px;
+    }
+}
