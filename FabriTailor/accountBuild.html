@@ -476,7 +476,7 @@
             var $step = $(this).parent().parent();
             $step.find(".options .option").removeClass("active");
             $(this).addClass("active");
-            if ($step.data("bg-img-change")) {
+            if ($step.data("bg-img-change") && $(window).width() > 1040) {
                 var src = $(this).find(".image img").attr("src");
                 $bgImg = $step.children(".bg-img");
                 if ($bgImg.attr("src") != src) {
@@ -497,6 +497,7 @@
         });
         accountBuilderContent.find(".step .options .option").click(accountBuildOptionSelect);
         accountBuilder.find("a.btn-close").click(hideAccountBuild);
+        accountBuilderSidebar.children("a.btn-save").click(hideAccountBuild);
     </script>
 </body>
 </html>

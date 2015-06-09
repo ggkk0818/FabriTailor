@@ -13,11 +13,11 @@
     text-align:left;
 }
 .accountBuild .customization{
-    max-width: 90%;
+    max-width: 1350px;
     margin: 0 auto;
 }
 .accountBuild .customization .options{
-    width: 100%;
+    width:100%;
     text-align: center;
 }
 .accountBuild .customization .options .option{
@@ -218,4 +218,134 @@
     line-height:35px;
     padding: 7px 0;
     text-transform: uppercase;
+}
+@media(max-width:1660px) {
+    .accountBuild .customization .options .option{
+        /*width: 254px;*/
+        width: calc((100% - 141px) / 4);
+    }
+}
+@media(max-width:1440px) {
+    .accountBuilder-content .step.normal .message{
+        left:50%;
+        width: calc(50% - 35px);
+    }
+    .accountBuilder-content .step.normal .options{
+        width:calc(50% - 70px);
+    }
+    .accountBuilder-content .step.normal .options .option{
+        width: calc((100% - 64px) / 2);
+    }
+}
+/*@media(max-width:1480px) {
+    .accountBuild .customization .options .option{
+        width: 223px;
+    }
+}
+@media(max-width:1360px) {
+    .accountBuild .customization .options .option{
+        width: 202px;
+    }
+}
+@media(max-width:1280px) {
+    .accountBuild .customization .options .option{
+        width: 188px;
+    }
+}
+@media(max-width:1210px) {
+    .accountBuild .customization .options .option{
+        width: 176px;
+    }
+}
+@media(max-width:1170px) {
+    .accountBuild .customization .options .option{
+        width: 169px;
+    }
+}
+@media(max-width:1140px) {
+    .accountBuild .customization .options .option{
+        width: 163px;
+    }
+}
+@media(max-width:1110px) {
+    .accountBuild .customization .options .option{
+        width: 150px;
+    }
+}
+@media(max-width:1060px) {
+    .accountBuild .customization .options .option{
+        width: 140px;
+    }
+}*/
+@media(max-width:1040px) {
+    .accountBuild{
+        padding: 50px 0;
+    }   
+    .accountBuild p{
+        padding:0 20px;
+    }
+    .accountBuild .customization .options{
+        width:auto;
+        margin:0 10px;
+    }
+    .accountBuild .customization .options .option{
+        width: calc((100% - 49px) / 2);
+        margin: 10px;
+    }
+    .accountBuild .customization .options .option:hover{
+        border: 5px solid #6f95a9;
+        margin: 6px;
+    }
+    /* ==========================================================================
+       Account Builder
+       ========================================================================== */
+    .accountBuilder{
+        background-color:#fff;
+    }
+    .accountBuilder a.btn-close{
+        display:none;
+    }
+    .accountBuilder-sidebar{
+        float: none;
+        width:auto;
+    }
+    .accountBuilder-sidebar ul{
+        display:none;
+    }
+    .accountBuilder-sidebar a.reset{
+        display:none;
+    }
+    .accountBuilder-content{
+        margin-left:0;
+    }
+    .accountBuilder-content .step{
+        height:auto;
+    }
+    .accountBuilder-content .step .bg-img{
+        display:none;
+    }
+    .accountBuilder-content .step.normal .message{
+        position:static;
+        top:auto;
+        left:auto;
+        width: auto;
+        margin: 50px 0 0 0;
+    }
+    .accountBuilder-content .step.normal .message p{
+        padding: 10px 20px 30px;
+    }
+    .accountBuilder-content .step.normal .options{
+        position:static;
+        top:auto;
+        left:auto;
+        width:auto;
+        margin:0 10px;
+    }
+    .accountBuilder-content .step.normal .options .option{
+        width: calc((100% - 49px) / 2);
+        margin: 10px;
+    }
+    .accountBuilder-content .step.normal .options .option.active{
+        margin: 6px;
+    }
 }
