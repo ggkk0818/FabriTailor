@@ -1,0 +1,113 @@
+﻿.accountAddress{
+    margin:0 auto;
+    padding: 50px;
+}
+.accountAddress h1{
+    font-size:30px;
+    text-align: center;
+}
+.accountAddress p{
+    max-width:500px;
+    margin:0 auto;
+    font-size:16px;
+}
+.accountAddress .add-address{
+    position:relative;
+    display:block;
+    width:250px;
+    margin:20px auto;
+    padding:15px;
+    border-radius:3px;
+    font-size:16px;
+    line-height:20px;
+    background-color:#f5f5f5;
+    text-decoration:none;
+    -webkit-transition: background 500ms ease, color 500ms ease;
+    -moz-transition: background 500ms ease, color 500ms ease;
+    transition: background 500ms ease, color 500ms ease;
+}
+.accountAddress .add-address:hover{
+    background-color:#f6f6f6;
+}
+.accountAddress .add-address i{
+    position:absolute;
+    top:20px;
+    right:20px;
+    width:10px;
+    height:10px;
+    background:url(../img/address-add-close.png) no-repeat 0 0;
+}
+.accountAddress .add-address.active i{
+    background-position:-10px 0;
+}
+.accountAddress .detailForm{
+    display:none;
+    width:250px;
+    margin:40px auto 0;
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    animation-duration: 1s;
+}
+.accountAddress .detailForm.active{
+    display:block;
+}
+.accountAddress .detailForm .form-control{
+    position:relative;
+}
+.accountAddress .detailForm .form-control .tooltip{
+    position:absolute;
+    top: -20px;
+    right:0;
+    display:none;
+    padding:0 10px;
+    background: #e86c4b;
+    border-radius:5px;
+    color:#fff;
+    font-size:12px;
+    font-family:"宋体";
+    line-height:20px;
+}
+.accountAddress .detailForm .form-control.has-error .tooltip{
+    display:block;
+}
+.accountAddress .detailForm .form-control .tooltip:after{
+    content:' ';
+    border-top: 9px solid #e86c4b;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    position: absolute;
+    right: 20px;
+    bottom: -7px;
+}
+.accountAddress .detailForm .input{
+    margin-bottom:10px;
+}
+.accountAddress .detailForm .control-group{
+    height:60px;
+}
+.accountAddress .detailForm .control-group .input,
+.accountAddress .detailForm .control-group .select{
+    float:left;
+    width:120px;
+}
+.accountAddress .detailForm .control-group .form-control{
+    float:left;
+}
+.accountAddress .detailForm .control-group .form-control .input,
+.accountAddress .detailForm .control-group .form-control .select{
+    float:none;
+}
+.accountAddress .detailForm .control-group > *:not(:first-child){
+    margin-left:10px;
+}
+.accountAddress .detailForm a.button{
+    display:block;
+    margin:0 0 10px;
+    font-size:16px;
+    line-height:20px;
+}
+@media(max-width:1040px) {
+    .accountAddress{
+        padding: 50px 25px;
+    }
+}
