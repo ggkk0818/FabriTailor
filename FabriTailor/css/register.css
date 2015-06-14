@@ -1,0 +1,518 @@
+﻿.main-container h1{
+    font-size:30px;
+    text-align: center;
+    margin-top:50px;
+    padding:0 20px;
+}
+.main-container p{
+    font-size:16px;
+    text-align:center;
+    padding:0 20px;
+}
+.main-container ol{
+    display: block;
+    width:200px;
+    margin: 50px auto 20px;
+    padding:0;
+    list-style: none;
+    text-align: center;
+    z-index:1;
+}
+.main-container ol li{
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 4px;
+}
+.main-container ol li a{
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color:#999999;
+    border-radius:50%;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+.main-container ol li a:hover,
+.main-container ol li.active a{
+    background-color:#333333;
+}
+/* ==========================================================================
+   Steps
+   ========================================================================== */
+.steps{
+    position:relative;
+}
+.steps .step{
+    position:absolute;
+    top:0;
+    left:0;
+    display:none;
+    width:100%;
+}
+/*step form*/
+.steps .step .stepForm{
+    width:250px;
+    margin:40px auto 0;
+}
+.steps .step .stepForm .form-control{
+    position:relative;
+}
+.steps .step .stepForm .form-control .tooltip{
+    position:absolute;
+    top: -20px;
+    right:0;
+    display:none;
+    padding:0 10px;
+    background: #e86c4b;
+    border-radius:5px;
+    color:#fff;
+    font-size:12px;
+    font-family:"宋体";
+    line-height:20px;
+}
+.steps .step .stepForm .form-control.has-error .tooltip{
+    display:block;
+}
+.steps .step .stepForm .form-control .tooltip:after{
+    content:' ';
+    border-top: 9px solid #e86c4b;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    position: absolute;
+    right: 20px;
+    bottom: -7px;
+}
+.steps .step .stepForm .input{
+    margin-bottom:10px;
+}
+.steps .step .stepForm .control-group{
+    height:60px;
+}
+.steps .step .stepForm .control-group .input,
+.steps .step .stepForm .control-group .select{
+    float:left;
+    width:120px;
+}
+.steps .step .stepForm .control-group .form-control{
+    float:left;
+}
+.steps .step .stepForm .control-group .form-control .input,
+.steps .step .stepForm .control-group .form-control .select{
+    float:none;
+}
+.steps .step .stepForm .control-group > *:not(:first-child){
+    margin-left:10px;
+}
+.steps .step .stepForm a.button{
+    display:block;
+    margin:0 0 10px;
+    font-size:16px;
+    line-height:20px;
+    color:#fff;
+    background-color:#333333;
+}
+/*step1*/
+.steps .step.step1{
+
+}
+.steps .step.step1 .options{
+    position:relative;
+    left:-25px;
+    max-width:1350px;
+    margin:0 auto;
+}
+.steps .step.step1 .options .option{
+    float:left;
+    margin:0 0 0 50px;
+    width:calc((100% - 150px) / 3 - 1px);
+}
+.steps .step.step1 .options .option .image{
+    width:100%;
+    cursor:pointer;
+}
+.steps .step.step1 .options .option .image img{
+    width:100%;
+}
+.steps .step.step1 .options .option h1{
+    font-size:30px;
+    text-align: center;
+    margin:30px auto 50px;
+}
+.steps .step.step1 .options .option a{
+    display:block;
+    max-width:250px;
+    margin:0 auto;
+    padding:12px 15px;
+    font-size:16px;
+    line-height:20px;
+    text-align:center;
+    border:3px solid #333333;
+    border-radius:5px;
+    -webkit-transition: background 500ms ease, color 500ms ease;
+    -moz-transition: background 500ms ease, color 500ms ease;
+    transition: background 500ms ease, color 500ms ease;
+}
+.steps .step.step1 .options .option a:hover,
+.steps .step.step1 .options .option a.active{
+    color:#fff;
+    background-color:#333333;
+    text-decoration:none;
+}
+/*step2*/
+.steps .step.step2{
+
+}
+.steps .step.step2 .step-container{
+    position:relative;
+    max-width:1024px;
+    margin:0 auto;
+}
+.steps .step.step2 .step-container .radio{
+    position:relative;
+    margin-bottom:10px;
+}
+.steps .step.step2 .step-container .radio input{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    opacity:0;
+}
+.steps .step.step2 .step-container .radio span{
+    display:inline-block;
+    width:25px;
+    height:25px;
+    vertical-align:middle;
+    font-size:0;
+    line-height:0;
+    background:url(../img/radio-btn-black.png) no-repeat 0 0;
+}
+.steps .step.step2 .step-container .radio input:checked+span{
+    background-position:-25px 0;
+}
+.steps .step.step2 .step-container .radio h4{
+    display:inline-block;
+    margin:0 0 0 10px;
+    padding:0;
+    vertical-align:middle;
+    font-size:16px;
+    line-height:25px;
+}
+.steps .step.step2 .step-container .image{
+    float:left;
+    width:calc(100% - 424px);
+    margin:0 auto;
+}
+.steps .step.step2 .step-container .image img{
+    width:100%;
+}
+.steps .step.step2 .step-container .options{
+    float:left;
+    width:212px;
+    padding-left:20px;
+}
+.steps .step.step2 .step-container .options .option{
+    position:relative;
+    margin-bottom:50px;
+}
+.steps .step.step2 .step-container .options .option h3{
+    
+}
+.steps .step.step2 .step-container .options .option .radio-image{
+    position:absolute;
+    top:42px;
+    right:0;
+    display:none;
+    height:60px;
+}
+.steps .step.step2 .step-container .options .option .radio-image img{
+    height:100%;
+}
+.steps .step.step2 .step-container .option-none{
+    position:absolute;
+    top:100%;
+    left:0;
+    margin:50px 0 0 20px;
+}
+/*step3*/
+.steps .step.step3{
+
+}
+.steps .step.step3 .options{
+    max-width:920px;
+    margin:0 auto;
+}
+.steps .step.step3 .options .option{
+    float:left;
+    width:calc((100% - 120px) / 4);
+    max-width:200px;
+    margin:15px;
+}
+.steps .step.step3 .options .option .image{
+    position:relative;
+    width:100%;
+    cursor:pointer;
+    font-size:0;
+    line-height:0;
+}
+.steps .step.step3 .options .option .image img{
+    width:100%;
+}
+.steps .step.step3 .options .option .image .cover{
+    position:absolute;
+    top:0;
+    left:0;
+    display:none;
+    width:100%;
+    height:100%;
+    background:url(../img/register-step3-selected.png) no-repeat center center;
+    background-color:rgba(111, 149, 169, 0.5);
+}
+.steps .step.step3 .options .option.active .image .cover{
+    display:block;
+}
+.steps .step.step3 .options .option h4{
+    text-align: center;
+    margin:10px auto 10px;
+}
+/*step4*/
+.steps .step.step4{
+
+}
+/*step5*/
+.steps .step.step5{
+
+}
+/*step6*/
+.steps .step.step6{
+
+}
+.steps .step.step6 .options{
+    max-width:1024px;
+    margin:0 auto;
+}
+.steps .step.step6 .options .option{
+    float:left;
+    width:calc((100% - 120px) / 3 - 1px);
+    max-width:300px;
+    margin:20px;
+}
+.steps .step.step6 .options .option h4{
+    line-height:28px;
+    margin:10px 0;
+}
+.steps .step.step6 .options .option a.button{
+    display:block;
+    width:auto;
+    max-width:250px;
+    margin:0 auto 10px;
+    font-size:16px;
+    line-height:20px;
+    color:#fff;
+    background-color:#333333;
+}
+.steps .step.step6 .map{
+    max-width:1024px;
+    margin:10px auto;
+    padding:20px;
+}
+.steps .step.step6 .map img{
+    width:100%;
+}
+/* ==========================================================================
+   Next Button
+   ========================================================================== */
+.main-container a.next-btn{
+    display:block;
+    width:250px;
+    margin:40px auto;
+    padding:12px 15px;
+    font-size:16px;
+    line-height:20px;
+    text-align:center;
+    border:3px solid #333333;
+    border-radius:5px;
+    -webkit-transition: background 500ms ease, color 500ms ease;
+    -moz-transition: background 500ms ease, color 500ms ease;
+    transition: background 500ms ease, color 500ms ease;
+}
+.main-container a.next-btn:hover,
+.main-container a.next-btn.active{
+    color:#fff;
+    background-color:#333333;
+    text-decoration:none;
+}
+/* ==========================================================================
+   Info Confirm
+   ========================================================================== */
+.info-confirm{
+    max-width:1024px;
+    margin:40px auto;
+    border-top:1px solid #f6f6f6;
+}
+.info-confirm .info-container{
+
+}
+.info-confirm .info-container .info{
+    float:left;
+    width:300px;
+    margin-left:30px;
+}
+.info-confirm .info-container .info h4{
+    text-align:center;
+}
+.info-confirm .info-container .info .image{
+    font-size:0;
+    line-height:0;
+}
+.info-confirm .info-container .info .image img{
+    width:100%;
+}
+.info-confirm .info-container .info .images{
+    margin-left:-10px;
+}
+.info-confirm .info-container .info .images .image{
+    float:left;
+    width:145px;
+    margin:0 0 10px 10px;
+}
+.info-confirm .info-container .info .radio-info{
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+.info-confirm .info-container .info .radio-info li{
+    display:block;
+    text-align:center;
+    font-size:16px;
+    line-height:28px;
+}
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media(max-width:1180px) {
+    /*step1*/
+    .steps .step.step1 .options .option h1{
+        font-size:24px;
+        min-height:60px;
+        margin:25px auto 20px;
+    }
+}
+@media(max-width:1040px) {
+    /*step6*/
+    .steps .step.step6 .options .option h4{
+        min-height:84px;
+    }
+    /* ==========================================================================
+       Info Confirm
+       ========================================================================== */
+    .info-confirm{
+        margin:40px 20px;
+    }
+    .info-confirm .info-container .info{
+        float:none;
+        width:auto;
+        margin-left:0;
+    }
+    .info-confirm .info-container .info .images{
+        margin-left:-20px;
+    }
+    .info-confirm .info-container .info .images .image{
+        width:calc((100% - 40px) / 2);
+        margin:0 0 20px 20px;
+    }
+}
+@media(max-width:750px) {
+    /*step6*/
+    .steps .step.step6 .options .option h4{
+        min-height:112px;
+    }
+}
+@media(max-width:650px) {
+    /*step1*/
+    .steps .step.step1 .options .option h1{
+        font-size:18px;
+        min-height:45px;
+        margin:25px auto 20px;
+    }
+    /*step6*/
+    .steps .step.step6 .options .option h4{
+        min-height:140px;
+    }
+}
+@media(max-width:550px) {
+    /*step2*/
+    .steps .step.step2 .step-container{
+        margin:0 20px;
+    }
+    .steps .step.step2 .step-container .image{
+        display:none;
+    }
+    .steps .step.step2 .step-container .options{
+        float:none;
+        width:auto;
+        padding-left:0;
+    }
+    .steps .step.step2 .step-container .options .option{
+        border-bottom:1px solid #f6f6f6;
+        margin-bottom:20px;
+        padding-bottom:10px;
+    }
+    .steps .step.step2 .step-container .options .option h3{
+        text-align:center;
+    }
+    .steps .step.step2 .step-container .options .option .radio-image{
+        display:block;
+    }
+    .steps .step.step2 .step-container .option-none{
+        position:static;
+        top:auto;
+        left:auto;
+        margin:20px auto;
+        border-bottom:1px solid #f6f6f6;
+    }
+    /*step6*/
+    .steps .step.step6 .options{
+        max-width:1024px;
+        margin:0 20px;
+    }
+    .steps .step.step6 .options .option{
+        float:none;
+        width:100%;
+        max-width:none;
+        margin:0 0 20px 0;
+    }
+    .steps .step.step6 .options .option h4{
+        min-height:0;
+    }
+    .steps .step.step6 .map{
+        display:none;
+    }
+}
+@media(max-width:500px) {
+    /*step1*/
+    .steps .step.step1 .options{
+        position:static;
+        left:0;
+        margin:0 25px;
+    }
+    .steps .step.step1 .options .option{
+        float:none;
+        margin:0 0 50px 0;
+        width:100%;
+    }
+    .steps .step.step1 .options .option h1{
+        font-size:14px;
+        margin:20px auto 30px;
+    }
+    /*step3*/
+    .steps .step.step3 .options{
+        margin:0 20px 0 0;
+    }
+    .steps .step.step3 .options .option{
+        width:calc((100% - 40px) / 2);
+        max-width:none;
+        margin:0 0 20px 20px;
+    }
+}

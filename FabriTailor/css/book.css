@@ -1,0 +1,212 @@
+﻿.main-container h1{
+    font-size:30px;
+    text-align: center;
+    margin-top:50px;
+}
+.main-container p{
+    font-size:16px;
+    text-align:center;
+}
+select.date{
+    display:block;
+    width:600px;
+    margin:0 auto 20px;
+}
+.period{
+    display:none;
+    width:300px;
+    margin:0 auto 20px;
+}
+.period.active{
+    display:block;
+}
+.period a{
+    display:block;
+    border:1px solid #f6f6f6;
+    background-color: #f6f6f6;
+    padding: 36px 0 30px;
+    margin: 20px auto 0;
+    font-size: 30px;
+    line-height: 36px;
+    text-align: center;
+    text-decoration:none;
+}
+.period a:hover{
+    border-color:#cccccc;
+}
+.time-selection{
+    position:relative;
+    display:none;
+    width:600px;
+    margin:0 auto;
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    animation-duration: 1s;
+}
+.time-selection.active{
+    display:block;
+}
+.time-selection a.btn-close{
+    position:absolute;
+    top:4px;
+    right:20px;
+    width:25px;
+    height:25px;
+    background:url(../img/account-build-close.png) no-repeat 0 0;
+    z-index:1;
+}
+.time-selection a.btn-close:hover{
+    background-position:-25px 0;
+}
+.time-selection h2{
+    margin-top:30px;
+    text-align:center;
+}
+.time-selection .options{
+    margin-left:-20px;
+}
+.time-selection .options .option{
+    float:left;
+    display:block;
+    width:135px;
+    margin:0 0 20px 20px;
+    padding:10px 0;
+    color:#333333;
+    font-size:30px;
+    line-height:40px;
+    text-align:center;
+    text-decoration:none;
+    background-color:#f6f6f6;
+}
+.time-selection .options .option.active{
+    color:#fff;
+    background-color: #6f95a9;
+}
+.contact{
+    padding:0 20px;
+    color:#cccccc;
+    font-size:14px;
+    line-height:20px;
+    text-align:center;
+}
+.schedule{
+    display:none;
+    width:950px;
+    margin:0 auto;
+}
+.schedule.active{
+    display:block;
+}
+.schedule h4{
+    text-align:center;
+}
+.schedule a.change-date{
+    text-decoration:underline;
+}
+.schedule .scheduleForm{
+    width:250px;
+    margin:40px auto 0;
+}
+.schedule .scheduleForm .form-control{
+    position:relative;
+}
+.schedule .scheduleForm .form-control .tooltip{
+    position:absolute;
+    top: -20px;
+    right:0;
+    display:none;
+    padding:0 10px;
+    background: #e86c4b;
+    border-radius:5px;
+    color:#fff;
+    font-size:12px;
+    font-family:"宋体";
+    line-height:20px;
+}
+.schedule .scheduleForm .form-control.has-error .tooltip{
+    display:block;
+}
+.schedule .scheduleForm .form-control .tooltip:after{
+    content:' ';
+    border-top: 9px solid #e86c4b;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    position: absolute;
+    right: 20px;
+    bottom: -7px;
+}
+.schedule .scheduleForm .input{
+    margin-bottom:10px;
+}
+.schedule .scheduleForm .control-group{
+    height:60px;
+}
+.schedule .scheduleForm .control-group .input,
+.schedule .scheduleForm .control-group .select{
+    float:left;
+    width:120px;
+}
+.schedule .scheduleForm .control-group .form-control{
+    float:left;
+}
+.schedule .scheduleForm .control-group .form-control .input,
+.schedule .scheduleForm .control-group .form-control .select{
+    float:none;
+}
+.schedule .scheduleForm .control-group > *:not(:first-child){
+    margin-left:10px;
+}
+.schedule .scheduleForm a.button{
+    display:block;
+    margin:0 0 10px;
+    font-size:16px;
+    line-height:20px;
+    color:#fff;
+    background-color:#333333;
+}
+hr{
+    width: 100%;
+    max-width:1024px;
+    height: 0;
+    margin:0 auto;
+    border:none;
+    border-top:1px solid #f6f6f6;
+    font-size:0;
+    line-height:0;
+}
+.footer-img{
+    width:950px;
+    margin:50px auto 30px;
+}
+.footer-img img{
+    width:100%;
+}
+@media(max-width:1040px) {
+    select.date{
+        width:calc(100% - 40px);
+        max-width:600px;
+    }
+    .period{
+        width:calc(100% - 40px);
+        max-width:300px;
+    }
+    .time-selection{
+        width:calc(100% - 40px);
+        max-width:300px;
+    }
+    .time-selection .options{
+        margin-left:-10px;
+    }
+    .time-selection .options .option{
+        width:calc((100% - 20px) / 2);
+        margin:0 0 10px 10px;
+    }
+    .schedule{
+        width:calc(100% - 40px);
+        max-width:950px;
+    }
+    .footer-img{
+        width:calc(100% - 40px);
+        max-width:950px;
+    }
+}
