@@ -113,7 +113,7 @@
 }
 /*step1*/
 .steps .step.step1{
-
+    min-height:567px;
 }
 .steps .step.step1 .options{
     position:relative;
