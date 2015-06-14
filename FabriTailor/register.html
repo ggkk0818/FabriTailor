@@ -48,15 +48,14 @@
         <h1>以下哪个描述更贴近你自己的感受？</h1>
         <p>点击下面提供的内容选项。你的量体师将为你调整尺寸，以便我们为你制作最合身的衣服。</p>
         <ol>
-            <li class="active"><a href="javascript:void(0);">1</a></li>
+            <li><a href="javascript:void(0);">1</a></li>
             <li><a href="javascript:void(0);">2</a></li>
             <li><a href="javascript:void(0);">3</a></li>
             <li><a href="javascript:void(0);">4</a></li>
             <li><a href="javascript:void(0);">5</a></li>
             <li><a href="javascript:void(0);">6</a></li>
-            <li><a href="javascript:void(0);">7</a></li>
         </ol>
-        <div class="steps" style="height:2000px;">
+        <div class="steps">
             <div class="step step1">
                 <div class="options clearfix">
                     <div class="option">
@@ -82,7 +81,7 @@
                     </div>
                 </div>
             </div>
-            <div class="step step2">
+            <div class="step step2" data-show-next-btn="true">
                 <div class="step-container clearfix">
                     <div class="options">
                         <div class="option">
@@ -196,9 +195,9 @@
                     </div>
                 </div>
             </div>
-            <div class="step step3">
+            <div class="step step3" data-show-next-btn="true">
                 <div class="options clearfix">
-                    <div class="option active">
+                    <div class="option">
                         <div class="image">
                             <img src="img/register-step3-1.jpg" />
                             <span class="cover"></span>
@@ -247,7 +246,7 @@
                         </div>
                         <h4>休闲衬衫</h4>
                     </div>
-                    <div class="option">
+                    <div class="option select-all">
                         <div class="image">
                             <img src="img/register-step3-8.jpg" />
                             <span class="cover"></span>
@@ -256,24 +255,24 @@
                     </div>
                 </div>
             </div>
-            <div class="step step4">
+            <div class="step step4" data-show-info-confirm="true">
                 <div class="stepForm">
                     <div class="control-group">
-                        <div class="form-control has-error">
-                            <input class="input" type="text" placeholder="姓" />
+                        <div class="form-control">
+                            <input class="input" type="text" placeholder="姓" required />
                             <div class="tooltip">姓错误</div>
                         </div>
                         <div class="form-control">
-                            <input class="input" type="text" placeholder="名" />
+                            <input class="input" type="text" placeholder="名" required />
                             <div class="tooltip">名错误</div>
                         </div>
                     </div>
                     <div class="form-control">
-                        <input class="input" type="text" placeholder="邮件地址" />
+                        <input class="input" type="text" placeholder="邮件地址" required />
                         <div class="tooltip">邮件地址错误</div>
                     </div>
                     <div class="form-control">
-                        <input class="input" type="text" placeholder="联系电话" />
+                        <input class="input" type="text" placeholder="联系电话" required />
                         <div class="tooltip">联系电话错误</div>
                     </div>
                     <div class="form-control">
@@ -287,20 +286,20 @@
                     <a href="javascript:void(0);" class="button">下一步</a>
                 </div>
             </div>
-            <div class="step step5">
+            <div class="step step5" data-show-info-confirm="true">
                 <div class="stepForm">
-                    <div class="form-control has-error">
-                        <input class="input" type="text" placeholder="创建新的密码" />
+                    <div class="form-control">
+                        <input class="input" type="password" placeholder="创建新的密码" required />
                         <div class="tooltip">创建新的密码错误</div>
                     </div>
                     <div class="form-control">
-                        <input class="input" type="text" placeholder="确认新密码" />
+                        <input class="input" type="password" placeholder="确认新密码" required />
                         <div class="tooltip">确认新密码错误</div>
                     </div>
                     <a href="javascript:void(0);" class="button">下一步</a>
                 </div>
             </div>
-            <div class="step step6" style="display:block;">
+            <div class="step step6">
                 <div class="options clearfix">
                     <div class="option">
                         <h4>1.在线量体：您可以按照我们提供的视频方式进行量体，引导您正确量体。</h4>
@@ -321,7 +320,7 @@
             </div>
         </div>
         <a class="next-btn hidden" href="javascript:void(0);">下一步</a>
-        <div class="info-confirm">
+        <div class="info-confirm hidden">
             <h1>请确认一下信息。</h1>
             <div class="info-container clearfix">
                 <div class="info">
@@ -452,6 +451,147 @@
         };
         $("div.login-cover-black").click(hideLogin);
         $("header .btn-group .login").click(showLogin);
+    </script>
+    <script type="text/javascript">
+        var $h1 = $(".main-container > h1"),
+            $p = $(".main-container > p"),
+            $ol = $(".main-container > ol"),
+            $steps = $(".main-container .steps"),
+            $btnNext = $(".main-container .next-btn"),
+            $infoConfirm = $(".main-container .info-confirm");
+        var showStep = function (index) {
+            if (typeof index !== "number")
+                index = parseInt(index, 10);
+            if (index >= $steps.children(".step").length
+                || $steps.children(".step.active").length && index == $steps.children(".step.active").prevAll().length
+                || (index > 0 && !$steps.children(".step").eq(index - 1).hasClass("selected"))
+                || $steps.hasClass("loading")) {
+                return;
+            }
+            var $step = $steps.children(".step").eq(index);
+            $steps.children(".step.active").removeClass("active").fadeTo("normal", 0, EASING_NAME, function () { $(this).hide(); });
+            $steps.addClass("loading").children(".step").eq(index).addClass("active").fadeTo("slow", 1, EASING_NAME, function () {
+                $steps.removeClass("loading");
+            });
+            $steps.animate({ height: $step.outerHeight() }, "slow", EASING_NAME);
+            $ol.children("li").removeClass("active").eq(index).addClass("active");
+            if ($step.data("show-next-btn")) {
+                $btnNext.removeClass("hidden");
+            }
+            else {
+                $btnNext.addClass("hidden");
+            }
+            if ($step.data("show-info-confirm")) {
+                $infoConfirm.removeClass("hidden");
+            }
+            else {
+                $infoConfirm.addClass("hidden");
+            }
+        };
+        var nextBtnClick = function () {
+            showStep($steps.children(".step.active").prevAll().length + 1);
+        };
+        var step1BtnClick = function () {
+            var $option = $(this).parent(),
+                $step = $option.parent().parent();
+            $step.find(".options .option a").removeClass("active");
+            $option.children("a").addClass("active");
+            $step.addClass("selected");
+            showStep($step.prevAll().length + 1);
+        };
+        var step2RadioClick = function () {
+            var $radio = $(this).parent(),
+                $option = $radio.parent(),
+                $step = $option.parent().parent().parent();
+            //TO DO
+            $step.find(".option-none input").get(0).checked = false;
+            $step.addClass("selected");
+        };
+        var step2ResetRadioClick = function () {
+            var $step = $(this).parent().parent().parent().parent();
+            $step.find(".options .option input").each(function (i, e) {
+                e.checked = false;
+            });
+            $step.addClass("selected");
+        };
+        var step3OptionImageClick = function () {
+            var $option = $(this).parent(),
+                $step = $option.parent().parent();
+            $option.toggleClass("active");
+            if ($step.find(".options .option.active").not(".select-all").length == $step.find(".options .option").not(".select-all").length) {
+                $step.find(".options .option.select-all").addClass("active");
+            }
+            else {
+                $step.find(".options .option.select-all").removeClass("active");
+            }
+            if ($step.find(".options .option.active").length) {
+                $step.addClass("selected");
+            }
+            else {
+                $step.removeClass("selected");
+            }
+        };
+        var step3OptionSelectAll = function () {
+            var $option = $(this).parent(),
+                $step = $option.parent().parent();
+            if ($step.find(".options .option.active").not(".select-all").length >= $step.find(".options .option").not($option).length) {
+                $step.removeClass("selected").find(".options .option.active").removeClass("active");
+            }
+            else {
+                $step.addClass("selected").find(".options .option").addClass("active");
+            }
+        };
+        var step4BtnClick = function () {
+            var $stepForm = $(this).parent(),
+                $step = $stepForm.parent(),
+                hasError = 0;
+            $stepForm.find(".form-control input").each(function (i, e) {
+                var $this = $(this),
+                    $control = $this.parent();
+                if ($this.attr("required") && (!$this.val() || $this.val().length == 0)) {
+                    $control.addClass("has-error");
+                    hasError++;
+                }
+                else {
+                    $control.removeClass("has-error");
+                }
+            });
+            if (hasError == 0) {
+                $step.addClass("selected");
+                showStep($step.prevAll().length + 1);
+            }
+            else {
+                $step.removeClass("selected");
+            }
+        };
+        var step4InputChange = function () {
+            var $this = $(this),
+                $control = $this.parent(),
+                $step = $control.parentsUntil(".step").last().parent();
+            if ($this.attr("required") && (!$this.val() || $this.val().length == 0) && $step.hasClass("selected")) {
+                $control.addClass("has-error");
+                $step.removeClass("selected");
+            }
+        };
+        $steps.children(".step").eq(0).find(".options .option").on("click", "div.image,a", step1BtnClick);
+        $steps.children(".step").eq(1).find(".options .option input").click(step2RadioClick);
+        $steps.children(".step").eq(1).find(".option-none input").click(step2ResetRadioClick);
+        $steps.children(".step").eq(2).find(".options .option:not(.select-all) .image").click(step3OptionImageClick);
+        $steps.children(".step").eq(2).find(".options .option.select-all .image").click(step3OptionSelectAll);
+        $steps.children(".step").eq(3).find(".stepForm .form-control input").change(step4InputChange);
+        $steps.children(".step").eq(3).find(".stepForm a.button").click(step4BtnClick);
+        $steps.children(".step").eq(4).find(".stepForm .form-control input").change(step4InputChange);
+        $steps.children(".step").eq(4).find(".stepForm a.button").click(step4BtnClick);
+        $btnNext.click(nextBtnClick);
+        $ol.find("li a").click(function () {
+            showStep($(this).parent().prevAll().length);
+        });
+        $(window).resize(function () {
+            if ($steps.children(".step.active").length) {
+                $steps.height($steps.children(".step.active").first().outerHeight());
+            }
+        });
+        showStep(0);
     </script>
 </body>
 </html>

@@ -391,7 +391,7 @@
 /* ==========================================================================
    Responsive
    ========================================================================== */
-@media(max-width:1180px) {
+@media(max-width:1300px) {
     /*step1*/
     .steps .step.step1 .options .option h1{
         font-size:24px;
@@ -424,6 +424,11 @@
     }
 }
 @media(max-width:750px) {
+    /*step1*/
+    .steps .step.step1 .options .option h1{
+        font-size:18px;
+        min-height:45px;
+    }
     /*step6*/
     .steps .step.step6 .options .option h4{
         min-height:112px;
@@ -432,9 +437,8 @@
 @media(max-width:650px) {
     /*step1*/
     .steps .step.step1 .options .option h1{
-        font-size:18px;
-        min-height:45px;
-        margin:25px auto 20px;
+        font-size:16px;
+        min-height:50px;
     }
     /*step6*/
     .steps .step.step6 .options .option h4{
