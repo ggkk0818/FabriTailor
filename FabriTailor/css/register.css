@@ -309,8 +309,19 @@
     margin:0 auto 10px;
     font-size:16px;
     line-height:20px;
+    border:3px solid #333333;
+    border-radius:5px;
+    color:#000;
+    background:#fff;
+    -webkit-transition: background 500ms ease, color 500ms ease;
+    -moz-transition: background 500ms ease, color 500ms ease;
+    transition: background 500ms ease, color 500ms ease;
+}
+.steps .step.step6 .options .option a.button:hover,
+.steps .step.step6 .options .option a.button.active{
     color:#fff;
     background-color:#333333;
+    text-decoration:none;
 }
 .steps .step.step6 .map{
     max-width:1024px;
