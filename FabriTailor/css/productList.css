@@ -162,6 +162,7 @@ section.products ul.list li{
     font-size: 14px;
     line-height: 20px;
     overflow: hidden;
+    cursor:pointer;
 }
 section.products ul.list li .img{
     width:300px;

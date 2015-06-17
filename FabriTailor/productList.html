@@ -317,5 +317,12 @@
         }).mouseleave();
         productCarouselInit();
     </script>
+    <script type="text/javascript">
+        //商品点击
+        $(".main-container .products ul li").click(function () {
+            if ($(this).data("href"))
+                window.location.href = $(this).data("href");
+        });
+    </script>
 </body>
 </html>
