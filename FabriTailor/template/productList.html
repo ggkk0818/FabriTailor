@@ -30,7 +30,7 @@
     <script src="${base}/resources/shop/js/jquery-1.11.3.min.js"></script>
     <script src="${base}/resources/shop/js/jquery.easing.1.3.js"></script>
     <script src="${base}/resources/shop/js/jquery.lazyload.js"></script>
-    <script src="${base}/resources/shop/js/common.js"></script>
+    <script src="${base}/resources/shop/js/f_common.js"></script>
 </head>
 <body>
     [#include "/shop/include/header.ftl" /]
@@ -81,11 +81,15 @@
         </div>
         <div class="product-categories">
             <ul>
-                <li class="active"><a href="javascript:void(0);">查看全部</a></li>
+                <li [#if !productCategory] class="active" [/#if]><a href="javascript:void(0);">查看全部</a></li>
                 <li><a href="javascript:void(0);">最近上架</a></li>
-                <li><a href="javascript:void(0);">纯色衬衫</a></li>
-                <li><a href="javascript:void(0);">纯棉衬衫</a></li>
-                <li><a href="javascript:void(0);">亚麻衬衫</a></li>
+                [@product_category_root_list]
+                    [#list productCategories as category]
+                        <li [#if productCategory?? && productCategory.id==category.id] class="active"[/#if]>
+                            <a href="${base}${category.path}">${category.name}</a>
+                        </li>
+                    [/#list]
+                    [/@product_category_root_list]
             </ul>
         </div>
         <section class="products">
@@ -93,8 +97,8 @@
                 [#list page.content as product]
                 <li data-href="${base}${product.path}">
                     <div class="img"><img src="[#if product.thumbnail??]${product.thumbnail}[#else]${setting.defaultThumbnailProductImage}[/#if]" /></div>
-                    <h2>${product.name}</h2>
-                    <h3><span>￥${currency(product.price, true)}</span></h3>
+                    <h2 title="${product.name}">${abbreviate(product.name, 20)}</h2>
+                    <h3><span>${currency(product.price, true)}</span></h3>
                     <!--<div class="label new">新品</div>
                     <div class="label few">少量</div>
                     <div class="label sold-out">售罄</div>-->
