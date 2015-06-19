@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=devicewidth;initial-scale=1.0" />
     [#if productCategory??]
         [@seo type = "productList"]
-            <title>[#if productCategory.seoTitle??]${productCategory.seoTitle}[#elseif seo.title??][@seo.title?interpret /] - FabriTailor[/#if][#if systemShowPowered] - Powered By Zaders[/#if]</title>
+            <title>[#if productCategory.seoTitle??]${productCategory.seoTitle}[#elseif seo.title??][@seo.title?interpret /][/#if][#if systemShowPowered] - FabriTailor[/#if]</title>
             <meta name="author" content="Zaders Team" />
             <meta name="copyright" content="FabriTailor" />
             [#if productCategory.seoKeywords??]
@@ -20,9 +20,9 @@
             [/#if]
         [/@seo]
     [#else]
-        <title>${message("shop.product.title")} - FabriTailor[#if systemShowPowered] - Powered By Zaders[/#if]</title>
-        <meta name="author" content="SHOP++ Team" />
-        <meta name="copyright" content="SHOP++" />
+        <title>${message("shop.product.title")}[#if systemShowPowered] - FabriTailor[/#if]</title>
+        <meta name="author" content="Zaders Team" />
+        <meta name="copyright" content="FabriTailor" />
     [/#if]    
     <link href="${base}/resources/shop/css/style.css" rel="stylesheet" />
     <link href="${base}/resources/shop/css/productList.css" rel="stylesheet" />
@@ -81,8 +81,8 @@
         </div>
         <div class="product-categories">
             <ul>
-                <li [#if !productCategory] class="active" [/#if]><a href="javascript:void(0);">查看全部</a></li>
-                <li><a href="javascript:void(0);">最近上架</a></li>
+                <li [#if !productcategory && tags?size=0]class="active"[/#if]><a href="${base}/product/list.jhtml">查看全部</a></li>
+                <li [#if tags?? && tags?size>0] class="active" [/#if]><a href="${base}/product/list.jhtml?tagIds=1">最近上架</a></li>
                 [@product_category_root_list]
                     [#list productCategories as category]
                         <li [#if productCategory?? && productCategory.id==category.id] class="active"[/#if]>
