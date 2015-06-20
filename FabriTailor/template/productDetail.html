@@ -14,13 +14,19 @@
 </head>
 <body>
     [#include "/shop/include/header.ftl" /]
+    [#assign productCategory = product.productCategory /]
     <div class="main-container">
         <div class="breadcrumb hide-on-small">
             <div class="breadcrumb-container">
                 <ul class="clearfix">
                     <li><a href="javascript:void(0);">在线定制</a><span class="divider">&gt;</span></li>
-                    <li><a href="javascript:void(0);">衬衫</a><span class="divider">&gt;</span></li>
-                    <li class="active">休斯顿系列</li>
+                    [@product_category_parent_list productCategoryId = productCategory.id]
+                        [#list productCategories as productCategory]
+                            <li><a href="${base}${productCategory.path}">${productCategory.name}</a><span class="divider">&gt;</span></li>
+                        [/#list]
+                    [/@product_category_parent_list]
+                    <li><a href="${base}${productCategory.path}">${productCategory.name}</a><span class="divider">&gt;</span></li>
+                    <li class="active">${product.name}</li>
                 </ul>
             </div>
         </div>
@@ -31,11 +37,13 @@
                         <div class="product-image">
                             <div class="product-image">
                                 <div class="images">
-                                    <div class="image"><img src="${base}/resources/shop/img/product-detail1.jpg" /></div>
-                                    <div class="image"><img src="${base}/resources/shop/img/product-detail2.jpg" /></div>
-                                    <div class="image"><img src="${base}/resources/shop/img/product-detail3.jpg" /></div>
-                                    <div class="image"><img src="${base}/resources/shop/img/product-detail4.jpg" /></div>
-                                    <div class="image"><img src="${base}/resources/shop/img/product-detail5.jpg" /></div>
+                                    [#if product.productImages?has_content]
+                                        [#list product.productImages as productImage]
+                                            <div class="image"><img src="${productImage.thumbnail}" title="${productImage.title}" /></div>
+                                        [/#list]
+                                    [#else]
+                                        <div class="image"><img src="${setting.defaultThumbnailProductImage}" /></div>
+                                    [/#if]
                                 </div>
                             </div>
                             <a class="arrow-left" href="javascript:void(0);">Prev</a>
@@ -44,17 +52,15 @@
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <div class="product-info">
-                            <h2>休斯顿 - 蓝色</h2>
+                            <h2>${product.name}</h2>
                             <div class="price">
-                                <span>$500</span>
+                                <span>${currency(product.price, true)}</span>
                             </div>
                             <div class="consist">
                                 100％棉牛津，蓝色。
                             </div>
                             <div class="text">
-                                同名：山姆，昔日的共和国总统，他的是自己的同名到一个庞大的墨西哥湾沿岸的大都市。<br />
-                                <br />
-                                适用于：任何事情。搭配牛仔裤，西装，或与针织领带西装上衣扔它。这件衬衫行之有效的任何地方，而不必惹它。
+                                ${message("shop.product.introduction")}
                             </div>
                             <div class="build-info">
                                 这Trumaker衬衫将会向您的测量。您可以选择三种简单的方式来构建它。点击了解更多。
@@ -190,12 +196,13 @@
                 <a class="btn next" href="javascript:void(0);">下一步</a>
                 <ol>
                     <li><a href="javascript:void(0);">1</a></li>
-                    <li><a href="javascript:void(0);">2</a></li>
-                    <li><a href="javascript:void(0);">3</a></li>
-                    <li><a href="javascript:void(0);">4</a></li>
-                    <li><a href="javascript:void(0);">5</a></li>
-                    <li><a href="javascript:void(0);">6</a></li>
-                    <li><a href="javascript:void(0);">7</a></li>
+                    [#if product.specifications?has_content]
+                        [#list product.specifications as specification]
+                            <li><a href="javascript:void(0);">${specification_index + 2}</a></li>
+                        [/#list]
+                    [/#if]
+                    <li><a href="javascript:void(0);">${product.specifications.size + 2}</a></li>
+                    <li><a href="javascript:void(0);">${product.specifications.size + 3}</a></li>
                 </ol>
                 <div class="step intro">
                     <img class="bg-img" src="${base}/resources/shop/img/product-customization-build1.jpg" />
@@ -222,93 +229,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="step normal" data-bg-img-change="true">
-                    <img class="bg-img right" src="${base}/resources/shop/img/product-customization-build3-0.jpg" />
-                    <div class="message">
-                        <h2>新建衬衫版型</h2>
-                        <p>这个简单的工具能够帮助你迅速了解并且建立属于自己的衬衫版型。在每一个衬衫细节选择你喜欢的选项，然后点击下一步即可。保证每个细节都按照你的设想与喜好，一切就绪之后就可以把这件衬衫添加到购物车了。</p>
-                    </div>
-                    <div class="options">
-                        <div class="option">
-                            <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-0.jpg" /></div>
-                            <div class="text">直筒型</div>
+                [#if product.specifications?has_content]
+                    [#list product.specifications as specification]
+                        <div class="step normal" data-bg-img-change="true">
+                            <img class="bg-img right" src="${specification.specificationValues[0].image}" />
+                            <div class="message">
+                                <h2>${specification.name}</h2>
+                                <p>${specification.memo}</p>
+                            </div>
+                            <div class="options">
+                                [#list specification.specificationValues as specificationValue]
+                                    <div class="option">
+                                        <div class="image"><img src="${specificationValue.image}" /></div>
+                                        <div class="text">${specificationValue.name}</div>
+                                    </div>
+                                [/#list]
+                            </div>
                         </div>
-                        <div class="option">
-                            <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-1.jpg" /></div>
-                            <div class="text">修身型</div>
-                        </div>
-                        <div class="option">
-                            <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-2.jpg" /></div>
-                            <div class="text">修身型</div>
-                        </div>
-                        <div class="option">
-                            <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-3.jpg" /></div>
-                            <div class="text">修身型</div>
-                        </div>
-                        <div class="option">
-                            <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-4.jpg" /></div>
-                            <div class="text">修身型</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="step normal" data-bg-img-change="true">
-                    <img class="bg-img right" src="${base}/resources/shop/img/product-customization-build3-0.jpg" />
-                    <div class="message">
-                        <h2>新建衬衫版型</h2>
-                        <p>这个简单的工具能够帮助你迅速了解并且建立属于自己的衬衫版型。在每一个衬衫细节选择你喜欢的选项，然后点击下一步即可。保证每个细节都按照你的设想与喜好，一切就绪之后就可以把这件衬衫添加到购物车了。</p>
-                    </div>
-                    <div class="options">
-                        <div class="option">
-                            <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-0.jpg" /></div>
-                            <div class="text">直筒型</div>
-                        </div>
-                        <div class="option">
-                            <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-1.jpg" /></div>
-                            <div class="text">修身型</div>
-                        </div>
-                        <div class="option">
-                            <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-2.jpg" /></div>
-                            <div class="text">修身型</div>
-                        </div>
-                        <div class="option">
-                            <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-3.jpg" /></div>
-                            <div class="text">修身型</div>
-                        </div>
-                        <div class="option">
-                            <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-4.jpg" /></div>
-                            <div class="text">修身型</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="step normal" data-bg-img-change="true">
-                    <img class="bg-img right" src="${base}/resources/shop/img/product-customization-build3-0.jpg" />
-                    <div class="message">
-                        <h2>新建衬衫版型</h2>
-                        <p>这个简单的工具能够帮助你迅速了解并且建立属于自己的衬衫版型。在每一个衬衫细节选择你喜欢的选项，然后点击下一步即可。保证每个细节都按照你的设想与喜好，一切就绪之后就可以把这件衬衫添加到购物车了。</p>
-                    </div>
-                    <div class="options">
-                        <div class="option">
-                            <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-0.jpg" /></div>
-                            <div class="text">直筒型</div>
-                        </div>
-                        <div class="option">
-                            <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-1.jpg" /></div>
-                            <div class="text">修身型</div>
-                        </div>
-                        <div class="option">
-                            <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-2.jpg" /></div>
-                            <div class="text">修身型</div>
-                        </div>
-                        <div class="option">
-                            <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-3.jpg" /></div>
-                            <div class="text">修身型</div>
-                        </div>
-                        <div class="option">
-                            <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-4.jpg" /></div>
-                            <div class="text">修身型</div>
-                        </div>
-                    </div>
-                </div>
+                    [/#list]
+                [/#if]
                 <div class="step normal">
                     <img class="bg-img right" src="${base}/resources/shop/img/product-customization-build3-0.jpg" />
                     <div class="message">
