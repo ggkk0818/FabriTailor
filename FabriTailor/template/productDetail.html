@@ -9,6 +9,7 @@
     <script src="${base}/resources/shop/js/modernizr.js"></script>
     <script src="${base}/resources/shop/js/jquery-1.11.3.min.js"></script>
     <script src="${base}/resources/shop/js/jquery.easing.1.3.js"></script>
+    <script src="${base}/resources/shop/js/jquery.cookie.js"></script>
     <script src="${base}/resources/shop/js/jquery.lazyload.js"></script>
     <script src="${base}/resources/shop/js/f_common.js"></script>
 </head>
@@ -39,7 +40,7 @@
                                 <div class="images">
                                     [#if product.productImages?has_content]
                                         [#list product.productImages as productImage]
-                                            <div class="image"><img src="${productImage.thumbnail}" title="${productImage.title}" /></div>
+                                            <div class="image"><img src="${productImage.medium}" title="${productImage.title}" /></div>
                                         [/#list]
                                     [#else]
                                         <div class="image"><img src="${setting.defaultThumbnailProductImage}" /></div>
@@ -84,6 +85,17 @@
                 <a class="arrow-right" href="javascript:void(0);">Next</a>
                 <img class="image" src="${base}/resources/shop/img/product-detail1.jpg" />
             </div>
+        </div>
+        <div class="product-detail-image-zoom-thumbs">
+            <ul>
+                [#if product.productImages?has_content]
+                [#list product.productImages as productImage]
+                <li><a href="javascript:void(0);"><img src="${productImage.thumbnail}" data-origin-src="${productImage.large}" /></a></li>
+                [/#list]
+                [#else]
+                <li><a href="javascript:void(0);"><img src="${setting.defaultThumbnailProductImage}" data-origin-src="${setting.defaultThumbnailProductImage}" /></a></li>
+                [/#if]
+            </ul>
         </div>
         <div class="product-customizations">
             <div class="customization clearfix no-login">
@@ -197,12 +209,12 @@
                 <ol>
                     <li><a href="javascript:void(0);">1</a></li>
                     [#if product.specifications?has_content]
-                        [#list product.specifications as specification]
-                            <li><a href="javascript:void(0);">${specification_index + 2}</a></li>
-                        [/#list]
+                    [#list product.specifications as specification]
+                    <li><a href="javascript:void(0);">${specification_index + 2}</a></li>
+                    [/#list]
                     [/#if]
-                    <li><a href="javascript:void(0);">${product.specifications.size + 2}</a></li>
-                    <li><a href="javascript:void(0);">${product.specifications.size + 3}</a></li>
+                    <li><a href="javascript:void(0);">${product.specifications?size + 2}</a></li>
+                    <li><a href="javascript:void(0);">${product.specifications?size + 3}</a></li>
                 </ol>
                 <div class="step intro">
                     <img class="bg-img" src="${base}/resources/shop/img/product-customization-build1.jpg" />
@@ -230,23 +242,23 @@
                     </div>
                 </div>
                 [#if product.specifications?has_content]
-                    [#list product.specifications as specification]
-                        <div class="step normal" data-bg-img-change="true">
-                            <img class="bg-img right" src="${specification.specificationValues[0].image}" />
-                            <div class="message">
-                                <h2>${specification.name}</h2>
-                                <p>${specification.memo}</p>
-                            </div>
-                            <div class="options">
-                                [#list specification.specificationValues as specificationValue]
-                                    <div class="option">
-                                        <div class="image"><img src="${specificationValue.image}" /></div>
-                                        <div class="text">${specificationValue.name}</div>
-                                    </div>
-                                [/#list]
-                            </div>
+                [#list product.specifications as specification]
+                <div class="step normal" data-bg-img-change="true">
+                    <img class="bg-img right" src="${specification.specificationValues[0].image}" />
+                    <div class="message">
+                        <h2>${specification.name}</h2>
+                        <p>${specification.memo}</p>
+                    </div>
+                    <div class="options">
+                        [#list specification.specificationValues as specificationValue]
+                        <div class="option">
+                            <div class="image"><img src="${specificationValue.image}" /></div>
+                            <div class="text">${specificationValue.name}</div>
                         </div>
-                    [/#list]
+                        [/#list]
+                    </div>
+                </div>
+                [/#list]
                 [/#if]
                 <div class="step normal">
                     <img class="bg-img right" src="${base}/resources/shop/img/product-customization-build3-0.jpg" />
@@ -320,15 +332,6 @@
                     <a class="btn" href="javascript:void(0);">加入购物车</a>
                 </div>
             </div>
-        </div>
-        <div class="product-detail-image-zoom-thumbs">
-            <ul>
-                <li><a href="javascript:void(0);"><img src="${base}/resources/shop/img/product-detail-thumb1.jpg" data-origin-src="${base}/resources/shop/img/product-detail1.jpg" /></a></li>
-                <li><a href="javascript:void(0);"><img src="${base}/resources/shop/img/product-detail-thumb2.jpg" data-origin-src="${base}/resources/shop/img/product-detail2.jpg" /></a></li>
-                <li><a href="javascript:void(0);"><img src="${base}/resources/shop/img/product-detail-thumb3.jpg" data-origin-src="${base}/resources/shop/img/product-detail3.jpg" /></a></li>
-                <li><a href="javascript:void(0);"><img src="${base}/resources/shop/img/product-detail-thumb4.jpg" data-origin-src="${base}/resources/shop/img/product-detail4.jpg" /></a></li>
-                <li><a href="javascript:void(0);"><img src="${base}/resources/shop/img/product-detail-thumb5.jpg" data-origin-src="${base}/resources/shop/img/product-detail5.jpg" /></a></li>
-            </ul>
         </div>
     </div>
     [#include "/shop/include/footer.ftl" /]

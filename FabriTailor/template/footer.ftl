@@ -64,6 +64,7 @@
         <h2>登录</h2>
         <input class="input" type="text" placeholder="请输入电子邮件地址" />
         <input class="input" type="password" placeholder="请输入密码" />
+        <p class="hidden"></p>
         <a class="button" href="javascript:void(0);">登陆</a>
         <a href="javascript:void(0);">忘记密码，或立即免费注册成为会员？</a>
     </div>
@@ -79,15 +80,92 @@
             $("aside").removeClass("opened");
             $("div.cover-small-black").fadeTo("normal", 0, EASING_NAME, function () { $(this).removeClass("opened"); });
         });
-        //登陆
-        var showLogin = function () {
-            $(".login-panel").show();
-            $("div.login-cover-black").addClass("opened").fadeTo("normal", 0.5, EASING_NAME);
-        };
-        var hideLogin = function () {
-            $(".login-panel").hide();
-            $("div.login-cover-black").fadeTo("normal", 0, EASING_NAME, function () { $(this).removeClass("opened"); });
-        };
-        $("div.login-cover-black").click(hideLogin);
-        $("header .btn-group .login").click(showLogin);
+    </script>
+    <script src="${base}/resources/shop/js/jsbn.js"></script>
+    <script src="${base}/resources/shop/js/base64.js"></script>
+    <script src="${base}/resources/shop/js/prng4.js"></script>
+    <script src="${base}/resources/shop/js/rng.js"></script>
+    <script src="${base}/resources/shop/js/rsa.js"></script>
+    <script type="text/javascript">
+        if ($.cookie("memberUsername")) {
+            //用户信息链接
+            $("header .btn-group .account .dropdown-menu a").click(function (e) {
+                e.stopPropagation();
+            });
+            $("header .btn-group .account").click(function (e) {
+                window.location.href = "${base}/member/index.jhtml";
+            });
+            $("header .btn-group .login").addClass("hidden");
+            $("header .btn-group .account").removeClass("hidden").children("span").text($.cookie("memberUsername"));
+        }
+        else {
+            //登陆
+            var $loginPanel = $(".login-panel"),
+                $loginCover = $("div.login-cover-black");
+            var showLogin = function () {
+                $loginPanel.show();
+                $loginCover.addClass("opened").fadeTo("normal", 0.5, EASING_NAME);
+            };
+            var hideLogin = function () {
+                $loginPanel.hide();
+                $loginCover.fadeTo("normal", 0, EASING_NAME, function () { $(this).removeClass("opened"); });
+            };
+            var doLogin = function () {
+                if ($(this).hasClass("disabled"))
+                    return;
+                $loginPanel.children("p").addClass("hidden");
+                var $username = $loginPanel.children("input").eq(0),
+                    $password = $loginPanel.children("input").eq(1);
+                if (!$username.val() || !$username.val().length) {
+                    $username.addClass("has-error");
+                }
+                else {
+                    $username.removeClass("has-error");
+                }
+                if (!$password.val() || !$password.val().length) {
+                    $password.addClass("has-error");
+                }
+                else {
+                    $password.removeClass("has-error");
+                }
+                if ($loginPanel.children(".has-error").length)
+                    return;
+                $.getJSON("${base}/common/public_key.jhtml", function (data) {
+                    var rsaKey = new RSAKey();
+                    rsaKey.setPublic(b64tohex(data.modulus), b64tohex(data.exponent));
+                    var enPassword = hex2b64(rsaKey.encrypt($password.val()));
+                    $.ajax({
+                        url: "${base}/login/submit.jhtml",
+                        type: "POST",
+                        data: {
+                            username: $username.val(),
+                            enPassword: enPassword
+                        },
+                        dataType: "json",
+                        cache: false,
+                        success: function (data) {
+                            if (data && data.type == "success") {
+                                $.cookie("memberUsername", $username.val(), { expires: 7 * 24 * 60 * 60 });
+                                //[#if redirectUrl??]
+                                //    window.location.href = "${redirectUrl}";
+                                //[#else]
+                                    window.location.reload();
+                                //[/#if]
+                            }
+                            else {
+                                $loginPanel.children("p").removeClass("hidden").text("登录失败。" + data.content);
+                            }
+                        },
+                        error: function () {
+                            $loginPanel.children("p").removeClass("hidden").text("登录失败");
+                        }
+                    });
+                }).fail(function () {
+                    $loginPanel.children("p").removeClass("hidden").text("获取登录凭证失败");
+                });
+            };
+            $("div.login-cover-black").click(hideLogin);
+            $("header .btn-group .login").click(showLogin);
+            $(".login-panel a.button").click(doLogin);
+        }
     </script>
