@@ -507,7 +507,6 @@
     </script>
     <script type="text/javascript">
         //自定义版型
-        var 
         var $productCustomizationBuild = $(".main-container .product-customizations .customization-build");
         var productCustomizationBuildShow = function (index) {
             if (typeof index !== "number")
