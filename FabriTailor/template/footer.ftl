@@ -1,4 +1,4 @@
-﻿    <footer>
+    <footer>
         <div class="contact">
             <h3 class="hide-on-small">与凡布保持联系</h3>
             <div class="input-group hide-on-small">
@@ -86,8 +86,11 @@
     <script src="${base}/resources/shop/js/prng4.js"></script>
     <script src="${base}/resources/shop/js/rng.js"></script>
     <script src="${base}/resources/shop/js/rsa.js"></script>
+    <script type="text/javascript" src="${base}/resources/shop/js/common.js"></script>
     <script type="text/javascript">
-        if ($.cookie("memberUsername")) {
+    	//这里应该用cookie中是否有username来判断是否已登录,memberUsername是用于记住曾经登录的用户名(记住我)
+    	//if ($.cookie("memberUsername")) {
+        if ($.cookie("username")) {
             //用户信息链接
             $("header .btn-group .account .dropdown-menu a").click(function (e) {
                 e.stopPropagation();
@@ -96,7 +99,9 @@
                 window.location.href = "${base}/member/index.jhtml";
             });
             $("header .btn-group .login").addClass("hidden");
-            $("header .btn-group .account").removeClass("hidden").children("span").text($.cookie("memberUsername"));
+            //这里应该用cookie中是否有username来判断是否已登录,memberUsername是用于记住曾经登录的用户名(记住我)
+            //$("header .btn-group .account").removeClass("hidden").children("span").text($.cookie("memberUsername"));
+            $("header .btn-group .account").removeClass("hidden").children("span").text($.cookie("username"));
         }
         else {
             //登陆
@@ -146,11 +151,11 @@
                         success: function (data) {
                             if (data && data.type == "success") {
                                 $.cookie("memberUsername", $username.val(), { expires: 7 * 24 * 60 * 60 });
-                                //[#if redirectUrl??]
-                                //    window.location.href = "${redirectUrl}";
-                                //[#else]
+                                [#if redirectUrl??]
+                                    window.location.href = "${redirectUrl}";
+                                [#else]
                                     window.location.reload();
-                                //[/#if]
+                                [/#if]
                             }
                             else {
                                 $loginPanel.children("p").removeClass("hidden").text("登录失败。" + data.content);
