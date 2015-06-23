@@ -889,7 +889,24 @@
                 }
             }
             if (product) {
-                //TO DO 放入购物车
+                $.ajax({
+                    url: "${base}/cart/add.jhtml",
+                    type: "POST",
+                    data: { id: 1, quantity: quantity },
+                    dataType: "json",
+                    cache: false,
+                    success: function (data) {
+                        if (data && data.type == "success") {
+
+                        }
+                        else {
+
+                        }
+                    },
+                    error: function () {
+
+                    }
+                });
             }
             else {
 
@@ -906,6 +923,10 @@
                 .keyup(productCustomizationBuildMonogramKeyup)
                 .change(productCustomizationBuildMonogramChange);
             $customizationBuildSummary.find(".options .option").click(productCustomizationBuildSummaryOptionClick);
+            //我的版型放入购物车
+            $(".main-container .product-customizations .customization").eq(0).find("a.btn").click(productCustomizationBuildAddToCart);
+            //自定版型放入购物车
+            $customizationBuildSummary.find("a.btn").click(productCustomizationBuildAddToCart);
             $(window).on("resize.customizationBuild", function () {
                 productCustomizationBuildCheckHeight(false);
             });
