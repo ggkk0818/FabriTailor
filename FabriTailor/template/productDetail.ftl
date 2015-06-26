@@ -98,42 +98,19 @@
             </ul>
         </div>
         <div class="product-customizations">
-            <div class="customization clearfix no-login">
+			[@current_member]
+            <div class="customization clearfix [#if !currentMember??]no-login[/#if]">
                 <h2 class="description">查看我的版型</h2>
                 <p class="description">这是属于你的定制版型组合，点击任意一个选项可以看到详细说明。你可以点击这里修改你的定制版型，或者点击新建版型来建立一个新的衬衫版型。</p>
-                <div class="options" style="display:none;">
-                    <div class="option" data-title="直筒型" data-description="这是属于你的定制版型组合，点击任意一个选项可以看到详细说明。你可以点击这里修改你的定制版型，或者点击新建版型来建立一个新的衬衫版型。">
-                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion1.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
-                    <div class="option">
-                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion2.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
-                    <div class="option">
-                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion3.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
-                    <div class="option">
-                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion4.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
-                    <div class="option">
-                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion5.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
-                    <div class="option">
-                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion6.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
-                    <div class="option">
-                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion7.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
-                    <div class="option">
-                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion8.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
+                <div class="options">
+					[#if currentMember.specificationValues?has_content]
+						[#list currentMember.specificationValues as specificationValue]
+						<div class="option" data-title="${specificationValue.name}" data-description="${specificationValue.description}">
+							<div class="image"><img src="${specificationValue.image}" /></div>
+							<div class="text">${specificationValue.name}</div>
+						</div>
+						[/#list]
+					[/#if]
                 </div>
                 <a class="btn" href="javascript:void(0);">加入购物车</a>
                 <div class="zoom-container">
@@ -146,14 +123,17 @@
                     <a class="btn-close" href="javascript:void(0);"></a>
                     <a class="btn" href="javascript:void(0);">加入购物车</a>
                 </div>
-                <div class="zoom-container" style="display:block;">
-                    <img class="image" src="${base}/resources/shop/img/product-customization-build1.jpg" />
-                    <div class="description">
-                        <h2>我的版型</h2>
-                        <p>我们会在你量体环节帮助你建立属于你的专属衬衫版型。<br />如果你已经是我们的会员，请点击<a href="javascript:void(0);">登录</a></p>
-                    </div>
-                </div>
+				[#if !currentMember??]
+					<div class="zoom-container" style="display:block;">
+						<img class="image" src="${base}/resources/shop/img/product-customization-build1.jpg" />
+						<div class="description">
+							<h2>我的版型</h2>
+							<p>我们会在你量体环节帮助你建立属于你的专属衬衫版型。<br />如果你已经是我们的会员，请点击<a href="javascript:void(0);">登录</a></p>
+						</div>
+					</div>
+				[/#if]
             </div>
+			[/@current_member]
             <div class="customization clearfix">
                 <h2 class="description">查看凡布推荐版型</h2>
                 <p class="description">这是凡布设计师推荐的衬衫版型，点击任意一个选项可以看到详细说明。点击新建版型来建立一个属于你的衬衫版型。</p>
