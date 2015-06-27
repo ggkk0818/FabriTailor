@@ -1,0 +1,21 @@
+﻿.loginForm{
+    width:250px;
+    margin:40px auto 0;
+}
+.loginForm h1{
+    font-size:30px;
+    text-align: center;
+}
+.loginForm p{
+    font-size:16px;
+    text-align:center;
+}
+.loginForm .input{
+    margin-bottom:10px;
+}
+.loginForm a.button{
+    display:block;
+    margin:0 0 10px;
+    font-size:16px;
+    line-height:20px;
+}

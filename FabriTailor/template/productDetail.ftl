@@ -105,12 +105,16 @@
                 <div class="options">
 					[#if currentMember.specificationValues?has_content]
 						[#list currentMember.specificationValues as specificationValue]
-						<div class="option" data-title="${specificationValue.name}" data-description="${specificationValue.description}">
+						<div class="option" data-title="${specificationValue.name}" data-description="${specificationValue.description}" data-specification-name="${specificationValue.specification.name}" data-specification-value="${specificationValue.name}">
 							<div class="image"><img src="${specificationValue.image}" /></div>
 							<div class="text">${specificationValue.name}</div>
 						</div>
 						[/#list]
 					[/#if]
+                    <div class="option monogram" [#if currentMember.letters??]data-letters="${currentMember.letters}"[/#if]>
+                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion8.jpg" /></div>
+                        <div class="text">[#if currentMember.letters??]自定义(${currentMember.letters})[#else]无刺绣[/#if]</div>
+                    </div>
                 </div>
                 <a class="btn" href="javascript:void(0);">加入购物车</a>
                 <div class="zoom-container">
@@ -231,11 +235,11 @@
                     </div>
                     <div class="options">
                         <div class="option">
-                            <div class="image"><img src="img/product-customization-build3-0.jpg" /></div>
+                            <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-0.jpg" /></div>
                             <div class="text">自定义</div>
                         </div>
                         <div class="option">
-                            <div class="image"><img src="img/product-customization-build3-1.jpg" /></div>
+                            <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-1.jpg" /></div>
                             <div class="text">无刺绣</div>
                         </div>
                         <div class="option-monogram">
@@ -250,42 +254,22 @@
                 <h2 class="description">确认你的版型</h2>
                 <p class="description">这是属于你的定制版型组合，点击任意一个选项可以看到详细说明。你可以点击这里修改你的定制版型，或者点击新建版型来建立一个新的衬衫版型。</p>
                 <div class="options">
-                    <div class="option" data-specification-name="specification1" data-specification-value="value1">
-                        <div class="image"><img src="img/product-customizztion1.jpg" /></div>
-                        <div class="text">直筒型</div>
+				[#if product.specifications?has_content]
+					[#list product.specifications as specification]
+                    <div class="option">
+                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion1.jpg" /></div>
+                        <div class="text">${specification.name}</div>
                     </div>
-                    <div class="option" data-specification-name="specification2" data-specification-value="value1">
-                        <div class="image"><img src="img/product-customizztion2.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
-                    <div class="option" data-specification-name="specification3" data-specification-value="value1">
-                        <div class="image"><img src="img/product-customizztion3.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
-                    <div class="option" data-specification-name="specification4" data-specification-value="value1">
-                        <div class="image"><img src="img/product-customizztion4.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
-                    <div class="option" data-specification-name="specification5" data-specification-value="value1">
-                        <div class="image"><img src="img/product-customizztion5.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
-                    <div class="option" data-specification-name="specification6" data-specification-value="value1">
-                        <div class="image"><img src="img/product-customizztion6.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
-                    <div class="option" data-specification-name="specification7" data-specification-value="value1">
-                        <div class="image"><img src="img/product-customizztion7.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
+					[/#list]
+				[/#if]
                     <div class="option monogram">
-                        <div class="image"><img src="img/product-customizztion8.jpg" /></div>
+                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion8.jpg" /></div>
                         <div class="text">无刺绣</div>
                     </div>
                 </div>
                 <a class="btn" href="javascript:void(0);">加入购物车</a>
                 <div class="zoom-container">
-                    <img class="image" src="img/product-customizztion1.jpg" />
+                    <img class="image" src="${base}/resources/shop/img/product-customizztion1.jpg" />
                     <div class="gradient"></div>
                     <div class="description">
                         <h2>&nbsp;</h2>
@@ -293,6 +277,15 @@
                     </div>
                     <a class="btn-close" href="javascript:void(0);"></a>
                     <a class="btn" href="javascript:void(0);">加入购物车</a>
+                </div>
+            </div>
+            <div class="customization add-to-cart" style="height:500px;">
+                <div class="zoom-container" style="display:block;">
+                    <img class="image" src="${base}/resources/shop/img/product-customization-build1.jpg" />
+                    <div class="description">
+                        <p>已加入购物车</p>
+                    </div>
+                    <a class="btn" href="javascript:void(0);">返回</a>
                 </div>
             </div>
         </div>
@@ -435,7 +428,7 @@
                     $zoomContainer.fadeTo(0, 0, function () { $(this).hide(); });
             });
         };
-        $(".main-container .product-customizations .customization").not(".customization-build-summary,.no-login").each(function (i, e) { productCustomizationInit($(e)); });
+        $(".main-container .product-customizations .customization").not(".customization-build-summary,.no-login,.add-to-cart").each(function (i, e) { productCustomizationInit($(e)); });
     </script>
     <script type="text/javascript">
         //版型tab切换
@@ -601,7 +594,7 @@
             }
             //更新summary状态
             if ($option.data("specification-value") && $step.data("specification-name")) {
-                var $summaryOption = $customizationBuildSummary.find(".options .option").eq($step.prevAll(".step").length);
+                var $summaryOption = $customizationBuildSummary.find(".options .option").eq($step.prevAll(".step").length - 1);
                 $summaryOption.data("specification-name", $step.data("specification-name"));
                 $summaryOption.data("specification-value", $option.data("specification-value"));
                 $summaryOption.find(".text").text($option.find(".text").text());
@@ -630,9 +623,11 @@
                     letters += $(e).val();
             });
             if (letters.length) {
+                $customizationBuildSummary.find(".options .option.monogram").data("letters", letters);
                 $customizationBuildSummary.find(".options .option.monogram .text").text("自定义(" + letters + ")");
             }
             else {
+                $customizationBuildSummary.find(".options .option.monogram").removeData("letters");
                 $customizationBuildSummary.find(".options .option.monogram .text").text("无刺绣");
             }
         };
@@ -642,7 +637,8 @@
         };
         var productCustomizationBuildAddToCart = function () {
             var $customization = $(this).parent(),
-                specifications = [];
+                specifications = [],
+                letters = null;
             //获取当前定制信息
             $customization.find(".options .option").each(function (i, e) {
                 var $el = $(e);
@@ -650,6 +646,9 @@
                     specifications.push({ name: $el.data("specification-name"), value: $el.data("specification-value") });
                 }
             });
+            if ($customization.find(".options .option.monogram").data("letters")) {
+                letters = $customization.find(".options .option.monogram").data("letters");
+            }
             //筛选商品
             var product = null;
             if (productGoods && productGoods.length) {
@@ -678,16 +677,21 @@
                     }
                 }
             }
+            var params = { id: product.productId, quantity: 1 };
+            if (letters) {
+                params.letters = letters;
+            }
             if (product) {
                 $.ajax({
                     url: "${base}/cart/add.jhtml",
                     type: "POST",
-                    data: { id: 1, quantity: quantity },
+                    data: params,
                     dataType: "json",
                     cache: false,
                     success: function (data) {
                         if (data && data.type == "success") {
-
+                            $(".main-container .product-customizations .customization").last().data("customization-ret", $customization.prevAll("div").length);
+                            productCustomizationTabShow(4);
                         }
                         else {
 
@@ -701,6 +705,14 @@
             else {
 
             }
+        };
+        var productCustomizationBuildAddToCartReturn = function () {
+            var $customization = $(this).parent().parent(),
+                customizationId = 0;
+            if ($customization.data("customization-ret")) {
+                customizationId = $customization.data("customization-ret");
+            }
+            productCustomizationTabShow(customizationId);
         };
         var productCustomizationBuildInit = function () {
             $productCustomizationBuild.find("ol li a").click(productCustomizationBuildControlClick);
@@ -717,6 +729,8 @@
             $(".main-container .product-customizations .customization").eq(0).find("a.btn").click(productCustomizationBuildAddToCart);
             //自定版型放入购物车
             $customizationBuildSummary.find("a.btn").click(productCustomizationBuildAddToCart);
+            //放入购物车成功后返回
+            $(".main-container .product-customizations .customization").last().find("a.btn").click(productCustomizationBuildAddToCartReturn);
             $(window).on("resize.customizationBuild", function () {
                 productCustomizationBuildCheckHeight(false);
             });
