@@ -4,100 +4,44 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=devicewidth;initial-scale=1.0" />
     <title>FabriTailor</title>
-    <link href="css/animate.css" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" />
-    <link href="css/account.css" rel="stylesheet" />
-    <link href="css/accountBuild.css" rel="stylesheet" />
-    <script src="js/modernizr.js"></script>
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/jquery.easing.1.3.js"></script>
-    <script src="js/jquery.cookie.js"></script>
-    <script src="js/jquery.lazyload.js"></script>
-    <script src="js/common.js"></script>
+    <link href="${base}/resources/shop/css/animate.css" rel="stylesheet" />
+    <link href="${base}/resources/shop/css/style.css" rel="stylesheet" />
+    <link href="${base}/resources/shop/css/account.css" rel="stylesheet" />
+    <link href="${base}/resources/shop/css/accountBuild.css" rel="stylesheet" />
+    <script src="${base}/resources/shop/js/modernizr.js"></script>
+    <script src="${base}/resources/shop/js/jquery-1.11.3.min.js"></script>
+    <script src="${base}/resources/shop/js/jquery.easing.1.3.js"></script>
+    <script src="${base}/resources/shop/js/jquery.cookie.js"></script>
+    <script src="${base}/resources/shop/js/jquery.lazyload.js"></script>
+    <script src="${base}/resources/shop/js/f_common.js"></script>
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <a class="menu-btn show-on-small" href="javascript:void(0);"><img src="img/menu-btn.png" /></a>
-            <div class="logo">
-                <img src="img/logo.png" />
-            </div>
-            <nav class="hide-on-small">
-                <ul>
-                    <li><a href="javascript:void(0);"><span>在线定制</span></a></li>
-                    <li><a href="javascript:void(0);"><span>关于我们</span></a></li>
-                    <li><a href="javascript:void(0);"><span>凡布风尚</span></a></li>
-                    <li><a href="javascript:void(0);"><span>休闲衬衫</span></a></li>
-                    <li><a href="javascript:void(0);"><span>我们的凡布</span></a></li>
-                </ul>
-            </nav>
-            <div class="btn-group hide-on-small">
-                <a href="javascript:void(0);" class="register">从这里开始</a><a href="javascript:void(0);" class="login">登录</a>
-            </div>
-        </div>
-    </header>
-    <aside class="show-on-small">
-        <a href="javascript:void(0);" class="btn-close"><img src="img/menu-btn-close.png" /></a>
-        <ul>
-            <li><a href="javascript:void(0);"><span>在线定制</span></a></li>
-            <li><a href="javascript:void(0);"><span>关于我们</span></a></li>
-            <li><a href="javascript:void(0);"><span>凡布风尚</span></a></li>
-            <li><a href="javascript:void(0);"><span>休闲衬衫</span></a></li>
-            <li><a href="javascript:void(0);"><span>我们的凡布</span></a></li>
-            <li><a class="button" href="javascript:void(0);">从这里开始</a></li>
-        </ul>
-    </aside>
+	[#assign current = "memberSpecification" /]
+    [#include "/shop/include/header.ftl" /]
     <div class="main-container clearfix">
         <div class="account-aside">
             <div class="current">我的板型<i class="showhide"></i></div>
-            <ul>
-                <li><a href="javascript:void(0);">账户信息</a></li>
-                <li><a href="javascript:void(0);">我的订单</a></li>
-                <li><a href="javascript:void(0);">我的尺寸</a></li>
-                <li class="active"><a href="javascript:void(0);">我的板型</a></li>
-                <li><a href="javascript:void(0);">分享与学习</a></li>
-                <li><a href="javascript:void(0);">地址簿</a></li>
-                <li><a href="javascript:void(0);">退换货</a></li>
-            </ul>
+            [#include "/shop/member/include/navigation.ftl" /]
             <a href="javascript:void(0);" class="sign-out">退出</a>
         </div>
+		[@current_member]
         <div class="account-container">
             <div class="accountBuild">
                 <h1>我的版型</h1>
                 <p>当前网页中默认的是我们的推荐版型，你可点击任意部分进行查看和修改。</p>
                 <div class="customization clearfix">
                     <div class="options">
-                        <div class="option">
-                            <div class="image"><img src="img/product-customizztion1.jpg" /></div>
-                            <div class="text">直筒型<i class="edit"></i></div>
-                        </div>
-                        <div class="option">
-                            <div class="image"><img src="img/product-customizztion2.jpg" /></div>
-                            <div class="text">直筒型<i class="edit"></i></div>
-                        </div>
-                        <div class="option">
-                            <div class="image"><img src="img/product-customizztion3.jpg" /></div>
-                            <div class="text">直筒型<i class="edit"></i></div>
-                        </div>
-                        <div class="option">
-                            <div class="image"><img src="img/product-customizztion4.jpg" /></div>
-                            <div class="text">直筒型<i class="edit"></i></div>
-                        </div>
-                        <div class="option">
-                            <div class="image"><img src="img/product-customizztion5.jpg" /></div>
-                            <div class="text">直筒型<i class="edit"></i></div>
-                        </div>
-                        <div class="option">
-                            <div class="image"><img src="img/product-customizztion6.jpg" /></div>
-                            <div class="text">直筒型<i class="edit"></i></div>
-                        </div>
-                        <div class="option">
-                            <div class="image"><img src="img/product-customizztion7.jpg" /></div>
-                            <div class="text">直筒型<i class="edit"></i></div>
-                        </div>
-                        <div class="option">
+						[#if currentMember.specificationValues?has_content]
+							[#list currentMember.specificationValues as specificationValue]
+							<div class="option" data-title="${specificationValue.name}" data-description="${specificationValue.description}" data-specification-name="${specificationValue.specification.name}" data-specification-value="${specificationValue.name}">
+								<div class="image"><img src="${specificationValue.image}" /></div>
+								<div class="text">${specificationValue.name}<i class="edit"></i></div>
+							</div>
+							[/#list]
+						[/#if]
+                        <div class="option monogram" [#if currentMember.letters??]data-letters="${currentMember.letters}"[/#if]>
                             <div class="image"><img src="img/product-customizztion8.jpg" /></div>
-                            <div class="text">直筒型<i class="edit"></i></div>
+                            <div class="text">[#if currentMember.letters??]自定义(${currentMember.letters})[#else]无刺绣[/#if]<i class="edit"></i></div>
                         </div>
                     </div>
                 </div>
@@ -106,42 +50,24 @@
                 <a href="javascript:void(0);" class="btn-close"></a>
                 <div class="accountBuilder-sidebar">
                     <ul>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <span>衣身选择</span>
-                                <span class="chosen">修身型</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <span>领型选择</span>
-                                <span class="chosen">修身型</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <span>袖口选择</span>
-                                <span class="chosen">修身型</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <span>口袋选择</span>
-                                <span class="chosen">修身型</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <span>门襟选择</span>
-                                <span class="chosen">修身型</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <span>褶皱选择</span>
-                                <span class="chosen">修身型</span>
-                            </a>
-                        </li>
+						[#if currentMember.specifications?has_content]
+							[#assign chosenValue = {} /]
+							[#list currentMember.specifications as specification]
+							<li>
+								<a href="javascript:void(0);">
+									<span>${specification.name}</span>
+									[#if currentMember.specificationValues?has_content]
+										[#list currentMember.specificationValues as specificationValue]
+											[#if specification.name == specificationValue.specification.name]
+												[#assign chosenValue[specification.name] = specificationValue.name /]
+											[/#if]
+										[/#list]
+									[/#if]
+									<span class="chosen">[#if chosenValue[specification.name]]${chosenValue[specification.name]}[#else]无[/#if]</span>
+								</a>
+							</li>
+							[/#list]
+						[/#if]
                         <li>
                             <a href="javascript:void(0);">
                                 <span>绣花选择</span>
@@ -330,110 +256,26 @@
                                 <div class="image"><img src="img/product-customization-build3-1.jpg" /></div>
                                 <div class="text">修身型</div>
                             </div>
-                            <div class="option-monogram">
-                                <input class="monogram" type="text" value="" />
-                                <input class="monogram second" type="text" value="" />
-                                <input class="monogram third" type="text" value="" />
+                            <div class="option">
+                                <div class="image"><img src="img/product-customization-build3-2.jpg" /></div>
+                                <div class="text">修身型</div>
+                            </div>
+                            <div class="option">
+                                <div class="image"><img src="img/product-customization-build3-3.jpg" /></div>
+                                <div class="text">修身型</div>
+                            </div>
+                            <div class="option">
+                                <div class="image"><img src="img/product-customization-build3-4.jpg" /></div>
+                                <div class="text">修身型</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+		[/@current_member]
     </div>
-    <footer>
-        <div class="contact">
-            <h3 class="hide-on-small">与凡布保持联系</h3>
-            <div class="input-group hide-on-small">
-                <input class="input" type="text" placeholder="请输入您的邮件地址" />
-                <a href="javascript:void(0);" class="btn">»</a>
-            </div>
-            <div class="ico-link text-center-on-small">
-                <a href="javascript:void(0);"><img src="img/ico-email.jpg" /></a>
-                <a href="javascript:void(0);"><img src="img/ico-weibo.png" /></a>
-                <a href="javascript:void(0);"><img src="img/ico-weixin.png" /></a>
-                <a href="javascript:void(0);"><img src="img/ico-taobao.png" /></a>
-            </div>
-        </div>
-        <div class="links text-center-on-small">
-            <div class="row">
-                <div class="col-md-3 col-sm-12">
-                    <h6>FabriTailor.com</h6>
-                    <ul>
-                        <li>
-                            <a href="javascript:void(0);">
-                                北京市<br />
-                                朝阳区<br />
-                                夏家园18号楼<br />
-                                2091室
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-12">
-                    <h6>凡布制衣</h6>
-                    <ul>
-                        <li><a href="javascript:void(0);">关于我们</a></li>
-                        <li><a href="javascript:void(0);">人才招聘</a></li>
-                        <li><a href="javascript:void(0);">成为凡布量体师</a></li>
-                        <li><a href="javascript:void(0);">服务条款</a></li>
-                        <li><a href="javascript:void(0);">隐私声明</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-12">
-                    <h6>帮助</h6>
-                    <ul>
-                        <li><a href="javascript:void(0);">购物指南</a></li>
-                        <li><a href="javascript:void(0);">关于量体定制</a></li>
-                        <li><a href="javascript:void(0);">常见问题解答</a></li>
-                        <li><a href="javascript:void(0);">帮助与支持</a></li>
-                        <li><a href="javascript:void(0);">退换货信息</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-12">
-                    <h6>在线商店</h6>
-                    <ul>
-                        <li><a href="javascript:void(0);">衬衫</a></li>
-                        <li><a href="javascript:void(0);">查看全部</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="logo">
-            <img src="img/logo-footer.png" />
-        </div>
-    </footer>
-    <div class="login-panel">
-        <h2>登录</h2>
-        <input class="input" type="text" placeholder="请输入电子邮件地址" />
-        <input class="input" type="password" placeholder="请输入密码" />
-        <a class="button" href="javascript:void(0);">登陆</a>
-        <a href="javascript:void(0);">忘记密码，或立即免费注册成为会员？</a>
-    </div>
-    <div class="cover-small-black"></div>
-    <div class="login-cover-black"></div>
-    <script type="text/javascript">
-        //侧边栏
-        $("header .menu-btn").click(function () {
-            $("aside").addClass("opened");
-            $("div.cover-small-black").addClass("opened").fadeTo("normal", 0.5, EASING_NAME);
-        });
-        $("aside .btn-close").click(function () {
-            $("aside").removeClass("opened");
-            $("div.cover-small-black").fadeTo("normal", 0, EASING_NAME, function () { $(this).removeClass("opened"); });
-        });
-        //登陆
-        var showLogin = function () {
-            $(".login-panel").show();
-            $("div.login-cover-black").addClass("opened").fadeTo("normal", 0.5, EASING_NAME);
-        };
-        var hideLogin = function () {
-            $(".login-panel").hide();
-            $("div.login-cover-black").fadeTo("normal", 0, EASING_NAME, function () { $(this).removeClass("opened"); });
-        };
-        $("div.login-cover-black").click(hideLogin);
-        $("header .btn-group .login").click(showLogin);
-    </script>
+    [#include "/shop/include/footer.ftl" /]
     <script type="text/javascript">
         //账号导航菜单
         $(".main-container .account-aside .current i.showhide").click(function () {

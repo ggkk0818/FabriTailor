@@ -219,6 +219,35 @@
     padding: 7px 0;
     text-transform: uppercase;
 }
+.accountBuilder-content .step.normal .options .option-monogram{
+    position:relative;
+    float:left;
+    width:300px;
+    margin:15px;
+    vertical-align: middle;
+}
+.accountBuilder-content .step.normal .options .option-monogram .monogram{
+    position:absolute;
+    top:0;
+    left:0;
+    width:26.6666667%;
+    height:100px;
+    border:1px solid #dae0d9;
+    font-size:60px;
+    line-height:166.6666667%;
+    text-align:center;
+    -webkit-transition: height 200ms ease, font-size 200ms ease;
+    -moz-transition: height 200ms ease, font-size 200ms ease;
+    transition: height 200ms ease, font-size 200ms ease;
+}
+.accountBuilder-content .step.normal .options .option-monogram .monogram.second{
+    left:50%;
+    margin-left:-13.3333333%;
+}
+.accountBuilder-content .step.normal .options .option-monogram .monogram.third{
+    left:auto;
+    right:0;
+}
 @media(max-width:1660px) {
     .accountBuild .customization .options .option{
         /*width: 254px;*/
@@ -233,8 +262,43 @@
     .accountBuilder-content .step.normal .options{
         width:calc(50% - 70px);
     }
-    .accountBuilder-content .step.normal .options .option{
+    .accountBuilder-content .step.normal .options .option, 
+    .accountBuilder-content .step.normal .options .option-monogram{
         width: calc((100% - 64px) / 2);
+    }
+    .accountBuilder-content .step.normal .options .option-monogram{
+        height:80px;
+    }
+    .accountBuilder-content .step.normal .options .option-monogram .monogram {
+        height:80px;
+        font-size:48px;
+    }
+}
+@media(max-width:1340px) {
+    .accountBuilder-content .step.normal .options .option-monogram{
+        height:71.25px;
+    }
+    .accountBuilder-content .step.normal .options .option-monogram .monogram {
+        height:71.25px;
+        font-size:42.75px;
+    }
+}
+@media(max-width:1240px) {
+    .accountBuilder-content .step.normal .options .option-monogram{
+        height:62.5px;
+    }
+    .accountBuilder-content .step.normal .options .option-monogram .monogram {
+        height:62.5px;
+        font-size:37.5px;
+    }
+}
+@media(max-width:1140px) {
+    .accountBuilder-content .step.normal .options .option-monogram{
+        height:55px;
+    }
+    .accountBuilder-content .step.normal .options .option-monogram .monogram {
+        height:55px;
+        font-size:33px;
     }
 }
 /*@media(max-width:1480px) {
@@ -341,11 +405,82 @@
         width:auto;
         margin:0 10px;
     }
-    .accountBuilder-content .step.normal .options .option{
+    .accountBuilder-content .step.normal .options .option, 
+    .accountBuilder-content .step.normal .options .option-monogram{
         width: calc((100% - 49px) / 2);
         margin: 10px;
     }
+    .accountBuilder-content .step.normal .options .option-monogram{
+        height: 162.5px;
+    }
+    .accountBuilder-content .step.normal .options .option-monogram .monogram {
+        height:162.5px;
+        font-size:97.5px;
+    }
     .accountBuilder-content .step.normal .options .option.active{
         margin: 6px;
+    }
+}
+@media(max-width:940px) {
+    .accountBuilder-content .step.normal .options .option-monogram{
+        height:146.25px;
+    }
+    .accountBuilder-content .step.normal .options .option-monogram .monogram {
+        height:146.25px;
+        font-size:87.75px;
+    }
+}
+@media(max-width:840px) {
+    .accountBuilder-content .step.normal .options .option-monogram{
+        height:128.75px;
+    }
+    .accountBuilder-content .step.normal .options .option-monogram .monogram {
+        height:128.75px;
+        font-size:77.25px;
+    }
+}
+@media(max-width:740px) {
+    .accountBuilder-content .step.normal .options .option-monogram{
+        height:112.5px;
+    }
+    .accountBuilder-content .step.normal .options .option-monogram .monogram {
+        height:112.5px;
+        font-size:67.5px;
+    }
+}
+@media(max-width:640px) {
+    .accountBuilder-content .step.normal .options .option-monogram{
+        height:96.25px;
+    }
+    .accountBuilder-content .step.normal .options .option-monogram .monogram {
+        height:96.25px;
+        font-size:57.75px;
+    }
+}
+@media(max-width:540px) {
+    .accountBuilder-content .step.normal .options .option-monogram{
+        height:78.75px;
+    }
+    .accountBuilder-content .step.normal .options .option-monogram .monogram {
+        height:78.75px;
+        font-size:47.25px;
+    }
+}
+@media(max-width:440px) {
+    .accountBuilder-content .step.normal .options .option-monogram{
+        height:62.5px;
+    }
+    .accountBuilder-content .step.normal .options .option-monogram .monogram {
+        height:62.5px;
+        font-size:37.5px;
+    }
+}
+@media(max-width:340px) {
+    .accountBuilder-content .step.normal .options .option-monogram{
+        height:46.25px;
+    }
+    .accountBuilder-content .step.normal .options .option-monogram .monogram {
+        height:46.25px;
+        font-size:27.75px;
     }
 }
