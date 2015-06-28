@@ -830,7 +830,7 @@
             }
             if ($option.data("monogram-value")) {
                 if ($option.data("monogram-value") == "none") {
-                    $customizationBuildSummary.find(".options .option.monogram").removeData("letters");
+                    $customizationBuildSummary.find(".options .option.monogram").removeData("letters").removeAttr("data-letters");
                     $customizationBuildSummary.find(".options .option.monogram .text").text("无刺绣");
                 }
                 else {
@@ -862,7 +862,7 @@
                 $customizationBuildSummary.find(".options .option.monogram .text").text("自定义(" + letters + ")");
             }
             else {
-                $customizationBuildSummary.find(".options .option.monogram").removeData("letters");
+                $customizationBuildSummary.find(".options .option.monogram").removeData("letters").removeAttr("data-letters");
                 $customizationBuildSummary.find(".options .option.monogram .text").text("无刺绣");
             }
         };

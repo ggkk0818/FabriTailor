@@ -204,7 +204,7 @@
             }
             if ($option.data("monogram-value")) {
                 if ($option.data("monogram-value") == "none") {
-                    accountBuilderSidebar.find("ul li").last().removeData("letters");
+                    accountBuilderSidebar.find("ul li").last().removeData("letters").removeAttr("data-letters");
                     accountBuilderSidebar.find("ul li").last().find("a span.chosen").text("无刺绣");
                 }
                 else {
@@ -237,7 +237,7 @@
                 accountBuilderSidebar.find("ul li").last().find("a span.chosen").text("自定义(" + letters + ")");
             }
             else {
-                accountBuilderSidebar.find("ul li").last().removeData("letters");
+                accountBuilderSidebar.find("ul li").last().removeData("letters").removeAttr("data-letters");
                 accountBuilderSidebar.find("ul li").last().find("a span.chosen").text("无刺绣");
             }
         };
@@ -264,7 +264,7 @@
                 data: params,
                 dataType: "json",
                 cache: false,
-				traditional: true,
+                traditional: true,
                 success: function (data) {
                     if (data && data.type == "success") {
                         //同步所选信息

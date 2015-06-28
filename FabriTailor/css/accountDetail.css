@@ -14,17 +14,52 @@
     width:250px;
     margin:40px auto 0;
 }
+.accountDetail .detailForm .form-control{
+    position:relative;
+}
+.accountDetail .detailForm .form-control .tooltip{
+    position:absolute;
+    top: -20px;
+    right:0;
+    display:none;
+    padding:0 10px;
+    background: #e86c4b;
+    border-radius:5px;
+    color:#fff;
+    font-size:12px;
+    font-family:"宋体";
+    line-height:20px;
+}
+.accountDetail .detailForm .form-control.has-error .tooltip{
+    display:block;
+}
+.accountDetail .detailForm .form-control .tooltip:after{
+    content:' ';
+    border-top: 9px solid #e86c4b;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    position: absolute;
+    right: 20px;
+    bottom: -7px;
+}
 .accountDetail .detailForm .input{
     margin-bottom:10px;
 }
 .accountDetail .detailForm .control-group{
-
+    height:60px;
 }
 .accountDetail .detailForm .control-group .input{
     float:left;
     width:120px;
 }
-.accountDetail .detailForm .control-group .input:not(:first-child){
+.accountDetail .detailForm .control-group .form-control{
+    float:left;
+}
+.accountDetail .detailForm .control-group .form-control .input,
+.accountDetail .detailForm .control-group .form-control .select{
+    float:none;
+}
+.accountDetail .detailForm .control-group > *:not(:first-child){
     margin-left:10px;
 }
 .accountDetail .detailForm div.checkbox{

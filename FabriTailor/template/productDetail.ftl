@@ -464,21 +464,13 @@
     <script type="text/javascript">
         //自定义版型
         var productGoods = [];
-		[#if product.goods?? && product.goods.products?has_content]
-			[#list product.goods.products as goodsProduct]
-			productGoods.push({
-				productId: ${goodsProduct.id},
-				productName: "${goodsProduct.name}",
-				specifications: [
-					[#if goodsProduct.specificationValues?has_content]
-						[#list goodsProduct.specificationValues as goodsProductSpecificationValue]
-							{ name: "${goodsProductSpecificationValue.specification.name}", value: "${goodsProductSpecificationValue.name}" }[#if goodsProductSpecificationValue_has_next],[/#if]
-						[/#list]
-					[/#if]
-				]
-			});
-			[/#list]
-		[/#if]
+        productGoods.push({
+            productId: 1,
+            productName: "",
+            specifications: [
+                { name: "", value: "" }
+            ]
+        });
         var $productCustomizationBuild = $(".main-container .product-customizations .customization-build"),
             $customizationBuildSummary = $(".main-container .product-customizations .customization-build-summary");
         var productCustomizationBuildShow = function (index) {
@@ -604,7 +596,7 @@
             }
             if ($option.data("monogram-value")) {
                 if ($option.data("monogram-value") == "none") {
-                    $customizationBuildSummary.find(".options .option.monogram").removeData("letters");
+                    $customizationBuildSummary.find(".options .option.monogram").removeData("letters").removeAttr("data-letters");
                     $customizationBuildSummary.find(".options .option.monogram .text").text("无刺绣");
                 }
                 else {
@@ -625,7 +617,7 @@
                 $(this).val($(this).val().substring(0, 1));
             }
         };
-        var productCustomizationBuildMonogramChange = function (e) {
+        var productCustomizationBuildMonogramChange = function () {
             var letters = "";
             $productCustomizationBuild.children(".step").last().find(".options .option-monogram input").each(function (i, e) {
                 if ($(e).val() && $(e).val().length)
@@ -636,7 +628,7 @@
                 $customizationBuildSummary.find(".options .option.monogram .text").text("自定义(" + letters + ")");
             }
             else {
-                $customizationBuildSummary.find(".options .option.monogram").removeData("letters");
+                $customizationBuildSummary.find(".options .option.monogram").removeData("letters").removeAttr("data-letters");
                 $customizationBuildSummary.find(".options .option.monogram .text").text("无刺绣");
             }
         };
