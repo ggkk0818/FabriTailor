@@ -128,6 +128,9 @@
     font-size:12px;
     margin-top:5px;
 }
+.accountBuilder-sidebar p.msg{
+    text-align:center;
+}
 .accountBuilder-sidebar .btn-save{
     display:block;
     width:140px;

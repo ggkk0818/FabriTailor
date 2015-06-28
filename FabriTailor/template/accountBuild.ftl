@@ -31,11 +31,19 @@
                 <p>当前网页中默认的是我们的推荐版型，你可点击任意部分进行查看和修改。</p>
                 <div class="customization clearfix">
                     <div class="options">
-						[#if currentMember.specificationValues?has_content]
-							[#list currentMember.specificationValues as specificationValue]
-							<div class="option" data-title="${specificationValue.name}" data-description="${specificationValue.description}" data-specification-name="${specificationValue.specification.name}" data-specification-value="${specificationValue.name}">
-								<div class="image"><img src="${specificationValue.image}" /></div>
-								<div class="text">${specificationValue.name}<i class="edit"></i></div>
+						[#if currentMember.specifications?has_content]
+							[#list currentMember.specifications as specification]
+							[#assign chosenValue = null /]
+							[#if currentMember.specificationValues?has_content]
+								[#list currentMember.specificationValues as specificationValue]
+									[#if specification.id == specificationValue.specification.id]
+										[#assign chosenValue = specificationValue /]
+									[/#if]
+								[/#list]
+							[/#if]
+							<div class="option" data-specification-id="${specification.id}" [#if chosenValue??]data-specification-value="${chosenValue.id}"[/#if]>
+								<div class="image"><img src="[#if chosenValue??]${chosenValue.image}[#else]${specification.specificationValues[0].image}[/#if]" /></div>
+								<div class="text"><span>[#if chosenValue??]${chosenValue.name}[#else]无[/#if]</span><i class="edit"></i></div>
 							</div>
 							[/#list]
 						[/#if]
@@ -55,12 +63,12 @@
 							[#assign chosenValue = null /]
 							[#if currentMember.specificationValues?has_content]
 								[#list currentMember.specificationValues as specificationValue]
-									[#if specification.name == specificationValue.specification.name]
+									[#if specification.id == specificationValue.specification.id]
 										[#assign chosenValue = specificationValue /]
 									[/#if]
 								[/#list]
 							[/#if]
-							<li>
+							<li data-specification-id="${specification.id}" [#if chosenValue??]data-specification-value="${chosenValue.id}"[/#if]>
 								<a href="javascript:void(0);">
 									<span>${specification.name}</span>
 									<span class="chosen">[#if chosenValue??]${chosenValue.name}[#else]无[/#if]</span>
@@ -68,13 +76,14 @@
 							</li>
 							[/#list]
 						[/#if]
-                        <li>
+                        <li [#if currentMember.letters??]data-letters="${currentMember.letters}"[/#if]>
                             <a href="javascript:void(0);">
                                 <span>绣花选择</span>
-                                <span class="chosen">修身型</span>
+                                <span class="chosen">[#if currentMember.letters??]自定义(${currentMember.letters})[#else]无刺绣[/#if]</span>
                             </a>
                         </li>
                     </ul>
+					<p class="msg hidden"></p>
                     <a href="javascript:void(0);" class="button btn-save">保存并退出</a>
                     <a href="javascript:void(0);" class="reset">全部重置</a>
                 </div>
@@ -84,12 +93,12 @@
 					[#assign chosenValue = null /]
 					[#if currentMember.specificationValues?has_content]
 						[#list currentMember.specificationValues as specificationValue]
-							[#if specification.name == specificationValue.specification.name]
+							[#if specification.id == specificationValue.specification.id]
 								[#assign chosenValue = specificationValue /]
 							[/#if]
 						[/#list]
 					[/#if]
-                    <div class="step normal" data-bg-img-change="true" style="display:block;" data-specification-name="${specification.name}" [#if chosenValue??]data-specification-value="${chosenValue.name}"[/#if]>
+                    <div class="step normal" data-bg-img-change="true" style="display:block;" data-specification-id="${specification.id}" [#if chosenValue??]data-specification-value="${chosenValue.id}"[/#if]>
                         <img class="bg-img right" src="[#if chosenValue??]${chosenValue.image}[#else]${specification.specificationValues[0].image}[/#if]" />
                         <div class="message">
                             <h2>${specification.name}</h2>
@@ -97,7 +106,7 @@
                         </div>
                         <div class="options">
 							[#list specification.specificationValues as specificationValue]
-                            <div class="option [#if chosenValue?? && chosenValue.name == specificationValue.name]active[/#if]" data-specification-value="${specificationValue.name}">
+                            <div class="option [#if chosenValue?? && chosenValue.id == specificationValue.id]active[/#if]" data-specification-value="${specificationValue.id}">
                                 <div class="image"><img src="${specificationValue.image}" [#if specificationValue.imagehd??]data-hover-image="${specificationValue.imagehd}"[/#if] /></div>
                                 <div class="text">${specificationValue.name}</div>
                             </div>
@@ -107,24 +116,24 @@
 					[/#list]
 				[/#if]
                     <div class="step normal" data-bg-img-change="true" style="display:block;">
-                        <img class="bg-img right" src="img/product-customization-build3-0.jpg" />
+                        <img class="bg-img right" src="${base}/resources/shop/img/product-customization-build3-0.jpg" />
                         <div class="message">
                             <h2>绣花</h2>
                             <p>这个简单的工具能够帮助你迅速了解并且建立属于自己的衬衫版型。在每一个衬衫细节选择你喜欢的选项，然后点击下一步即可。保证每个细节都按照你的设想与喜好，一切就绪之后就可以把这件衬衫添加到购物车了。</p>
                         </div>
                         <div class="options">
-                            <div class="option active">
+                            <div class="option [#if currentMember.letters??]active[/#if]" data-monogram-value="custom">
                                 <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-0.jpg" /></div>
                                 <div class="text">自定义</div>
                             </div>
-                            <div class="option">
+                            <div class="option [#if !currentMember.letters??]active[/#if]" data-monogram-value="none">
                                 <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-1.jpg" /></div>
                                 <div class="text">无刺绣</div>
                             </div>
                             <div class="option-monogram">
-                                <input class="monogram" type="text" value="" />
-                                <input class="monogram second" type="text" value="" />
-                                <input class="monogram third" type="text" value="" />
+                                <input class="monogram" type="text" value="[#if currentMember.letters?? && currentMember.letters?size > 0]${currentMember.letters[0]}[/#if]" />
+                                <input class="monogram second" type="text" value="[#if currentMember.letters?? && currentMember.letters?size > 1]${currentMember.letters[1]}[/#if]" />
+                                <input class="monogram third" type="text" value="[#if currentMember.letters?? && currentMember.letters?size > 2]${currentMember.letters[2]}[/#if]" />
                             </div>
                         </div>
                     </div>
@@ -167,7 +176,8 @@
             accountBuilderSidebar.find("ul li").removeClass("active");
         };
         var accountBuildOptionSelect = function () {
-            var $step = $(this).parent().parent();
+            var $option = $(this),
+                $step = $(this).parent().parent();
             $step.find(".options .option").removeClass("active");
             $(this).addClass("active");
             if ($step.data("bg-img-change") && $(window).width() > 1040) {
@@ -182,6 +192,111 @@
                     $newImg.fadeTo("normal", 1, EASING_NAME);
                 }
             }
+            if ($step.data("specification-id") && $option.data("specification-value")) {
+                accountBuilderSidebar.find("ul li").each(function (i, e) {
+                    var $li = $(e);
+                    if ($li.data("specification-id") == $step.data("specification-id")) {
+                        $li.data("specification-value", $option.data("specification-value"));
+                        $li.find("a span.chosen").text($option.children(".text").text());
+                        return false;
+                    }
+                });
+            }
+            if ($option.data("monogram-value")) {
+                if ($option.data("monogram-value") == "none") {
+                    accountBuilderSidebar.find("ul li").last().removeData("letters");
+                    accountBuilderSidebar.find("ul li").last().find("a span.chosen").text("无刺绣");
+                }
+                else {
+                    accountBuildMonogramChange();
+                }
+            }
+        };
+        var accountBuildMonogramKeydown = function (e) {
+            if (e && e.keyCode != 8 && e.keyCode != 46
+                && e.keyCode < 38 && e.keyCode > 40
+                && $(this).val() && $(this).val().length) {
+                return false;
+            }
+        };
+        var accountBuildMonogramKeyup = function (e) {
+            if (e && $(this).val() && $(this).val().length > 1) {
+                $(this).val($(this).val().substring(0, 1));
+            }
+        };
+        var accountBuildMonogramChange = function () {
+            if (accountBuilderContent.children(".step").last().find(".options .option[data-monogram-value=none]").hasClass("active"))
+                return;
+            var letters = "";
+            accountBuilderContent.children(".step").last().find(".options .option-monogram input").each(function (i, e) {
+                if ($(e).val() && $(e).val().length)
+                    letters += $(e).val();
+            });
+            if (letters.length) {
+                accountBuilderSidebar.find("ul li").last().data("letters", letters);
+                accountBuilderSidebar.find("ul li").last().find("a span.chosen").text("自定义(" + letters + ")");
+            }
+            else {
+                accountBuilderSidebar.find("ul li").last().removeData("letters");
+                accountBuilderSidebar.find("ul li").last().find("a span.chosen").text("无刺绣");
+            }
+        };
+        var saveAccountBuild = function () {
+            var $btnSave = $(this);
+            if ($btnSave.hasClass("disalbed"))
+                return;
+            $btnSave.addClass("disabled").text("正在保存...");
+            accountBuilderSidebar.children("p.msg").addClass("hidden");
+            var params = { specificationIds: [] };
+            accountBuilderSidebar.find("ul li").each(function (i, e) {
+                var $li = $(e);
+                if ($li.data("specification-id") && $li.data("specification-value")) {
+                    params.specificationIds.push($li.data("specification-id"));
+                    params["specification_" + $li.data("specification-id")] = $li.data("specification-value");
+                }
+                if ($li.data("letters")) {
+                    params.letters = $li.data("letters");
+                }
+            });
+            $.ajax({
+                url: "${base}/member/specification/save.jhtml",
+                type: "POST",
+                data: params,
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    if (data && data.type == "success") {
+                        //同步所选信息
+                        accountBuilderContent.children(".step").each(function (i, e) {
+                            var $step = $(e),
+                                $option = $step.find(".options .option.active").first();
+                            if ($step.data("specification-id") && $option.data("specification-value")) {
+                                var $optionSummary = accountBuildOptions.find(".option[data-specification-id=" + $step.data("specification-id") + "]");
+                                if ($optionSummary.length) {
+                                    $optionSummary.find(".image img").attr("src", $option.find(".image img").attr("src"));
+                                    $optionSummary.find(".text span").text($option.find(".text").text());
+                                }
+                            }
+                            if ($step.find(".options .option-monogram").length) {
+                                var $optionSummary = accountBuildOptions.find(".option.monogram");
+                                if ($optionSummary.length) {
+                                    $optionSummary.find(".image img").attr("src", $option.find(".image img").attr("src"));
+                                    $optionSummary.find(".text").text(accountBuilderSidebar.find("ul li").last().find("a span.chosen").text());
+                                }
+                            }
+                        });
+                        hideAccountBuild();
+                    }
+                    else {
+                        accountBuilderSidebar.children("p.msg").removeClass("hidden").text("保存失败。" + data.content);
+                    }
+                },
+                error: function () {
+                    accountBuilderSidebar.children("p.msg").removeClass("hidden").text("保存失败。");
+                }
+            }).always(function () {
+                $btnSave.removeClass("disabled").text("保存并退出");
+            });
         };
         accountBuildOptions.find(".option").click(function () {
             showAccountBuild($(this).prevAll(".option").length);
@@ -190,8 +305,12 @@
             showAccountBuild($(this).parent().prevAll().length);
         });
         accountBuilderContent.find(".step .options .option").click(accountBuildOptionSelect);
+        accountBuilderContent.children(".step").last().find(".options .option-monogram input")
+                .keydown(accountBuildMonogramKeydown)
+                .keyup(accountBuildMonogramKeyup)
+                .change(accountBuildMonogramChange);
         accountBuilder.find("a.btn-close").click(hideAccountBuild);
-        accountBuilderSidebar.children("a.btn-save").click(hideAccountBuild);
+        accountBuilderSidebar.children("a.btn-save").click(saveAccountBuild);
     </script>
 </body>
 </html>

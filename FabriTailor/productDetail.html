@@ -828,6 +828,15 @@
                     $summaryOption.find(".image img").attr("src", $option.find(".image img").data("image") || $option.find(".image img").attr("src"));
                 }
             }
+            if ($option.data("monogram-value")) {
+                if ($option.data("monogram-value") == "none") {
+                    $customizationBuildSummary.find(".options .option.monogram").removeData("letters");
+                    $customizationBuildSummary.find(".options .option.monogram .text").text("无刺绣");
+                }
+                else {
+                    productCustomizationBuildMonogramChange();
+                }
+            }
             $productCustomizationBuild.children(".btn.next").removeClass("disabled");
         };
         var productCustomizationBuildMonogramKeydown = function (e) {
@@ -842,7 +851,7 @@
                 $(this).val($(this).val().substring(0, 1));
             }
         };
-        var productCustomizationBuildMonogramChange = function (e) {
+        var productCustomizationBuildMonogramChange = function () {
             var letters = "";
             $productCustomizationBuild.children(".step").last().find(".options .option-monogram input").each(function (i, e) {
                 if ($(e).val() && $(e).val().length)

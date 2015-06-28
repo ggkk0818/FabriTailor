@@ -234,11 +234,11 @@
                         <p>这个简单的工具能够帮助你迅速了解并且建立属于自己的衬衫版型。在每一个衬衫细节选择你喜欢的选项，然后点击下一步即可。保证每个细节都按照你的设想与喜好，一切就绪之后就可以把这件衬衫添加到购物车了。</p>
                     </div>
                     <div class="options">
-                        <div class="option">
+                        <div class="option" data-monogram-value="custom">
                             <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-0.jpg" /></div>
                             <div class="text">自定义</div>
                         </div>
-                        <div class="option">
+                        <div class="option" data-monogram-value="none">
                             <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-1.jpg" /></div>
                             <div class="text">无刺绣</div>
                         </div>
@@ -600,6 +600,15 @@
                 $summaryOption.find(".text").text($option.find(".text").text());
                 if (!$step.data("do-not-change-summary-image")) {
                     $summaryOption.find(".image img").attr("src", $option.find(".image img").data("image") || $option.find(".image img").attr("src"));
+                }
+            }
+            if ($option.data("monogram-value")) {
+                if ($option.data("monogram-value") == "none") {
+                    $customizationBuildSummary.find(".options .option.monogram").removeData("letters");
+                    $customizationBuildSummary.find(".options .option.monogram .text").text("无刺绣");
+                }
+                else {
+                    productCustomizationBuildMonogramChange();
                 }
             }
             $productCustomizationBuild.children(".btn.next").removeClass("disabled");
