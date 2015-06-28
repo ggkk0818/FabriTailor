@@ -52,7 +52,7 @@
     font-size: 16px;
     line-height:35px;
     padding: 7px 0;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
 }
 .accountBuild .customization .options .option .text .edit{
     position:absolute;
@@ -220,7 +220,7 @@
     font-size: 16px;
     line-height:35px;
     padding: 7px 0;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
 }
 .accountBuilder-content .step.normal .options .option-monogram{
     position:relative;
