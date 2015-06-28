@@ -40,7 +40,7 @@
 							[/#list]
 						[/#if]
                         <div class="option monogram" [#if currentMember.letters??]data-letters="${currentMember.letters}"[/#if]>
-                            <div class="image"><img src="img/product-customizztion8.jpg" /></div>
+                            <div class="image"><img src="${base}/resources/shop/img/product-customizztion8.jpg" /></div>
                             <div class="text">[#if currentMember.letters??]自定义(${currentMember.letters})[#else]无刺绣[/#if]<i class="edit"></i></div>
                         </div>
                     </div>
@@ -51,19 +51,19 @@
                 <div class="accountBuilder-sidebar">
                     <ul>
 						[#if currentMember.specifications?has_content]
-							[#assign chosenValue = {} /]
 							[#list currentMember.specifications as specification]
+							[#assign chosenValue = null /]
+							[#if currentMember.specificationValues?has_content]
+								[#list currentMember.specificationValues as specificationValue]
+									[#if specification.name == specificationValue.specification.name]
+										[#assign chosenValue = specificationValue /]
+									[/#if]
+								[/#list]
+							[/#if]
 							<li>
 								<a href="javascript:void(0);">
 									<span>${specification.name}</span>
-									[#if currentMember.specificationValues?has_content]
-										[#list currentMember.specificationValues as specificationValue]
-											[#if specification.name == specificationValue.specification.name]
-												[#assign chosenValue[specification.name] = specificationValue.name /]
-											[/#if]
-										[/#list]
-									[/#if]
-									<span class="chosen">[#if chosenValue[specification.name]]${chosenValue[specification.name]}[#else]无[/#if]</span>
+									<span class="chosen">[#if chosenValue??]${chosenValue.name}[#else]无[/#if]</span>
 								</a>
 							</li>
 							[/#list]
@@ -79,168 +79,33 @@
                     <a href="javascript:void(0);" class="reset">全部重置</a>
                 </div>
                 <div class="accountBuilder-content">
-                    <div class="step normal" data-bg-img-change="true" style="display:block;">
-                        <img class="bg-img right" src="img/product-customization-build3-0.jpg" />
+				[#if currentMember.specifications?has_content]
+					[#list currentMember.specifications as specification]
+					[#assign chosenValue = null /]
+					[#if currentMember.specificationValues?has_content]
+						[#list currentMember.specificationValues as specificationValue]
+							[#if specification.name == specificationValue.specification.name]
+								[#assign chosenValue = specificationValue /]
+							[/#if]
+						[/#list]
+					[/#if]
+                    <div class="step normal" data-bg-img-change="true" style="display:block;" data-specification-name="${specification.name}" [#if chosenValue??]data-specification-value="${chosenValue.name}"[/#if]>
+                        <img class="bg-img right" src="[#if chosenValue??]${chosenValue.image}[#else]${specification.specificationValues[0].image}[/#if]" />
                         <div class="message">
-                            <h2>衣身</h2>
-                            <p>这个简单的工具能够帮助你迅速了解并且建立属于自己的衬衫版型。在每一个衬衫细节选择你喜欢的选项，然后点击下一步即可。保证每个细节都按照你的设想与喜好，一切就绪之后就可以把这件衬衫添加到购物车了。</p>
+                            <h2>${specification.name}</h2>
+                            <p>${specification.memo}</p>
                         </div>
                         <div class="options">
-                            <div class="option active">
-                                <div class="image"><img src="img/product-customization-build3-0.jpg" /></div>
-                                <div class="text">直筒型</div>
+							[#list specification.specificationValues as specificationValue]
+                            <div class="option [#if chosenValue?? && chosenValue.name == specificationValue.name]active[/#if]" data-specification-value="${specificationValue.name}">
+                                <div class="image"><img src="${specificationValue.image}" [#if specificationValue.imagehd??]data-hover-image="${specificationValue.imagehd}"[/#if] /></div>
+                                <div class="text">${specificationValue.name}</div>
                             </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-1.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
+							[/#list]
                         </div>
                     </div>
-                    <div class="step normal" data-bg-img-change="true" style="display:block;">
-                        <img class="bg-img right" src="img/product-customization-build3-0.jpg" />
-                        <div class="message">
-                            <h2>领口</h2>
-                            <p>这个简单的工具能够帮助你迅速了解并且建立属于自己的衬衫版型。在每一个衬衫细节选择你喜欢的选项，然后点击下一步即可。保证每个细节都按照你的设想与喜好，一切就绪之后就可以把这件衬衫添加到购物车了。</p>
-                        </div>
-                        <div class="options">
-                            <div class="option active">
-                                <div class="image"><img src="img/product-customization-build3-0.jpg" /></div>
-                                <div class="text">直筒型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-1.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-2.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-3.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-4.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="step normal" data-bg-img-change="true" style="display:block;">
-                        <img class="bg-img right" src="img/product-customization-build3-0.jpg" />
-                        <div class="message">
-                            <h2>袖口</h2>
-                            <p>这个简单的工具能够帮助你迅速了解并且建立属于自己的衬衫版型。在每一个衬衫细节选择你喜欢的选项，然后点击下一步即可。保证每个细节都按照你的设想与喜好，一切就绪之后就可以把这件衬衫添加到购物车了。</p>
-                        </div>
-                        <div class="options">
-                            <div class="option active">
-                                <div class="image"><img src="img/product-customization-build3-0.jpg" /></div>
-                                <div class="text">直筒型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-1.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-2.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-3.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-4.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="step normal" data-bg-img-change="true" style="display:block;">
-                        <img class="bg-img right" src="img/product-customization-build3-0.jpg" />
-                        <div class="message">
-                            <h2>口袋</h2>
-                            <p>这个简单的工具能够帮助你迅速了解并且建立属于自己的衬衫版型。在每一个衬衫细节选择你喜欢的选项，然后点击下一步即可。保证每个细节都按照你的设想与喜好，一切就绪之后就可以把这件衬衫添加到购物车了。</p>
-                        </div>
-                        <div class="options">
-                            <div class="option active">
-                                <div class="image"><img src="img/product-customization-build3-0.jpg" /></div>
-                                <div class="text">直筒型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-1.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-2.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-3.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-4.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="step normal" data-bg-img-change="true" style="display:block;">
-                        <img class="bg-img right" src="img/product-customization-build3-0.jpg" />
-                        <div class="message">
-                            <h2>门襟</h2>
-                            <p>这个简单的工具能够帮助你迅速了解并且建立属于自己的衬衫版型。在每一个衬衫细节选择你喜欢的选项，然后点击下一步即可。保证每个细节都按照你的设想与喜好，一切就绪之后就可以把这件衬衫添加到购物车了。</p>
-                        </div>
-                        <div class="options">
-                            <div class="option active">
-                                <div class="image"><img src="img/product-customization-build3-0.jpg" /></div>
-                                <div class="text">直筒型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-1.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-2.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-3.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-4.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="step normal" data-bg-img-change="true" style="display:block;">
-                        <img class="bg-img right" src="img/product-customization-build3-0.jpg" />
-                        <div class="message">
-                            <h2>褶皱</h2>
-                            <p>这个简单的工具能够帮助你迅速了解并且建立属于自己的衬衫版型。在每一个衬衫细节选择你喜欢的选项，然后点击下一步即可。保证每个细节都按照你的设想与喜好，一切就绪之后就可以把这件衬衫添加到购物车了。</p>
-                        </div>
-                        <div class="options">
-                            <div class="option active">
-                                <div class="image"><img src="img/product-customization-build3-0.jpg" /></div>
-                                <div class="text">直筒型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-1.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-2.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-3.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-4.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                        </div>
-                    </div>
+					[/#list]
+				[/#if]
                     <div class="step normal" data-bg-img-change="true" style="display:block;">
                         <img class="bg-img right" src="img/product-customization-build3-0.jpg" />
                         <div class="message">
@@ -249,24 +114,17 @@
                         </div>
                         <div class="options">
                             <div class="option active">
-                                <div class="image"><img src="img/product-customization-build3-0.jpg" /></div>
-                                <div class="text">直筒型</div>
+                                <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-0.jpg" /></div>
+                                <div class="text">自定义</div>
                             </div>
                             <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-1.jpg" /></div>
-                                <div class="text">修身型</div>
+                                <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-1.jpg" /></div>
+                                <div class="text">无刺绣</div>
                             </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-2.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-3.jpg" /></div>
-                                <div class="text">修身型</div>
-                            </div>
-                            <div class="option">
-                                <div class="image"><img src="img/product-customization-build3-4.jpg" /></div>
-                                <div class="text">修身型</div>
+                            <div class="option-monogram">
+                                <input class="monogram" type="text" value="" />
+                                <input class="monogram second" type="text" value="" />
+                                <input class="monogram third" type="text" value="" />
                             </div>
                         </div>
                     </div>
