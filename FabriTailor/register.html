@@ -549,7 +549,7 @@
             $stepForm.find(".form-control input").each(function (i, e) {
                 var $this = $(this),
                     $control = $this.parent();
-                if ($this.attr("required") && (!$this.val() || $this.val().length == 0)) {
+                if ($this.prop("required") && (!$this.val() || $this.val().length == 0)) {
                     $control.addClass("has-error");
                     hasError++;
                 }
