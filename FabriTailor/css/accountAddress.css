@@ -11,6 +11,116 @@
     margin:0 auto;
     font-size:16px;
 }
+/* ==========================================================================
+   Address List
+   ========================================================================== */
+.accountAddress ul.address-list{
+    width:600px;
+    margin:20px auto 0;
+    padding:0;
+    list-style:none;
+}
+.accountAddress ul.address-list li{
+    position:relative;
+    display:inline-block;
+    width:280px;
+    margin: 5px;
+    padding: 0;
+    border: 1px solid #f6f6f6;
+    border-radius:5px;
+    cursor: pointer;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+.accountAddress ul.address-list li:hover,
+.accountAddress ul.address-list li.active,
+.accountAddress ul.address-list li.confirm{
+    margin: 4px;
+    border: 2px solid #6f95a9;
+}
+.accountAddress ul.address-list li.confirm{
+    border-color:#e86c4b;
+}
+.accountAddress ul.address-list li .content{
+    padding:30px 100px 30px 30px;
+    font-size:14px;
+}
+.accountAddress ul.address-list li.confirm .content{
+    color: #b6b6b6;
+    font-size:12px;
+}
+.accountAddress ul.address-list li .content .delete-text{
+    display:none;
+    color: #6f95a9;
+}
+.accountAddress ul.address-list li .content p {
+    font-size:inherit;
+}
+.accountAddress ul.address-list li.confirm .content .delete-text{
+    display:inline;
+}
+.accountAddress ul.address-list li .sidebar{
+    position:absolute;
+    top:0;
+    right:0;
+    width:70px;
+    height:100%;
+    border-left: 1px solid #f6f6f6;
+}
+.accountAddress ul.address-list li .sidebar .btn{
+    position: relative;
+    display:block;
+    height: 50%;
+}
+.accountAddress ul.address-list li .sidebar .btn:not(:first-child){
+    border-top: 1px solid #f6f6f6;
+}
+.accountAddress ul.address-list li .sidebar .btn img{
+    position:absolute;
+    top:50%;
+    left:50%;
+}
+.accountAddress ul.address-list li .sidebar-confirm{
+    position:absolute;
+    top:0;
+    right:0;
+    display:none;
+    width:70px;
+    height:100%;
+    border-left: 1px solid #f6f6f6;
+}
+.accountAddress ul.address-list li.confirm .sidebar-confirm{
+    display:block;
+}
+.accountAddress ul.address-list li .sidebar-confirm .btn{
+    position: relative;
+    display:block;
+    height: 50%;
+    background-color: #f6f6f6;
+    color: #333d30;
+    border-bottom-right-radius:5px;
+}
+.accountAddress ul.address-list li .sidebar-confirm .btn-yes{
+    background-color: #e86c4b;
+    color: white;
+    border-top-right-radius:5px;
+    border-bottom-right-radius:0;
+}
+.accountAddress ul.address-list li .sidebar-confirm .btn span{
+    position:absolute;
+    top:50%;
+    left:0;
+    width:100%;
+    height:20px;
+    margin:-10px 0 0;
+    line-height:20px;
+    font-size:16px;
+    text-align:center;
+}
+/* ==========================================================================
+   Address Form
+   ========================================================================== */
 .accountAddress .add-address{
     position:relative;
     display:block;
