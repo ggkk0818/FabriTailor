@@ -75,8 +75,8 @@
                             <p>海淀区 学院路1号</p>
                         </div>
                         <div class="sidebar">
-                            <a class="btn" href="javascript:void(0);"><span>删除</span></a>
-                            <a class="btn" href="javascript:void(0);"><span>编辑</span></a>
+                            <a class="btn" href="javascript:void(0);"><img src="img/account-address-del.png" /></a>
+                            <a class="btn" href="javascript:void(0);"><img src="img/account-address-edit.png" /></a>
                         </div>
                         <div class="sidebar-confirm">
                             <a class="btn btn-yes" href="javascript:void(0);"><span>是</span></a>
@@ -92,8 +92,8 @@
                             <p>海淀区 学院路1号</p>
                         </div>
                         <div class="sidebar">
-                            <a class="btn" href="javascript:void(0);"><span>删除</span></a>
-                            <a class="btn" href="javascript:void(0);"><span>编辑</span></a>
+                            <a class="btn" href="javascript:void(0);"><img src="img/account-address-del.png" /></a>
+                            <a class="btn" href="javascript:void(0);"><img src="img/account-address-edit.png" /></a>
                         </div>
                         <div class="sidebar-confirm">
                             <a class="btn btn-yes" href="javascript:void(0);"><span>是</span></a>
@@ -109,8 +109,8 @@
                             <p>海淀区 学院路1号</p>
                         </div>
                         <div class="sidebar">
-                            <a class="btn" href="javascript:void(0);"><span>删除</span></a>
-                            <a class="btn" href="javascript:void(0);"><span>编辑</span></a>
+                            <a class="btn" href="javascript:void(0);"><img src="img/account-address-del.png" /></a>
+                            <a class="btn" href="javascript:void(0);"><img src="img/account-address-edit.png" /></a>
                         </div>
                         <div class="sidebar-confirm">
                             <a class="btn btn-yes" href="javascript:void(0);"><span>是</span></a>
@@ -286,12 +286,14 @@
             if ($btnAddAddress.hasClass("active"))
                 setFormValues();
             $btnAddAddress.children("span").text("添加新地址");
+            $addressList.toggleClass("hidden");
             $btnAddAddress.toggleClass("active");
             $detailForm.toggleClass("active");
         };
         var editAddress = function () {
             $btnAddAddress.children("span").text("编辑地址");
             setFormValues($(this).parent().parent());
+            $addressList.addClass("hidden");
             $btnAddAddress.addClass("active");
             $detailForm.addClass("active");
         };

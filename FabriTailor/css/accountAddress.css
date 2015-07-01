@@ -80,6 +80,7 @@
     position:absolute;
     top:50%;
     left:50%;
+    margin:-7px 0 0 -7px;
 }
 .accountAddress ul.address-list li .sidebar-confirm{
     position:absolute;
@@ -148,7 +149,7 @@
     background:url(../img/address-add-close.png) no-repeat 0 0;
 }
 .accountAddress .add-address.active i{
-    background-position:-10px 0;
+    background-position:-11px 0;
 }
 .accountAddress .detailForm{
     display:none;
