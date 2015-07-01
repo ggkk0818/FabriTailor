@@ -66,7 +66,7 @@
                 <h1>地址簿</h1>
                 <p>选择以下地址来设置默认送货地址。要编辑地址，单击铅笔。要删除它，点击X.要查看哪些信用卡都分配给它，单击卡。编辑或删除地址将更新分配给它的任何卡。</p>
                 <ul class="address-list">
-                    <li class="active">
+                    <li>
                         <div class="content">
                             <span class="delete-text">删除这个地址？</span>
                             <p>张三</p>
@@ -83,7 +83,7 @@
                             <a class="btn btn-no" href="javascript:void(0);"><span>否</span></a>
                         </div>
                     </li>
-                    <li class="confirm">
+                    <li data-id="2" data-name="张三" data-province="bj" data-city="北京" data-addr="海淀区 学院路1号" data-tel="13901111111">
                         <div class="content">
                             <span class="delete-text">删除这个地址？</span>
                             <p>张三</p>
@@ -118,34 +118,36 @@
                         </div>
                     </li>
                 </ul>
-                <a class="add-address" href="javascript:void(0);">添加新地址<i></i></a>
+                <a class="add-address" href="javascript:void(0);"><span>添加新地址</span><i></i></a>
                 <div class="detailForm fadeInDownFast">
-                    <div class="form-control has-error">
-                        <input class="input" type="text" placeholder="姓名" />
+                    <div class="form-control">
+                        <input name="name" class="input" type="text" placeholder="姓名" required />
                         <div class="tooltip">姓名错误</div>
                     </div>
                     <div class="control-group">
                         <div class="form-control">
-                            <select class="select">
-                                <option>省市</option>
+                            <select name="province" class="select" required>
+                                <option value="">省市</option>
+                                <option value="bj">北京</option>
+                                <option value="tj">天津</option>
                             </select>
                             <div class="tooltip">省市错误</div>
                         </div>
                         <div class="form-control">
-                            <input class="input" type="text" placeholder="区县" />
+                            <input name="city" class="input" type="text" placeholder="区县" required />
                             <div class="tooltip">区县错误</div>
                         </div>
                     </div>
                     <div class="form-control">
-                        <input class="input" type="text" placeholder="地址" />
+                        <input name="addr" class="input" type="text" placeholder="地址" required />
                         <div class="tooltip">地址错误</div>
                     </div>
                     <div class="form-control">
-                        <input class="input" type="text" placeholder="联系电话" />
+                        <input name="tel" class="input" type="text" placeholder="联系电话" required />
                         <div class="tooltip">联系电话错误</div>
                     </div>
                     <div class="form-control">
-                        <input class="input" type="text" placeholder="微信" />
+                        <input name="weichat" class="input" type="text" placeholder="微信" />
                     </div>
                     <a href="javascript:void(0);" class="button">保存</a>
                 </div>
@@ -253,9 +255,85 @@
         });
     </script>
     <script type="text/javascript">
-        $(".main-container .accountAddress .add-address").click(function () {
-            $(this).toggleClass("active").next().toggleClass("active");
+        var $addressList = $(".main-container .account-container .accountAddress .address-list"),
+            $btnAddAddress = $(".main-container .account-container .accountAddress .add-address"),
+            $detailForm = $(".main-container .account-container .accountAddress .detailForm"),
+            $name = $detailForm.find("input[name=name]"),
+            $province = $detailForm.find("select[name=province]"),
+            $city = $detailForm.find("input[name=city]"),
+            $addr = $detailForm.find("input[name=addr]"),
+            $tel = $detailForm.find("input[name=tel]");
+        var setFormValues = function (address) {
+            if (address) {
+                var $address = $(address);
+                $detailForm.data("id", $address.data("id"));
+                $name.val($address.data("name") || "");
+                $province.find("option").removeProp("selected").filter("[value=" + $address.data("province") + "]").prop("selected", true);
+                $city.val($address.data("city") || "");
+                $addr.val($address.data("addr") || "");
+                $tel.val($address.data("tel") || "");
+            }
+            else {
+                $detailForm.removeData("id");
+                $name.val("");
+                $province.find("option").removeProp("selected").eq(0).prop("selected", true);
+                $city.val("");
+                $addr.val("");
+                $tel.val("");
+            }
+        };
+        var addAddress = function () {
+            if ($btnAddAddress.hasClass("active"))
+                setFormValues();
+            $btnAddAddress.children("span").text("添加新地址");
+            $btnAddAddress.toggleClass("active");
+            $detailForm.toggleClass("active");
+        };
+        var editAddress = function () {
+            $btnAddAddress.children("span").text("编辑地址");
+            setFormValues($(this).parent().parent());
+            $btnAddAddress.addClass("active");
+            $detailForm.addClass("active");
+        };
+        var deleteAddress = function () {
+            $(this).parent().parent().addClass("confirm");
+        };
+        var doDelete = function () {
+
+        };
+        var cancelDelete = function () {
+            $(this).parent().parent().removeClass("confirm");
+        };
+        var submit = function () {
+            if ($(this).hasClass("disabled"))
+                return;
+            //表单验证
+            var hasError = 0;
+            $detailForm.find(".form-control input, .form-control select").each(function (i, e) {
+                var $this = $(this),
+                    $control = $this.parent();
+                if ($this.prop("required") && (!$this.val() || $this.val().length == 0)) {
+                    $control.addClass("has-error");
+                    hasError++;
+                }
+                else {
+                    $control.removeClass("has-error");
+                }
+            });
+            if (hasError == 0) {
+
+            }
+        };
+        $addressList.find("li").each(function (i, e) {
+            $(e).find(".sidebar a.btn")
+                .eq(0).click(deleteAddress).end()
+                .eq(1).click(editAddress);
+            $(e).find(".sidebar-confirm a.btn")
+                .eq(0).click(doDelete).end()
+                .eq(1).click(cancelDelete);
         });
+        $btnAddAddress.click(addAddress);
+        $detailForm.children("a.button").click(submit);
     </script>
 </body>
 </html>

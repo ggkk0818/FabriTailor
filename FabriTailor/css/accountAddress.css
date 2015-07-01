@@ -99,12 +99,12 @@
     height: 50%;
     background-color: #f6f6f6;
     color: #333d30;
-    border-bottom-right-radius:5px;
+    border-bottom-right-radius:2px;
 }
 .accountAddress ul.address-list li .sidebar-confirm .btn-yes{
     background-color: #e86c4b;
     color: white;
-    border-top-right-radius:5px;
+    border-top-right-radius:2px;
     border-bottom-right-radius:0;
 }
 .accountAddress ul.address-list li .sidebar-confirm .btn span{
