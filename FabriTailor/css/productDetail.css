@@ -370,6 +370,13 @@
     bottom:50px;
     margin:0;
 }
+.product-customizations .customization.add-to-cart .zoom-container a.btn{
+    position:absolute;
+    left:50%;
+    right:auto;
+    bottom:50px;
+    margin-left: -125px;
+}
 .product-customizations .customization .zoom-container .btn-close:hover{
     background-position:-25px 0;
 }
@@ -387,6 +394,13 @@
     right: 25%;
     width: 500px;
     margin-right: -250px;
+    text-align: center;
+}
+.product-customizations .customization.add-to-cart .zoom-container .description{
+    position: absolute;
+    left: 31%;
+    width: 38%;
+    top: 6%;
     text-align: center;
 }
 .product-customizations .customization .zoom-container .description h2{

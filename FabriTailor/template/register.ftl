@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=devicewidth;initial-scale=1.0" />
-    <title>FabriTailor</title>
+    <title>注册 - FabriTailor</title>
     <link href="${base}/resources/shop/css/style.css" rel="stylesheet" />
     <link href="${base}/resources/shop/css/register.css" rel="stylesheet" />
     <script src="${base}/resources/shop/js/modernizr.js"></script>
@@ -27,23 +27,23 @@
             <li><a href="javascript:void(0);">6</a></li>
         </ol>
         <div class="steps">
-            <div class="step step1">
+            <div class="step step1" data-name="穿衣风格">
                 <div class="options clearfix">
-                    <div class="option">
+                    <div class="option" data-value="我不知道怎么穿更合适">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step1-1.jpg" />
                         </div>
                         <h1>我不知道怎么穿更合适。</h1>
                         <a href="javascript:void(0);">这就是我</a>
                     </div>
-                    <div class="option">
+                    <div class="option" data-value="我没有时间购物">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step1-2.jpg" />
                         </div>
                         <h1>我没有时间购物。</h1>
                         <a href="javascript:void(0);">这就是我</a>
                     </div>
-                    <div class="option">
+                    <div class="option" data-value="我很在意自己的穿着">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step1-3.jpg" />
                         </div>
@@ -52,10 +52,10 @@
                     </div>
                 </div>
             </div>
-            <div class="step step2" data-show-next-btn="true">
+            <div class="step step2" data-show-next-btn="true" data-name="我通常感觉不合适的地方">
                 <div class="step-container clearfix">
                     <div class="options">
-                        <div class="option">
+                        <div class="option" data-name="领口">
                             <h3>衬衫领口</h3>
                             <div class="radio-image">
                                 <img src="${base}/resources/shop/img/register-step2-2.jpg" />
@@ -71,7 +71,7 @@
                                 <h4>太松</h4>
                             </div>
                         </div>
-                        <div class="option">
+                        <div class="option" data-name="袖子">
                             <h3>衬衫袖子</h3>
                             <div class="radio-image">
                                 <img src="${base}/resources/shop/img/register-step2-3.jpg" />
@@ -87,7 +87,7 @@
                                 <h4>太长</h4>
                             </div>
                         </div>
-                        <div class="option">
+                        <div class="option" data-name="袖口">
                             <h3>衬衫袖口</h3>
                             <div class="radio-image">
                                 <img src="${base}/resources/shop/img/register-step2-4.jpg" />
@@ -108,7 +108,7 @@
                         <img src="${base}/resources/shop/img/register-step2-1.jpg" />
                     </div>
                     <div class="options">
-                        <div class="option">
+                        <div class="option" data-name="胸围">
                             <h3>衬衫胸围</h3>
                             <div class="radio-image">
                                 <img src="${base}/resources/shop/img/register-step2-5.jpg" />
@@ -124,7 +124,7 @@
                                 <h4>太松</h4>
                             </div>
                         </div>
-                        <div class="option">
+                        <div class="option" data-name="腰围">
                             <h3>衬衫腰围</h3>
                             <div class="radio-image">
                                 <img src="${base}/resources/shop/img/register-step2-6.jpg" />
@@ -140,7 +140,7 @@
                                 <h4>太松</h4>
                             </div>
                         </div>
-                        <div class="option">
+                        <div class="option" data-name="衣长">
                             <h3>衬衫衣长</h3>
                             <div class="radio-image">
                                 <img src="${base}/resources/shop/img/register-step2-7.jpg" />
@@ -166,56 +166,56 @@
                     </div>
                 </div>
             </div>
-            <div class="step step3" data-show-next-btn="true">
+            <div class="step step3" data-show-next-btn="true" data-name="我对以下这些东西感兴趣">
                 <div class="options clearfix">
-                    <div class="option">
+                    <div class="option" data-value="休闲衬衫1">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step3-1.jpg" />
                             <span class="cover"></span>
                         </div>
-                        <h4>休闲衬衫</h4>
+                        <h4>休闲衬衫1</h4>
                     </div>
-                    <div class="option">
+                    <div class="option" data-value="正装衬衫1">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step3-2.jpg" />
                             <span class="cover"></span>
                         </div>
-                        <h4>正装衬衫</h4>
+                        <h4>正装衬衫1</h4>
                     </div>
-                    <div class="option">
+                    <div class="option" data-value="休闲衬衫2">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step3-3.jpg" />
                             <span class="cover"></span>
                         </div>
-                        <h4>休闲衬衫</h4>
+                        <h4>休闲衬衫2</h4>
                     </div>
-                    <div class="option">
+                    <div class="option" data-value="正装衬衫2">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step3-4.jpg" />
                             <span class="cover"></span>
                         </div>
-                        <h4>正装衬衫</h4>
+                        <h4>正装衬衫2</h4>
                     </div>
-                    <div class="option">
+                    <div class="option" data-value="休闲衬衫3">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step3-5.jpg" />
                             <span class="cover"></span>
                         </div>
-                        <h4>休闲衬衫</h4>
+                        <h4>休闲衬衫3</h4>
                     </div>
-                    <div class="option">
+                    <div class="option" data-value="正装衬衫3">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step3-6.jpg" />
                             <span class="cover"></span>
                         </div>
-                        <h4>正装衬衫</h4>
+                        <h4>正装衬衫3</h4>
                     </div>
-                    <div class="option">
+                    <div class="option" data-value="休闲衬衫4">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step3-7.jpg" />
                             <span class="cover"></span>
                         </div>
-                        <h4>休闲衬衫</h4>
+                        <h4>休闲衬衫4</h4>
                     </div>
                     <div class="option select-all">
                         <div class="image">
@@ -230,28 +230,37 @@
                 <div class="stepForm">
                     <div class="control-group">
                         <div class="form-control">
-                            <input class="input" type="text" placeholder="姓" required />
+                            <input name="firstName" class="input" type="text" placeholder="姓" required />
                             <div class="tooltip">姓错误</div>
                         </div>
                         <div class="form-control">
-                            <input class="input" type="text" placeholder="名" required />
+                            <input name="lastName" class="input" type="text" placeholder="名" required />
                             <div class="tooltip">名错误</div>
                         </div>
                     </div>
                     <div class="form-control">
-                        <input class="input" type="text" placeholder="邮件地址" required />
+                        <input name="email" class="input" type="text" placeholder="邮件地址" required />
                         <div class="tooltip">邮件地址错误</div>
                     </div>
                     <div class="form-control">
-                        <input class="input" type="text" placeholder="联系电话" required />
+                        <input name="tel" class="input" type="text" placeholder="联系电话" required />
                         <div class="tooltip">联系电话错误</div>
                     </div>
+                    <div class="control-group">
+                        <div class="form-control">
+                            <input name="captcha" class="input" type="text" placeholder="验证码" required />
+                            <div class="tooltip">验证码错误</div>
+                        </div>
+                        <div class="form-control">
+                            <a class="button btn-captcha" href="javascript:void(0);">获取验证码</a>
+                        </div>
+                    </div>
                     <div class="form-control">
-                        <input class="input" type="text" placeholder="微信" />
+                        <input name="weichat" class="input" type="text" placeholder="微信" />
                         <div class="tooltip">微信错误</div>
                     </div>
                     <div class="form-control">
-                        <input class="input" type="text" placeholder="介绍人电子邮箱" />
+                        <input name="refer" class="input" type="text" placeholder="介绍人电子邮箱" />
                         <div class="tooltip">介绍人电子邮箱错误</div>
                     </div>
                     <a href="javascript:void(0);" class="button">下一步</a>
@@ -260,13 +269,14 @@
             <div class="step step5" data-show-info-confirm="true">
                 <div class="stepForm">
                     <div class="form-control">
-                        <input class="input" type="password" placeholder="创建新的密码" required />
-                        <div class="tooltip">创建新的密码错误</div>
+                        <input name="newPassword" class="input" type="password" placeholder="创建新的密码" autocomplete="off" min="6" max="[#if setting.passwordMaxLength??]${setting.passwordMaxLength}[#else]20[/#if]" required />
+                        <div class="tooltip">密码应由6-[#if setting.passwordMaxLength??]${setting.passwordMaxLength}[#else]20[/#if]位字符组成</div>
                     </div>
                     <div class="form-control">
-                        <input class="input" type="password" placeholder="确认新密码" required />
+                        <input name="rePassword" class="input" type="password" placeholder="确认新密码" autocomplete="off" required />
                         <div class="tooltip">确认新密码错误</div>
                     </div>
+                    <p class="msg hidden"></p>
                     <a href="javascript:void(0);" class="button">下一步</a>
                 </div>
             </div>
@@ -337,7 +347,18 @@
             $ol = $(".main-container > ol"),
             $steps = $(".main-container .steps"),
             $btnNext = $(".main-container .next-btn"),
-            $infoConfirm = $(".main-container .info-confirm");
+            $infoConfirm = $(".main-container .info-confirm"),
+            $step4Form = $steps.children(".step.step4").children(".stepForm"),
+            $step5Form = $steps.children(".step.step5").children(".stepForm"),
+            $firstName = $step4Form.find("input[name=firstName]"),
+            $lastName = $step4Form.find("input[name=lastName]"),
+            $email = $step4Form.find("input[name=email]"),
+            $tel = $step4Form.find("input[name=tel]"),
+            $captcha = $step4Form.find("input[name=captcha]"),
+            $weichat = $step4Form.find("input[name=weichat]"),
+            $refer = $step4Form.find("input[name=refer]"),
+            $newPassword = $step5Form.find("input[name=newPassword]"),
+            $rePassword = $step5Form.find("input[name=rePassword]");
         var showStep = function (index) {
             if (typeof index !== "number")
                 index = parseInt(index, 10);
@@ -373,18 +394,20 @@
         var step1BtnClick = function () {
             var $option = $(this).parent(),
                 $step = $option.parent().parent();
-            $step.find(".options .option a").removeClass("active");
-            $option.children("a").addClass("active");
+            $step.find(".options .option").removeClass("active").find("a").removeClass("active");
+            $option.addClass("active").children("a").addClass("active");
             $step.addClass("selected");
+            $infoConfirm.find(".info-container .info").eq(0).children("h4").text($option.children("h1").text());
+            $infoConfirm.find(".info-container .info").eq(0).find(".image img").attr("src", $option.find(".image img").attr("src"));
             showStep($step.prevAll().length + 1);
         };
         var step2RadioClick = function () {
             var $radio = $(this).parent(),
                 $option = $radio.parent(),
                 $step = $option.parent().parent().parent();
-            //TO DO
             $step.find(".option-none input").get(0).checked = false;
             $step.addClass("selected");
+            step2SetSummaryValue();
         };
         var step2ResetRadioClick = function () {
             var $step = $(this).parent().parent().parent().parent();
@@ -392,6 +415,22 @@
                 e.checked = false;
             });
             $step.addClass("selected");
+            step2SetSummaryValue();
+        };
+        var step2SetSummaryValue = function () {
+            var $step = $steps.children(".step").eq(1),
+                $ul = $infoConfirm.find(".info-container .info").eq(2).children("ul.radio-info");
+            if ($step.find(".option-none input:checked").length) {
+                $ul.children("li").remove().end().append("<li>无</li>");
+            }
+            else {
+                $ul.children("li").remove();
+                $step.find(".options .option input:checked").each(function (i, e) {
+                    var $radio = $(e).parent(),
+                        $option = $radio.parent();
+                    $ul.append("<li>" + $option.data("name") + $radio.children("h4").text() + "</li>");
+                });
+            }
         };
         var step3OptionImageClick = function () {
             var $option = $(this).parent(),
@@ -409,6 +448,7 @@
             else {
                 $step.removeClass("selected");
             }
+            step3SetSummaryValue();
         };
         var step3OptionSelectAll = function () {
             var $option = $(this).parent(),
@@ -419,6 +459,52 @@
             else {
                 $step.addClass("selected").find(".options .option").addClass("active");
             }
+            step3SetSummaryValue();
+        };
+        var step3SetSummaryValue = function () {
+            var $step = $steps.children(".step").eq(2),
+                $images = $infoConfirm.find(".info-container .info").eq(1).children(".images");
+            $images.children().remove();
+            $step.find(".options .option.active").each(function (i, e) {
+                var $option = $(e),
+                    $image = $('<div class="image"><img /></div>');
+                $image.children("img").attr("src", $option.find(".image img").attr("src"));
+                $images.append($image);
+            });
+        };
+        var step4CaptchaTimer = null;
+        var step4CaptchaBtnClick = function () {
+            if ($(this).hasClass("disabled"))
+                return;
+            if (!$tel.val() || $tel.val().length == 0) {
+                $tel.parent().addClass("has-error");
+                return;
+            }
+            var $this = $(this);
+            $.ajax({
+                url: "${base}/common/captchasms.jhtml",
+                type: "GET",
+                data: { captchaId: $tel.val() },
+                dataType: "json",
+                cache: false,
+                traditional: true,
+                success: function (data) { },
+                error: function () { }
+            }).always(function () {
+                $this.addClass("disabled").data("timeout", 60);
+                $this.text(60);
+                step4CaptchaTimer = setInterval(function () {
+                    var timeout = parseInt($this.data("timeout")) - 1;
+                    if (timeout <= 0) {
+                        $this.removeClass("disabled").text("获取验证码");
+                        clearInterval(step4CaptchaTimer);
+                    }
+                    else {
+                        $this.data("timeout", timeout);
+                        $this.text(timeout);
+                    }
+                }, 1000);
+            });
         };
         var step4BtnClick = function () {
             var $stepForm = $(this).parent(),
@@ -427,7 +513,7 @@
             $stepForm.find(".form-control input").each(function (i, e) {
                 var $this = $(this),
                     $control = $this.parent();
-                if ($this.attr("required") && (!$this.val() || $this.val().length == 0)) {
+                if ($this.prop("required") && (!$this.val() || $this.val().length == 0)) {
                     $control.addClass("has-error");
                     hasError++;
                 }
@@ -438,6 +524,126 @@
             if (hasError == 0) {
                 $step.addClass("selected");
                 showStep($step.prevAll().length + 1);
+            }
+            else {
+                $step.removeClass("selected");
+            }
+        };
+        var step5BtnClick = function () {
+            if ($(this).hasClass("disabled"))
+                return;
+            var $stepForm = $(this).parent(),
+                $step = $stepForm.parent(),
+                hasError = 0;
+            $stepForm.children("p.msg").addClass("hidden");
+            $stepForm.find(".form-control input").each(function (i, e) {
+                var $this = $(this),
+                    $control = $this.parent();
+                if ($this.prop("required") && (!$this.val() || $this.val().length == 0)) {
+                    $control.addClass("has-error");
+                    hasError++;
+                }
+                else if ($this.attr("min") && $this.val() && $this.val().length < parseInt($this.attr("min"))) {
+                    $control.addClass("has-error");
+                    hasError++;
+                }
+                else if ($this.attr("max") && $this.val() && $this.val().length > parseInt($this.attr("max"))) {
+                    $control.addClass("has-error");
+                    hasError++;
+                }
+                else {
+                    $control.removeClass("has-error");
+                }
+            });
+            if ($newPassword.prop("required") && $newPassword.val() != $rePassword.val()) {
+                $rePassword.parent().addClass("has-error");
+                hasError++;
+            }
+            if (hasError == 0) {
+                //获取调查问卷信息
+                var questionArr = [], optionArr = [], answerArr = [];
+                $steps.children(".step1, .step2, .step3").each(function (i, e) {
+                    var $step = $(e),
+                        option = [],
+                        answer = [];
+                    questionArr.push($step.data("name") || "无");
+                    if ($step.is(".step2")) {
+                        $step.find(".options .option").each(function (j, el) {
+                            var $option = $(el);
+                            if ($option.data("name")) {
+                                option.push($option.data("name"));
+                                if ($option.find("input:checked").length) {
+                                    answer.push($option.data("name") + $option.find("input:checked").parent().children("h4").text());
+                                }
+                            }
+                        });
+                    }
+                    else {
+                        $step.find(".options .option").each(function (j, el) {
+                            var $option = $(el);
+                            if ($option.data("value")) {
+                                option.push($option.data("value"));
+                                if ($option.hasClass("active")) {
+                                    answer.push($option.data("value"));
+                                }
+                            }
+                        });
+                    }
+                    optionArr.push(option.length ? option.join(",") : "无");
+                    answerArr.push(answer.length ? answer.join(",") : "无");
+                });
+                //提交注册信息
+                $.ajax({
+                    url: "${base}/common/public_key.jhtml",
+                    type: "GET",
+                    dataType: "json",
+                    cache: false,
+                    success: function (data) {
+                        var params = {
+                            captchaId: $tel.val(),
+                            captcha: $captcha.val(),
+                            username: $email.val(),
+                            email: $email.val(),
+                            memberAttribute_1: $firstName.val() + $lastName.val(),
+                            memberAttribute_11: $firstName.val(),
+                            memberAttribute_12: $lastName.val(),
+                            question: questionArr,
+                            option: optionArr,
+                            answer: answerArr
+                        };
+                        var rsaKey = new RSAKey();
+                        rsaKey.setPublic(b64tohex(data.modulus), b64tohex(data.exponent));
+                        params.enPassword = hex2b64(rsaKey.encrypt($newPassword.val()));
+                        if ($weichat.val() && $weichat.val().length) {
+                            params.memberAttribute_9 = $weichat.val();
+                        }
+                        if ($refer.val() && $refer.val().length) {
+                            params.memberAttribute_10 = $refer.val();
+                        }
+                        $.ajax({
+                            url: "${base}/register/submitv2.jhtml",
+                            type: "POST",
+                            data: params,
+                            dataType: "json",
+                            cache: false,
+                            traditional: true,
+                            success: function (data) {
+                                if (data && data.type == "success") {
+                                    $step.addClass("selected");
+                                    showStep($step.prevAll().length + 1);
+                                }
+                                else {
+                                    $stepForm.children("p.msg").removeClass("hidden").text("注册失败。" + (data && data.content ? data.content : ""));
+                                }
+                            },
+                            error: function () {
+                                $stepForm.children("p.msg").removeClass("hidden").text("注册失败。");
+                            }
+                        }).always(function () {
+                            $stepForm.children("a.button").removeClass("disabled");
+                        });
+                    }
+                });
             }
             else {
                 $step.removeClass("selected");
@@ -458,9 +664,10 @@
         $steps.children(".step").eq(2).find(".options .option:not(.select-all) .image").click(step3OptionImageClick);
         $steps.children(".step").eq(2).find(".options .option.select-all .image").click(step3OptionSelectAll);
         $steps.children(".step").eq(3).find(".stepForm .form-control input").change(step4InputChange);
-        $steps.children(".step").eq(3).find(".stepForm a.button").click(step4BtnClick);
+        $steps.children(".step").eq(3).find(".stepForm a.btn-captcha").click(step4CaptchaBtnClick);
+        $steps.children(".step").eq(3).find(".stepForm a.button").not(".btn-captcha").click(step4BtnClick);
         $steps.children(".step").eq(4).find(".stepForm .form-control input").change(step4InputChange);
-        $steps.children(".step").eq(4).find(".stepForm a.button").click(step4BtnClick);
+        $steps.children(".step").eq(4).find(".stepForm a.button").click(step5BtnClick);
         $btnNext.click(nextBtnClick);
         $ol.find("li a").click(function () {
             showStep($(this).parent().prevAll().length);

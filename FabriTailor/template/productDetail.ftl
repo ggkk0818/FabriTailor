@@ -103,14 +103,6 @@
                 <h2 class="description">查看我的版型</h2>
                 <p class="description">这是属于你的定制版型组合，点击任意一个选项可以看到详细说明。你可以点击这里修改你的定制版型，或者点击新建版型来建立一个新的衬衫版型。</p>
                 <div class="options">
-					[#if currentMember.specificationValues?has_content]
-						[#list currentMember.specificationValues as specificationValue]
-						<div class="option" data-title="${specificationValue.name}" data-description="${specificationValue.description}" data-specification-name="${specificationValue.specification.name}" data-specification-value="${specificationValue.name}">
-							<div class="image"><img src="${specificationValue.image}" /></div>
-							<div class="text">${specificationValue.name}</div>
-						</div>
-						[/#list]
-					[/#if]
                     <div class="option monogram" [#if currentMember.letters??]data-letters="${currentMember.letters}"[/#if]>
                         <div class="image"><img src="${base}/resources/shop/img/product-customizztion8.jpg" /></div>
                         <div class="text">[#if currentMember.letters??]自定义(${currentMember.letters})[#else]无刺绣[/#if]</div>
@@ -127,15 +119,13 @@
                     <a class="btn-close" href="javascript:void(0);"></a>
                     <a class="btn" href="javascript:void(0);">加入购物车</a>
                 </div>
-				[#if !currentMember??]
-					<div class="zoom-container" style="display:block;">
-						<img class="image" src="${base}/resources/shop/img/product-customization-build1.jpg" />
-						<div class="description">
-							<h2>我的版型</h2>
-							<p>我们会在你量体环节帮助你建立属于你的专属衬衫版型。<br />如果你已经是我们的会员，请点击<a href="javascript:void(0);">登录</a></p>
-						</div>
+				<div class="zoom-container" style="display:block;">
+					<img class="image" src="${base}/resources/shop/img/product-customization-build1.jpg" />
+					<div class="description">
+						<h2>我的版型</h2>
+						<p>我们会在你量体环节帮助你建立属于你的专属衬衫版型。<br />如果你已经是我们的会员，请点击<a href="javascript:void(0);">登录</a></p>
 					</div>
-				[/#if]
+				</div>
             </div>
 			[/@current_member]
             <div class="customization clearfix">
@@ -281,9 +271,8 @@
             </div>
             <div class="customization add-to-cart" style="height:500px;">
                 <div class="zoom-container" style="display:block;">
-                    <img class="image" src="${base}/resources/shop/img/product-customization-build1.jpg" />
                     <div class="description">
-                        <p>已加入购物车</p>
+                        <h2>已加入购物车</h2>
                     </div>
                     <a class="btn" href="javascript:void(0);">返回</a>
                 </div>
@@ -464,13 +453,21 @@
     <script type="text/javascript">
         //自定义版型
         var productGoods = [];
-        productGoods.push({
-            productId: 1,
-            productName: "",
-            specifications: [
-                { name: "", value: "" }
-            ]
-        });
+		[#if product.goods?? && product.goods.products?has_content]
+			[#list product.goods.products as goodsProduct]
+			productGoods.push({
+				productId: ${goodsProduct.id},
+				productName: "${goodsProduct.name}",
+				specifications: [
+					[#if goodsProduct.specificationValues?has_content]
+						[#list goodsProduct.specificationValues as goodsProductSpecificationValue]
+							{ name: "${goodsProductSpecificationValue.specification.name}", value: "${goodsProductSpecificationValue.name}" }[#if goodsProductSpecificationValue_has_next],[/#if]
+						[/#list]
+					[/#if]
+				]
+			});
+			[/#list]
+		[/#if]
         var $productCustomizationBuild = $(".main-container .product-customizations .customization-build"),
             $customizationBuildSummary = $(".main-container .product-customizations .customization-build-summary");
         var productCustomizationBuildShow = function (index) {
@@ -634,7 +631,7 @@
         };
         var productCustomizationBuildSummaryOptionClick = function () {
             productCustomizationTabShow(2);
-            productCustomizationBuildShow($(this).prevAll(".option").length);
+            productCustomizationBuildShow($(this).prevAll(".option").length + 1);
         };
         var productCustomizationBuildAddToCart = function () {
             var $customization = $(this).parent(),
@@ -678,11 +675,11 @@
                     }
                 }
             }
-            var params = { id: product.productId, quantity: 1 };
-            if (letters) {
-                params.letters = letters;
-            }
             if (product) {
+				var params = { id: product.productId, quantity: 1 };
+				if (letters) {
+					params.letters = letters;
+				}
                 $.ajax({
                     url: "${base}/cart/add.jhtml",
                     type: "POST",
@@ -737,7 +734,49 @@
             });
             productCustomizationBuildShow(0);
         };
+        var getCurrentMemberBuild = function () {
+            var $myCustomizations = $(".main-container .product-customizations .customization").eq(0);
+            $.ajax({
+                url: "${base}/login/check.jhtml",
+                type: "GET",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    if (data) {
+                        $.getJSON("${base}/member/specification/listajax.jhtml", function (data) {
+                            if (data && data.specifications && data.specificationValues) {
+                                for (var i = 0; i < data.specifications.length; i++) {
+                                    var $option = $('<div class="option"><div class="image"><img /></div><div class="text">&nbsp;</div></div>'),
+                                        specification = data.specifications[i],
+                                        specificationValue = data.specificationValues.length > i ? data.specificationValues[i] : null;
+                                    if (!specificationValue) {
+                                        break;
+                                    }
+                                    $option.data("title", specificationValue.name);
+                                    $option.data("description", specificationValue.description);
+                                    $option.data("specification-name", specification.name);
+                                    $option.data("specification-value", specificationValue.name);
+                                    $option.find(".image img").attr("src", specificationValue.image);
+                                    $option.children(".text").text(specificationValue.name);
+                                    $myCustomizations.find(".options .option.monogram").before($option);
+                                }
+                                $myCustomizations.removeClass("no-login").children(".zoom-container").last().remove();
+                            }
+                        }).fail(function () {
+                            $myCustomizations.children(".zoom-container").last().find("a").click(showLogin);
+                        });
+                    }
+                    else {
+                        $myCustomizations.children(".zoom-container").last().find("a").click(showLogin);
+                    }
+                },
+                error: function () {
+                    $myCustomizations.children(".zoom-container").last().find("a").click(showLogin);
+                }
+            });
+        };
         productCustomizationBuildInit();
+        getCurrentMemberBuild();
     </script>
 </body>
 </html>

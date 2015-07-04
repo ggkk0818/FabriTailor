@@ -277,12 +277,12 @@
     margin:10px auto 10px;
 }
 /*step4*/
-.steps .step.step4{
-
+.steps .step.step4 a.btn-captcha.disabled{
+    background-color:#ccc;
 }
 /*step5*/
-.steps .step.step5{
-
+.steps .step.step5 a.button.disabled{
+    background-color:#ccc;
 }
 /*step6*/
 .steps .step.step6{

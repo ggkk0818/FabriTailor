@@ -9,7 +9,7 @@
                     <li><a href="${base}/product/list.jhtml"><span>在线定制</span></a></li>
                     <li><a href="javascript:void(0);"><span>关于我们</span></a></li>
                     <li><a href="javascript:void(0);"><span>凡布风尚</span></a></li>
-                    <li><a href="${base}/product/list.jhtml"><span>休闲衬衫</span></a></li>
+                    <li><a href="${base}/product/list/2.jhtml"><span>休闲衬衫</span></a></li>
                     <li><a href="javascript:void(0);"><span>我们的凡布</span></a></li>
                 </ul>
             </nav>

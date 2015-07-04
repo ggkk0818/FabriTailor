@@ -4,61 +4,24 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=devicewidth;initial-scale=1.0" />
     <title>地址簿 - FabriTailor</title>
-    <link href="css/animate.css" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" />
-    <link href="css/account.css" rel="stylesheet" />
-    <link href="css/accountAddress.css" rel="stylesheet" />
-    <script src="js/modernizr.js"></script>
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/jquery.cookie.js"></script>
-    <script src="js/jquery.easing.1.3.js"></script>
-    <script src="js/jquery.lazyload.js"></script>
-    <script src="js/common.js"></script>
+    <link href="${base}/resources/shop/css/animate.css" rel="stylesheet" />
+    <link href="${base}/resources/shop/css/style.css" rel="stylesheet" />
+    <link href="${base}/resources/shop/css/account.css" rel="stylesheet" />
+    <link href="${base}/resources/shop/css/accountAddress.css" rel="stylesheet" />
+    <script src="${base}/resources/shop/js/modernizr.js"></script>
+    <script src="${base}/resources/shop/js/jquery-1.11.3.min.js"></script>
+    <script src="${base}/resources/shop/js/jquery.cookie.js"></script>
+    <script src="${base}/resources/shop/js/jquery.easing.1.3.js"></script>
+    <script src="${base}/resources/shop/js/jquery.lazyload.js"></script>
+    <script src="${base}/resources/shop/js/f_common.js"></script>
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <a class="menu-btn show-on-small" href="javascript:void(0);"><img src="img/menu-btn.png" /></a>
-            <div class="logo">
-                <img src="img/logo.png" />
-            </div>
-            <nav class="hide-on-small">
-                <ul>
-                    <li><a href="javascript:void(0);"><span>在线定制</span></a></li>
-                    <li><a href="javascript:void(0);"><span>关于我们</span></a></li>
-                    <li><a href="javascript:void(0);"><span>凡布风尚</span></a></li>
-                    <li><a href="javascript:void(0);"><span>休闲衬衫</span></a></li>
-                    <li><a href="javascript:void(0);"><span>我们的凡布</span></a></li>
-                </ul>
-            </nav>
-            <div class="btn-group hide-on-small">
-                <a href="javascript:void(0);" class="register">从这里开始</a><a href="javascript:void(0);" class="login">登录</a>
-            </div>
-        </div>
-    </header>
-    <aside class="show-on-small">
-        <a href="javascript:void(0);" class="btn-close"><img src="img/menu-btn-close.png" /></a>
-        <ul>
-            <li><a href="javascript:void(0);"><span>在线定制</span></a></li>
-            <li><a href="javascript:void(0);"><span>关于我们</span></a></li>
-            <li><a href="javascript:void(0);"><span>凡布风尚</span></a></li>
-            <li><a href="javascript:void(0);"><span>休闲衬衫</span></a></li>
-            <li><a href="javascript:void(0);"><span>我们的凡布</span></a></li>
-            <li><a class="button" href="javascript:void(0);">从这里开始</a></li>
-        </ul>
-    </aside>
+	[#assign current = "addressList" /]
+    [#include "/shop/include/header.ftl" /]
     <div class="main-container clearfix">
         <div class="account-aside">
             <div class="current">地址簿<i class="showhide"></i></div>
-            <ul>
-                <li><a href="javascript:void(0);">账户信息</a></li>
-                <li><a href="javascript:void(0);">我的订单</a></li>
-                <li><a href="javascript:void(0);">我的尺寸</a></li>
-                <li><a href="javascript:void(0);">我的板型</a></li>
-                <li><a href="javascript:void(0);">分享与学习</a></li>
-                <li class="active"><a href="javascript:void(0);">地址簿</a></li>
-                <li><a href="javascript:void(0);">退换货</a></li>
-            </ul>
+            [#include "/shop/member/include/navigation.ftl" /]
             <a href="javascript:void(0);" class="sign-out">退出</a>
         </div>
         <div class="account-container">
@@ -66,57 +29,25 @@
                 <h1>地址簿</h1>
                 <p>选择以下地址来设置默认送货地址。要编辑地址，单击铅笔。要删除它，点击X.要查看哪些信用卡都分配给它，单击卡。编辑或删除地址将更新分配给它的任何卡。</p>
                 <ul class="address-list">
-                    <li>
+					[#list page.content as receiver]
+                    <li [#if receiver.isDefault]class="active"[/#if] data-id="${receiver.id}" data-name="${receiver.consignee}" data-province="[#if receiver.area?? && receiver.area.parent]${receiver.area.parent.id}[/#if]" data-city="[#if receiver.area??]${receiver.area.id}[/#if]" data-addr="${receiver.address}" data-tel="${receiver.phone}" data-default="${receiver.isDefault}">
                         <div class="content">
                             <span class="delete-text">删除这个地址？</span>
-                            <p>张三</p>
-                            <p>13901111111</p>
-                            <p>北京 北京市</p>
-                            <p>海淀区 学院路1号</p>
+                            <p>${receiver.consignee}</p>
+                            <p>${receiver.phone}</p>
+                            <p>${receiver.areaName}</p>
+                            <p>${receiver.address}</p>
                         </div>
                         <div class="sidebar">
-                            <a class="btn" href="javascript:void(0);"><img src="img/account-address-del.png" /></a>
-                            <a class="btn" href="javascript:void(0);"><img src="img/account-address-edit.png" /></a>
+                            <a class="btn" href="javascript:void(0);"><img src="${base}/resources/shop/img/account-address-del.png" /></a>
+                            <a class="btn" href="javascript:void(0);"><img src="${base}/resources/shop/img/account-address-edit.png" /></a>
                         </div>
                         <div class="sidebar-confirm">
                             <a class="btn btn-yes" href="javascript:void(0);"><span>是</span></a>
                             <a class="btn btn-no" href="javascript:void(0);"><span>否</span></a>
                         </div>
                     </li>
-                    <li data-id="2" data-name="张三" data-province="bj" data-city="北京" data-addr="海淀区 学院路1号" data-tel="13901111111" data-default="true">
-                        <div class="content">
-                            <span class="delete-text">删除这个地址？</span>
-                            <p>张三</p>
-                            <p>13901111111</p>
-                            <p>北京 北京市</p>
-                            <p>海淀区 学院路1号</p>
-                        </div>
-                        <div class="sidebar">
-                            <a class="btn" href="javascript:void(0);"><img src="img/account-address-del.png" /></a>
-                            <a class="btn" href="javascript:void(0);"><img src="img/account-address-edit.png" /></a>
-                        </div>
-                        <div class="sidebar-confirm">
-                            <a class="btn btn-yes" href="javascript:void(0);"><span>是</span></a>
-                            <a class="btn btn-no" href="javascript:void(0);"><span>否</span></a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="content">
-                            <span class="delete-text">删除这个地址？</span>
-                            <p>张三</p>
-                            <p>13901111111</p>
-                            <p>北京 北京市</p>
-                            <p>海淀区 学院路1号</p>
-                        </div>
-                        <div class="sidebar">
-                            <a class="btn" href="javascript:void(0);"><img src="img/account-address-del.png" /></a>
-                            <a class="btn" href="javascript:void(0);"><img src="img/account-address-edit.png" /></a>
-                        </div>
-                        <div class="sidebar-confirm">
-                            <a class="btn btn-yes" href="javascript:void(0);"><span>是</span></a>
-                            <a class="btn btn-no" href="javascript:void(0);"><span>否</span></a>
-                        </div>
-                    </li>
+					[/#list]
                 </ul>
                 <a class="add-address" href="javascript:void(0);"><span>添加新地址</span><i></i></a>
                 <div class="detailForm fadeInDownFast">
@@ -159,99 +90,7 @@
             </div>
         </div>
     </div>
-    <footer>
-        <div class="contact">
-            <h3 class="hide-on-small">与凡布保持联系</h3>
-            <div class="input-group hide-on-small">
-                <input class="input" type="text" placeholder="请输入您的邮件地址" />
-                <a href="javascript:void(0);" class="btn">»</a>
-            </div>
-            <div class="ico-link text-center-on-small">
-                <a href="javascript:void(0);"><img src="img/ico-email.jpg" /></a>
-                <a href="javascript:void(0);"><img src="img/ico-weibo.png" /></a>
-                <a href="javascript:void(0);"><img src="img/ico-weixin.png" /></a>
-                <a href="javascript:void(0);"><img src="img/ico-taobao.png" /></a>
-            </div>
-        </div>
-        <div class="links text-center-on-small">
-            <div class="row">
-                <div class="col-md-3 col-sm-12">
-                    <h6>FabriTailor.com</h6>
-                    <ul>
-                        <li>
-                            <a href="javascript:void(0);">
-                                北京市<br />
-                                朝阳区<br />
-                                夏家园18号楼<br />
-                                2091室
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-12">
-                    <h6>凡布制衣</h6>
-                    <ul>
-                        <li><a href="javascript:void(0);">关于我们</a></li>
-                        <li><a href="javascript:void(0);">人才招聘</a></li>
-                        <li><a href="javascript:void(0);">成为凡布量体师</a></li>
-                        <li><a href="javascript:void(0);">服务条款</a></li>
-                        <li><a href="javascript:void(0);">隐私声明</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-12">
-                    <h6>帮助</h6>
-                    <ul>
-                        <li><a href="javascript:void(0);">购物指南</a></li>
-                        <li><a href="javascript:void(0);">关于量体定制</a></li>
-                        <li><a href="javascript:void(0);">常见问题解答</a></li>
-                        <li><a href="javascript:void(0);">帮助与支持</a></li>
-                        <li><a href="javascript:void(0);">退换货信息</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-12">
-                    <h6>在线商店</h6>
-                    <ul>
-                        <li><a href="javascript:void(0);">衬衫</a></li>
-                        <li><a href="javascript:void(0);">查看全部</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="logo">
-            <img src="img/logo-footer.png" />
-        </div>
-    </footer>
-    <div class="login-panel">
-        <h2>登录</h2>
-        <input class="input" type="text" placeholder="请输入电子邮件地址" />
-        <input class="input" type="password" placeholder="请输入密码" />
-        <a class="button" href="javascript:void(0);">登陆</a>
-        <a href="javascript:void(0);">忘记密码，或立即免费注册成为会员？</a>
-    </div>
-    <div class="cover-small-black"></div>
-    <div class="login-cover-black"></div>
-    <script type="text/javascript">
-        //侧边栏
-        $("header .menu-btn").click(function () {
-            $("aside").addClass("opened");
-            $("div.cover-small-black").addClass("opened").fadeTo("normal", 0.5, EASING_NAME);
-        });
-        $("aside .btn-close").click(function () {
-            $("aside").removeClass("opened");
-            $("div.cover-small-black").fadeTo("normal", 0, EASING_NAME, function () { $(this).removeClass("opened"); });
-        });
-        //登陆
-        var showLogin = function () {
-            $(".login-panel").show();
-            $("div.login-cover-black").addClass("opened").fadeTo("normal", 0.5, EASING_NAME);
-        };
-        var hideLogin = function () {
-            $(".login-panel").hide();
-            $("div.login-cover-black").fadeTo("normal", 0, EASING_NAME, function () { $(this).removeClass("opened"); });
-        };
-        $("div.login-cover-black").click(hideLogin);
-        $("header .btn-group .login").click(showLogin);
-    </script>
+    [#include "/shop/include/footer.ftl" /]
     <script type="text/javascript">
         //账号导航菜单
         $(".main-container .account-aside .current i.showhide").click(function () {

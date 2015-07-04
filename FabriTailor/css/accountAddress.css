@@ -211,6 +211,41 @@
 .accountAddress .detailForm .control-group > *:not(:first-child){
     margin-left:10px;
 }
+.accountAddress .detailForm div.checkbox{
+    height:25px;
+    position:relative;
+    margin-bottom:10px;
+}
+.accountAddress .detailForm div.checkbox input.checkbox{
+    position: absolute;
+    opacity: 0;
+    width: 19px;
+    height: 19px;
+    margin: 3px 0 0;
+    cursor: pointer;
+    z-index:1;
+}
+.accountAddress .detailForm div.checkbox label{
+}
+.accountAddress .detailForm div.checkbox label:before{
+    content: ' ';
+    position:relative;
+    top:3px;
+    display:inline-block;
+    width: 19px;
+    height: 19px;
+    margin-right: 5px;
+    border:1px solid #040000;
+}
+.accountAddress .detailForm div.checkbox input.checkbox:checked+label:before{
+    content: ' ';
+    background:url(../img/checkbox-ok.png) no-repeat center center;
+    background-size:contain;
+}
+.accountAddress .detailForm p.msg{
+    text-align:center;
+    margin-bottom:10px;
+}
 .accountAddress .detailForm a.button{
     display:block;
     margin:0 0 10px;

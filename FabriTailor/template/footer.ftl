@@ -90,7 +90,7 @@
     <script type="text/javascript">
     	//这里应该用cookie中是否有username来判断是否已登录,memberUsername是用于记住曾经登录的用户名(记住我)
     	//if ($.cookie("memberUsername")) {
-        if ($.cookie("username")) {
+        if ($.cookie("name")) {
             //用户信息链接
             $("header .btn-group .account .dropdown-menu a").click(function (e) {
                 e.stopPropagation();
@@ -101,7 +101,7 @@
             $("header .btn-group .login").addClass("hidden");
             //这里应该用cookie中是否有username来判断是否已登录,memberUsername是用于记住曾经登录的用户名(记住我)
             //$("header .btn-group .account").removeClass("hidden").children("span").text($.cookie("memberUsername"));
-            $("header .btn-group .account").removeClass("hidden").children("span").text($.cookie("username"));
+            $("header .btn-group .account").removeClass("hidden").children("span").text($.cookie("name"));
         }
         else {
             //登陆

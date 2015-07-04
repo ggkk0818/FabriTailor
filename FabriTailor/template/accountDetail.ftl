@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=devicewidth;initial-scale=1.0" />
-    <title>FabriTailor</title>
+    <title>${message("shop.member.index")}[#if systemShowPowered] - FabriTailor[/#if]</title>
     <link href="${base}/resources/shop/css/animate.css" rel="stylesheet" />
     <link href="${base}/resources/shop/css/style.css" rel="stylesheet" />
     <link href="${base}/resources/shop/css/account.css" rel="stylesheet" />
@@ -18,6 +18,18 @@
 <body>
     [#assign current = "account" /]
     [#include "/shop/include/header.ftl" /]
+	[@current_member]
+	[#assign memberFirstName = null /]
+	[#assign memberLastName = null /]
+	[#if currentMember?? && memberAttributes??]
+		[#list memberAttributes as memberAttribute]
+			[#if memberAttribute.id == 11]
+				[#assign memberFirstName = currentMember.getAttributeValue(memberAttribute) /]
+			[#elseif memberAttribute.id == 12]
+				[#assign memberLastName = currentMember.getAttributeValue(memberAttribute) /]
+			[/#if]
+		[/#list]
+	[/#if]
     <div class="main-container clearfix">
         <div class="account-aside">
             <div class="current">账户信息<i class="showhide"></i></div>
@@ -30,19 +42,38 @@
                 <p>在下面的信息栏里你可以更改你的名字、邮件地址以及账户密码。</p>
                 <div class="detailForm">
                     <div class="control-group">
-                        <input class="input" type="text" placeholder="姓" />
-                        <input class="input" type="text" placeholder="名" />
+                        <div class="form-control">
+                            <input name="firstName" class="input" type="text" placeholder="姓" value="[#if memberFirstName??]${memberFirstName}[/#if]" required />
+                            <div class="tooltip">姓错误</div>
+                        </div>
+                        <div class="form-control">
+                            <input name="lastName" class="input" type="text" placeholder="名" value="[#if memberLastName??]${memberLastName}[/#if]" required />
+                            <div class="tooltip">名错误</div>
+                        </div>
                     </div>
-                    <input class="input" type="text" placeholder="邮箱" />
+                    <div class="form-control">
+                        <input name="email" class="input" type="text" placeholder="邮箱" value="[#if currentMember?? && currentMember.email??]${currentMember.email}[/#if]" required />
+                        <div class="tooltip">邮箱错误</div>
+                    </div>
+                    <div class="form-control">
+                        <input name="curPassword" class="input" type="password" placeholder="当前密码" />
+                        <div class="tooltip">当前密码错误</div>
+                    </div>
                     <div class="checkbox">
                         <input id="accountDetailCheckbox" class="checkbox" type="checkbox" />
-                        <label>更改密码</label>
+                        <label for="accountDetailCheckbox">更改密码</label>
                     </div>
                     <div id="accountDetailPwdContainer" class="hidden">
-                        <input class="input" type="text" placeholder="当前密码" />
-                        <input class="input" type="text" placeholder="新的密码" />
-                        <input class="input" type="text" placeholder="确认新密码" />
+                        <div class="form-control">
+                            <input name="newPassword" class="input" type="password" placeholder="新的密码" />
+                            <div class="tooltip">新密码错误</div>
+                        </div>
+                        <div class="form-control">
+                            <input name="rePassword" class="input" type="password" placeholder="确认新密码" />
+                            <div class="tooltip">确认密码错误</div>
+                        </div>
                     </div>
+                    <p class="msg hidden"></p>
                     <a href="javascript:void(0);" class="button">保存</a>
                 </div>
             </div>
@@ -57,12 +88,89 @@
         });
     </script>
     <script type="text/javascript">
+        var $detailForm = $(".main-container .account-container .detailForm"),
+            $firstName = $detailForm.find("input[name=firstName]"),
+            $lastName = $detailForm.find("input[name=lastName]"),
+            $email = $detailForm.find("input[name=email]"),
+            $curPassword = $detailForm.find("input[name=curPassword]"),
+            $newPassword = $detailForm.find("input[name=newPassword]"),
+            $rePassword = $detailForm.find("input[name=rePassword]");
         $("#accountDetailCheckbox").click(function () {
-            if (this.checked)
+            if (this.checked) {
+                $newPassword.prop("required", true);
+                $rePassword.prop("required", true);
                 $("#accountDetailPwdContainer").removeClass("hidden");
-            else
+            }
+            else {
+                $newPassword.removeProp("required");
+                $rePassword.removeProp("required");
                 $("#accountDetailPwdContainer").addClass("hidden");
+            }
         });
+        var submit = function () {
+            if ($(this).hasClass("disabled"))
+                return;
+            $detailForm.children("p.msg").addClass("hidden");
+            //表单验证
+            var hasError = 0;
+            $detailForm.find(".form-control input").each(function (i, e) {
+                var $this = $(this),
+                    $control = $this.parent();
+                if ($this.prop("required") && (!$this.val() || $this.val().length == 0)) {
+                    $control.addClass("has-error");
+                    hasError++;
+                }
+                else {
+                    $control.removeClass("has-error");
+                }
+            });
+            if ($newPassword.prop("required") && $newPassword.val() != $rePassword.val()) {
+                $rePassword.parent().addClass("has-error");
+                hasError++;
+            }
+            if (hasError == 0) {
+                var params = {
+                    email: $email.val(),
+                    memberAttribute_1: $firstName.val() + $lastName.val(),
+                    memberAttribute_11: $firstName.val(),
+                    memberAttribute_12: $lastName.val()
+                };
+                $.getJSON("${base}/common/public_key.jhtml", function (data) {
+                    var rsaKey = new RSAKey();
+                    rsaKey.setPublic(b64tohex(data.modulus), b64tohex(data.exponent));
+                    params.enCurrentPassword = hex2b64(rsaKey.encrypt($curPassword.val()));
+                    if (!$("#accountDetailPwdContainer").hasClass("hidden")) {
+                        params.enPassword = hex2b64(rsaKey.encrypt($newPassword.val()));
+                    }
+                    $.ajax({
+                        url: "${base}/member/profile/updatev2.jhtml",
+                        type: "POST",
+                        data: params,
+                        dataType: "json",
+                        cache: false,
+                        traditional: true,
+                        success: function (data) {
+                            if (data && data.type == "success") {
+                                $detailForm.children("p.msg").removeClass("hidden").text("保存成功。");
+                            }
+                            else {
+                                $detailForm.children("p.msg").removeClass("hidden").text("保存失败。" + (data && data.content ? data.content : ""));
+                            }
+                        },
+                        error: function () {
+                            $detailForm.children("p.msg").removeClass("hidden").text("保存失败。");
+                        }
+                    }).always(function () {
+                        $detailForm.children("a.button").removeClass("disabled");
+                    });
+                }).fail(function () {
+                    $detailForm.children("p").removeClass("hidden").text("获取登录凭证失败");
+                    $detailForm.children("a.button").removeClass("disabled");
+                });
+            }
+        };
+        $detailForm.children("a.button").click(submit);
     </script>
+	[/@current_member]
 </body>
 </html>

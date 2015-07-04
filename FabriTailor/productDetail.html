@@ -423,9 +423,8 @@
             </div>
             <div class="customization add-to-cart" style="height:500px;">
                 <div class="zoom-container" style="display:block;">
-                    <img class="image" src="img/product-customization-build1.jpg" />
                     <div class="description">
-                        <p>已加入购物车</p>
+                        <h2>已加入购物车</h2>
                     </div>
                     <a class="btn" href="javascript:void(0);">返回</a>
                 </div>
@@ -868,7 +867,7 @@
         };
         var productCustomizationBuildSummaryOptionClick = function () {
             productCustomizationTabShow(2);
-            productCustomizationBuildShow($(this).prevAll(".option").length);
+            productCustomizationBuildShow($(this).prevAll(".option").length + 1);
         };
         var productCustomizationBuildAddToCart = function () {
             var $customization = $(this).parent(),
@@ -912,11 +911,11 @@
                     }
                 }
             }
-            var params = { id: product.productId, quantity: 1 };
-            if (letters) {
-                params.letters = letters;
-            }
             if (product) {
+                var params = { id: product.productId, quantity: 1 };
+                if (letters) {
+                    params.letters = letters;
+                }
                 $.ajax({
                     url: "${base}/cart/add.jhtml",
                     type: "POST",
@@ -971,7 +970,49 @@
             });
             productCustomizationBuildShow(0);
         };
+        var getCurrentMemberBuild = function () {
+            var $myCustomizations = $(".main-container .product-customizations .customization").eq(0);
+            $.ajax({
+                url: "${base}/login/check.jhtml",
+                type: "GET",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    if (data) {
+                        $.getJSON("${base}/member/specification/listajax.jhtml", function (data) {
+                            if (data && data.specifications && data.specificationValues) {
+                                for (var i = 0; i < data.specifications.length; i++) {
+                                    var $option = $('<div class="option"><div class="image"><img /></div><div class="text">&nbsp;</div></div>'),
+                                        specification = data.specifications[i],
+                                        specificationValue = data.specificationValues.length > i ? data.specificationValues[i] : null;
+                                    if (!specificationValue) {
+                                        break;
+                                    }
+                                    $option.data("title", specificationValue.name);
+                                    $option.data("description", specificationValue.description);
+                                    $option.data("specification-name", specification.name);
+                                    $option.data("specification-value", specificationValue.name);
+                                    $option.find(".image img").attr("src", specificationValue.image);
+                                    $option.children(".text").text(specificationValue.name);
+                                    $myCustomizations.find(".options .option.monogram").before($option);
+                                }
+                                $myCustomizations.removeClass("no-login").children(".zoom-container").last().remove();
+                            }
+                        }).fail(function () {
+                            $myCustomizations.children(".zoom-container").last().find("a").click(showLogin);
+                        });
+                    }
+                    else {
+                        $myCustomizations.children(".zoom-container").last().find("a").click(showLogin);
+                    }
+                },
+                error: function () {
+                    $myCustomizations.children(".zoom-container").last().find("a").click(showLogin);
+                }
+            });
+        };
         productCustomizationBuildInit();
+        getCurrentMemberBuild();
     </script>
 </body>
 </html>
