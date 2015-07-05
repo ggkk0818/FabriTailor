@@ -594,6 +594,7 @@
                     answerArr.push(answer.length ? answer.join(",") : "无");
                 });
                 //提交注册信息
+                $stepForm.children("a.button").addClass("disabled");
                 $.ajax({
                     url: "${base}/common/public_key.jhtml",
                     type: "GET",
@@ -644,6 +645,9 @@
                             $stepForm.children("a.button").removeClass("disabled");
                         });
                     }
+                }).fail(function () {
+                    $stepForm.children("p.msg").removeClass("hidden").text("注册失败。");
+                    $stepForm.children("a.button").removeClass("disabled");
                 });
             }
             else {
