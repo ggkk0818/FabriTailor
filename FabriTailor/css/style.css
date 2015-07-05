@@ -218,6 +218,12 @@ a.button:hover{
     background-color: #668291;
     text-decoration:none;
 }
+input.button.disabled,
+input.button.disabled:hover,
+a.button.disabled,
+a.button.disabled:hover{
+    background-color: #ccc;
+}
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     height: auto;

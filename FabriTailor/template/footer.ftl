@@ -116,7 +116,7 @@
                 $loginCover.fadeTo("normal", 0, EASING_NAME, function () { $(this).removeClass("opened"); });
             };
             var doLogin = function () {
-                if ($(this).hasClass("disabled"))
+                if ($loginPanel.children("a.button").hasClass("disabled"))
                     return;
                 $loginPanel.children("p").addClass("hidden");
                 var $username = $loginPanel.children("input").eq(0),
@@ -135,6 +135,7 @@
                 }
                 if ($loginPanel.children(".has-error").length)
                     return;
+                $loginPanel.children("a.button").addClass("disabled");
                 $.getJSON("${base}/common/public_key.jhtml", function (data) {
                     var rsaKey = new RSAKey();
                     rsaKey.setPublic(b64tohex(data.modulus), b64tohex(data.exponent));
@@ -164,13 +165,21 @@
                         error: function () {
                             $loginPanel.children("p").removeClass("hidden").text("登录失败");
                         }
+                    }).always(function () {
+                        $loginPanel.children("a.button").removeClass("disabled");
                     });
                 }).fail(function () {
                     $loginPanel.children("p").removeClass("hidden").text("获取登录凭证失败");
+                    $loginPanel.children("a.button").removeClass("disabled");
                 });
             };
             $("div.login-cover-black").click(hideLogin);
             $("header .btn-group .login").click(showLogin);
             $(".login-panel a.button").click(doLogin);
+            $loginPanel.find("input").keypress(function (e) {
+                if (e && e.keyCode == 13) {
+                    doLogin.call($loginPanel.children("a.button").get(0));
+                }
+            });
         }
     </script>

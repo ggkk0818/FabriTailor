@@ -283,6 +283,11 @@
                 return;
             $loginForm.submit();
         });
+        $loginForm.find("input").keypress(function (e) {
+            if (e && e.keyCode == 13 && !$submit.hasClass("disabled")) {
+                $loginForm.submit();
+            }
+        });
     </script>
 </body>
 </html>

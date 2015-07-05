@@ -57,13 +57,13 @@
                         <div class="tooltip">姓名错误</div>
                     </div>
                     <div class="control-group">
-                        <div class="form-control">
+                        <div class="form-control" style="width:120px;">
                             <select name="province" class="select" required>
                                 <option value="">省市</option>
                             </select>
                             <div class="tooltip">省市错误</div>
                         </div>
-                        <div class="form-control">
+                        <div class="form-control" style="width:120px;">
                             <select name="city" class="select" required>
                                 <option value="">区县</option>
                             </select>
