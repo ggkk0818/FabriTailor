@@ -442,18 +442,31 @@
     width:200px;
     margin:0;
     border-radius:5px;
-    color:#fff;
-    background-color:#768075;
+    /*color:#fff;
+    background-color:#768075;*/
+    color:#768075;
+    background-color:#d7ded6;
     padding:15px 0;
     font-size:16px;
     line-height:20px;
     text-decoration:none;
     text-align:center;
 }
-.product-customizations .customization-build a.btn:hover{
+.product-customizations .customization-build a.btn.next{
     background-color:#a4652d;
+    color: #fff;
 }
-.product-customizations .customization-build a.btn.disabled{
+.product-customizations .customization-build a.btn:hover{
+    /*background-color:#a4652d;*/
+    background-color: #f6f6f6;
+    color: #333e30;
+}
+.product-customizations .customization-build a.btn.next:hover{
+    color: #fff;
+    background: #333;
+}
+.product-customizations .customization-build a.btn.disabled,
+.product-customizations .customization-build a.btn.disabled:hover{
     color: #777;
     background-color: #ececec;
     cursor: default;

@@ -204,7 +204,7 @@ input.button,
 a.button{
     margin:20px 10px;
     padding: 15px 20px;
-    background-color: #c5baa6;
+    background-color: #6f95a9;
     border-bottom: none;
     text-align:center;
     color:#fff;
@@ -215,7 +215,7 @@ a.button{
 }
 input.button:hover,
 a.button:hover{
-    background-color: #b1a590;
+    background-color: #668291;
     text-decoration:none;
 }
 input[type="number"]::-webkit-inner-spin-button,
@@ -1081,10 +1081,10 @@ header .header-container .btn-group a:hover {
 header .header-container .btn-group a.register {
     width: 150px;
     color: #fff;
-    background-color: #c5baa6;
+    background-color: #6f95a9;
 }
 header .header-container .btn-group a.register:hover {
-    background-color: #b1a590;
+    background-color: #668291;
 }
 header .header-container .btn-group a.login,
 header .header-container .btn-group .account {
@@ -1289,6 +1289,17 @@ div.login-panel a.button{
     display:block;
     width:400px;
     margin:10px auto 25px;
+    color:#fff;
+    background-color: #6f95a9;
+    font-size:16px;
+    line-height:20px;
+}
+div.login-panel a.button:hover{
+    background-color: #668291;
+}
+div.login-panel a.button.disabled,
+div.login-panel a.button.disabled:hover{
+    background-color: #ccc;
 }
 div.login-cover-black{
     position:fixed;

@@ -133,9 +133,10 @@
     font-size:16px;
     line-height:20px;
 }
+.product-categories ul li:hover a,
 .product-categories ul li.active a{
     background-color:#fff;
-    color:#000;
+    color:#a4652d;
 }
 /* ==========================================================================
    Product List

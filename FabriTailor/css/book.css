@@ -101,6 +101,7 @@ select.date{
     text-align:center;
 }
 .schedule a.change-date{
+    font-size:14px;
     text-decoration:underline;
 }
 .schedule .scheduleForm{

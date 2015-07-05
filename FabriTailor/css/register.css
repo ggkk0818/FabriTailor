@@ -277,7 +277,14 @@
     margin:10px auto 10px;
 }
 /*step4*/
-.steps .step.step4 a.btn-captcha.disabled{
+.steps .step.step4 a.btn-captcha{
+    background-color:#6f95a9;
+}
+.steps .step.step4 a.btn-captcha:hover{
+    background-color:#668291;
+}
+.steps .step.step4 a.btn-captcha.disabled,
+.steps .step.step4 a.btn-captcha.disabled:hover{
     background-color:#ccc;
 }
 /*step5*/
