@@ -998,6 +998,10 @@
                                 }
                                 $myCustomizations.removeClass("no-login").children(".zoom-container").last().remove();
                             }
+                            if (data && data.letters) {
+                                $myCustomizations.find(".options .option.monogram").data("letters", data.letters);
+                                $myCustomizations.find(".options .option.monogram").children(".text").text("自定义(" + data.letters + ")");
+                            }
                         }).fail(function () {
                             $myCustomizations.children(".zoom-container").last().find("a").click(showLogin);
                         });

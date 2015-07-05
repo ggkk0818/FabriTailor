@@ -103,9 +103,9 @@
                 <h2 class="description">查看我的版型</h2>
                 <p class="description">这是属于你的定制版型组合，点击任意一个选项可以看到详细说明。你可以点击这里修改你的定制版型，或者点击新建版型来建立一个新的衬衫版型。</p>
                 <div class="options">
-                    <div class="option monogram" [#if currentMember.letters??]data-letters="${currentMember.letters}"[/#if]>
+                    <div class="option monogram">
                         <div class="image"><img src="${base}/resources/shop/img/product-customizztion8.jpg" /></div>
-                        <div class="text">[#if currentMember.letters??]自定义(${currentMember.letters})[#else]无刺绣[/#if]</div>
+                        <div class="text">无刺绣</div>
                     </div>
                 </div>
                 <a class="btn" href="javascript:void(0);">加入购物车</a>
@@ -761,6 +761,10 @@
                                     $myCustomizations.find(".options .option.monogram").before($option);
                                 }
                                 $myCustomizations.removeClass("no-login").children(".zoom-container").last().remove();
+                            }
+                            if (data && data.letters) {
+                                $myCustomizations.find(".options .option.monogram").data("letters", data.letters);
+                                $myCustomizations.find(".options .option.monogram").children(".text").text("自定义(" + data.letters + ")");
                             }
                         }).fail(function () {
                             $myCustomizations.children(".zoom-container").last().find("a").click(showLogin);
