@@ -33,7 +33,7 @@
    Product Detail
    ========================================================================== */
 .product-detail{
-    padding: 45px 0;
+    padding: 45px 0 20px;
 }
 .product-detail-container{
     max-width: 1024px;
@@ -274,6 +274,33 @@
     display:none;
     width: 100%;
     background-color:#f5f5f5;
+}
+.product-customizations .customization:nth-child(1)::after,
+.product-customizations .customization:nth-child(2)::after,
+.product-customizations .customization:nth-child(3)::after,
+.product-customizations .customization-build::after{
+    bottom: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-bottom-color: #f6f6f6;
+    border-width: 25px;
+}
+.product-customizations .customization:nth-child(1)::after{
+    left: 51%;
+    margin-left: 50px;
+}
+.product-customizations .customization:nth-child(2)::after{
+    left: 51%;
+    margin-left: 205px;
+}
+.product-customizations .customization-build::after,
+.product-customizations .customization:nth-child(3)::after{
+    left: 51%;
+    margin-left: 360px;
 }
 .product-customizations .customization h2.description{
     margin:0;
