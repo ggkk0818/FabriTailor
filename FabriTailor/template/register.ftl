@@ -303,7 +303,7 @@
         </div>
         <a class="next-btn hidden" href="javascript:void(0);">下一步</a>
         <div class="info-confirm hidden">
-            <h1>请确认一下信息。</h1>
+            <h1>请确认以下信息。</h1>
             <div class="info-container clearfix">
                 <div class="info">
                     <h4>我没有时间购物。</h4>

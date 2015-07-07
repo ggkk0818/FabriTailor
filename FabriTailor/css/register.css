@@ -134,7 +134,7 @@
     width:100%;
 }
 .steps .step.step1 .options .option h1{
-    font-size:30px;
+    font-size:20px;
     text-align: center;
     margin:30px auto 50px;
 }
@@ -181,15 +181,15 @@
 }
 .steps .step.step2 .step-container .radio span{
     display:inline-block;
-    width:25px;
-    height:25px;
+    width:20px;
+    height:20px;
     vertical-align:middle;
     font-size:0;
     line-height:0;
     background:url(../img/radio-btn-black.png) no-repeat 0 0;
 }
 .steps .step.step2 .step-container .radio input:checked+span{
-    background-position:-25px 0;
+    background-position:-20px 0;
 }
 .steps .step.step2 .step-container .radio h4{
     display:inline-block;
@@ -413,7 +413,7 @@
 @media(max-width:1300px) {
     /*step1*/
     .steps .step.step1 .options .option h1{
-        font-size:24px;
+        font-size:20px;
         min-height:60px;
         margin:25px auto 20px;
     }

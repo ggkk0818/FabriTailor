@@ -55,8 +55,8 @@
         </ul>
     </aside>
     <div class="main-container">
-        <section class="index-image-container">
-            <img src="img/lazyload.png" data-src="img/index1.jpg" style="height:900px;" />
+        <section class="index-image-container large">
+            <img src="img/lazyload.png" data-src="img/index1.jpg" />
             <div class="text">
                 <h2>完美定制你的衬衫</h2>
                 <h3>无可挑剔的设计<br />和准确无误的上门量体</h3>
@@ -80,8 +80,8 @@
         <section class="index-text-container">
             <h2>卓越品质，精确匹配</h2>
         </section>
-        <section class="index-image-container">
-            <img src="img/lazyload.png" data-src="img/index3.jpg" style="height:600px;" />
+        <section class="index-image-container medium">
+            <img src="img/lazyload.png" data-src="img/index3.jpg" />
         </section>
         <section class="index-text-container">
             <ol>
@@ -95,8 +95,8 @@
         <section class="index-text-container">
             <h2>拥有自己的私人搭配师</h2>
         </section>
-        <section class="index-image-container">
-            <img src="img/lazyload.png" data-src="img/index4.jpg" style="height:600px;" />
+        <section class="index-image-container medium">
+            <img src="img/lazyload.png" data-src="img/index4.jpg" />
         </section>
         <section class="index-text-container">
             <p>做时尚达人并不容易。但有了凡布，你毫不费力就可以打造一件有品味并合身的衬衫。量身过程轻松，简单，并只需要30分钟。<a class="underline" href="javascript:void(0);">了解更多</a>。</p>
@@ -105,14 +105,14 @@
         <section class="index-text-container">
             <h2>简单轻松的在线定制流程</h2>
         </section>
-        <section class="index-image-container">
-            <img src="img/lazyload.png" data-src="img/index5.jpg" style="height:600px;" />
+        <section class="index-image-container medium">
+            <img src="img/lazyload.png" data-src="img/index5.jpg" />
         </section>
         <section class="index-text-container">
             <p>自信起源于此。专属于你的尺寸，简单的在线购物体验，随时随地为你服务的穿衣顾问。</p>
         </section>
-        <section class="index-image-container">
-            <img src="img/lazyload.png" data-src="img/index6.jpg" style="height:600px;" />
+        <section class="index-image-container medium">
+            <img src="img/lazyload.png" data-src="img/index6.jpg" />
             <div class="text" style="height: 200px;margin-top:-50px;">
                 <h3>量体裁衣 只为懂得品质的你</h3>
                 <a href="javascript:void(0);" class="button-hollow hide-on-small" style="margin-top:60px;">从这里开始</a>
@@ -307,13 +307,24 @@
             load: function (elements_left, settings, img) {
                 var width = img ? img.width : this.width,
                     height = img ? img.height : this.height;
+                $(this).data("origin-width", width);
+                $(this).data("origin-height", height);
                 $(this).css({
                     //marginTop: -(height / 2),
                     marginLeft: -(width / 2)
                 }).parent().animate({ opacity: 1 }, 1000, EASING_NAME).removeClass("loading");
+                $(window).trigger("resize.index-image-container");
             }
         }).each(function (i, e) {
             $(this).parent().animate({ opacity: 0 }, 0).addClass("loading");
+        });
+        $(window).on("resize.index-image-container", function () {
+            $(".index-image-container > img").each(function (i, e) {
+                var $img = $(e);
+                if ($img.css("marginLeft") && $img.data("origin-width") && $img.data("origin-height")) {
+                    $img.css({ marginLeft: -($img.data("origin-width") * $img.height() / $img.data("origin-height") / 2) });
+                }
+            });
         });
     </script>
 </body>
