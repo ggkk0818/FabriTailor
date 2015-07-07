@@ -588,7 +588,7 @@
             var $step = $steps.children(".step").eq(2),
                 $images = $infoConfirm.find(".info-container .info").eq(1).children(".images");
             $images.children().remove();
-            $step.find(".options .option.active").each(function (i, e) {
+            $step.find(".options .option.active").not(".select-all").each(function (i, e) {
                 var $option = $(e),
                     $image = $('<div class="image"><img /></div>');
                 $image.children("img").attr("src", $option.find(".image img").attr("src"));

@@ -21,8 +21,8 @@
                             <a href="javascript:void(0);">
                                 北京市<br />
                                 朝阳区<br />
-                                夏家园18号楼<br />
-                                2091室
+                                太阳宫金星园5单元<br />
+                                2号楼1层5012
                             </a>
                         </li>
                     </ul>
@@ -66,7 +66,7 @@
         <input class="input" type="password" placeholder="请输入密码" />
         <p class="hidden"></p>
         <a class="button" href="javascript:void(0);">登陆</a>
-        <a href="javascript:void(0);">忘记密码，或立即免费注册成为会员？</a>
+        <a href="${base}/register.jhtml">忘记密码，或立即免费注册成为会员？</a>
     </div>
     <div class="cover-small-black"></div>
     <div class="login-cover-black"></div>

@@ -23,7 +23,6 @@
         <div class="account-aside">
             <div class="current">我的板型<i class="showhide"></i></div>
             [#include "/shop/member/include/navigation.ftl" /]
-            <a href="javascript:void(0);" class="sign-out">退出</a>
         </div>
 		[@current_member]
         <div class="account-container">
@@ -49,7 +48,7 @@
 							[/#list]
 						[/#if]
                         <div class="option monogram" [#if currentMember.letters??]data-letters="${currentMember.letters}"[/#if]>
-                            <div class="image"><img src="${base}/resources/shop/img/product-customizztion8.jpg" /></div>
+                            <div class="image"><img src="${base}/resources/shop/img/product-customizztion-letters[#if !currentMember.letters??]-none[/#if].jpg" /></div>
                             <div class="text">[#if currentMember.letters??]自定义(${currentMember.letters})[#else]无刺绣[/#if]<i class="edit"></i></div>
                         </div>
                     </div>
@@ -124,11 +123,11 @@
                         </div>
                         <div class="options">
                             <div class="option [#if currentMember.letters??]active[/#if]" data-monogram-value="custom">
-                                <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-0.jpg" /></div>
+                                <div class="image"><img src="${base}/resources/shop/img/product-customizztion-letters.jpg" /></div>
                                 <div class="text">自定义</div>
                             </div>
                             <div class="option [#if !currentMember.letters??]active[/#if]" data-monogram-value="none">
-                                <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-1.jpg" /></div>
+                                <div class="image"><img src="${base}/resources/shop/img/product-customizztion-letters-none.jpg" /></div>
                                 <div class="text">无刺绣</div>
                             </div>
                             <div class="option-monogram">

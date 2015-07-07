@@ -99,13 +99,12 @@
             </ul>
         </div>
         <div class="product-customizations">
-			[@current_member]
-            <div class="customization clearfix [#if !currentMember??]no-login[/#if]">
+            <div class="customization clearfix no-login">
                 <h2 class="description">查看我的版型</h2>
                 <p class="description">这是属于你的定制版型组合，点击任意一个选项可以看到详细说明。你可以点击这里修改你的定制版型，或者点击新建版型来建立一个新的衬衫版型。</p>
                 <div class="options">
                     <div class="option monogram">
-                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion8.jpg" /></div>
+                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion-letters-none.jpg" /></div>
                         <div class="text">无刺绣</div>
                     </div>
                 </div>
@@ -128,42 +127,21 @@
 					</div>
 				</div>
             </div>
-			[/@current_member]
             <div class="customization clearfix">
                 <h2 class="description">查看凡布推荐版型</h2>
                 <p class="description">这是凡布设计师推荐的衬衫版型，点击任意一个选项可以看到详细说明。点击新建版型来建立一个属于你的衬衫版型。</p>
                 <div class="options">
-                    <div class="option" data-title="直筒型" data-description="这是属于你的定制版型组合，点击任意一个选项可以看到详细说明。你可以点击这里修改你的定制版型，或者点击新建版型来建立一个新的衬衫版型。">
-                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion1.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
-                    <div class="option">
-                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion2.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
-                    <div class="option">
-                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion3.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
-                    <div class="option">
-                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion4.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
-                    <div class="option">
-                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion5.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
-                    <div class="option">
-                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion6.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
-                    <div class="option">
-                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion7.jpg" /></div>
-                        <div class="text">直筒型</div>
-                    </div>
-                    <div class="option">
-                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion8.jpg" /></div>
-                        <div class="text">直筒型</div>
+					[#if product.specificationValues?has_content]
+						[#list product.specificationValues as specificationValue]
+						<div class="option" data-title="${specificationValue.name}" data-description="${specificationValue.description}" data-specification-name="${specificationValue.specification.id}" data-specification-value="${specificationValue.id}">
+							<div class="image"><img src="[#if specificationValue.specification.id == 1]${base}/resources/shop/img/product-customizztion1.jpg[#else]${specificationValue.image}[/#if]" /></div>
+							<div class="text">${specificationValue.name}</div>
+						</div>
+						[/#list]
+					[/#if]
+                    <div class="option monogram">
+                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion-letters-none.jpg" /></div>
+                        <div class="text">无刺绣</div>
                     </div>
                 </div>
                 <a class="btn" href="javascript:void(0);">加入购物车</a>
@@ -184,9 +162,9 @@
                 <ol>
                     <li><a href="javascript:void(0);">1</a></li>
                     [#if product.specifications?has_content]
-                    [#list product.specifications as specification]
-                    <li><a href="javascript:void(0);">${specification_index + 2}</a></li>
-                    [/#list]
+						[#list product.specifications as specification]
+						<li><a href="javascript:void(0);">${specification_index + 2}</a></li>
+						[/#list]
                     [/#if]
                     <li><a href="javascript:void(0);">${product.specifications?size + 2}</a></li>
                     <li><a href="javascript:void(0);">${product.specifications?size + 3}</a></li>
@@ -201,7 +179,7 @@
                 </div>
                 [#if product.specifications?has_content]
                     [#list product.specifications as specification]
-                    <div class="step [#if specification.name=="版型"]cut[#else]normal[/#if]" data-bg-img-change="true" data-specification-name="${specification.name}">
+                    <div class="step [#if specification.id==1]cut[#else]normal[/#if]" [#if specification.id==1]data-do-not-change-summary-image="true"[#else]data-bg-img-change="true"[/#if] data-specification-name="${specification.id}">
                         <img class="bg-img right" src="${specification.specificationValues[0].image}" />
                         <div class="message">
                             <h2>${specification.name}</h2>
@@ -209,8 +187,8 @@
                         </div>
                         <div class="options">                            
                             [#list specification.specificationValues as specificationValue]
-                            <div class="option" data-specification-value="${specificationValue.name}">
-                                <div class="image"><img src="${specificationValue.image}" [#if specificationValue.imagehd??]data-hover-image="${specificationValue.imagehd}"[/#if] /></div>
+                            <div class="option" data-specification-value="${specificationValue.id}">
+                                <div class="image"><img src="${specificationValue.image}" [#if specification.id==1 && specificationValue.imagehd??]data-hover-image="${specificationValue.imagehd}"[/#if] /></div>
                                 <div class="text">${specificationValue.name}</div>
                             </div>
                             [/#list]
@@ -221,16 +199,16 @@
                 <div class="step normal">
                     <img class="bg-img right" src="${base}/resources/shop/img/product-customization-build3-0.jpg" />
                     <div class="message">
-                        <h2>新建衬衫版型</h2>
-                        <p>这个简单的工具能够帮助你迅速了解并且建立属于自己的衬衫版型。在每一个衬衫细节选择你喜欢的选项，然后点击下一步即可。保证每个细节都按照你的设想与喜好，一切就绪之后就可以把这件衬衫添加到购物车了。</p>
+                        <h2>刺绣</h2>
+                        <p>刺绣</p>
                     </div>
                     <div class="options">
                         <div class="option" data-monogram-value="custom">
-                            <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-0.jpg" /></div>
+                            <div class="image"><img src="${base}/resources/shop/img/product-customizztion-letters.jpg" /></div>
                             <div class="text">自定义</div>
                         </div>
                         <div class="option" data-monogram-value="none">
-                            <div class="image"><img src="${base}/resources/shop/img/product-customization-build3-1.jpg" /></div>
+                            <div class="image"><img src="${base}/resources/shop/img/product-customizztion-letters-none.jpg" /></div>
                             <div class="text">无刺绣</div>
                         </div>
                         <div class="option-monogram">
@@ -254,7 +232,7 @@
 					[/#list]
 				[/#if]
                     <div class="option monogram">
-                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion8.jpg" /></div>
+                        <div class="image"><img src="${base}/resources/shop/img/product-customizztion-letters-none.jpg" /></div>
                         <div class="text">无刺绣</div>
                     </div>
                 </div>
@@ -402,6 +380,7 @@
                     return;
                 $zoomContainer.find(".description h2").text($(this).data("title") || "");
                 $zoomContainer.find(".description p").text($(this).data("description") || "");
+                $zoomContainer.find(".image").attr("src", $(this).find(".image img").attr("src"));
                 $zoomContainer.fadeTo("normal", 1, EASING_NAME);
             });
             $zoomContainer.click(function () {
@@ -453,7 +432,7 @@
     </script>
     <script type="text/javascript">
         //自定义版型
-        var productGoods = [];
+        var productGoods = [], currentProductId = ${product.id};
 		[#if product.goods?? && product.goods.products?has_content]
 			[#list product.goods.products as goodsProduct]
 			productGoods.push({
@@ -462,7 +441,7 @@
 				specifications: [
 					[#if goodsProduct.specificationValues?has_content]
 						[#list goodsProduct.specificationValues as goodsProductSpecificationValue]
-							{ name: "${goodsProductSpecificationValue.specification.name}", value: "${goodsProductSpecificationValue.name}" }[#if goodsProductSpecificationValue_has_next],[/#if]
+							{ name: "${goodsProductSpecificationValue.specification.id}", value: "${goodsProductSpecificationValue.id}" }[#if goodsProductSpecificationValue_has_next],[/#if]
 						[/#list]
 					[/#if]
 				]
@@ -676,34 +655,42 @@
                     }
                 }
             }
+            var params = { quantity: 1 };
             if (product) {
-				var params = { id: product.productId, quantity: 1 };
-				if (letters) {
-					params.letters = letters;
-				}
-                $.ajax({
-                    url: "${base}/cart/add.jhtml",
-                    type: "POST",
-                    data: params,
-                    dataType: "json",
-                    cache: false,
-                    success: function (data) {
-                        if (data && data.type == "success") {
-                            $(".main-container .product-customizations .customization").last().data("customization-ret", $customization.prevAll("div").length);
-                            productCustomizationTabShow(4);
-                        }
-                        else {
-
-                        }
-                    },
-                    error: function () {
-
-                    }
-                });
+                params.id = product.productId;
             }
             else {
-
+                if (currentProductId)
+                    params.id = currentProductId;
+                var specificationsValueArr = [];
+                for (var i = 0; i < specifications.length; i++) {
+                    specificationsValueArr.push(specifications[i].value);
+                }
+                params.specificationValueIds = specificationsValueArr;
             }
+            if (letters) {
+                params.letters = letters;
+            }
+            $.ajax({
+                url: "${base}/cart/addv2.jhtml",
+                type: "POST",
+                data: params,
+                dataType: "json",
+                cache: false,
+                traditional: true,
+                success: function (data) {
+                    if (data && data.type == "success") {
+                        $(".main-container .product-customizations .customization").last().data("customization-ret", $customization.prevAll("div").length);
+                        productCustomizationTabShow(4);
+                    }
+                    else {
+
+                    }
+                },
+                error: function () {
+
+                }
+            });
         };
         var productCustomizationBuildAddToCartReturn = function () {
             var $customization = $(this).parent().parent(),
@@ -755,9 +742,12 @@
                                     }
                                     $option.data("title", specificationValue.name);
                                     $option.data("description", specificationValue.description);
-                                    $option.data("specification-name", specification.name);
-                                    $option.data("specification-value", specificationValue.name);
-                                    $option.find(".image img").attr("src", specificationValue.image);
+                                    $option.data("specification-name", specification.id);
+                                    $option.data("specification-value", specificationValue.id);
+                                    if (specification.id == 1)
+                                        $option.find(".image img").attr("src", "${base}/resources/shop/img/product-customizztion1.jpg");
+                                    else
+                                        $option.find(".image img").attr("src", specificationValue.image);
                                     $option.children(".text").text(specificationValue.name);
                                     $myCustomizations.find(".options .option.monogram").before($option);
                                 }
@@ -766,6 +756,7 @@
                             if (data && data.letters) {
                                 $myCustomizations.find(".options .option.monogram").data("letters", data.letters);
                                 $myCustomizations.find(".options .option.monogram").children(".text").text("自定义(" + data.letters + ")");
+                                $myCustomizations.find(".options .option.monogram").find(".image img").attr("src", "${base}/resources/shop/img/product-customizztion-letters.jpg");
                             }
                         }).fail(function () {
                             $myCustomizations.children(".zoom-container").last().find("a").click(showLogin);

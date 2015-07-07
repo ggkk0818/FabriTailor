@@ -285,7 +285,7 @@
                 <div class="options clearfix">
                     <div class="option">
                         <h4>1.在线量体：您可以按照我们提供的视频方式进行量体，引导您正确量体。</h4>
-                        <a class="button" href="javascript:void(0);">开始量体</a>
+                        <a class="button" href="${base}/quantity.jhtml">开始量体</a>
                     </div>
                     <div class="option">
                         <h4>2.欢迎来访！如果您恰好在我们提供上门量体的城市，可与我们预约时间进行量体。</h4>
@@ -293,7 +293,7 @@
                     </div>
                     <div class="option">
                         <h4>3.立即购物。您可以选择毛衣、领带或者其它别的物品，马上行动吧。</h4>
-                        <a class="button" href="javascript:void(0);">立即购买</a>
+                        <a class="button" href="{base}/product/list.jhtml">立即购买</a>
                     </div>
                 </div>
                 <div class="map">
@@ -466,7 +466,7 @@
             var $step = $steps.children(".step").eq(2),
                 $images = $infoConfirm.find(".info-container .info").eq(1).children(".images");
             $images.children().remove();
-            $step.find(".options .option.active").each(function (i, e) {
+            $step.find(".options .option.active").not(".select-all").each(function (i, e) {
                 var $option = $(e),
                     $image = $('<div class="image"><img /></div>');
                 $image.children("img").attr("src", $option.find(".image img").attr("src"));

@@ -23,7 +23,6 @@
         <div class="account-aside">
             <div class="current">地址簿<i class="showhide"></i></div>
             [#include "/shop/member/include/navigation.ftl" /]
-            <a href="javascript:void(0);" class="sign-out">退出</a>
         </div>
         <div class="account-container">
             <div class="accountAddress">

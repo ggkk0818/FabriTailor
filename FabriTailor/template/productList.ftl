@@ -37,50 +37,7 @@
 <body>
     [#include "/shop/include/header.ftl" /]
     <div class="main-container">
-        <div class="product-carousel">
-            <div class="images">
-                <div class="image" style="background-image: url(${base}/resources/shop/img/product-carousel1.jpg); ">
-                    <div class="text left">
-                        <h2>Seriously casual.</h2>
-                        <p></p>
-                    </div>
-                </div>
-                <div class="image" style="background-image: url(${base}/resources/shop/img/product-carousel2.jpg);">
-                    <div class="text right">
-                        <h2>New sweaters.</h2>
-                        <p>Original lambswool blend and cashmere sweaters are here. A sweater makes it better.</p>
-                    </div>
-                </div>
-                <div class="image" style="background-image: url(${base}/resources/shop/img/product-carousel3.jpg);">
-                    <div class="text left black">
-                        <h2>Tie one on.</h2>
-                        <p>Trumaker ties are distinctive, versatile, and a great way to turn your outfit up a notch.</p>
-                    </div>
-                </div>
-                <div class="image" style="background-image: url(${base}/resources/shop/img/product-carousel4.jpg);">
-                    <div class="text left">
-                        <h2>It's the little things.</h2>
-                        <p>Leather goods, belts, scarves. Even a bottle opener. Great gifts from Trumaker.</p>
-                    </div>
-                </div>
-                <div class="image" style="background-image: url(${base}/resources/shop/img/product-carousel5.jpg);">
-                    <div class="text left">
-                        <h2>Seriously casual.</h2>
-                        <p>Original lambswool blend and cashmere sweaters are here. A sweater makes it better.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="direction">
-                <a class="arrow-left" href="javascript:void(0);"></a>
-                <a class="arrow-right" href="javascript:void(0);"></a>
-            </div>
-            <ul class="control">
-                <li class="active"><a href="javascript:void(0);"></a></li>
-                <li><a href="javascript:void(0);"></a></li>
-                <li><a href="javascript:void(0);"></a></li>
-                <li><a href="javascript:void(0);"></a></li>
-            </ul>
-        </div>
+        [@ad_position id = 11 /]
         <div class="product-categories">
             <ul>
 
@@ -99,12 +56,15 @@
             <ul class="list">
                 [#list page.content as product]
                 <li data-href="${base}${product.path}">
-                    <div class="img"><img src="[#if product.thumbnail??]${product.thumbnail}[#else]${setting.defaultThumbnailProductImage}[/#if]" /></div>
+                    <div class="img"><img src="[#if product.image??]${product.image}[#else]${setting.defaultThumbnailProductImage}[/#if]" /></div>
                     <h2 title="${product.name}">${abbreviate(product.name, 20)}</h2>
                     <h3><span>${currency(product.price, true)}</span></h3>
-                    <!--<div class="label new">新品</div>
-                    <div class="label few">少量</div>
-                    <div class="label sold-out">售罄</div>-->
+                    <!--<div class="label new">新品</div>-->
+                    [#if product.stock <= 5]
+						<div class="label few">少量</div>
+					[#elseif product.stock == 0]
+						<div class="label sold-out">售罄</div>
+					[/#if]
                 </li>
                 [/#list]
             </ul>

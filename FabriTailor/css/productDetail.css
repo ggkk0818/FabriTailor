@@ -33,7 +33,7 @@
    Product Detail
    ========================================================================== */
 .product-detail{
-    padding: 45px 0 20px;
+    padding: 45px 0;
 }
 .product-detail-container{
     max-width: 1024px;
@@ -590,6 +590,9 @@
 /*cut*/
 .product-customizations .customization-build .step.cut{
 
+}
+.product-customizations .customization-build .step.cut .bg-img{
+    display:none;
 }
 .product-customizations .customization-build .step.cut .message{
     position:absolute;

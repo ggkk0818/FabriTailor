@@ -35,7 +35,6 @@
         <div class="account-aside">
             <div class="current">账户信息<i class="showhide"></i></div>
             [#include "/shop/member/include/navigation.ftl" /]
-            <a href="javascript:void(0);" class="sign-out">退出</a>
         </div>
         <div class="account-container fadeInDown">
             <div class="accountDetail">
