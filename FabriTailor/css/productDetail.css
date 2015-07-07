@@ -586,6 +586,12 @@
     top:50%;
     right:50px;
     margin-top:70px;
+    background-color:#a4652d;
+    color: #fff;
+}
+.product-customizations .customization-build .step.intro a.btn.start:hover{
+    color: #fff;
+    background: #333;
 }
 /*cut*/
 .product-customizations .customization-build .step.cut{
@@ -807,6 +813,12 @@
     .product-detail-container .product-info .build-btns ul li a{
         width:250px;
         margin:10px auto 0;
+    }
+    .product-customizations .customization:nth-child(1)::after,
+    .product-customizations .customization:nth-child(2)::after,
+    .product-customizations .customization:nth-child(3)::after,
+    .product-customizations .customization-build::after{
+        content: none;
     }
     .product-customizations .customization p.description{
         width: 450px;

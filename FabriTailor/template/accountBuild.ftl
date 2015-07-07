@@ -33,7 +33,7 @@
                     <div class="options">
 						[#if currentMember.specifications?has_content]
 							[#list currentMember.specifications as specification]
-							[#assign chosenValue = null /]
+							[#assign chosenValue = {} /]
 							[#if currentMember.specificationValues?has_content]
 								[#list currentMember.specificationValues as specificationValue]
 									[#if specification.id == specificationValue.specification.id]
@@ -41,9 +41,9 @@
 									[/#if]
 								[/#list]
 							[/#if]
-							<div class="option" data-specification-id="${specification.id}" [#if chosenValue??]data-specification-value="${chosenValue.id}"[/#if]>
-								<div class="image"><img src="[#if chosenValue??]${chosenValue.image}[#else]${specification.specificationValues[0].image}[/#if]" /></div>
-								<div class="text"><span>[#if chosenValue??]${chosenValue.name}[#else]无[/#if]</span><i class="edit"></i></div>
+							<div class="option" data-specification-id="${specification.id}" [#if chosenValue.id??]data-specification-value="${chosenValue.id}"[/#if]>
+								<div class="image"><img src="[#if specification.id == 1]${base}/resources/shop/img/product-customizztion1.jpg[#elseif chosenValue.image??]${chosenValue.image}[#else]${specification.specificationValues[0].image}[/#if]" /></div>
+								<div class="text"><span>[#if chosenValue.name??]${chosenValue.name}[#else]无[/#if]</span><i class="edit"></i></div>
 							</div>
 							[/#list]
 						[/#if]
@@ -60,7 +60,7 @@
                     <ul>
 						[#if currentMember.specifications?has_content]
 							[#list currentMember.specifications as specification]
-							[#assign chosenValue = null /]
+							[#assign chosenValue = {} /]
 							[#if currentMember.specificationValues?has_content]
 								[#list currentMember.specificationValues as specificationValue]
 									[#if specification.id == specificationValue.specification.id]
@@ -68,10 +68,10 @@
 									[/#if]
 								[/#list]
 							[/#if]
-							<li data-specification-id="${specification.id}" [#if chosenValue??]data-specification-value="${chosenValue.id}"[/#if]>
+							<li data-specification-id="${specification.id}" [#if chosenValue.id??]data-specification-value="${chosenValue.id}"[/#if]>
 								<a href="javascript:void(0);">
 									<span>${specification.name}</span>
-									<span class="chosen">[#if chosenValue??]${chosenValue.name}[#else]无[/#if]</span>
+									<span class="chosen">[#if chosenValue.name??]${chosenValue.name}[#else]无[/#if]</span>
 								</a>
 							</li>
 							[/#list]
@@ -90,7 +90,7 @@
                 <div class="accountBuilder-content">
 				[#if currentMember.specifications?has_content]
 					[#list currentMember.specifications as specification]
-					[#assign chosenValue = null /]
+					[#assign chosenValue = {} /]
 					[#if currentMember.specificationValues?has_content]
 						[#list currentMember.specificationValues as specificationValue]
 							[#if specification.id == specificationValue.specification.id]
@@ -98,16 +98,16 @@
 							[/#if]
 						[/#list]
 					[/#if]
-                    <div class="step normal" data-bg-img-change="true" style="display:block;" data-specification-id="${specification.id}" [#if chosenValue??]data-specification-value="${chosenValue.id}"[/#if]>
-                        <img class="bg-img right" src="[#if chosenValue??]${chosenValue.image}[#else]${specification.specificationValues[0].image}[/#if]" />
+                    <div class="step normal" data-bg-img-change="true" style="display:block;" data-specification-id="${specification.id}" [#if chosenValue.id??]data-specification-value="${chosenValue.id}"[/#if]>
+                        <img class="bg-img right" src="[#if specification.id == 1]${base}/resources/shop/img/product-customizztion1.jpg[#elseif chosenValue.image??]${chosenValue.image}[#else]${specification.specificationValues[0].image}[/#if]" />
                         <div class="message">
                             <h2>${specification.name}</h2>
                             <p>${specification.memo}</p>
                         </div>
                         <div class="options">
 							[#list specification.specificationValues as specificationValue]
-                            <div class="option [#if chosenValue?? && chosenValue.id == specificationValue.id]active[/#if]" data-specification-value="${specificationValue.id}">
-                                <div class="image"><img src="${specificationValue.image}" [#if specificationValue.imagehd??]data-hover-image="${specificationValue.imagehd}"[/#if] /></div>
+                            <div class="option [#if chosenValue.id?? && chosenValue.id == specificationValue.id]active[/#if]" data-specification-value="${specificationValue.id}">
+                                <div class="image"><img src="[#if specification.id == 1]${base}/resources/shop/img/product-customizztion1.jpg[#else]${specificationValue.image}[/#if]" [#if specification.id == 1 && specificationValue.imagehd??]data-hover-image="${specificationValue.imagehd}"[/#if] /></div>
                                 <div class="text">${specificationValue.name}</div>
                             </div>
 							[/#list]
