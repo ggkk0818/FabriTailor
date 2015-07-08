@@ -31,7 +31,7 @@
                 <div class="image">
                     <img src="${base}/resources/shop/img/bookSuccess2.jpg" />
                 </div>
-                <h4>2.我们的量体师也是穿衣顾问，帮你打造私人的衣橱风格。</h4>
+                <h4>2.我们的穿衣顾问帮你打造私人衣橱风格。</h4>
             </div>
             <div class="step">
                 <div class="image">

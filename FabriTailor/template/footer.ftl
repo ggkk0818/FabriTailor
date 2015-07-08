@@ -32,7 +32,7 @@
                     <ul>
                         <li><a href="javascript:void(0);">关于我们</a></li>
                         <li><a href="javascript:void(0);">人才招聘</a></li>
-                        <li><a href="javascript:void(0);">成为凡布量体师</a></li>
+                        <li><a href="javascript:void(0);">成为凡布穿衣顾问</a></li>
                         <li><a href="javascript:void(0);">服务条款</a></li>
                         <li><a href="javascript:void(0);">隐私声明</a></li>
                     </ul>

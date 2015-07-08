@@ -18,7 +18,7 @@
     [#include "/shop/include/header.ftl" /]
     <div class="main-container">
         <h1>以下哪个描述更贴近你自己的感受？</h1>
-        <p>点击下面提供的内容选项。你的量体师将为你调整尺寸，以便我们为你制作最合身的衣服。</p>
+        <p>点击下面提供的内容选项。你的穿衣顾问将为你调整尺寸，以便我们为你制作最合身的衣服。</p>
         <ol>
             <li><a href="javascript:void(0);">1</a></li>
             <li><a href="javascript:void(0);">2</a></li>
@@ -261,8 +261,8 @@
                         <div class="tooltip">微信错误</div>
                     </div>
                     <div class="form-control">
-                        <input name="refer" class="input" type="text" placeholder="介绍人电子邮箱" />
-                        <div class="tooltip">介绍人电子邮箱错误</div>
+                        <input name="refer" class="input" type="text" placeholder="邀请码" />
+                        <div class="tooltip">邀请码错误</div>
                     </div>
                     <a href="javascript:void(0);" class="button">下一步</a>
                 </div>

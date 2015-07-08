@@ -30,7 +30,7 @@
 	[/#if]
     <div class="main-container">
         <h1>预约量体时间。</h1>
-        <p>和量体师预约一个你方便的时间。</p>
+        <p>和穿衣顾问预约一个你方便的时间。</p>
         <select class="select date">
             <option value="">请选择预约日期</option>
         </select>
@@ -87,7 +87,7 @@
         </p>
         <div class="schedule">
             <hr />
-            <h1><span>在你选择的时间</span>，量体师将登门拜访？</h1>
+            <h1><span>在你选择的时间</span>，穿衣顾问将登门拜访？</h1>
             <h4><a class="change-date" href="javascript:void(0);">&lt;&lt; 返回修改时间</a></h4>
             <div class="scheduleForm">
                 <div class="control-group">
