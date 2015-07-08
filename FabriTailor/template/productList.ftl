@@ -40,7 +40,6 @@
         [@ad_position id = 11 /]
         <div class="product-categories">
             <ul>
-
                 <li [#if !productCategory && tags?size=0]class="active"[/#if]><a href="${base}/product/list.jhtml"> 查看全部</a></li>
                 <li [#if tags?? && tags?size>0] class="active" [/#if]><a href="${base}/product/list.jhtml?tagIds=1">最近上架</a></li>
                 [@product_category_root_list]
@@ -49,7 +48,7 @@
                             <a href="${base}${category.path}">${category.name}</a>
                         </li>
                     [/#list]
-                    [/@product_category_root_list]
+                [/@product_category_root_list]
             </ul>
         </div>
         <section class="products">

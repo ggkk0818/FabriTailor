@@ -18,7 +18,7 @@
                     <span>&nbsp;</span>
                     <div class="dropdown-menu">
                         <ul>
-                            <li><a href="${base}/member/index.jhtml">账号</a></li>
+                            <li><a href="${base}/member/index.jhtml">账户</a></li>
                             <li><a href="${base}/logout.jhtml">登出</a></li>
                         </ul>
                     </div>

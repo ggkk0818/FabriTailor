@@ -293,7 +293,7 @@
                     </div>
                     <div class="option">
                         <h4>3.立即购物。您可以选择毛衣、领带或者其它别的物品，马上行动吧。</h4>
-                        <a class="button" href="{base}/product/list.jhtml">立即购买</a>
+                        <a class="button" href="${base}/product/list.jhtml">立即购买</a>
                     </div>
                 </div>
                 <div class="map">
