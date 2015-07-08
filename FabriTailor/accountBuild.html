@@ -543,9 +543,10 @@
             var params = { specificationIds: [] };
             accountBuilderSidebar.find("ul li").each(function (i, e) {
                 var $li = $(e);
-                if ($li.data("specification-id") && $li.data("specification-value")) {
+                if ($li.data("specification-id")) {
                     params.specificationIds.push($li.data("specification-id"));
-                    params["specification_" + $li.data("specification-id")] = $li.data("specification-value");
+                    if ($li.data("specification-value"))
+                        params["specification_" + $li.data("specification-id")] = $li.data("specification-value");
                 }
                 if ($li.data("letters")) {
                     params.letters = $li.data("letters");
