@@ -278,6 +278,7 @@
 }
 /*step4*/
 .steps .step.step4 a.btn-captcha{
+    width:120px;
     background-color:#6f95a9;
 }
 .steps .step.step4 a.btn-captcha:hover{
