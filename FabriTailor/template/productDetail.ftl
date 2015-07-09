@@ -441,7 +441,7 @@
 				specifications: [
 					[#if goodsProduct.specificationValues?has_content]
 						[#list goodsProduct.specificationValues as goodsProductSpecificationValue]
-							{ name: [#if goodsProductSpecificationValue.specification.id??]${goodsProductSpecificationValue.specification.id}[#else]null[/#if]], value: [#if goodsProductSpecificationValue.id??]${goodsProductSpecificationValue.id}[#else]null[/#if] }[#if goodsProductSpecificationValue_has_next],[/#if]
+							{ name: [#if goodsProductSpecificationValue.specification.id??]${goodsProductSpecificationValue.specification.id}[#else]null[/#if], value: [#if goodsProductSpecificationValue.id??]${goodsProductSpecificationValue.id}[#else]null[/#if] }[#if goodsProductSpecificationValue_has_next],[/#if]
 						[/#list]
 					[/#if]
 				]
