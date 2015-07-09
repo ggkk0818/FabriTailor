@@ -604,7 +604,7 @@
                         var params = {
                             captchaId: $tel.val(),
                             captcha: $captcha.val(),
-                            username: $email.val(),
+                            username: $tel.val(),
                             email: $email.val(),
                             memberAttribute_1: $firstName.val() + $lastName.val(),
                             memberAttribute_11: $firstName.val(),
