@@ -72,12 +72,12 @@
     </div>
     [#include "/shop/include/footer.ftl" /]
     <script type="text/javascript">
-		//更新导航栏菜单
+        //更新导航栏菜单
         $("body > aside ul li > a").each(function (i, e) {
             if ($(e).attr("href") == "${base}/product/list.jhtml") {
                 var $a = $(e),
                     $li = $a.parent(),
-                    $subMenu = $('<div class="sub-menu fadeInDownFast"></div>');
+                    $subMenu = $('<div class="sub-menu fadeInDownFast clearfix"></div>');
                 $(".main-container .product-categories ul li").each(function (j, el) {
                     var $clone = $(el).children("a").clone();
                     if ($(el).hasClass("active"))

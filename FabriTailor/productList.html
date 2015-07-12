@@ -39,19 +39,33 @@
     <aside class="show-on-small">
         <a href="javascript:void(0);" class="btn-close"><img src="img/menu-btn-close.png" /></a>
         <ul>
+            <li><a href="javascript:void(0);"><span>首页</span></a></li>
             <li>
                 <a href="javascript:void(0);"><span>在线定制</span><i class="showhide"></i></a>
-                <div class="sub-menu opened">
+                <div class="sub-menu opened clearfix">
                     <a href="javascript:void(0);">查看全部</a>
                     <a href="javascript:void(0);">查看全部</a>
                     <a href="javascript:void(0);">查看全部</a>
                 </div>
             </li>
+            <li class="login"><a href="javascript:void(0);"><span>登录</span></a></li>
+            <li class="logout hidden"><a href="javascript:void(0);"><span>登出</span></a></li>
             <li><a href="javascript:void(0);"><span>关于我们</span></a></li>
             <li><a href="javascript:void(0);"><span>凡布风尚</span></a></li>
             <li><a href="javascript:void(0);"><span>休闲衬衫</span></a></li>
             <li><a href="javascript:void(0);"><span>我们的凡布</span></a></li>
-            <li><a class="button" href="javascript:void(0);">从这里开始</a></li>
+            <li class="account hidden">
+                <a href="javascript:void(0);"><span>我的账号</span><i class="showhide"></i></a>
+                <div class="sub-menu fadeInDownFast clearfix">
+                    <a href="${base}/member/index.jhtml">账户信息</a>
+                    <a href="${base}/member/order/list.jhtml">我的订单</a>
+                    <a href="${base}/member/size/list.jhtml">我的尺寸</a>
+                    <a href="${base}/member/specification/list.jhtml">我的板型</a>
+                    <a href="${base}/member/receiver/list.jhtml">地址簿</a>
+                    <a href="javascript:void(0);">退换货</a>
+                </div>
+            </li>
+            <li class="register"><a class="button" href="javascript:void(0);">从这里开始</a></li>
         </ul>
     </aside>
     <div class="main-container">
@@ -237,6 +251,16 @@
             $("aside").removeClass("opened");
             $("div.cover-small-black").fadeTo("normal", 0, EASING_NAME, function () { $(this).removeClass("opened"); });
         });
+        var asideSubMenuInit = function (el) {
+            var $li = $(el),
+                $a = $li.children("a"),
+                $subMenu = $li.children(".sub-menu");
+            $a.click(function (e) {
+                e.preventDefault();
+                $a.next().toggleClass("opened").end().children("i.showhide").toggleClass("mins");
+            });
+        };
+        asideSubMenuInit($("body > aside ul li.account"));
         //登陆
         var showLogin = function () {
             $(".login-panel").show();
@@ -255,7 +279,7 @@
             if ($(e).attr("href") == "${base}/product/list.jhtml") {
                 var $a = $(e),
                     $li = $a.parent(),
-                    $subMenu = $('<div class="sub-menu fadeInDownFast"></div>');
+                    $subMenu = $('<div class="sub-menu fadeInDownFast clearfix"></div>');
                 $(".main-container .product-categories ul li").each(function (j, el) {
                     var $clone = $(el).children("a").clone();
                     if ($(el).hasClass("active"))
@@ -263,10 +287,8 @@
                     $subMenu.append($clone);
                 });
                 $li.append($subMenu);
-                $a.append('<i class="showhide"></i>').click(function (e) {
-                    e.preventDefault();
-                    $a.next().toggleClass("opened").end().children("i.showhide").toggleClass("mins");
-                });
+                $a.append('<i class="showhide"></i>');
+                asideSubMenuInit($li);
                 return false;
             }
         });

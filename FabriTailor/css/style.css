@@ -1198,12 +1198,22 @@ aside ul li a i.showhide.mins{
 }
 aside ul li .sub-menu{
     display:none;
+    padding:15px 0 0;
+    background-color:#fff;
     -webkit-animation-duration: 1s;
     -moz-animation-duration: 1s;
     animation-duration: 1s;
 }
-aside ul li .sub-menu a.active{
+aside ul li .sub-menu a{
+    margin: 0 0 15px 20px;
+    padding:0 0 0 20px;
     background-color:#fff;
+    color: #768075;
+}
+aside ul li .sub-menu a:hover,
+aside ul li .sub-menu a.active{
+    text-decoration: none;
+    color: #a4652d;
 }
 aside ul li .sub-menu.opened{
     display:block;

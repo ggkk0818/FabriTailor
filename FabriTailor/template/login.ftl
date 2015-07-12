@@ -66,7 +66,11 @@
                             success: function(message) {
                                 $submit.removeClass("disabled");
                                 if (message.type == "success") {
-                                    location.href = "${redirectUrl}";
+									[#if redirectUrl??]
+										window.location.href = "${redirectUrl}";
+									[#else]
+										window.location.href = "${base}/";
+									[/#if]
                                 } else {
                                     $msg.removeClass("hidden").text(message.content || "登录失败");
                                 }

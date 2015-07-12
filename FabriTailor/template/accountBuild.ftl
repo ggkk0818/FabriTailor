@@ -146,8 +146,8 @@
     [#include "/shop/include/footer.ftl" /]
     <script type="text/javascript">
         //账号导航菜单
-        $(".main-container .account-aside .current i.showhide").click(function () {
-            $(this).toggleClass("mins");
+        $(".main-container .account-aside .current").click(function () {
+            $(this).children("i.showhide").toggleClass("mins");
             $(".main-container .account-aside ul").toggleClass("opened");
         });
     </script>
