@@ -5,6 +5,7 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>FabriTailor</title>
+    <link href="css/animate.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
     <link href="css/productList.css" rel="stylesheet" />
     <script src="js/modernizr.js"></script>
@@ -38,7 +39,14 @@
     <aside class="show-on-small">
         <a href="javascript:void(0);" class="btn-close"><img src="img/menu-btn-close.png" /></a>
         <ul>
-            <li><a href="javascript:void(0);"><span>在线定制</span></a></li>
+            <li>
+                <a href="javascript:void(0);"><span>在线定制</span><i class="showhide"></i></a>
+                <div class="sub-menu opened">
+                    <a href="javascript:void(0);">查看全部</a>
+                    <a href="javascript:void(0);">查看全部</a>
+                    <a href="javascript:void(0);">查看全部</a>
+                </div>
+            </li>
             <li><a href="javascript:void(0);"><span>关于我们</span></a></li>
             <li><a href="javascript:void(0);"><span>凡布风尚</span></a></li>
             <li><a href="javascript:void(0);"><span>休闲衬衫</span></a></li>
@@ -240,6 +248,28 @@
         };
         $("div.login-cover-black").click(hideLogin);
         $("header .btn-group .login").click(showLogin);
+    </script>
+    <script type="text/javascript">
+        //更新导航栏菜单
+        $("body > aside ul li > a").each(function (i, e) {
+            if ($(e).attr("href") == "${base}/product/list.jhtml") {
+                var $a = $(e),
+                    $li = $a.parent(),
+                    $subMenu = $('<div class="sub-menu fadeInDownFast"></div>');
+                $(".main-container .product-categories ul li").each(function (j, el) {
+                    var $clone = $(el).children("a").clone();
+                    if ($(el).hasClass("active"))
+                        $clone.addClass("active");
+                    $subMenu.append($clone);
+                });
+                $li.append($subMenu);
+                $a.append('<i class="showhide"></i>').click(function (e) {
+                    e.preventDefault();
+                    $a.next().toggleClass("opened").end().children("i.showhide").toggleClass("mins");
+                });
+                return false;
+            }
+        });
     </script>
     <script type="text/javascript">
         //图片轮播

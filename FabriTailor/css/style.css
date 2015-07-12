@@ -1176,12 +1176,37 @@ aside ul li{
     list-style:none;
 }
 aside ul li a{
+    position:relative;
     display:block;
     padding: 15px 20px;
     background: #f6f6f6;
     border-bottom: 1px solid white;
     font-size:16px;
     line-height:20px;
+}
+aside ul li a i.showhide{
+    position:absolute;
+    top:21px;
+    right:20px;
+    width:9px;
+    height:9px;
+    background:url(../img/ico-showhide.png) no-repeat 0 0;
+    cursor:pointer;
+}
+aside ul li a i.showhide.mins{
+    background-position:-9px 0;
+}
+aside ul li .sub-menu{
+    display:none;
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    animation-duration: 1s;
+}
+aside ul li .sub-menu a.active{
+    background-color:#fff;
+}
+aside ul li .sub-menu.opened{
+    display:block;
 }
 aside ul li a.menu-button{
 }

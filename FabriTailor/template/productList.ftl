@@ -25,6 +25,7 @@
         <meta name="author" content="Zaders Team" />
         <meta name="copyright" content="FabriTailor" />
     [/#if]
+    <link href="${base}/resources/shop/css/animate.css" rel="stylesheet" />
     <link href="${base}/resources/shop/css/style.css" rel="stylesheet" />
     <link href="${base}/resources/shop/css/productList.css" rel="stylesheet" />
     <script src="${base}/resources/shop/js/modernizr.js"></script>
@@ -70,6 +71,28 @@
         </section>
     </div>
     [#include "/shop/include/footer.ftl" /]
+    <script type="text/javascript">
+		//更新导航栏菜单
+        $("body > aside ul li > a").each(function (i, e) {
+            if ($(e).attr("href") == "${base}/product/list.jhtml") {
+                var $a = $(e),
+                    $li = $a.parent(),
+                    $subMenu = $('<div class="sub-menu fadeInDownFast"></div>');
+                $(".main-container .product-categories ul li").each(function (j, el) {
+                    var $clone = $(el).children("a").clone();
+                    if ($(el).hasClass("active"))
+                        $clone.addClass("active");
+                    $subMenu.append($clone);
+                });
+                $li.append($subMenu);
+                $a.append('<i class="showhide"></i>').click(function (e) {
+                    e.preventDefault();
+                    $a.next().toggleClass("opened").end().children("i.showhide").toggleClass("mins");
+                });
+                return false;
+            }
+        });
+    </script>
     <script type="text/javascript">
         //图片轮播
         var $productCarousel = $(".main-container .product-carousel"),
