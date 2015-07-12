@@ -21,7 +21,7 @@
         <div class="breadcrumb hide-on-small">
             <div class="breadcrumb-container">
                 <ul class="clearfix">
-                    <li><a href="javascript:void(0);">在线定制</a><span class="divider">&gt;</span></li>
+                    <li><a href="${base}/product/list.jhtml">在线定制</a><span class="divider">&gt;</span></li>
                     [@product_category_parent_list productCategoryId = productCategory.id]
                         [#list productCategories as productCategory]
                             <li><a href="${base}${productCategory.path}">${productCategory.name}</a><span class="divider">&gt;</span></li>
@@ -187,7 +187,7 @@
                         </div>
                         <div class="options">                            
                             [#list specification.specificationValues as specificationValue]
-                            <div class="option" data-specification-value="${specificationValue.id}">
+                            <div class="option" data-specification-value="${specificationValue.id}" data-title="${specificationValue.name}" [#if specificationValue.description??]data-description="${specificationValue.description}"[/#if]>
                                 <div class="image"><img src="${specificationValue.image}" [#if specification.id==1 && specificationValue.imagehd??]data-hover-image="${specificationValue.imagehd}"[/#if] /></div>
                                 <div class="text">${specificationValue.name}</div>
                             </div>
@@ -549,6 +549,10 @@
                     $bgImg.fadeTo("normal", 0, EASING_NAME, function () { $(this).remove(); }).after($newImg);
                     $newImg.fadeTo("normal", 1, EASING_NAME);
                 }
+            }
+            if ($option.data("title")) {
+                $step.find(".message h2").text($option.data("title"));
+                $step.find(".message p").text($option.data("description") || "");
             }
             if ($option.find(".image img").data("hover-image")) {
                 var $img = $option.find(".image img");

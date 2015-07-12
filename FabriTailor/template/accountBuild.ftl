@@ -12,6 +12,7 @@
     <script src="${base}/resources/shop/js/modernizr.js"></script>
     <script src="${base}/resources/shop/js/jquery-1.11.3.min.js"></script>
     <script src="${base}/resources/shop/js/jquery.easing.1.3.js"></script>
+	<script src="${base}/resources/shop/js/jquery.alert.js"></script>
     <script src="${base}/resources/shop/js/jquery.cookie.js"></script>
     <script src="${base}/resources/shop/js/jquery.lazyload.js"></script>
     <script src="${base}/resources/shop/js/f_common.js"></script>
@@ -98,7 +99,7 @@
 							[/#if]
 						[/#list]
 					[/#if]
-                    <div class="step normal" data-bg-img-change="true" style="display:block;" data-specification-id="${specification.id}" [#if chosenValue.id??]data-specification-value="${chosenValue.id}"[/#if]>
+                    <div class="step normal" data-bg-img-change="true" style="display:block;" data-specification-id="${specification.id}" [#if chosenValue.id??]data-specification-value="${chosenValue.id}"[/#if] data-title="${specification.name}" [#if specification.memo??]data-description="${specification.memo}"[/#if]>
                         <img class="bg-img right" src="[#if specification.id == 1]${base}/resources/shop/img/product-customizztion1.jpg[#elseif chosenValue.image??]${chosenValue.image}[#else]${specification.specificationValues[0].image}[/#if]" />
                         <div class="message">
                             <h2>${specification.name}</h2>
@@ -106,7 +107,7 @@
                         </div>
                         <div class="options">
 							[#list specification.specificationValues as specificationValue]
-                            <div class="option [#if chosenValue.id?? && chosenValue.id == specificationValue.id]active[/#if]" data-specification-value="${specificationValue.id}">
+                            <div class="option [#if chosenValue.id?? && chosenValue.id == specificationValue.id]active[/#if]" data-specification-value="${specificationValue.id}" data-title="${specificationValue.name}" [#if specificationValue.description]data-description="${specificationValue.description}"[/#if]>
                                 <div class="image"><img src="[#if specification.id == 1]${base}/resources/shop/img/product-customizztion1.jpg[#else]${specificationValue.image}[/#if]" [#if specification.id == 1 && specificationValue.imagehd??]data-hover-image="${specificationValue.imagehd}"[/#if] /></div>
                                 <div class="text">${specificationValue.name}</div>
                             </div>
@@ -192,6 +193,10 @@
                     $newImg.fadeTo("normal", 1, EASING_NAME);
                 }
             }
+            if ($option.data("title")) {
+                $step.find(".message h2").text($option.data("title"));
+                $step.find(".message p").text($option.data("description") || "");
+            }
             if ($step.data("specification-id") && $option.data("specification-value")) {
                 accountBuilderSidebar.find("ul li").each(function (i, e) {
                     var $li = $(e);
@@ -211,6 +216,22 @@
                     accountBuildMonogramChange();
                 }
             }
+        };
+        var accountBuildOptionReset = function () {
+            accountBuilderContent.children("div.step").each(function (i, e) {
+                var $step = $(e);
+                if ($step.find(".options .option-monogram").length) {
+                    accountBuildOptionSelect.call($step.find(".options .option").get(1));
+                }
+                else {
+                    $step.removeData("specification-value").removeAttr("data-specification-value").find(".options .option").removeClass("active");
+                    accountBuilderSidebar.find("ul li[data-specification-id=" + $step.data("specification-id") + "]").removeData("specification-value").removeAttr("data-specification-value").find("a span.chosen").text("无");
+                }
+                if ($step.data("title")) {
+                    $step.find(".message h2").text($step.data("title"));
+                    $step.find(".message p").text($step.data("description") || "");
+                }
+            });
         };
         var accountBuildMonogramKeydown = function (e) {
             if (e && e.keyCode != 8 && e.keyCode != 46
@@ -245,20 +266,29 @@
             var $btnSave = $(this);
             if ($btnSave.hasClass("disalbed"))
                 return;
-            $btnSave.addClass("disabled").text("正在保存...");
             accountBuilderSidebar.children("p.msg").addClass("hidden");
-            var params = { specificationIds: [] };
+            var params = { specificationIds: [] },
+                allSelected = true;
             accountBuilderSidebar.find("ul li").each(function (i, e) {
                 var $li = $(e);
                 if ($li.data("specification-id")) {
                     params.specificationIds.push($li.data("specification-id"));
                     if ($li.data("specification-value"))
                         params["specification_" + $li.data("specification-id")] = $li.data("specification-value");
+                    else {
+                        allSelected = false;
+                        return false;
+                    }
                 }
                 if ($li.data("letters")) {
                     params.letters = $li.data("letters");
                 }
             });
+            if (!allSelected) {
+                $.alert.error("请选择所有定制项后再进行保存");
+                return;
+            }
+            $btnSave.addClass("disabled").text("正在保存...");
             $.ajax({
                 url: "${base}/member/specification/save.jhtml",
                 type: "POST",
@@ -288,13 +318,16 @@
                             }
                         });
                         hideAccountBuild();
+                        $.alert("保存成功");
                     }
                     else {
-                        accountBuilderSidebar.children("p.msg").removeClass("hidden").text("保存失败。" + data.content);
+                        //accountBuilderSidebar.children("p.msg").removeClass("hidden").text("保存失败。" + data.content);
+                        $.alert.error("保存失败。" + data.content);
                     }
                 },
                 error: function () {
-                    accountBuilderSidebar.children("p.msg").removeClass("hidden").text("保存失败。");
+                    //accountBuilderSidebar.children("p.msg").removeClass("hidden").text("保存失败。");
+                    $.alert.error("保存失败。");
                 }
             }).always(function () {
                 $btnSave.removeClass("disabled").text("保存并退出");
@@ -313,6 +346,7 @@
                 .change(accountBuildMonogramChange);
         accountBuilder.find("a.btn-close").click(hideAccountBuild);
         accountBuilderSidebar.children("a.btn-save").click(saveAccountBuild);
+        accountBuilderSidebar.children("a.reset").click(accountBuildOptionReset);
     </script>
 </body>
 </html>

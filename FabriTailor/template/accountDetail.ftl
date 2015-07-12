@@ -12,6 +12,7 @@
     <script src="${base}/resources/shop/js/modernizr.js"></script>
     <script src="${base}/resources/shop/js/jquery-1.11.3.min.js"></script>
     <script src="${base}/resources/shop/js/jquery.easing.1.3.js"></script>
+	<script src="${base}/resources/shop/js/jquery.alert.js"></script>
     <script src="${base}/resources/shop/js/jquery.cookie.js"></script>
     <script src="${base}/resources/shop/js/jquery.lazyload.js"></script>
     <script src="${base}/resources/shop/js/f_common.js"></script>
@@ -56,7 +57,7 @@
                         <div class="tooltip">邮箱错误</div>
                     </div>
                     <div class="form-control">
-                        <input name="curPassword" class="input" type="password" placeholder="当前密码" />
+                        <input name="curPassword" class="input" type="password" placeholder="当前密码" required />
                         <div class="tooltip">当前密码错误</div>
                     </div>
                     <div class="checkbox">
@@ -110,7 +111,7 @@
         var submit = function () {
             if ($(this).hasClass("disabled"))
                 return;
-            $detailForm.children("p.msg").addClass("hidden");
+            //$detailForm.children("p.msg").addClass("hidden");
             //表单验证
             var hasError = 0;
             $detailForm.find(".form-control input").each(function (i, e) {
@@ -135,6 +136,7 @@
                     memberAttribute_11: $firstName.val(),
                     memberAttribute_12: $lastName.val()
                 };
+				$detailForm.children("a.button").addClass("disabled");
                 $.getJSON("${base}/common/public_key.jhtml", function (data) {
                     var rsaKey = new RSAKey();
                     rsaKey.setPublic(b64tohex(data.modulus), b64tohex(data.exponent));
@@ -151,20 +153,24 @@
                         traditional: true,
                         success: function (data) {
                             if (data && data.type == "success") {
-                                $detailForm.children("p.msg").removeClass("hidden").text("保存成功。");
+                                //$detailForm.children("p.msg").removeClass("hidden").text("保存成功。");
+                                $.alert("保存成功。");
                             }
                             else {
-                                $detailForm.children("p.msg").removeClass("hidden").text("保存失败。" + (data && data.content ? data.content : ""));
+                                //$detailForm.children("p.msg").removeClass("hidden").text("保存失败。" + (data && data.content ? data.content : ""));
+                                $.alert.error("保存失败。" + (data && data.content ? data.content : ""));
                             }
                         },
                         error: function () {
-                            $detailForm.children("p.msg").removeClass("hidden").text("保存失败。");
+                            //$detailForm.children("p.msg").removeClass("hidden").text("保存失败。");
+                            $.alert.error("保存失败。" + (data && data.content ? data.content : ""));
                         }
                     }).always(function () {
                         $detailForm.children("a.button").removeClass("disabled");
                     });
                 }).fail(function () {
-                    $detailForm.children("p").removeClass("hidden").text("获取登录凭证失败");
+                    //$detailForm.children("p").removeClass("hidden").text("获取登录凭证失败");
+                    $.alert.error("获取登录凭证失败");
                     $detailForm.children("a.button").removeClass("disabled");
                 });
             }

@@ -174,7 +174,7 @@
     height:100%;
     overflow:auto;
     background-color:#fff;
-    z-index:3;
+    z-index:5;
 }
 .product-detail-image-zoom .zoom-container{
     position:relative;
@@ -236,7 +236,7 @@
     margin-right:20px;
     overflow:auto;
     background-color:#fff;
-    z-index:4;
+    z-index:6;
 }
 .product-detail-image-zoom-thumbs ul{
     display:block;

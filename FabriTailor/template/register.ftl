@@ -10,6 +10,7 @@
     <script src="${base}/resources/shop/js/modernizr.js"></script>
     <script src="${base}/resources/shop/js/jquery-1.11.3.min.js"></script>
     <script src="${base}/resources/shop/js/jquery.easing.1.3.js"></script>
+	<script src="${base}/resources/shop/js/jquery.alert.js"></script>
     <script src="${base}/resources/shop/js/jquery.cookie.js"></script>
     <script src="${base}/resources/shop/js/jquery.lazyload.js"></script>
     <script src="${base}/resources/shop/js/f_common.js"></script>
@@ -28,7 +29,7 @@
             <li><a href="javascript:void(0);">6</a></li>
         </ol>
         <div class="steps">
-            <div class="step step1" data-name="穿衣风格">
+            <div class="step step1" data-name="穿衣风格" data-title="以下哪个描述更贴近你自己的感受？">
                 <div class="options clearfix">
                     <div class="option" data-value="我不知道怎么穿更合适">
                         <div class="image">
@@ -53,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <div class="step step2" data-show-next-btn="true" data-name="我通常感觉不合适的地方">
+            <div class="step step2" data-show-next-btn="true" data-name="我通常感觉不合适的地方" data-title="你购买的衬衣时最常遇到的问题是？">
                 <div class="step-container clearfix">
                     <div class="options">
                         <div class="option" data-name="领口">
@@ -167,7 +168,7 @@
                     </div>
                 </div>
             </div>
-            <div class="step step3" data-show-next-btn="true" data-name="我对以下这些东西感兴趣">
+            <div class="step step3" data-show-next-btn="true" data-name="我对以下这些东西感兴趣" data-title="你对以下哪些品类感兴趣？">
                 <div class="options clearfix">
                     <div class="option" data-value="休闲衬衫1">
                         <div class="image">
@@ -227,7 +228,7 @@
                     </div>
                 </div>
             </div>
-            <div class="step step4" data-show-info-confirm="true">
+            <div class="step step4" data-show-info-confirm="true" data-title="请留下你的联系方式完成注册">
                 <div class="stepForm">
                     <div class="control-group">
                         <div class="form-control">
@@ -267,7 +268,7 @@
                     <a href="javascript:void(0);" class="button">下一步</a>
                 </div>
             </div>
-            <div class="step step5" data-show-info-confirm="true">
+            <div class="step step5" data-show-info-confirm="true" data-title="请留下你的联系方式完成注册">
                 <div class="stepForm">
                     <div class="form-control">
                         <input name="newPassword" class="input" type="password" placeholder="创建新的密码" autocomplete="off" min="6" max="[#if setting.passwordMaxLength??]${setting.passwordMaxLength}[#else]20[/#if]" required />
@@ -281,7 +282,7 @@
                     <a href="javascript:void(0);" class="button">下一步</a>
                 </div>
             </div>
-            <div class="step step6">
+            <div class="step step6" data-title="请留下你的联系方式完成注册">
                 <div class="options clearfix">
                     <div class="option">
                         <h4>1.在线量体：您可以按照我们提供的视频方式进行量体，引导您正确量体。</h4>
@@ -387,6 +388,9 @@
             }
             else {
                 $infoConfirm.addClass("hidden");
+            }
+            if ($step.data("title")) {
+                $h1.text($step.data("title"));
             }
         };
         var nextBtnClick = function () {

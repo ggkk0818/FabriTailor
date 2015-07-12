@@ -253,7 +253,7 @@
                         <p>这个简单的工具能够帮助你迅速了解并且建立属于自己的衬衫版型。在每一个衬衫细节选择你喜欢的选项，然后点击下一步即可。保证每个细节都按照你的设想与喜好，一切就绪之后就可以把这件衬衫添加到购物车了。</p>
                     </div>
                     <div class="options">
-                        <div class="option" data-specification-value="value1">
+                        <div class="option" data-specification-value="value1" data-title="直筒型" data-description="直筒型描述">
                             <div class="image"><img src="img/product-customization-build2-0.png" data-hover-image="img/product-customization-build2-0-hover.png" /></div>
                             <div class="text">直筒型</div>
                         </div>
@@ -807,6 +807,10 @@
                     $bgImg.fadeTo("normal", 0, EASING_NAME, function () { $(this).remove(); }).after($newImg);
                     $newImg.fadeTo("normal", 1, EASING_NAME);
                 }
+            }
+            if ($option.data("title")) {
+                $step.find(".message h2").text($option.data("title"));
+                $step.find(".message p").text($option.data("description") || "");
             }
             if ($option.find(".image img").data("hover-image")) {
                 var $img = $option.find(".image img");
