@@ -814,10 +814,10 @@
         width:250px;
         margin:10px auto 0;
     }
-    .product-customizations .customization:nth-child(1)::after,
-    .product-customizations .customization:nth-child(2)::after,
-    .product-customizations .customization:nth-child(3)::after,
-    .product-customizations .customization-build::after{
+    .product-customizations .customization:nth-child(1)::before,
+    .product-customizations .customization:nth-child(2)::before,
+    .product-customizations .customization:nth-child(3)::before,
+    .product-customizations .customization-build::before{
         content: none;
     }
     .product-customizations .customization p.description{

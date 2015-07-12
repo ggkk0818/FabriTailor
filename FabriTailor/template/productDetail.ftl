@@ -196,8 +196,8 @@
                     </div>
                     [/#list]
                 [/#if]
-                <div class="step normal">
-                    <img class="bg-img right" src="${base}/resources/shop/img/product-customization-build3-0.jpg" />
+                <div class="step normal" data-bg-img-change="true">
+                    <img class="bg-img right" src="${base}/resources/shop/img/product-customizztion-letters.jpg" />
                     <div class="message">
                         <h2>刺绣</h2>
                         <p>刺绣</p>
