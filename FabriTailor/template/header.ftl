@@ -32,7 +32,7 @@
         <a href="javascript:void(0);" class="btn-close"><img src="${base}/resources/shop/img/menu-btn-close.png" /></a>
         <ul>
             <li><a href="${base}/"><span>首页</span></a></li>
-            <li><a href="${base}/product/list.jhtml"><span>在线定制</span></a></li>
+            <li><a href="${base}/product/list.jhtml"><span>商城</span></a></li>
             <li class="login"><a href="${base}/login.jhtml"><span>登录</span></a></li>
             <li class="logout hidden"><a href="${base}/logout.jhtml"><span>登出</span></a></li>
             <li><a href="javascript:void(0);"><span>关于我们</span></a></li>

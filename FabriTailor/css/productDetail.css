@@ -131,7 +131,7 @@
     font-size:12px;
 }
 .product-detail-container .product-info .build-btns{
-      padding: 30px 0 0;
+    padding: 30px 0 0;
 }
 .product-detail-container .product-info .build-btns ul{
     list-style:none;
@@ -161,6 +161,26 @@
 .product-detail-container .product-info .build-btns ul li.active a{
     background-color:#fff;
     color:#000;
+}
+.product-detail-container .product-info .build-btns-no-login{
+    padding: 30px 0 0;
+}
+.product-detail-container .product-info .build-btns-no-login a{
+    display:block;
+    width:250px;
+    margin:0 auto;
+    padding:12px 0;
+    background-color:#d7ded6;
+    border:3px solid #d7ded6;
+    border-radius:5px;
+    color:#768075;
+    font-size:16px;
+    line-height:20px;
+    text-align:center;
+    text-decoration:none;
+}
+.product-detail-container .product-info .build-btns-no-login a:hover{
+    background-color:#fff;
 }
 /* ==========================================================================
    Image Zoom

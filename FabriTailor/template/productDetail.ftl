@@ -67,12 +67,15 @@
                             <div class="build-info">
                                 这Trumaker衬衫将会向您的测量。您可以选择三种简单的方式来构建它。点击了解更多。
                             </div>
-                            <div class="build-btns clearfix">
+                            <div class="build-btns clearfix hidden">
                                 <ul>
                                     <li><a href="javascript:void(0);">我的版型</a></li>
                                     <li><a href="javascript:void(0);">推荐版型</a></li>
                                     <li><a href="javascript:void(0);">新建版型</a></li>
                                 </ul>
+                            </div>
+                            <div class="build-btns-no-login">
+                                <a href="${base}/register.jhtml">从这里开始</a>
                             </div>
                         </div>
                     </div>
@@ -122,8 +125,8 @@
 				<div class="zoom-container" style="display:block;">
 					<img class="image" src="${base}/resources/shop/img/product-customization-build1.jpg" />
 					<div class="description">
-						<h2>我的版型</h2>
-						<p>我们会在你量体环节帮助你建立属于你的专属衬衫版型。<br />如果你已经是我们的会员，请点击<a href="javascript:void(0);">登录</a></p>
+                        <h2>我的版型</h2>
+                        <p>当前没有可用的版型信息，使用自定义版型购买商品或前往我的版型页面设置版型信息。</p>
 					</div>
 				</div>
             </div>
@@ -697,6 +700,9 @@
             });
         };
         var productCustomizationBuildAddToCartReturn = function () {
+            //现阶段直接刷新页面
+            window.location.reload();
+            return;
             var $customization = $(this).parent().parent(),
                 customizationId = 0;
             if ($customization.data("customization-ret")) {
@@ -738,25 +744,36 @@
                 success: function (data) {
                     if (data) {
                         $.getJSON("${base}/member/specification/listajax.jhtml", function (data) {
-                            if (data && data.specifications && data.specificationValues) {
-                                for (var i = 0; i < data.specifications.length; i++) {
-                                    var $option = $('<div class="option"><div class="image"><img /></div><div class="text">&nbsp;</div></div>'),
-                                        specification = data.specifications[i],
-                                        specificationValue = data.specificationValues.length > i ? data.specificationValues[i] : null;
-                                    if (!specificationValue) {
-                                        break;
+                            if (data && data.specificationValues && data.specificationValues.length) {
+                                $(".main-container .product-customizations .customization").eq(1).find(".options .option").each(function (i, e) {
+                                    var $option = $(e),
+                                        $template = $('<div class="option"><div class="image"><img /></div><div class="text">&nbsp;</div></div>'),
+                                        specification = null,
+                                        specificationValue = null;
+                                    for (var j = 0; j < data.specifications.length; j++) {
+                                        var val = data.specificationValues[j];
+                                        if (val.specification && val.specification.id == $option.data("specification-name")) {
+                                            specification = val.specification;
+                                            specificationValue = val;
+                                            break;
+                                        }
                                     }
-                                    $option.data("title", specificationValue.name);
-                                    $option.data("description", specificationValue.description);
-                                    $option.data("specification-name", specification.id);
-                                    $option.data("specification-value", specificationValue.id);
-                                    if (specification.id == 1)
-                                        $option.find(".image img").attr("src", "${base}/resources/shop/img/product-customizztion1.jpg");
-                                    else
-                                        $option.find(".image img").attr("src", specificationValue.image);
-                                    $option.children(".text").text(specificationValue.name);
-                                    $myCustomizations.find(".options .option.monogram").before($option);
-                                }
+                                    if (specification && specificationValue) {
+                                        $template.data("title", specificationValue.name);
+                                        $template.data("description", specificationValue.description);
+                                        $template.data("specification-name", specification.id);
+                                        $template.data("specification-value", specificationValue.id);
+                                        if (specification.id == 1)
+                                            $template.find(".image img").attr("src", "${base}/resources/shop/img/product-customizztion1.jpg");
+                                        else
+                                            $template.find(".image img").attr("src", specificationValue.image);
+                                        $template.children(".text").text(specificationValue.name);
+                                        $myCustomizations.find(".options .option.monogram").before($template);
+                                    }
+                                    else {
+                                        $myCustomizations.find(".options .option.monogram").before($option.clone());
+                                    }
+                                });
                                 $myCustomizations.removeClass("no-login").children(".zoom-container").last().remove();
                             }
                             if (data && data.letters) {
@@ -765,15 +782,13 @@
                                 $myCustomizations.find(".options .option.monogram").find(".image img").attr("src", "${base}/resources/shop/img/product-customizztion-letters.jpg");
                             }
                         }).fail(function () {
-                            $myCustomizations.children(".zoom-container").last().find("a").click(showLogin);
+                            
                         });
-                    }
-                    else {
-                        $myCustomizations.children(".zoom-container").last().find("a").click(showLogin);
+                        $(".main-container .product-detail-container .product-info .build-btns").removeClass("hidden");
+                        $(".main-container .product-detail-container .product-info .build-btns-no-login").addClass("hidden");
                     }
                 },
                 error: function () {
-                    $myCustomizations.children(".zoom-container").last().find("a").click(showLogin);
                 }
             });
         };

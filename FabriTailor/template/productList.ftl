@@ -39,7 +39,7 @@
     [#include "/shop/include/header.ftl" /]
     <div class="main-container">
         [@ad_position id = 11 /]
-        <div class="product-categories">
+        <div class="product-categories hide-on-small">
             <ul>
                 <li [#if !productCategory && tags?size=0]class="active"[/#if]><a href="${base}/product/list.jhtml"> 查看全部</a></li>
                 <li [#if tags?? && tags?size>0] class="active" [/#if]><a href="${base}/product/list.jhtml?tagIds=1">最近上架</a></li>

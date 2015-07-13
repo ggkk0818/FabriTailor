@@ -570,17 +570,17 @@
                         params["specification_" + $li.data("specification-id")] = $li.data("specification-value");
                     else {
                         allSelected = false;
-                        return false;
+                        //return false;
                     }
                 }
                 if ($li.data("letters")) {
                     params.letters = $li.data("letters");
                 }
             });
-            if (!allSelected) {
-                $.alert.error("请选择所有定制项后再进行保存");
-                return;
-            }
+            //if (!allSelected) {
+            //    $.alert.error("请选择所有定制项后再进行保存");
+            //    return;
+            //}
             $btnSave.addClass("disabled").text("正在保存...");
             $.ajax({
                 url: "${base}/member/specification/save.jhtml",
@@ -594,12 +594,18 @@
                         //同步所选信息
                         accountBuilderContent.children(".step").each(function (i, e) {
                             var $step = $(e),
-                                $option = $step.find(".options .option.active").first();
-                            if ($step.data("specification-id") && $option.data("specification-value")) {
+                                $option = $step.find(".options .option");
+                            if ($step.data("specification-id")) {
                                 var $optionSummary = accountBuildOptions.find(".option[data-specification-id=" + $step.data("specification-id") + "]");
                                 if ($optionSummary.length) {
-                                    $optionSummary.find(".image img").attr("src", $option.find(".image img").attr("src"));
-                                    $optionSummary.find(".text span").text($option.find(".text").text());
+                                    if ($option.filter(".active").length) {
+                                        $optionSummary.find(".image img").attr("src", $option.filter(".active").find(".image img").attr("src"));
+                                        $optionSummary.find(".text span").text($option.filter(".active").find(".text").text());
+                                    }
+                                    else {
+                                        $optionSummary.find(".image img").attr("src", $option.first().find(".image img").attr("src"));
+                                        $optionSummary.find(".text span").text("无");
+                                    }
                                 }
                             }
                             if ($step.find(".options .option-monogram").length) {
