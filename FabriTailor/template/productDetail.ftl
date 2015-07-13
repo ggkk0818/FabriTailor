@@ -102,7 +102,7 @@
             <div class="customization clearfix no-login">
                 <h2 class="description">查看我的版型</h2>
                 <p class="description">这是属于你的定制版型组合，点击任意一个选项可以看到详细说明。你可以点击这里修改你的定制版型，或者点击新建版型来建立一个新的衬衫版型。</p>
-                <div class="options">
+                <div class="options clearfix">
                     <div class="option monogram">
                         <div class="image"><img src="${base}/resources/shop/img/product-customizztion-letters-none.jpg" /></div>
                         <div class="text">无刺绣</div>
@@ -130,7 +130,7 @@
             <div class="customization clearfix">
                 <h2 class="description">查看凡布推荐版型</h2>
                 <p class="description">这是凡布设计师推荐的衬衫版型，点击任意一个选项可以看到详细说明。点击新建版型来建立一个属于你的衬衫版型。</p>
-                <div class="options">
+                <div class="options clearfix">
 					[#if product.specificationValues?has_content]
 						[#list product.specificationValues as specificationValue]
 						<div class="option" data-title="${specificationValue.name}" data-description="${specificationValue.description}" data-specification-name="${specificationValue.specification.id}" data-specification-value="${specificationValue.id}">
@@ -185,7 +185,7 @@
                             <h2>${specification.name}</h2>
                             <p>${specification.memo}</p>
                         </div>
-                        <div class="options">                            
+                        <div class="options clearfix">                            
                             [#list specification.specificationValues as specificationValue]
                             <div class="option" data-specification-value="${specificationValue.id}" data-title="${specificationValue.name}" [#if specificationValue.description??]data-description="${specificationValue.description}"[/#if]>
                                 <div class="image"><img src="${specificationValue.image}" [#if specification.id==1 && specificationValue.imagehd??]data-hover-image="${specificationValue.imagehd}"[/#if] /></div>
@@ -202,7 +202,7 @@
                         <h2>刺绣</h2>
                         <p>刺绣</p>
                     </div>
-                    <div class="options">
+                    <div class="options clearfix">
                         <div class="option" data-monogram-value="custom">
                             <div class="image"><img src="${base}/resources/shop/img/product-customizztion-letters.jpg" /></div>
                             <div class="text">自定义</div>
@@ -222,7 +222,7 @@
             <div class="customization customization-build-summary clearfix ">
                 <h2 class="description">确认你的版型</h2>
                 <p class="description">这是属于你的定制版型组合，点击任意一个选项可以看到详细说明。你可以点击这里修改你的定制版型，或者点击新建版型来建立一个新的衬衫版型。</p>
-                <div class="options">
+                <div class="options clearfix">
 				[#if product.specifications?has_content]
 					[#list product.specifications as specification]
                     <div class="option">
