@@ -5,11 +5,13 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>注册 - FabriTailor</title>
+    <link href="${base}/resources/shop/css/animate.css" rel="stylesheet" />
     <link href="${base}/resources/shop/css/style.css" rel="stylesheet" />
     <link href="${base}/resources/shop/css/register.css" rel="stylesheet" />
     <script src="${base}/resources/shop/js/modernizr.js"></script>
     <script src="${base}/resources/shop/js/jquery-1.11.3.min.js"></script>
     <script src="${base}/resources/shop/js/jquery.easing.1.3.js"></script>
+    <script src="${base}/resources/shop/js/jquery.alert.js"></script>
 	<script src="${base}/resources/shop/js/jquery.alert.js"></script>
     <script src="${base}/resources/shop/js/jquery.cookie.js"></script>
     <script src="${base}/resources/shop/js/jquery.lazyload.js"></script>
@@ -170,42 +172,42 @@
             </div>
             <div class="step step3" data-show-next-btn="true" data-name="我对以下这些东西感兴趣" data-title="你对以下哪些品类感兴趣？">
                 <div class="options clearfix">
-                    <div class="option" data-value="休闲衬衫1">
+                    <div class="option" data-value="休闲衬衫">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step3-1.jpg" />
                             <span class="cover"></span>
                         </div>
-                        <h4>休闲衬衫1</h4>
+                        <h4>休闲衬衫</h4>
                     </div>
-                    <div class="option" data-value="正装衬衫1">
+                    <div class="option" data-value="正装衬衫">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step3-2.jpg" />
                             <span class="cover"></span>
                         </div>
-                        <h4>正装衬衫1</h4>
+                        <h4>正装衬衫</h4>
                     </div>
-                    <div class="option" data-value="休闲衬衫2">
+                    <div class="option" data-value="西服">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step3-3.jpg" />
                             <span class="cover"></span>
                         </div>
-                        <h4>休闲衬衫2</h4>
+                        <h4>西服</h4>
                     </div>
-                    <div class="option" data-value="正装衬衫2">
+                    <div class="option" data-value="配饰">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step3-4.jpg" />
                             <span class="cover"></span>
                         </div>
-                        <h4>正装衬衫2</h4>
+                        <h4>配饰</h4>
                     </div>
-                    <div class="option" data-value="休闲衬衫3">
+                    <div class="option" data-value="T-shirt">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step3-5.jpg" />
                             <span class="cover"></span>
                         </div>
-                        <h4>休闲衬衫3</h4>
+                        <h4>T-shirt</h4>
                     </div>
-                    <div class="option" data-value="正装衬衫3">
+                    <!--<div class="option" data-value="正装衬衫3">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step3-6.jpg" />
                             <span class="cover"></span>
@@ -218,13 +220,13 @@
                             <span class="cover"></span>
                         </div>
                         <h4>休闲衬衫4</h4>
-                    </div>
+                    </div>-->
                     <div class="option select-all">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step3-8.jpg" />
                             <span class="cover"></span>
                         </div>
-                        <h4>我全部喜欢</h4>
+                        <h4>都感兴趣</h4>
                     </div>
                 </div>
             </div>
@@ -240,10 +242,10 @@
                             <div class="tooltip">名错误</div>
                         </div>
                     </div>
-                    <div class="form-control">
+                    <!--<div class="form-control">
                         <input name="email" class="input" type="text" placeholder="邮件地址" required />
                         <div class="tooltip">邮件地址错误</div>
-                    </div>
+                    </div>-->
                     <div class="form-control">
                         <input name="tel" class="input" type="text" placeholder="联系电话" required />
                         <div class="tooltip">联系电话错误</div>
@@ -354,7 +356,7 @@
             $step5Form = $steps.children(".step.step5").children(".stepForm"),
             $firstName = $step4Form.find("input[name=firstName]"),
             $lastName = $step4Form.find("input[name=lastName]"),
-            $email = $step4Form.find("input[name=email]"),
+            //$email = $step4Form.find("input[name=email]"),
             $tel = $step4Form.find("input[name=tel]"),
             $captcha = $step4Form.find("input[name=captcha]"),
             $weichat = $step4Form.find("input[name=weichat]"),
@@ -515,6 +517,8 @@
             var $stepForm = $(this).parent(),
                 $step = $stepForm.parent(),
                 hasError = 0;
+            $stepForm.children("p.msg").addClass("hidden");
+            $tel.next(".tooltip").text("联系电话错误");
             $stepForm.find(".form-control input").each(function (i, e) {
                 var $this = $(this),
                     $control = $this.parent();
@@ -527,11 +531,76 @@
                 }
             });
             if (hasError == 0) {
-                $step.addClass("selected");
-                showStep($step.prevAll().length + 1);
+                $stepForm.children("a.button").addClass("disabled");
+                //验证手机号
+                $tel.prop("queryDone", false);
+                $.ajax({
+                    url: "${base}/register/isUsernameValid.jhtml",
+                    type: "GET",
+                    data: { username: $tel.val() },
+                    dataType: "json",
+                    cache: false,
+                    success: function (data) {
+                        if (data && data.type == "success") {
+                            $tel.prop("valid", true);
+                        }
+                        else if (data && data.type == "error") {
+                            $tel.next(".tooltip").text(data.content || "联系电话错误").parent().addClass("has-error");
+                            $tel.prop("valid", false);
+                        }
+                        else {
+                            $tel.parent().addClass("has-error");
+                            $tel.prop("valid", false);
+                        }
+                    },
+                    error: function () {
+                        $.alert.error("验证用户名失败");
+                        $tel.prop("valid", false);
+                    }
+                }).always(function () {
+                    $tel.prop("queryDone", true);
+                    step4QueryDone($step, $stepForm);
+                });
+                //验证手机验证码
+                $captcha.prop("queryDone", false);
+                $.ajax({
+                    url: "${base}/register/isCodeValid.jhtml",
+                    type: "GET",
+                    data: { captchaId: $tel.val(), captcha: $captcha.val() },
+                    dataType: "json",
+                    cache: false,
+                    success: function (data) {
+                        if (data && data.type == "success") {
+                            $captcha.prop("valid", true);
+                        }
+                        else {
+                            $captcha.parent().addClass("has-error");
+                            $captcha.prop("valid", false);
+                        }
+                    },
+                    error: function () {
+                        $.alert.error("验证手机验证码失败");
+                        $captcha.prop("valid", false);
+                    }
+                }).always(function () {
+                    $captcha.prop("queryDone", true);
+                    step4QueryDone($step, $stepForm);
+                });
             }
             else {
                 $step.removeClass("selected");
+            }
+        };
+        var step4QueryDone = function ($step, $stepForm) {
+            if ($tel.prop("queryDone") && $captcha.prop("queryDone")) {
+                if ($tel.prop("valid") && $captcha.prop("valid")) {
+                    $step.addClass("selected");
+                    showStep($step.prevAll().length + 1);
+                }
+                else {
+                    $step.removeClass("selected");
+                }
+                $stepForm.children("a.button").removeClass("disabled");
             }
         };
         var step5BtnClick = function () {
@@ -609,7 +678,7 @@
                             captchaId: $tel.val(),
                             captcha: $captcha.val(),
                             username: $tel.val(),
-                            email: $email.val(),
+                            //email: $email.val(),
                             memberAttribute_1: $firstName.val() + $lastName.val(),
                             memberAttribute_11: $firstName.val(),
                             memberAttribute_12: $lastName.val(),
