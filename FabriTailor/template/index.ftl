@@ -58,7 +58,7 @@
     </script>
     <script type="text/javascript">
         if ($.cookie("name")) {
-            window.location.href = "${base}/login/welcome.jhtml";
+            window.location.href = "/login/welcome.jhtml";
         }
     </script>
 </body>

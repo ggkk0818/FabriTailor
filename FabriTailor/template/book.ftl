@@ -258,7 +258,7 @@
                     //email: $email.val(),
                     firstname: $firstName.val(),
                     lastname: $lastName.val(),
-                    address: $province.children(":ckecked").text() + $city.children(":ckecked").text() + " " + $addr.val(),
+                    address: $province.children(":checked").text() + $city.children(":checked").text() + " " + $addr.val(),
                     phone: $tel.val()
                 };
                 var datetimeStr = $dateSelect.children("option[value=" + $dateSelect.val() + "]").text()
@@ -280,7 +280,7 @@
                     traditional: true,
                     success: function (data) {
                         if (data && data.type == "success") {
-                            window.location.href = "bookSuccess.html";
+                            window.location.href = "${base}/quantity/complete.jhtml";
                         }
                         else {
                             //$scheduleForm.children("p.msg").removeClass("hidden").text("保存失败。" + (data && data.content ? data.content : ""));
@@ -296,6 +296,7 @@
                 });
             }
         });
+        $province.change(getCityData);
     </script>
 	[/@current_member]
 </body>
