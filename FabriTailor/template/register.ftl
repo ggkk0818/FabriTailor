@@ -535,7 +535,7 @@
                 $tel.prop("queryDone", false);
                 $.ajax({
                     url: "${base}/register/isUsernameValid.jhtml",
-                    type: "GET",
+                    type: "POST",
                     data: { username: $tel.val() },
                     dataType: "json",
                     cache: false,
