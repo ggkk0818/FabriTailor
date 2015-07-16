@@ -108,10 +108,11 @@
             $("header .btn-group .account").click(function (e) {
                 window.location.href = "${base}/member/index.jhtml";
             });
-            $("header .btn-group .login").addClass("hidden");
+            $("header .btn-group").children(".register, .login").addClass("hidden");
+            $("header .btn-group").children(".cart, .account").removeClass("hidden");
             //这里应该用cookie中是否有username来判断是否已登录,memberUsername是用于记住曾经登录的用户名(记住我)
             //$("header .btn-group .account").removeClass("hidden").children("span").text($.cookie("memberUsername"));
-            $("header .btn-group .account").removeClass("hidden").children("span").text($.cookie("name"));
+            $("header .btn-group .account").children("span").text($.cookie("name"));
             //侧边栏链接
             $("body > aside ul li").filter(".login, .register").addClass("hidden").end().filter(".logout, .account").removeClass("hidden");
         }

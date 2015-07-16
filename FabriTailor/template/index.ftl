@@ -56,5 +56,10 @@
             });
         });
     </script>
+    <script type="text/javascript">
+        if ($.cookie("name")) {
+            window.location.href = "${base}/login/welcome.jhtml";
+        }
+    </script>
 </body>
 </html>

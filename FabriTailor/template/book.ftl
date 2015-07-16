@@ -10,6 +10,7 @@
     <script src="${base}/resources/shop/js/modernizr.js"></script>
     <script src="${base}/resources/shop/js/jquery-1.11.3.min.js"></script>
     <script src="${base}/resources/shop/js/jquery.easing.1.3.js"></script>
+	<script src="${base}/resources/shop/js/jquery.alert.js"></script>
     <script src="${base}/resources/shop/js/jquery.cookie.js"></script>
     <script src="${base}/resources/shop/js/jquery.lazyload.js"></script>
     <script src="${base}/resources/shop/js/jquery.scrollTo-1.4.3.1.js"></script>
@@ -100,10 +101,29 @@
                         <div class="tooltip">名错误</div>
                     </div>
                 </div>
-                <div class="form-control">
-                    <input name="email" class="input" type="text" placeholder="邮件地址" value="[#if currentMember?? && currentMember.email??]${currentMember.email}[/#if]" required />
-                    <div class="tooltip">邮件地址错误</div>
+                <div class="control-group">
+                    <div class="form-control" style="width:120px;">
+                        <select name="province" class="select" required>
+                            <option value="">省市</option>
+                            <option value="1">北京市</option>
+                        </select>
+                        <div class="tooltip">省市错误</div>
+                    </div>
+                    <div class="form-control" style="width:120px;">
+                        <select name="city" class="select" required>
+                            <option value="">区县</option>
+                        </select>
+                        <div class="tooltip">区县错误</div>
+                    </div>
                 </div>
+                <div class="form-control">
+                    <input name="addr" class="input" type="text" placeholder="地址" required />
+                    <div class="tooltip">地址错误</div>
+                </div>
+                <!--<div class="form-control">
+                    <input name="email" class="input" type="text" placeholder="邮件地址" required />
+                    <div class="tooltip">邮件地址错误</div>
+                </div>-->
                 <div class="form-control">
                     <input name="tel" class="input" type="text" placeholder="联系电话" value="[#if currentMember?? && currentMember.mobile??]${currentMember.mobile}[/#if]" required />
                     <div class="tooltip">联系电话错误</div>
@@ -135,11 +155,14 @@
             $scheduleForm = $schedule.children(".scheduleForm"),
             $firstName = $scheduleForm.find("input[name=firstName]"),
             $lastName = $scheduleForm.find("input[name=lastName]"),
-            $email = $scheduleForm.find("input[name=email]"),
+            //$email = $scheduleForm.find("input[name=email]"),
             $tel = $scheduleForm.find("input[name=tel]"),
             $weichat = $scheduleForm.find("input[name=weichat]"),
             $refer = $scheduleForm.find("input[name=refer]"),
-            today = new Date([#if today??]"${today?string("yyyy-MM-dd")}"[/#if]);
+            $province = $scheduleForm.find("select[name=province]"),
+            $city = $scheduleForm.find("select[name=city]"),
+            $addr = $scheduleForm.find("input[name=addr]"),
+            today = new Date("2015/07/04 00:00:00");
         var dayOfWeekName = {
             0: "星期天",
             1: "星期一",
@@ -153,6 +176,31 @@
             today.setDate(today.getDate() + 1);
             $dateSelect.append('<option value="' + today.Format("yyyy-mm-dd") + '">' + (today.getMonth() + 1) + '月' + today.getDate() + '日 ' + dayOfWeekName[today.getDay()] + '</option>');
         }
+        //获取区县信息
+        var getCityData = function () {
+            $city.children("option").not(":eq(0)").remove();
+            if ($province.val() && $province.val().length) {
+                $.ajax({
+                    url: "${base}/common/area.jhtml",
+                    type: "GET",
+                    data: { parentId: $province.val() },
+                    dataType: "json",
+                    cache: false,
+                    traditional: true,
+                    success: function (data) {
+                        if (data) {
+                            for (var id in data) {
+                                $city.append('<option value="' + id + '">' + data[id] + '</option>');
+                            }
+                            if ($city.data("value")) {
+                                $city.val($city.data("value"));
+                                $city.removeData("value");
+                            }
+                        }
+                    }
+                });
+            }
+        };
         $dateSelect.change(function () {
             var val = $(this).val();
             if (val && val.length) {
@@ -194,7 +242,7 @@
             $scheduleForm.children("p.msg").addClass("hidden");
             //表单验证
             var hasError = 0;
-            $scheduleForm.find(".form-control input").each(function (i, e) {
+            $scheduleForm.find(".form-control input, .form-control select").each(function (i, e) {
                 var $this = $(this),
                     $control = $this.parent();
                 if ($this.prop("required") && (!$this.val() || $this.val().length == 0)) {
@@ -207,9 +255,10 @@
             });
             if (hasError == 0) {
                 var params = {
-                    email: $email.val(),
+                    //email: $email.val(),
                     firstname: $firstName.val(),
                     lastname: $lastName.val(),
+                    address: $province.children(":ckecked").text() + $city.children(":ckecked").text() + " " + $addr.val(),
                     phone: $tel.val()
                 };
                 var datetimeStr = $dateSelect.children("option[value=" + $dateSelect.val() + "]").text()
@@ -221,6 +270,7 @@
                 if ($refer.val() && $refer.val().length) {
                     params.introducerEmail = $refer.val();
                 }
+                $(this).addClass("disabled");
                 $.ajax({
                     url: "${base}/quantity/save.jhtml",
                     type: "POST",
@@ -230,14 +280,16 @@
                     traditional: true,
                     success: function (data) {
                         if (data && data.type == "success") {
-                            window.location.href = "${base}/quantity/complete.jhtml";
+                            window.location.href = "bookSuccess.html";
                         }
                         else {
-                            $scheduleForm.children("p.msg").removeClass("hidden").text("保存失败。" + (data && data.content ? data.content : ""));
+                            //$scheduleForm.children("p.msg").removeClass("hidden").text("保存失败。" + (data && data.content ? data.content : ""));
+                            $.alert.error("保存失败。" + (data && data.content ? data.content : ""));
                         }
                     },
                     error: function () {
-                        $scheduleForm.children("p.msg").removeClass("hidden").text("保存失败。");
+                        //$scheduleForm.children("p.msg").removeClass("hidden").text("保存失败。");
+                        $.alert.error("保存失败。");
                     }
                 }).always(function () {
                     $scheduleForm.children("a.button").removeClass("disabled");

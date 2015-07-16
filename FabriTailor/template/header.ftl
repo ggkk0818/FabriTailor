@@ -16,6 +16,7 @@
             <div class="btn-group hide-on-small">
                 <#t><a href="${base}/register.jhtml" class="register">从这里开始</a><#t>
                 <#t><a href="javascript:void(0);" class="login">登录</a><#t>
+                <#t><a href="javascript:void(0);" class="cart hidden">购物车</a><#t>
                 <#t><div class="account hidden">
                     <span>&nbsp;</span>
                     <div class="dropdown-menu">

@@ -33,7 +33,10 @@
                 </ul>
             </nav>
             <div class="btn-group hide-on-small">
-                <a href="javascript:void(0);" class="register">从这里开始</a><a href="javascript:void(0);" class="login">登录</a><div class="account hidden">
+                <a href="javascript:void(0);" class="register">从这里开始</a>
+                <a href="javascript:void(0);" class="login">登录</a>
+                <a href="javascript:void(0);" class="cart hidden">购物车</a>
+                <div class="account hidden">
                     <span>&nbsp;</span>
                     <div class="dropdown-menu">
                         <ul>
@@ -234,16 +237,21 @@
     <script src="js/rng.js"></script>
     <script src="js/rsa.js"></script>
     <script type="text/javascript">
-        if ($.cookie("memberUsername")) {
+        //这里应该用cookie中是否有username来判断是否已登录,memberUsername是用于记住曾经登录的用户名(记住我)
+        //if ($.cookie("memberUsername")) {
+        if ($.cookie("name")) {
             //用户信息链接
             $("header .btn-group .account .dropdown-menu a").click(function (e) {
                 e.stopPropagation();
             });
             $("header .btn-group .account").click(function (e) {
-                window.location.href = "";
+                window.location.href = "${base}/member/index.jhtml";
             });
-            $("header .btn-group .login").addClass("hidden");
-            $("header .btn-group .account").removeClass("hidden").children("span").text($.cookie("memberUsername"));
+            $("header .btn-group").children(".register, .login").addClass("hidden");
+            $("header .btn-group").children(".cart, .account").removeClass("hidden");
+            //这里应该用cookie中是否有username来判断是否已登录,memberUsername是用于记住曾经登录的用户名(记住我)
+            //$("header .btn-group .account").removeClass("hidden").children("span").text($.cookie("memberUsername"));
+            $("header .btn-group .account").children("span").text($.cookie("name"));
             //侧边栏链接
             $("body > aside ul li").filter(".login, .register").addClass("hidden").end().filter(".logout, .account").removeClass("hidden");
         }
@@ -297,7 +305,7 @@
                             if (data && data.type == "success") {
                                 $.cookie("memberUsername", $username.val(), { expires: 7 * 24 * 60 * 60 });
                                 //[#if redirectUrl??]
-                                //    window.location.href = "${redirectUrl}";
+                                    window.location.href = "${redirectUrl}";
                                 //[#else]
                                     window.location.reload();
                                 //[/#if]
@@ -356,7 +364,9 @@
         });
     </script>
     <script type="text/javascript">
-        $.alert.success("test");
+        if ($.cookie("name")) {
+            window.location.href = "${base}/login/welcome.jhtml";
+        }
     </script>
 </body>
 </html>

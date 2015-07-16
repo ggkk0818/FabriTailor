@@ -12,7 +12,6 @@
     <script src="${base}/resources/shop/js/jquery-1.11.3.min.js"></script>
     <script src="${base}/resources/shop/js/jquery.easing.1.3.js"></script>
     <script src="${base}/resources/shop/js/jquery.alert.js"></script>
-	<script src="${base}/resources/shop/js/jquery.alert.js"></script>
     <script src="${base}/resources/shop/js/jquery.cookie.js"></script>
     <script src="${base}/resources/shop/js/jquery.lazyload.js"></script>
     <script src="${base}/resources/shop/js/f_common.js"></script>
@@ -756,6 +755,11 @@
             }
         });
         showStep(0);
+    </script>
+    <script type="text/javascript">
+        if ($.cookie("name")) {
+            window.location.href = "${base}/login/welcome.jhtml";
+        }
     </script>
 </body>
 </html>
