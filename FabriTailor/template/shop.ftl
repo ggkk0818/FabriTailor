@@ -29,7 +29,7 @@
                 </a>
             </div>
             <div class="shop-col">
-                <a class="casual" href="${base}/product/list/2.jhtml">
+                <a href="${base}/product/list/2.jhtml">
                     <img src="${base}/resources/shop/img/shop2.jpg" />
                     <div class="text">
                         <h1>休闲衬衫</h1>
