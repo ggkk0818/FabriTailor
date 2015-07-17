@@ -206,7 +206,7 @@
                         </div>
                         <h4>T-shirt</h4>
                     </div>
-                    <!--<div class="option" data-value="正装衬衫3">
+                    <div class="option" data-value="正装衬衫3">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step3-6.jpg" />
                             <span class="cover"></span>
@@ -219,7 +219,7 @@
                             <span class="cover"></span>
                         </div>
                         <h4>休闲衬衫4</h4>
-                    </div>-->
+                    </div>
                     <div class="option select-all">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step3-8.jpg" />
