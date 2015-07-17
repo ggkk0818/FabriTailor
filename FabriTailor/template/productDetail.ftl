@@ -737,20 +737,20 @@
         var getCurrentMemberBuild = function () {
             var $myCustomizations = $(".main-container .product-customizations .customization").eq(0);
             $.ajax({
-                url: "${base}/login/check.jhtml",
+                url: "${base}/login/checkv2.jhtml",
                 type: "GET",
                 dataType: "json",
                 cache: false,
                 success: function (data) {
-                    if (data) {
+                    if (data && data.content == "true") {
                         $.getJSON("${base}/member/specification/listajax.jhtml", function (data) {
                             if (data && data.specificationValues && data.specificationValues.length) {
-                                $(".main-container .product-customizations .customization").eq(1).find(".options .option").each(function (i, e) {
+                                $(".main-container .product-customizations .customization").eq(1).find(".options .option").not(".monogram").each(function (i, e) {
                                     var $option = $(e),
                                         $template = $('<div class="option"><div class="image"><img /></div><div class="text">&nbsp;</div></div>'),
                                         specification = null,
                                         specificationValue = null;
-                                    for (var j = 0; j < data.specifications.length; j++) {
+                                    for (var j = 0; j < data.specificationValues.length; j++) {
                                         var val = data.specificationValues[j];
                                         if (val.specification && val.specification.id == $option.data("specification-name")) {
                                             specification = val.specification;
