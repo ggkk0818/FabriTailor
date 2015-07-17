@@ -128,10 +128,10 @@
                     <input name="tel" class="input" type="text" placeholder="联系电话" value="[#if currentMember?? && currentMember.mobile??]${currentMember.mobile}[/#if]" required />
                     <div class="tooltip">联系电话错误</div>
                 </div>
-                <div class="form-control">
+                <!--<div class="form-control">
                     <input name="weichat" class="input" type="text" placeholder="微信" />
                     <div class="tooltip">微信错误</div>
-                </div>
+                </div>-->
                 <div class="form-control">
                     <input name="refer" class="input" type="text" placeholder="介绍人电子邮箱" />
                     <div class="tooltip">介绍人电子邮箱错误</div>
@@ -157,7 +157,7 @@
             $lastName = $scheduleForm.find("input[name=lastName]"),
             //$email = $scheduleForm.find("input[name=email]"),
             $tel = $scheduleForm.find("input[name=tel]"),
-            $weichat = $scheduleForm.find("input[name=weichat]"),
+            //$weichat = $scheduleForm.find("input[name=weichat]"),
             $refer = $scheduleForm.find("input[name=refer]"),
             $province = $scheduleForm.find("select[name=province]"),
             $city = $scheduleForm.find("select[name=city]"),
@@ -264,9 +264,9 @@
                 var datetimeStr = $dateSelect.children("option[value=" + $dateSelect.val() + "]").text()
                     + " " + $timeSelection.filter(".active").find(".options .option.active").text();
                 params.appointmentDate = datetimeStr;
-                if ($weichat.val() && $weichat.val().length) {
-                    params.wechat = $weichat.val();
-                }
+                //if ($weichat.val() && $weichat.val().length) {
+                //    params.wechat = $weichat.val();
+                //}
                 if ($refer.val() && $refer.val().length) {
                     params.introducerEmail = $refer.val();
                 }

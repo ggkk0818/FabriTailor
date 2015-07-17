@@ -258,10 +258,10 @@
                             <a class="button btn-captcha" href="javascript:void(0);">获取验证码</a>
                         </div>
                     </div>
-                    <div class="form-control">
+                    <!--<div class="form-control">
                         <input name="weichat" class="input" type="text" placeholder="微信" />
                         <div class="tooltip">微信错误</div>
-                    </div>
+                    </div>-->
                     <div class="form-control">
                         <input name="refer" class="input" type="text" placeholder="邀请码" />
                         <div class="tooltip">邀请码错误</div>
@@ -358,7 +358,7 @@
             //$email = $step4Form.find("input[name=email]"),
             $tel = $step4Form.find("input[name=tel]"),
             $captcha = $step4Form.find("input[name=captcha]"),
-            $weichat = $step4Form.find("input[name=weichat]"),
+            //$weichat = $step4Form.find("input[name=weichat]"),
             $refer = $step4Form.find("input[name=refer]"),
             $newPassword = $step5Form.find("input[name=newPassword]"),
             $rePassword = $step5Form.find("input[name=rePassword]");
@@ -689,9 +689,9 @@
                         var rsaKey = new RSAKey();
                         rsaKey.setPublic(b64tohex(data.modulus), b64tohex(data.exponent));
                         params.enPassword = hex2b64(rsaKey.encrypt($newPassword.val()));
-                        if ($weichat.val() && $weichat.val().length) {
-                            params.memberAttribute_9 = $weichat.val();
-                        }
+                        //if ($weichat.val() && $weichat.val().length) {
+                        //    params.memberAttribute_9 = $weichat.val();
+                        //}
                         if ($refer.val() && $refer.val().length) {
                             params.memberAttribute_10 = $refer.val();
                         }
