@@ -678,6 +678,7 @@
                             captcha: $captcha.val(),
                             username: $tel.val(),
                             //email: $email.val(),
+                            email: $tel.val() + "@fabritailor.com",
                             memberAttribute_1: $firstName.val() + $lastName.val(),
                             memberAttribute_11: $firstName.val(),
                             memberAttribute_12: $lastName.val(),

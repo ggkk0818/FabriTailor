@@ -52,10 +52,10 @@
                             <div class="tooltip">名错误</div>
                         </div>
                     </div>
-                    <!--<div class="form-control">
+                    <div class="form-control" style="display:none;">
                         <input name="email" class="input" type="text" placeholder="邮箱" value="[#if currentMember?? && currentMember.email??]${currentMember.email}[/#if]" required />
                         <div class="tooltip">邮箱错误</div>
-                    </div>-->
+                    </div>
                     <div class="form-control">
                         <input name="curPassword" class="input" type="password" placeholder="当前密码" required />
                         <div class="tooltip">当前密码错误</div>
@@ -92,7 +92,7 @@
         var $detailForm = $(".main-container .account-container .detailForm"),
             $firstName = $detailForm.find("input[name=firstName]"),
             $lastName = $detailForm.find("input[name=lastName]"),
-            //$email = $detailForm.find("input[name=email]"),
+            $email = $detailForm.find("input[name=email]"),
             $curPassword = $detailForm.find("input[name=curPassword]"),
             $newPassword = $detailForm.find("input[name=newPassword]"),
             $rePassword = $detailForm.find("input[name=rePassword]");
@@ -131,7 +131,7 @@
             }
             if (hasError == 0) {
                 var params = {
-                    //email: $email.val(),
+                    email: $email.val(),
                     memberAttribute_1: $firstName.val() + $lastName.val(),
                     memberAttribute_11: $firstName.val(),
                     memberAttribute_12: $lastName.val()
