@@ -169,8 +169,8 @@
 						<li><a href="javascript:void(0);">${specification_index + 2}</a></li>
 						[/#list]
                     [/#if]
-                    <li><a href="javascript:void(0);">${product.specifications?size + 2}</a></li>
-                    <li><a href="javascript:void(0);">${product.specifications?size + 3}</a></li>
+                    <li><a href="javascript:void(0);">[#if product.specifications?has_content]${product.specifications?size + 2}[#else]2[/#if]</a></li>
+                    <li><a href="javascript:void(0);">[#if product.specifications?has_content]${product.specifications?size + 3}[#else]3[/#if]</a></li>
                 </ol>
                 <div class="step intro">
                     <img class="bg-img" src="${base}/resources/shop/img/product-customization-build1.jpg" />

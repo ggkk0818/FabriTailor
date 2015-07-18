@@ -317,7 +317,7 @@
     left: 51%;
     margin-left: 205px;
 }
-.product-customizations .customization-build::after::before,
+.product-customizations .customization-build::before,
 .product-customizations .customization:nth-child(3)::before{
     left: 51%;
     margin-left: 360px;

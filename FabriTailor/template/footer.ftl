@@ -30,7 +30,7 @@
                 <div class="col-md-3 col-sm-12">
                     <h6>凡布制衣</h6>
                     <ul>
-                        <li><a href="javascript:void(0);">关于我们</a></li>
+                        <li><a href="${base}/article/content/201507/1/1.html">关于我们</a></li>
                         <li><a href="javascript:void(0);">人才招聘</a></li>
                         <li><a href="javascript:void(0);">成为凡布穿衣顾问</a></li>
                         <li><a href="javascript:void(0);">服务条款</a></li>
