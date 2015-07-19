@@ -125,7 +125,8 @@
     padding: 0 0 30px;
     font-size:12px;
 }
-.product-detail-container .product-info .build-info{
+.product-detail-container .product-info .build-info,
+.product-detail-container .product-info .build-info-no-login{
     border-top: 1px solid #d7ded6;
     padding: 30px 0 0;
     font-size:12px;
@@ -1003,7 +1004,8 @@
     .product-detail-container .product-info .text{
         padding: 0 20px 30px;
     }
-    .product-detail-container .product-info .build-info{
+    .product-detail-container .product-info .build-info,
+    .product-detail-container .product-info .build-info-no-login{
         padding: 30px 20px 0;
     }
     .product-customizations .customization p.description{

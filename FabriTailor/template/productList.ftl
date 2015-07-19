@@ -61,7 +61,7 @@
                     <h3><span>${currency(product.price, true)}</span></h3>
                     <!--<div class="label new">新品</div>-->
                     [#if product.stock <= 5]
-						<div class="label few">少量</div>
+						<div class="label few">限量</div>
 					[#elseif product.stock == 0]
 						<div class="label sold-out">售罄</div>
 					[/#if]

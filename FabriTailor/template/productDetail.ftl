@@ -64,8 +64,11 @@
                             <div class="text">
                                 ${product.introduction}
                             </div>
-                            <div class="build-info">
-                                这Trumaker衬衫将会向您的测量。您可以选择三种简单的方式来构建它。点击了解更多。
+                            <div class="build-info hidden">
+                                凡布的穿衣顾问会为你提供免费上门量体，你有三种方式构建自己的衬衫版型。
+                            </div>
+                            <div class="build-info-no-login">
+                                凡布的穿衣顾问会为你提供免费上门量体，点击下面按钮预约。
                             </div>
                             <div class="build-btns clearfix hidden">
                                 <ul>
@@ -786,6 +789,8 @@
                         });
                         $(".main-container .product-detail-container .product-info .build-btns").removeClass("hidden");
                         $(".main-container .product-detail-container .product-info .build-btns-no-login").addClass("hidden");
+                        $(".main-container .product-detail-container .product-info .build-info").removeClass("hidden");
+                        $(".main-container .product-detail-container .product-info .build-info-no-login").addClass("hidden");
                     }
                 },
                 error: function () {
