@@ -258,6 +258,15 @@
                             <a class="button btn-captcha" href="javascript:void(0);">获取验证码</a>
                         </div>
                     </div>
+                    <div class="control-group">
+                        <div class="form-control">
+                            <input name="imgcaptcha" class="input" type="text" placeholder="图片验证码" required />
+                            <div class="tooltip">验证码错误</div>
+                        </div>
+                        <div class="form-control">
+                            <a class="captcha-img" href="javascript:void(0);"><img src="${base}/common/captcha.jhtml?captchaId=${captchaId}" /></a>
+                        </div>
+                    </div>
                     <!--<div class="form-control">
                         <input name="weichat" class="input" type="text" placeholder="微信" />
                         <div class="tooltip">微信错误</div>
@@ -484,6 +493,10 @@
                 return;
             if (!$tel.val() || $tel.val().length == 0) {
                 $tel.parent().addClass("has-error");
+                return;
+            }
+            if (!$step4Form.find("input[name=imgcaptcha]").val() || $step4Form.find("input[name=imgcaptcha]").val().length == 0) {
+                $step4Form.find("input[name=imgcaptcha]").parent().addClass("has-error");
                 return;
             }
             var $this = $(this);

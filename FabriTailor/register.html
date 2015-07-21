@@ -617,6 +617,10 @@
                 $tel.parent().addClass("has-error");
                 return;
             }
+            if (!$step4Form.find("input[name=imgcaptcha]").val() || $step4Form.find("input[name=imgcaptcha]").val().length == 0) {
+                $step4Form.find("input[name=imgcaptcha]").parent().addClass("has-error");
+                return;
+            }
             var $this = $(this);
             $.ajax({
                 url: "${base}/common/captchasms.jhtml",
