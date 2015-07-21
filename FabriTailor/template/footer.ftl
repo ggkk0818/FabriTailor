@@ -62,10 +62,10 @@
     </footer>
     <div class="login-panel">
         <h2>登录</h2>
-        <input class="input" type="text" placeholder="请输入电子邮件地址" />
+        <input class="input" type="text" placeholder="请输入手机号" />
         <input class="input" type="password" placeholder="请输入密码" />
         <p class="hidden"></p>
-        <a class="button" href="javascript:void(0);">登陆</a>
+        <a class="button" href="javascript:void(0);">登录</a>
         <a href="${base}/register.jhtml">忘记密码，或立即免费注册成为会员？</a>
     </div>
     <div class="cover-small-black"></div>

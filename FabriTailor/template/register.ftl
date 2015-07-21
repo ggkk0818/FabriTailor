@@ -192,13 +192,6 @@
                         </div>
                         <h4>西服</h4>
                     </div>
-                    <div class="option" data-value="配饰">
-                        <div class="image">
-                            <img src="${base}/resources/shop/img/register-step3-4.jpg" />
-                            <span class="cover"></span>
-                        </div>
-                        <h4>配饰</h4>
-                    </div>
                     <div class="option" data-value="T-shirt">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step3-5.jpg" />
@@ -206,19 +199,26 @@
                         </div>
                         <h4>T-shirt</h4>
                     </div>
-                    <div class="option" data-value="正装衬衫3">
+                    <div class="option" data-value="休闲外套">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step3-6.jpg" />
                             <span class="cover"></span>
                         </div>
-                        <h4>正装衬衫3</h4>
+                        <h4>休闲外套</h4>
                     </div>
-                    <div class="option" data-value="休闲衬衫4">
+                    <div class="option" data-value="针织衫">
                         <div class="image">
                             <img src="${base}/resources/shop/img/register-step3-7.jpg" />
                             <span class="cover"></span>
                         </div>
-                        <h4>休闲衬衫4</h4>
+                        <h4>针织衫</h4>
+                    </div>
+                    <div class="option" data-value="配饰">
+                        <div class="image">
+                            <img src="${base}/resources/shop/img/register-step3-4.jpg" />
+                            <span class="cover"></span>
+                        </div>
+                        <h4>配饰</h4>
                     </div>
                     <div class="option select-all">
                         <div class="image">

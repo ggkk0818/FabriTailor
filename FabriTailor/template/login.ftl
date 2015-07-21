@@ -20,11 +20,11 @@
     <div class="main-container">
         <form class="loginForm" action="${base}/login/submit.jhtml" method="post">
             <h1>登录</h1>
-            <input name="username" class="input" type="text" placeholder="请输入电子邮件地址" />
+            <input name="username" class="input" type="text" placeholder="请输入手机号" />
             <input name="password" class="input" type="password" placeholder="请输入密码" />
             <p class="hidden"></p>
-            <a class="button" href="javascript:void(0);">登陆</a>
-            <a href="javascript:void(0);">忘记密码，或立即免费注册成为会员？</a>
+            <a class="button" href="javascript:void(0);">登录</a>
+            <a href="${base}/register.jhtml">忘记密码，或立即免费注册成为会员？</a>
         </form>
     </div>
     [#include "/shop/include/footer.ftl" /]
