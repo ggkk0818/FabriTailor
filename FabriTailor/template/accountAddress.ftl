@@ -27,7 +27,7 @@
         <div class="account-container">
             <div class="accountAddress">
                 <h1>地址簿</h1>
-                <p>选择以下地址来设置默认送货地址。要编辑地址，单击铅笔。要删除它，点击X.要查看哪些信用卡都分配给它，单击卡。编辑或删除地址将更新分配给它的任何卡。</p>
+                <p>在这里你可以管理你的送货地址。点击地址卡片右下角的编辑按钮可以进行修改和设置默认地址，点击地址卡片右上角可以进行删除。</p>
                 <ul class="address-list">
 					[#list page.content as receiver]
                     <li [#if receiver.isDefault]class="active"[/#if] data-id="${receiver.id}" data-name="${receiver.consignee}" data-province="[#if receiver.area?? && receiver.area.parent]${receiver.area.parent.id}[/#if]" data-city="[#if receiver.area??]${receiver.area.id}[/#if]" data-addr="${receiver.address}" data-tel="${receiver.phone}" data-default="${receiver.isDefault}">
