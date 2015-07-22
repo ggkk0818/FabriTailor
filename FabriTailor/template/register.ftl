@@ -495,34 +495,63 @@
                 $tel.parent().addClass("has-error");
                 return;
             }
+            else {
+                $tel.parent().removeClass("has-error");
+            }
             if (!$step4Form.find("input[name=imgcaptcha]").val() || $step4Form.find("input[name=imgcaptcha]").val().length == 0) {
                 $step4Form.find("input[name=imgcaptcha]").parent().addClass("has-error");
                 return;
             }
-            var $this = $(this);
+            else {
+                $step4Form.find("input[name=imgcaptcha]").parent().removeClass("has-error");
+            }
+            var $this = $(this).addClass("disabled");
+            //验证图片验证码
             $.ajax({
-                url: "${base}/common/captchasms.jhtml",
+                url: "${base}/register/isImageValid.jhtml",
                 type: "GET",
-                data: { captchaId: $tel.val() },
+                data: { captchaId: "${captchaId}", captcha: $step4Form.find("input[name=imgcaptcha]").val() },
                 dataType: "json",
                 cache: false,
-                traditional: true,
-                success: function (data) { },
-                error: function () { }
-            }).always(function () {
-                $this.addClass("disabled").data("timeout", 60);
-                $this.text(60);
-                step4CaptchaTimer = setInterval(function () {
-                    var timeout = parseInt($this.data("timeout")) - 1;
-                    if (timeout <= 0) {
-                        $this.removeClass("disabled").text("获取验证码");
-                        clearInterval(step4CaptchaTimer);
+                success: function (data) {
+                    if (data && data.type == "success") {
+                        $.ajax({
+                            url: "${base}/common/captchasms.jhtml",
+                            type: "GET",
+                            data: { captchaId: $tel.val() },
+                            dataType: "json",
+                            cache: false,
+                            traditional: true,
+                            success: function (data) { },
+                            error: function () { }
+                        }).always(function () {
+                            $this.addClass("disabled").data("timeout", 60);
+                            $this.text(60);
+                            step4CaptchaTimer = setInterval(function () {
+                                var timeout = parseInt($this.data("timeout")) - 1;
+                                if (timeout <= 0) {
+                                    $this.removeClass("disabled").text("获取验证码");
+                                    clearInterval(step4CaptchaTimer);
+                                }
+                                else {
+                                    $this.data("timeout", timeout);
+                                    $this.text(timeout);
+                                }
+                            }, 1000);
+                        });
+                        $step4Form.find("input[name=imgcaptcha]").parent().removeClass("has-error");
                     }
                     else {
-                        $this.data("timeout", timeout);
-                        $this.text(timeout);
+                        $this.removeClass("disabled");
+                        $step4Form.find("input[name=imgcaptcha]").parent().addClass("has-error");
+                        step4ImageCaptchaRefresh();
                     }
-                }, 1000);
+                },
+                error: function () {
+                    $this.removeClass("disabled");
+                    $step4Form.find("input[name=imgcaptcha]").parent().addClass("has-error");
+                    step4ImageCaptchaRefresh();
+                }
             });
         };
         var step4BtnClick = function () {
@@ -614,6 +643,18 @@
                 }
                 $stepForm.children("a.button").removeClass("disabled");
             }
+        };
+        var step4InputChange = function () {
+            var $this = $(this),
+                $control = $this.parent(),
+                $step = $control.parentsUntil(".step").last().parent();
+            if ($this.attr("required") && (!$this.val() || $this.val().length == 0) && $step.hasClass("selected")) {
+                $control.addClass("has-error");
+                $step.removeClass("selected");
+            }
+        };
+        var step4ImageCaptchaRefresh = function () {
+            $step4Form.find("a.captcha-img img").attr("src", "${base}/common/captcha.jhtml?captchaId=${captchaId}&timestamp=" + (new Date()).valueOf());
         };
         var step5BtnClick = function () {
             if ($(this).hasClass("disabled"))
@@ -740,15 +781,6 @@
                 $step.removeClass("selected");
             }
         };
-        var step4InputChange = function () {
-            var $this = $(this),
-                $control = $this.parent(),
-                $step = $control.parentsUntil(".step").last().parent();
-            if ($this.attr("required") && (!$this.val() || $this.val().length == 0) && $step.hasClass("selected")) {
-                $control.addClass("has-error");
-                $step.removeClass("selected");
-            }
-        };
         $steps.children(".step").eq(0).find(".options .option").on("click", "div.image,a", step1BtnClick);
         $steps.children(".step").eq(1).find(".options .option input").click(step2RadioClick);
         $steps.children(".step").eq(1).find(".option-none input").click(step2ResetRadioClick);
@@ -757,6 +789,7 @@
         $steps.children(".step").eq(3).find(".stepForm .form-control input").change(step4InputChange);
         $steps.children(".step").eq(3).find(".stepForm a.btn-captcha").click(step4CaptchaBtnClick);
         $steps.children(".step").eq(3).find(".stepForm a.button").not(".btn-captcha").click(step4BtnClick);
+        $steps.children(".step").eq(3).find(".stepForm a.captcha-img").click(step4ImageCaptchaRefresh);
         $steps.children(".step").eq(4).find(".stepForm .form-control input").change(step4InputChange);
         $steps.children(".step").eq(4).find(".stepForm a.button").click(step5BtnClick);
         $btnNext.click(nextBtnClick);
