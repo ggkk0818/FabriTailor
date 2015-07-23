@@ -36,33 +36,5 @@
 		${article.content}
 	</div>
     [#include "/shop/include/footer.ftl" /]
-    <script type="text/javascript">
-        //分屏加载
-        $(".article-image-container > img[data-src]").lazyload({
-            failurelimit: 10,
-            data_attribute: "src",
-            load: function (elements_left, settings, img) {
-                var width = img ? img.width : this.width,
-                    height = img ? img.height : this.height;
-                $(this).data("origin-width", width);
-                $(this).data("origin-height", height);
-                $(this).css({
-                    //marginTop: -(height / 2),
-                    marginLeft: -(width / 2)
-                }).parent().animate({ opacity: 1 }, 1000, EASING_NAME).removeClass("loading");
-                $(window).trigger("resize.article-image-container");
-            }
-        }).each(function (i, e) {
-            $(this).parent().animate({ opacity: 0 }, 0).addClass("loading");
-        });
-        $(window).on("resize.article-image-container", function () {
-            $(".article-image-container > img").each(function (i, e) {
-                var $img = $(e);
-                if ($img.css("marginLeft") && $img.data("origin-width") && $img.data("origin-height")) {
-                    $img.css({ marginLeft: -($img.data("origin-width") * $img.height() / $img.data("origin-height") / 2) });
-                }
-            });
-        });
-    </script>
 </body>
 </html>
