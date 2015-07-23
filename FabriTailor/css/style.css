@@ -1056,7 +1056,7 @@ header .header-container .logo {
     position: absolute;
     top: 15px;
     left: 30px;
-    width: 160px;
+    width: 182px;
     height: 20px;
     background-color:#fff;
 }
@@ -1431,7 +1431,7 @@ div.messageBar a{
     }
     header .header-container .logo {
         left: 50%;
-        margin-left:-80px;
+        margin-left:-91px;
     }
     footer .logo {
         position: static;
