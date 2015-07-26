@@ -31,8 +31,8 @@
                     <h6>凡布制衣</h6>
                     <ul>
                         <li><a href="${base}/article/content/201507/1/1.html">关于我们</a></li>
-                        <li><a href="javascript:void(0);">人才招聘</a></li>
-                        <li><a href="javascript:void(0);">成为凡布穿衣顾问</a></li>
+                        <li><a href="http://www.jobtong.com/e/26279" target="_blank">人才招聘</a></li>
+                        <!--<li><a href="javascript:void(0);">成为凡布穿衣顾问</a></li>-->
                         <li><a href="javascript:void(0);">服务条款</a></li>
                         <li><a href="javascript:void(0);">隐私声明</a></li>
                     </ul>
@@ -40,18 +40,18 @@
                 <div class="col-md-3 col-sm-12">
                     <h6>帮助</h6>
                     <ul>
-                        <li><a href="javascript:void(0);">购物指南</a></li>
-                        <li><a href="javascript:void(0);">关于量体定制</a></li>
+                        <li><a href="${base}/article/content/201507/5/1.html">购物指南</a></li>
+                        <li><a href="${base}/article/content/201507/4/1.html">关于量体定制</a></li>
                         <li><a href="javascript:void(0);">常见问题解答</a></li>
-                        <li><a href="javascript:void(0);">帮助与支持</a></li>
+                        <li><a href="${base}/article/content/201507/3/1.html">帮助与支持</a></li>
                         <li><a href="javascript:void(0);">退换货信息</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-12">
                     <h6>在线商店</h6>
                     <ul>
-                        <li><a href="javascript:void(0);">衬衫</a></li>
-                        <li><a href="javascript:void(0);">查看全部</a></li>
+                        <li><a href="${base}/login/welcome.jhtml">衬衫</a></li>
+                        <li><a href="${base}/product/list.jhtml">查看全部</a></li>
                     </ul>
                 </div>
             </div>
