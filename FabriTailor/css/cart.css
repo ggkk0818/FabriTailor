@@ -1,0 +1,274 @@
+﻿/* ==========================================================================
+   Form Control
+   ========================================================================== */
+.main-container input.input {
+    width: 100%;
+    height:40px;
+    border-radius: 0px;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #d7ded6;
+    box-shadow: none;
+    display: block;
+    padding:10px 10px;
+    margin: 0;
+    font-size:1rem;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
+}
+.main-container input.input:hover {
+    border-left: 1px solid #d7ded6;
+    padding-left: 10px;
+}
+.main-container input.input:focus {
+    border-left: 1px solid #d7ded6;
+    padding-left: 10px;
+    outline: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+}
+.main-container select.select{
+    width:100%;
+    height:50px;
+    padding:15px 10px;
+    border: 1px solid #d7ded6;
+    background-color: #fff;
+    background-image: url(../img/select-arrow-down.png);
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    background-clip: padding-box;
+    font-size:16px;
+    line-height:20px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+}
+.main-container select.select:focus {
+    outline: none;
+    border: 1px solid #d7ded6;
+    padding:15px 10px;
+}
+.main-container input.button,
+.main-container a.button{
+    display:block;
+    width:120px;
+    margin:20px 10px;
+    padding: 10px 20px;
+    background-color: #768075;
+    border: none;
+    text-align:center;
+    color:#fff;
+    border-radius:0;
+    -webkit-transition: background 500ms ease, color 500ms ease;
+    -moz-transition: background 500ms ease, color 500ms ease;
+    transition: background 500ms ease, color 500ms ease;
+}
+.main-container input.button:hover,
+.main-container a.button:hover{
+    background-color: #a4652d;
+    text-decoration:none;
+}
+.main-container input.button.disabled,
+.main-container input.button.disabled:hover,
+.main-container a.button.disabled,
+.main-container a.button.disabled:hover{
+    background-color: #ccc;
+    color:#333;
+    cursor:default;
+}
+/* ==========================================================================
+   Cart Navigator
+   ========================================================================== */
+.cart-categories{
+    margin: 0 auto 29px;
+    background: #d7ded6;
+}
+.cart-categories h1{
+    width:960px;
+    color: #768075;
+    padding: 15px 25px;
+    margin:0 auto;
+    display: block;
+    text-decoration: none;
+    font-size:16px;
+    line-height:20px;
+}
+/* ==========================================================================
+   Product List
+   ========================================================================== */
+.products{
+    width: 960px;
+    margin: 0 auto;
+}
+.products .product{
+    position:relative;
+    min-height:246px;
+    overflow: hidden;
+    padding: 0 0 34px;
+    margin: 0 0 49px;
+    background:url(../img/cart-product-border.png) repeat-x bottom left;
+}
+.products .product .title{
+    margin:0 0 0 212px;
+    padding-bottom:19px;
+    border-bottom:1px solid #d7ded6;
+}
+.products .product .title h3{
+    display:block;
+    float:left;
+    margin:0 42px 0 0;
+    padding:0;
+    font-size:16px;
+    line-height:20px;
+}
+.products .product .title .image{
+    position:absolute;
+    top:0;
+    left:0;
+    width:212px;
+    height:212px;
+}
+.products .product .title .image img{
+    width:100%;
+    height:100%;
+}
+.products .product .title span{
+    float: left;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 1px;
+}
+.products .product .title a.close{
+    position:absolute;
+    top:5px;
+    right:2px;
+    width: 12px;
+    height: 12px;
+    text-indent: -9999px;
+    background:url(../img/account-address-del.png) no-repeat center center;
+}
+.products .product .detail{
+    margin:18px 0 0 212px;
+}
+.products .product .detail ul{
+    margin: 0 100px 0 0;
+    padding: 0 0 30px;
+    list-style: none;
+    overflow: hidden;
+}
+.products .product .detail ul li{
+    float: left;
+    padding: 0 3px 0 0;
+    width: 195px;
+}
+.products .product .detail ul li a{
+    text-decoration:underline;
+}
+.products .product .detail .purchase-info .qty{
+    position:absolute;
+    top:60px;
+    right:0;
+}
+.products .product .detail .purchase-info .qty span{
+    padding-right:5px;
+}
+.products .product .detail .purchase-info .qty .input{
+    display:inline-block;
+    width:50px;
+    text-align:center;
+}
+.products .product .detail .purchase-info .price{
+    position:absolute;
+    bottom:50px;
+    right:0;
+    font-size:18px;
+    line-height:20px;
+}
+/* ==========================================================================
+   Purchase
+   ========================================================================== */
+.purchase{
+    width:960px;
+    margin:0 auto;
+}
+.purchase h2{
+    margin: 0 0 26px;
+    font-size:18px;
+    line-height:20px;
+}
+.purchase .order-info{
+    background: #f6f6f6;
+    padding: 18px 24px;
+}
+.purchase .order-info label{
+    display: block;
+    margin: 0 0 9px;
+    font-size:14px;
+    line-height:20px;
+}
+.purchase .order-info label.margin{
+    margin-top:45px;
+}
+.purchase .order-info input.input,
+.purchase .order-info select.select{
+    margin-bottom:15px;
+}
+.purchase .order-info a.button{
+    float:right;
+    margin:20px 0 43px;
+    font-size:18px;
+    line-height:20px;
+}
+.purchase .total{
+
+}
+.purchase .total dl{
+    padding: 16px 0 0 14px;
+    margin: 0 0 17px;
+    overflow: hidden;
+    border-bottom: 1px solid #d7ded6;
+}
+.purchase .total dl.sum{
+    padding-top:0;
+    border-bottom: none;
+}
+.purchase .total dl dt{
+    float: left;
+    margin: 0;
+    padding: 0 0 22px;
+    font-size:14px;
+    line-height:20px;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+.purchase .total dl dd{
+    overflow: hidden;
+    padding: 0 0 22px;
+    margin: 0;
+    text-align: right;
+    font-size:18px;
+    line-height:20px;
+}
+.purchase .total dl dd.warn{
+    color: #ff9000;
+}
+.purchase .total dl.sum dt{
+    padding-top:5px;
+}
+.purchase .total dl.sum dd{
+    font-size:24px;
+    line-height:32px;
+}
+.purchase .total a.button{
+    float:right;
+    margin:55px 0 0;
+    padding:20px;
+    font-size:18px;
+    line-height:20px;
+}

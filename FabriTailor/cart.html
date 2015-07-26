@@ -1,0 +1,310 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>FabriTailor</title>
+    <link href="css/animate.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/cart.css" rel="stylesheet" />
+    <script src="js/modernizr.js"></script>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/jquery.lazyload.js"></script>
+    <script src="js/common.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a class="menu-btn show-on-small" href="javascript:void(0);"><img src="img/menu-btn.png" /></a>
+            <div class="logo">
+                <img src="img/logo.png" />
+            </div>
+            <nav class="hide-on-small">
+                <ul>
+                    <li><a href="javascript:void(0);"><span>在线定制</span></a></li>
+                    <li><a href="javascript:void(0);"><span>关于我们</span></a></li>
+                    <li><a href="javascript:void(0);"><span>凡布风尚</span></a></li>
+                    <li><a href="javascript:void(0);"><span>休闲衬衫</span></a></li>
+                    <li><a href="javascript:void(0);"><span>我们的凡布</span></a></li>
+                </ul>
+            </nav>
+            <div class="btn-group hide-on-small">
+                <a href="javascript:void(0);" class="register">从这里开始</a><a href="javascript:void(0);" class="login">登录</a>
+            </div>
+        </div>
+    </header>
+    <aside class="show-on-small">
+        <a href="javascript:void(0);" class="btn-close"><img src="img/menu-btn-close.png" /></a>
+        <ul>
+            <li><a href="javascript:void(0);"><span>首页</span></a></li>
+            <li>
+                <a href="javascript:void(0);"><span>在线定制</span><i class="showhide"></i></a>
+                <div class="sub-menu opened clearfix">
+                    <a href="javascript:void(0);">查看全部</a>
+                    <a href="javascript:void(0);">查看全部</a>
+                    <a href="javascript:void(0);">查看全部</a>
+                </div>
+            </li>
+            <li class="login"><a href="javascript:void(0);"><span>登录</span></a></li>
+            <li class="logout hidden"><a href="javascript:void(0);"><span>登出</span></a></li>
+            <li><a href="javascript:void(0);"><span>关于我们</span></a></li>
+            <li><a href="javascript:void(0);"><span>凡布风尚</span></a></li>
+            <li><a href="javascript:void(0);"><span>休闲衬衫</span></a></li>
+            <li><a href="javascript:void(0);"><span>我们的凡布</span></a></li>
+            <li class="account hidden">
+                <a href="javascript:void(0);"><span>我的账号</span><i class="showhide"></i></a>
+                <div class="sub-menu fadeInDownFast clearfix">
+                    <a href="${base}/member/index.jhtml">账户信息</a>
+                    <a href="${base}/member/order/list.jhtml">我的订单</a>
+                    <a href="${base}/member/size/list.jhtml">我的尺寸</a>
+                    <a href="${base}/member/specification/list.jhtml">我的板型</a>
+                    <a href="${base}/member/receiver/list.jhtml">地址簿</a>
+                    <a href="javascript:void(0);">退换货</a>
+                </div>
+            </li>
+            <li class="register"><a class="button" href="javascript:void(0);">从这里开始</a></li>
+        </ul>
+    </aside>
+    <div class="main-container">
+        <div class="cart-categories">
+            <h1>购物车</h1>
+        </div>
+        <div class="products">
+            <div class="product">
+                <div class="title clearfix">
+                    <h3>Hume</h3>
+                    <div class="image">
+                        <img src="img/product-detail1.jpg" />
+                    </div>
+                    <span>100%纯棉 小条纹格</span>
+                    <a class="close" href="javascript:void(0);"></a>
+                </div>
+                <div class="detail">
+                    <div class="build-name">
+                        <ul class="clearfix">
+                            <li>我的版型</li>
+                            <li><a href="javascript:void(0);">编辑版型</a></li>
+                        </ul>
+                    </div>
+                    <div class="build-content">
+                        <ul class="clearfix">
+                            <li>标准版</li>
+                            <li>经典扣领</li>
+                            <li>圆角袖口</li>
+                            <li>无口袋</li>
+                            <li>明门襟</li>
+                            <li>无褶</li>
+                            <li>加长</li>
+                            <li>无刺绣</li>
+                        </ul>
+                    </div>
+                    <div class="purchase-info">
+                        <div class="qty">
+                            <span>数量</span><input name="qty" class="input" type="text" value="1" />
+                        </div>
+                        <div class="price">
+                            ￥999.00
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <div class="title clearfix">
+                    <h3>Hume</h3>
+                    <div class="image">
+                        <img src="img/product-detail1.jpg" />
+                    </div>
+                    <span>100%纯棉 小条纹格</span>
+                    <a class="close" href="javascript:void(0);"></a>
+                </div>
+                <div class="detail">
+                    <div class="build-name">
+                        <ul class="clearfix">
+                            <li>我的版型</li>
+                            <li><a href="javascript:void(0);">编辑版型</a></li>
+                        </ul>
+                    </div>
+                    <div class="build-content">
+                        <ul class="clearfix">
+                            <li>标准版</li>
+                            <li>经典扣领</li>
+                            <li>圆角袖口</li>
+                            <li>无口袋</li>
+                            <li>明门襟</li>
+                            <li>无褶</li>
+                            <li>加长</li>
+                            <li>无刺绣</li>
+                        </ul>
+                    </div>
+                    <div class="purchase-info">
+                        <div class="qty">
+                            <span>数量</span><input name="qty" class="input" type="text" value="1" />
+                        </div>
+                        <div class="price">
+                            ￥999.00
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="purchase row">
+            <div class="col-md-8">
+                <h2>订单信息</h2>
+                <div class="order-info">
+                    <label>地址</label>
+                    <select name="address_id" class="select">
+                        <option value="">新建</option>
+                    </select>
+                    <label>姓名</label>
+                    <input class="input" type="text" />
+                    <label class="margin">省市</label>
+                    <select name="province" class="select">
+                        <option value="">省市</option>
+                    </select>
+                    <label>区县</label>
+                    <select name="province" class="select">
+                        <option value="">区县</option>
+                    </select>
+                    <label class="margin">地址</label>
+                    <input class="input" type="text" />
+                    <label class="margin">联系电话</label>
+                    <input class="input" type="text" />
+                    <label class="margin">微信</label>
+                    <input class="input" type="text" />
+                    <div class="clearfix">
+                        <a class="button" href="javascript:void(0);">保存</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h2>总计</h2>
+                <div class="total">
+                    <dl>
+                        <dt>金额</dt>
+                        <dd>¥24.00</dd>
+                        <dt>优惠</dt>
+                        <dd class="warn">¥0.00</dd>
+                        <dt>返现</dt>
+                        <dd>¥0.00</dd>
+                        <dt>运费</dt>
+                        <dd>¥10.00</dd>
+                    </dl>
+                    <dl class="sum">
+                        <dt>总额</dt>
+                        <dd>¥34.00</dd>
+                    </dl>
+                    <div class="clearfix">
+                        <a class="button disabled" href="javascript:void(0);">保存</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="contact">
+            <h3 class="hide-on-small">与凡布保持联系</h3>
+            <div class="input-group hide-on-small">
+                <input class="input" type="text" placeholder="请输入您的邮件地址" />
+                <a href="javascript:void(0);" class="btn">»</a>
+            </div>
+            <div class="ico-link text-center-on-small">
+                <a href="javascript:void(0);"><img src="img/ico-email.jpg" /></a>
+                <a href="javascript:void(0);"><img src="img/ico-weibo.png" /></a>
+                <a href="javascript:void(0);"><img src="img/ico-weixin.png" /></a>
+                <a href="javascript:void(0);"><img src="img/ico-taobao.png" /></a>
+            </div>
+        </div>
+        <div class="links text-center-on-small">
+            <div class="row">
+                <div class="col-md-3 col-sm-12">
+                    <h6>FabriTailor.com</h6>
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0);">
+                                北京市<br />
+                                朝阳区<br />
+                                夏家园18号楼<br />
+                                2091室
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    <h6>凡布制衣</h6>
+                    <ul>
+                        <li><a href="javascript:void(0);">关于我们</a></li>
+                        <li><a href="javascript:void(0);">人才招聘</a></li>
+                        <li><a href="javascript:void(0);">成为凡布量体师</a></li>
+                        <li><a href="javascript:void(0);">服务条款</a></li>
+                        <li><a href="javascript:void(0);">隐私声明</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    <h6>帮助</h6>
+                    <ul>
+                        <li><a href="javascript:void(0);">购物指南</a></li>
+                        <li><a href="javascript:void(0);">关于量体定制</a></li>
+                        <li><a href="javascript:void(0);">常见问题解答</a></li>
+                        <li><a href="javascript:void(0);">帮助与支持</a></li>
+                        <li><a href="javascript:void(0);">退换货信息</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    <h6>在线商店</h6>
+                    <ul>
+                        <li><a href="javascript:void(0);">衬衫</a></li>
+                        <li><a href="javascript:void(0);">查看全部</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="logo">
+            <img src="img/logo-footer.png" />
+        </div>
+    </footer>
+    <div class="login-panel">
+        <h2>登录</h2>
+        <input class="input" type="text" placeholder="请输入电子邮件地址" />
+        <input class="input" type="password" placeholder="请输入密码" />
+        <a class="button" href="javascript:void(0);">登陆</a>
+        <a href="javascript:void(0);">忘记密码，或立即免费注册成为会员？</a>
+    </div>
+    <div class="cover-small-black"></div>
+    <div class="login-cover-black"></div>
+    <script type="text/javascript">
+        //侧边栏
+        $("header .menu-btn").click(function () {
+            $("aside").addClass("opened");
+            $("div.cover-small-black").addClass("opened").fadeTo("normal", 0.5, EASING_NAME);
+        });
+        $("aside .btn-close").click(function () {
+            $("aside").removeClass("opened");
+            $("div.cover-small-black").fadeTo("normal", 0, EASING_NAME, function () { $(this).removeClass("opened"); });
+        });
+        var asideSubMenuInit = function (el) {
+            var $li = $(el),
+                $a = $li.children("a"),
+                $subMenu = $li.children(".sub-menu");
+            $a.click(function (e) {
+                e.preventDefault();
+                $a.next().toggleClass("opened").end().children("i.showhide").toggleClass("mins");
+            });
+        };
+        asideSubMenuInit($("body > aside ul li.account"));
+        //登陆
+        var showLogin = function () {
+            $(".login-panel").show();
+            $("div.login-cover-black").addClass("opened").fadeTo("normal", 0.5, EASING_NAME);
+        };
+        var hideLogin = function () {
+            $(".login-panel").hide();
+            $("div.login-cover-black").fadeTo("normal", 0, EASING_NAME, function () { $(this).removeClass("opened"); });
+        };
+        $("div.login-cover-black").click(hideLogin);
+        $("header .btn-group .login").click(showLogin);
+    </script>
+</body>
+</html>
