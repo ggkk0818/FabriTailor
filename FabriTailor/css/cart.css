@@ -272,3 +272,75 @@
     font-size:18px;
     line-height:20px;
 }
+@media(max-width:991px) {
+    .cart-categories h1{
+        width:750px;
+    }
+    .products{
+        width: 750px;
+    }
+    .purchase{
+        width:750px;
+    }
+}
+@media(max-width:767px) {
+    .cart-categories h1{
+        width:100%;
+        text-align:center;
+    }
+    /* ==========================================================================
+       Product List
+       ========================================================================== */
+    .products{
+        width: 100%;
+        margin: 0;
+    }
+    .products .product .title{
+        margin:0;
+    }
+    .products .product .title h3{
+        display:block;
+        float:none;
+        margin:0;
+        text-align:center;
+    }
+    .products .product .title .image{
+        position:static;
+        margin:0 auto;
+    }
+    .products .product .title span{
+        display:block;
+        float: none;
+        text-align:center;
+    }
+    .products .product .title a.close{
+        right:10px;
+    }
+    .products .product .detail{
+        margin:18px 0 0 0;
+    }
+    .products .product .detail ul{
+        margin: 0;
+    }
+    .products .product .detail ul li{
+        float: none;
+        text-align:center;
+    }
+    .products .product .detail .purchase-info .qty{
+        position:static;
+        float:left;
+        margin-left:20px;
+    }
+    .products .product .detail .purchase-info .price{
+        position:static;
+        float:right;
+        margin:10px 140px 0 0;
+    }
+    /* ==========================================================================
+       Purchase
+       ========================================================================== */
+    .purchase{
+        width:100%;
+        margin:0;
+    }
+}
