@@ -17,11 +17,57 @@
 .accountOrder .order-image img{
     width:100%;
 }
+.accountOrder .order-table{
+    width: 100%;
+    border: none;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background: white;
+    margin-bottom: 1.25rem;
+    table-layout: auto;
+}
+.accountOrder .order-table thead tr th{
+    text-align:left;
+    padding: 10px;
+    color: #b6b6b6;
+}
+.accountOrder .order-table tbody tr {
+    cursor:pointer;
+}
+.accountOrder .order-table tbody tr:nth-child(odd) {
+    background-color: #f6f6f6;
+}
+.accountOrder .order-table tbody tr td {
+    position: relative;
+    padding: 10px;
+}
+.accountOrder .order-table tbody tr td a.arrow-right{
+    display:none;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size:18px;
+}
+.accountOrder .order-table tbody tr td a.arrow-right:hover{
+    text-decoration:none;
+}
 @media(max-width:1040px) {
     .accountOrder{
         padding: 50px 25px;
     }
     .accountOrder .order-image{
         width:250px;
+    }
+}
+@media(max-width:563px) {
+    .accountOrder .order-table thead{
+        display:none;
+    }
+    .accountOrder .order-table tbody tr td {
+        display:block;
+        width:auto;
+    }
+    .accountOrder .order-table tbody tr td a.arrow-right{
+        display:block;
     }
 }
