@@ -19,6 +19,9 @@
     text-align:left;
     font-size:14px;
 }
+/* ==========================================================================
+   Product List
+   ========================================================================== */
 .accountOrderDetail .products{
     max-width:900px;
     margin: 0 auto;
@@ -68,6 +71,17 @@
 .accountOrderDetail .products .product .detail a.show-build-info.active{
     color: #b6b6b6;
 }
+.accountOrderDetail .products .product .detail a.show-build-info i.showhide{
+    display:inline-block;
+    width:9px;
+    height:9px;
+    margin:0 0 0 10px;
+    background:url(../img/ico-showhide.png) no-repeat 0 0;
+    cursor:pointer;
+}
+.accountOrderDetail .products .product .detail a.show-build-info.active i.showhide{
+    background-position:-9px 0;
+}
 .accountOrderDetail .products .product .detail ul.build-info{
     display:none;
     list-style: none;
@@ -87,4 +101,80 @@
     font-size:18px;
     line-height:22px;
     color:#333;
+}
+/* ==========================================================================
+   Purchase
+   ========================================================================== */
+.purchase{
+    max-width:900px;
+    margin:50px auto;
+}
+.purchase h2{
+    margin: 0 0 26px 0;
+    color: #b6b6b6;
+    font-size:18px;
+    line-height:20px;
+}
+.purchase div{
+    
+}
+.purchase div ul{
+    list-style: none;
+    margin: 0 0 50px 0;
+    padding: 0;
+}
+.purchase div ul li{
+    width: auto;
+    margin: 4px 0;
+    font-size:14px;
+}
+.purchase div ul li .left{
+    float:left;
+}
+.purchase div ul li .right{
+    float:right;
+    color: #b6b6b6;
+}
+.purchase div.total .sum{
+    width: 100%;
+    display: inline-block;
+    height: auto;
+    margin: 5px;
+    padding: 30px;
+    cursor: pointer;
+    position: relative;
+    border: 1px solid #f6f6f6;
+    border-radius:5px;
+} 
+.purchase div.total .sum .left{
+    float:left;
+}
+.purchase div.total .sum .right{
+    float:right;
+    color: #b6b6b6;
+}
+@media(max-width:1040px) {
+    .accountOrderDetail{
+        padding: 50px 15px;
+    }
+}
+@media(max-width:640px) {
+    .accountOrderDetail .products .product .detail{
+        width:140px;
+    }
+}
+@media(max-width:440px) {
+.accountOrderDetail h1{
+    font-size:24px;
+}
+.accountOrderDetail .products .product .detail h2{
+    font-size:18px;
+}
+.accountOrderDetail .products .product .status{
+    font-size:16px;
+    line-height:22px;
+}
+.purchase h2{
+    font-size:16px;
+}
 }
