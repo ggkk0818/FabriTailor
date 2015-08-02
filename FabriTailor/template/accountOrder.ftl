@@ -27,10 +27,59 @@
         <div class="account-container">
             <div class="accountOrder">
                 <h1>我的订单</h1>
+			[#if !page.content?has_content]
                 <p>下单后，可以在订单中跟踪其进度。</p>
                 <div class="order-image">
                     <img src="${base}/resources/shop/img/accountOrder.jpg" />
                 </div>
+			[/#if]
+			[#if page.content?has_content]
+                <table class="order-table">
+                    <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>订单号</th>
+                            <th>商品</th>
+                            <th>状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+					[#list page.content as order]
+                        <tr data-sn="${order.sn}">
+                            <td>
+                                ${order.createDate}
+                                <a class="arrow-right" href="view.jhtml?sn=${order.sn}">»</a>
+                            </td>
+                            <td>#${order.sn}</td>
+                            <td>
+							[#list order.orderItems as orderItem]
+                                ${orderItem.name}[#if orderItem_has_next]<br />[/#if]
+							[/#list]
+                            </td>
+                            <td>
+								[#if order.expired]
+									${message("shop.member.order.hasExpired")}
+								[#elseif order.orderStatus == "completed" || order.orderStatus == "cancelled"]
+									${message("Order.OrderStatus." + order.orderStatus)}
+								[#elseif order.paymentStatus == "unpaid" || order.paymentStatus == "partialPayment"]
+									${message("shop.member.order.waitingPayment")}
+									[#if order.shippingStatus != "unshipped"]
+										${message("Order.ShippingStatus." + order.shippingStatus)}
+									[/#if]
+								[#else]
+									${message("Order.PaymentStatus." + order.paymentStatus)}
+									[#if order.paymentStatus == "paid" && order.shippingStatus == "unshipped"]
+										${message("shop.member.order.waitingShipping")}
+									[#else]
+										${message("Order.ShippingStatus." + order.shippingStatus)}
+									[/#if]
+								[/#if]
+							</td>
+                        </tr>
+					[/#list]
+                    </tbody>
+                </table>
+			[/#if]
             </div>
         </div>
     </div>
@@ -41,6 +90,18 @@
             $(this).children("i.showhide").toggleClass("mins");
             $(".main-container .account-aside ul").toggleClass("opened");
         });
+    </script>
+    <script type="text/javascript">
+		//表格点击跳转
+        var $orderTable = $(".main-container .account-container .accountOrder .order-table");
+        if ($orderTable.length) {
+            $orderTable.find("tbody tr").click(function () {
+                var $tr = $(this);
+                if ($tr.data("sn")) {
+                    window.location.href = "view.jhtml?sn=" + encodeURIComponent($tr.data("sn"));
+                }
+            });
+        }
     </script>
 </body>
 </html>

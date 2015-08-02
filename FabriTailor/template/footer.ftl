@@ -114,7 +114,7 @@
             //$("header .btn-group .account").removeClass("hidden").children("span").text($.cookie("memberUsername"));
             $("header .btn-group .account").children("span").text($.cookie("name"));
             //侧边栏链接
-            $("body > aside ul li").filter(".login, .register").addClass("hidden").end().filter(".logout, .account").removeClass("hidden");
+            $("body > aside ul li").filter(".login, .register").addClass("hidden").end().filter(".logout, .cart, .account").removeClass("hidden");
         }
         else {
             //登陆

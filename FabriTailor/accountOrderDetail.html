@@ -255,5 +255,11 @@
             $(".main-container .account-aside ul").toggleClass("opened");
         });
     </script>
+    <script type="text/javascript">
+        //商品显示隐藏详细信息
+        $(".main-container .account-container .accountOrderDetail .products .product a.show-build-info").click(function () {
+            $(this).toggleClass("active").next("ul.build-info").toggleClass("active");
+        });
+    </script>
 </body>
 </html>

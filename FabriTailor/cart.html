@@ -72,6 +72,9 @@
         <div class="cart-categories">
             <h1>购物车</h1>
         </div>
+        <div class="cart-empty">
+            购物车是空的
+        </div>
         <div class="products">
             <div class="product">
                 <div class="title clearfix">
@@ -151,8 +154,24 @@
             </div>
         </div>
         <div class="purchase row">
-            <div class="col-md-8 col-sm-12">
-                <h2>订单信息</h2>
+            <div class="col-md-4 col-sm-12">
+                <h2>支付方式</h2>
+                <div class="order-info">
+                    <div class="radio clearfix">
+                        <input name="paymentMethod" type="radio" value="alipay" />
+                        <span></span>
+                        <h4>支付宝</h4>
+                        <p>支付宝描述</p>
+                    </div>
+                    <div class="radio clearfix">
+                        <input name="paymentMethod" type="radio" value="weichatpay" />
+                        <span></span>
+                        <h4>微信</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <h2>收货地址</h2>
                 <div class="order-info">
                     <label>地址</label>
                     <select name="address_id" class="select">
@@ -165,7 +184,7 @@
                         <option value="">省市</option>
                     </select>
                     <label>区县</label>
-                    <select name="province" class="select">
+                    <select name="city" class="select">
                         <option value="">区县</option>
                     </select>
                     <label class="margin">地址</label>

@@ -209,5 +209,17 @@
             $(".main-container .account-aside ul").toggleClass("opened");
         });
     </script>
+    <script type="text/javascript">
+        //表格点击跳转
+        var $orderTable = $(".main-container .account-container .accountOrder .order-table");
+        if ($orderTable.length) {
+            $orderTable.find("tbody tr").click(function () {
+                var $tr = $(this);
+                if ($tr.data("sn")) {
+                    window.location.href = "view.jhtml?sn=" + encodeURIComponent($tr.data("sn"));
+                }
+            });
+        }
+    </script>
 </body>
 </html>

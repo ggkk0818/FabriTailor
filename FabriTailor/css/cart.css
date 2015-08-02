@@ -82,6 +82,52 @@
     color:#333;
     cursor:default;
 }
+.main-container .radio{
+    position:relative;
+    min-height:40px;
+    margin-bottom:10px;
+    padding:10px 10px 10px 30px;
+    border: 1px solid #d7ded6;
+    background:#fff;
+}
+.main-container .radio input{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    opacity:0;
+    cursor:pointer;
+}
+.main-container .radio span{
+    position:absolute;
+    top:50%;
+    left:10px;
+    display:block;
+    width:20px;
+    height:20px;
+    margin-top:-10px;
+    vertical-align:middle;
+    font-size:0;
+    line-height:0;
+    background:url(../img/radio-btn-black.png) no-repeat 0 0;
+}
+.main-container .radio input:checked+span{
+    background-position:-20px 0;
+}
+.main-container .radio h4{
+    margin:0 0 0 10px;
+    padding:0;
+    vertical-align:middle;
+    font-size:16px;
+    line-height:20px;
+}
+.main-container .radio p{
+    margin:0 0 0 10px;
+    padding:0;
+    font-size:14px;
+    color:#b6b6b6;
+}
 /* ==========================================================================
    Cart Navigator
    ========================================================================== */
@@ -92,12 +138,23 @@
 .cart-categories h1{
     width:960px;
     color: #768075;
-    padding: 15px 25px;
+    padding: 15px 0;
     margin:0 auto;
     display: block;
     text-decoration: none;
     font-size:16px;
     line-height:20px;
+}
+/* ==========================================================================
+   Cart Emplty
+   ========================================================================== */
+.cart-empty{
+    width: 960px;
+    margin: 0 auto 49px;
+    padding: 0 0 34px;
+    background:url(../img/cart-product-border.png) repeat-x bottom left;
+    font-size:16px;
+    line-height:24px;
 }
 /* ==========================================================================
    Product List
@@ -276,6 +333,9 @@
     .cart-categories h1{
         width:750px;
     }
+    .cart-empty{
+        width: 750px;
+    }
     .products{
         width: 750px;
     }
@@ -287,6 +347,11 @@
     .cart-categories h1{
         width:100%;
         text-align:center;
+    }
+    .cart-empty{
+        width: auto;
+        margin: 0 0 49px;
+        padding: 0 15px 34px;
     }
     /* ==========================================================================
        Product List
