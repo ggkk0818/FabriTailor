@@ -21,7 +21,7 @@
         <div class="cart-categories">
             <h1>购物车</h1>
         </div>
-	[#if order.orderItems?has_content]
+	[#if order?? && order.orderItems?has_content]
         <div class="products">
 		[#list order.orderItems as orderItem]
             <div class="product">
@@ -70,12 +70,12 @@
             <div class="col-md-4 col-sm-12">
                 <h2>支付方式</h2>
                 <div class="order-info">
-				[#list paymentMethods as paymentMethod]
+				[#list paymentPlugin as paymentPlugins]
                     <div class="radio clearfix">
-                        <input name="paymentMethod" type="radio" value="${paymentMethod.id}" />
+                        <input name="paymentPlugin" type="radio" value="${paymentPlugin.id}" />
                         <span></span>
-                        <h4>${paymentMethod.name}</h4>
-                        <p>${abbreviate(paymentMethod.description, 80, "...")}</p>
+                        <h4>${paymentPlugin.name}</h4>
+                        <p>${abbreviate(paymentPlugin.description, 80, "...")}</p>
                     </div>
 				[/#list]
                 </div>

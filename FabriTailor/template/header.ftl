@@ -16,7 +16,7 @@
             <div class="btn-group hide-on-small">
                 <#t><a href="${base}/register.jhtml" class="register">从这里开始</a><#t>
                 <#t><a href="javascript:void(0);" class="login">登录</a><#t>
-                <#t><a href="${base}/member/order/info.jhtml" class="cart hidden">购物车</a><#t>
+                <#t><a href="${base}/member/order/infov2.jhtml" class="cart hidden">购物车</a><#t>
                 <#t><div class="account hidden">
                     <span>&nbsp;</span>
                     <div class="dropdown-menu">
@@ -36,7 +36,7 @@
             <li><a href="${base}/login/welcome.jhtml"><span>商城</span></a></li>
             <li class="login"><a href="${base}/login.jhtml"><span>登录</span></a></li>
             <li class="logout hidden"><a href="${base}/logout.jhtml"><span>登出</span></a></li>
-            <li class="cart hidden"><a href="${base}/member/order/info.jhtml"><span>购物车</span></a></li>
+            <li class="cart hidden"><a href="${base}/member/order/infov2.jhtml"><span>购物车</span></a></li>
             <li><a href="${base}/article/content/201507/1/1.html"><span>关于我们</span></a></li>
             <li><a href="http://blog.fabritailor.com/" target="_blank"><span>凡布故事</span></a></li>
             <li><a href="${base}/product/list/2.jhtml"><span>休闲衬衫</span></a></li>
