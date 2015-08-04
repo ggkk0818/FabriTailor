@@ -90,24 +90,26 @@
 						<option value="${receiver.id}">${receiver.consignee}</option>
 					[/#list]
                     </select>
-                    <label>姓名</label>
-                    <input class="input" type="text" />
-                    <label class="margin">省市</label>
-                    <select name="province" class="select">
-                        <option value="">省市</option>
-                    </select>
-                    <label>区县</label>
-                    <select name="province" class="select">
-                        <option value="">区县</option>
-                    </select>
-                    <label class="margin">地址</label>
-                    <input class="input" type="text" />
-                    <label class="margin">联系电话</label>
-                    <input class="input" type="text" />
-                    <label class="margin">微信</label>
-                    <input class="input" type="text" />
-                    <div class="clearfix">
-                        <a class="button" href="javascript:void(0);">保存</a>
+                    <div class="address-form">
+                        <label>姓名</label>
+                        <input name="name" class="input" type="text" />
+                        <label class="margin">省市</label>
+                        <select name="province" class="select">
+                            <option value="">省市</option>
+                        </select>
+                        <label>区县</label>
+                        <select name="city" class="select">
+                            <option value="">区县</option>
+                        </select>
+                        <label class="margin">地址</label>
+                        <input name="addr" class="input" type="text" />
+                        <label class="margin">联系电话</label>
+                        <input name="tel" class="input" type="text" />
+                        <label class="margin">微信</label>
+                        <input name="weichat" class="input" type="text" />
+                        <div class="clearfix">
+                            <a class="button" href="javascript:void(0);">保存</a>
+                        </div>
                     </div>
                 </div>
             </div>

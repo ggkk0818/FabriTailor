@@ -177,24 +177,26 @@
                     <select name="address_id" class="select">
                         <option value="">新建</option>
                     </select>
-                    <label>姓名</label>
-                    <input class="input" type="text" />
-                    <label class="margin">省市</label>
-                    <select name="province" class="select">
-                        <option value="">省市</option>
-                    </select>
-                    <label>区县</label>
-                    <select name="city" class="select">
-                        <option value="">区县</option>
-                    </select>
-                    <label class="margin">地址</label>
-                    <input class="input" type="text" />
-                    <label class="margin">联系电话</label>
-                    <input class="input" type="text" />
-                    <label class="margin">微信</label>
-                    <input class="input" type="text" />
-                    <div class="clearfix">
-                        <a class="button" href="javascript:void(0);">保存</a>
+                    <div class="address-form">
+                        <label>姓名</label>
+                        <input name="name" class="input" type="text" />
+                        <label class="margin">省市</label>
+                        <select name="province" class="select">
+                            <option value="">省市</option>
+                        </select>
+                        <label>区县</label>
+                        <select name="city" class="select">
+                            <option value="">区县</option>
+                        </select>
+                        <label class="margin">地址</label>
+                        <input name="addr" class="input" type="text" />
+                        <label class="margin">联系电话</label>
+                        <input name="tel" class="input" type="text" />
+                        <label class="margin">微信</label>
+                        <input name="weichat" class="input" type="text" />
+                        <div class="clearfix">
+                            <a class="button" href="javascript:void(0);">保存</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -324,6 +326,138 @@
         };
         $("div.login-cover-black").click(hideLogin);
         $("header .btn-group .login").click(showLogin);
+    </script>
+    <script type="text/javascript">
+        var $purchase = $(".main-container .purchase"),
+            $paymentRadio = $purchase.find(".radio"),
+            $addressId = $purchase.find("select[name=address_id]"),
+            $addressForm = $purchase.find(".address-form"),
+            $name = $addressForm.find("input[name=name]"),
+            $province = $addressForm.find("select[name=province]"),
+            $city = $addressForm.find("select[name=city]"),
+            $addr = $addressForm.find("input[name=addr]"),
+            $tel = $addressForm.find("input[name=tel]"),
+            $weichat = $addressForm.find("input[name=weichat]"),
+            $btnBuy = $purchase.find(".total a.button");
+        var addressList = [
+            {
+                id: 1,
+                consignee: "",
+                provinceId: 1,
+                cityId: 2,
+                address: "",
+                phone: "",
+                isDefault: true
+            }
+        ];
+        //获取省市信息
+        $.ajax({
+            url: "${base}/common/area.jhtml",
+            type: "GET",
+            dataType: "json",
+            cache: false,
+            traditional: true,
+            success: function (data) {
+                if (data) {
+                    for (var id in data) {
+                        $province.append('<option value="' + id + '">' + data[id] + '</option>');
+                    }
+                }
+            }
+        });
+        //获取区县信息
+        var getCityData = function () {
+            $city.children("option").not(":eq(0)").remove();
+            if ($province.val() && $province.val().length) {
+                $.ajax({
+                    url: "${base}/common/area.jhtml",
+                    type: "GET",
+                    data: { parentId: $province.val() },
+                    dataType: "json",
+                    cache: false,
+                    traditional: true,
+                    success: function (data) {
+                        if (data) {
+                            for (var id in data) {
+                                $city.append('<option value="' + id + '">' + data[id] + '</option>');
+                            }
+                            if ($city.data("value")) {
+                                $city.val($city.data("value"));
+                                $city.removeData("value");
+                            }
+                        }
+                    }
+                });
+            }
+        };
+        //更改地址选择
+        var addressChange = function () {
+            var id = $addressId.val();
+            if (!id || id.length == 0) {
+                $addressForm.removeClass("hidden");
+            }
+            else {
+                $addressForm.addClass("hidden");
+            }
+        };
+        //检测提交按钮状态
+        var validateForm = function () {
+            var isValide = true;
+            if ($paymentRadio.filter(":checked").length == 0) {
+                $paymentRadio.parent().addClass("has-error");
+                isValide = false;
+            }
+            else {
+                $paymentRadio.parent().removeClass("has-error");
+            }
+            if (!$addressId.val() || $addressId.val().length == 0) {
+                $addressId.prev().addClass("has-error");
+                isValide = false;
+            }
+            else {
+                $addressId.prev().removeClass("has-error");
+            }
+            if (isValide) {
+                $btnBuy.removeClass("disabled");
+            }
+            else {
+                $btnBuy.addClass("disabled");
+            }
+            return isValide;
+        };
+        //提交订单
+        var doSubmit = function () {
+            if (!validateForm() || $(this).hasClass("loading"))
+                return;
+            var params = {
+                cartToken: "",
+                receiverId: $addressId.val(),
+                paymentMethodId: 1,
+                paymentPluginId: $paymentRadio.filter(":checked").val(),
+                shippingMethodId: 1
+            };
+            $btnBuy.addClass("loading");
+            $.ajax({
+                url: "${base}/member/order/createv2.jhtml",
+                type: "POST",
+                data: params,
+                dataType: "json",
+                cache: false,
+                traditional: true,
+                success: function (data) {
+                    if (data && data.type == "success") {
+                        
+                    }
+                },
+                error: function () {
+
+                }
+            }).always(function () {
+                $btnBuy.removeClass("loading");
+            });
+        };
+        $province.change(getCityData);
+        $addressId.change(addressChange);
     </script>
 </body>
 </html>
