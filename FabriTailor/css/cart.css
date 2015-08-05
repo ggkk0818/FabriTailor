@@ -74,8 +74,8 @@
     background-color: #a4652d;
     text-decoration:none;
 }
-.main-container input.button.disabled,
-.main-container input.button.disabled:hover,
+.main-container a.button.calculating,
+.main-container a.button.calculating:hover,
 .main-container a.button.disabled,
 .main-container a.button.disabled:hover{
     background-color: #ccc;

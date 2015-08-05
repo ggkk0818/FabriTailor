@@ -11,6 +11,7 @@
     <script src="${base}/resources/shop/js/modernizr.js"></script>
     <script src="${base}/resources/shop/js/jquery-1.11.3.min.js"></script>
     <script src="${base}/resources/shop/js/jquery.easing.1.3.js"></script>
+	<script src="${base}/resources/shop/js/jquery.alert.js"></script>
     <script src="${base}/resources/shop/js/jquery.cookie.js"></script>
     <script src="${base}/resources/shop/js/jquery.lazyload.js"></script>
     <script src="${base}/resources/shop/js/f_common.js"></script>
@@ -147,5 +148,188 @@
 	[/#if]
     </div>
     [#include "/shop/include/footer.ftl" /]
+    <script type="text/javascript">
+        var $purchase = $(".main-container .purchase"),
+            $paymentRadio = $purchase.find(".radio"),
+            $addressId = $purchase.find("select[name=address_id]"),
+            $addressForm = $purchase.find(".address-form"),
+            $name = $addressForm.find("input[name=name]"),
+            $province = $addressForm.find("select[name=province]"),
+            $city = $addressForm.find("select[name=city]"),
+            $addr = $addressForm.find("input[name=addr]"),
+            $tel = $addressForm.find("input[name=tel]"),
+            $weichat = $addressForm.find("input[name=weichat]"),
+            $btnBuy = $purchase.find(".total a.button");
+        var addressList = [
+            {
+                id: 1,
+                consignee: "",
+                provinceId: 1,
+                cityId: 2,
+                address: "",
+                phone: "",
+                isDefault: true
+            }
+        ];
+        //获取省市信息
+        $.ajax({
+            url: "${base}/common/area.jhtml",
+            type: "GET",
+            dataType: "json",
+            cache: false,
+            traditional: true,
+            success: function (data) {
+                if (data) {
+                    for (var id in data) {
+                        $province.append('<option value="' + id + '">' + data[id] + '</option>');
+                    }
+                }
+            }
+        });
+        //获取区县信息
+        var getCityData = function () {
+            $city.children("option").not(":eq(0)").remove();
+            if ($province.val() && $province.val().length) {
+                $.ajax({
+                    url: "${base}/common/area.jhtml",
+                    type: "GET",
+                    data: { parentId: $province.val() },
+                    dataType: "json",
+                    cache: false,
+                    traditional: true,
+                    success: function (data) {
+                        if (data) {
+                            for (var id in data) {
+                                $city.append('<option value="' + id + '">' + data[id] + '</option>');
+                            }
+                            if ($city.data("value")) {
+                                $city.val($city.data("value"));
+                                $city.removeData("value");
+                            }
+                        }
+                    }
+                });
+            }
+        };
+        //更改地址选择
+        var addressChange = function () {
+            var id = $addressId.val();
+            if (!id || id.length == 0) {
+                $addressForm.removeClass("hidden");
+            }
+            else {
+                $addressForm.addClass("hidden");
+            }
+        };
+        //更改支付方式
+        var paymentPluginChange = function () {
+            var $radio = $(this).parent(),
+                $container = $radio.parent(),
+                val = $(this).val();
+            if (!$container.data("val") || $container.data("val") != val) {
+                $container.data("val", val);
+                doCalculate();
+            }
+        };
+        //检测提交按钮状态
+        var validateForm = function () {
+            var isValide = true;
+            if ($paymentRadio.filter(":checked").length == 0) {
+                $paymentRadio.parent().addClass("has-error");
+                isValide = false;
+            }
+            else {
+                $paymentRadio.parent().removeClass("has-error");
+            }
+            if (!$addressId.val() || $addressId.val().length == 0) {
+                $addressId.prev().addClass("has-error");
+                isValide = false;
+            }
+            else {
+                $addressId.prev().removeClass("has-error");
+            }
+            if (isValide) {
+                $btnBuy.removeClass("disabled");
+            }
+            else {
+                $btnBuy.addClass("disabled");
+            }
+            return isValide;
+        };
+        //重新计算订单数据
+        var doCalculate = function (callback) {
+            $btnBuy.addClass("calculating");
+            var params = {
+                paymentMethodId: 1,
+                paymentPluginId: $paymentRadio.filter(":checked").val(),
+                shippingMethodId: 1
+            };
+            $.ajax({
+                url: "${base}/member/order/calculatev2.jhtml",
+                type: "POST",
+                data: params,
+                dataType: "json",
+                cache: false,
+                traditional: true,
+                success: function (data) {
+                    if (data && data.message && data.message.type == "success") {
+                        var total = $purchase.find(".total dd");
+                        total.eq(0).text("￥" + (data.prive || "0.00"));
+                        total.eq(1).text("￥" + (data.couponDiscount || "0.00"));
+                        total.eq(2).text("￥" + (data.promotionDiscount || "0.00"));
+                        total.eq(3).text("￥" + (data.freight || "0.00"));
+                        total.eq(3).text("￥" + (data.tax || "0.00"));
+                        total.last().text("￥" + (data.amount || "0.00"));
+                    }
+                    if (typeof callback === "function")
+                        callback.call(this, data);
+                },
+                error: function () {
+                    if (typeof callback === "function")
+                        callback.call(this, null);
+                }
+            }).always(function () {
+                $btnBuy.removeClass("calculating");
+            });
+        };
+        //提交订单
+        var doSubmit = function () {
+            if (!validateForm() || $(this).hasClass("loading"))
+                return;
+            var params = {
+                cartToken: "",
+                receiverId: $addressId.val(),
+                paymentMethodId: 1,
+                paymentPluginId: $paymentRadio.filter(":checked").val(),
+                shippingMethodId: 1
+            };
+            $btnBuy.addClass("loading");
+            $.ajax({
+                url: "${base}/member/order/createv2.jhtml",
+                type: "POST",
+                data: params,
+                dataType: "json",
+                cache: false,
+                traditional: true,
+                success: function (data) {
+                    if (data && data.type == "success") {
+                        window.location.href = "${base}/member/order/view.jhtml?sn=" + encodeURIComponent(data.content);
+                    }
+                    else {
+                        $.alert.error("提交订单失败。" + (data && data.content ? data.content : ""));
+                    }
+                },
+                error: function () {
+                    $.alert.error("提交订单失败。");
+                }
+            }).always(function () {
+                $btnBuy.removeClass("loading");
+            });
+        };
+        $paymentRadio.click(paymentPluginChange);
+        $province.change(getCityData);
+        $addressId.change(addressChange);
+        $btnBuy.click(doSubmit);
+    </script>
 </body>
 </html>
