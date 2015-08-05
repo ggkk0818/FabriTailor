@@ -71,7 +71,7 @@
             <div class="col-md-4 col-sm-12">
                 <h2>支付方式</h2>
                 <div class="order-info">
-				[#list paymentPlugin as paymentPlugins]
+				[#list paymentPlugins as paymentPlugin]
                     <div class="radio clearfix">
                         <input name="paymentPlugin" type="radio" value="${paymentPlugin.id}" />
                         <span></span>
@@ -161,15 +161,17 @@
             $weichat = $addressForm.find("input[name=weichat]"),
             $btnBuy = $purchase.find(".total a.button");
         var addressList = [
+		[#list member.receivers as receiver]
             {
-                id: 1,
-                consignee: "",
-                provinceId: 1,
-                cityId: 2,
-                address: "",
-                phone: "",
-                isDefault: true
-            }
+                id: ${receiver.id},
+                consignee: "${receiver.consignee}",
+                provinceId: [#if receiver.area?? && receiver.area.parent??]${receiver.area.parent.id}[#else]""[/#if],
+                cityId: [#if receiver.area??]${receiver.area.id}[#else]""[/#if],
+                address: "${receiver.address}",
+                phone: "${receiver.phone}",
+                isDefault: ${receiver.isDefault}
+            }[#if receiver_has_next],[/#if]
+		[/#list]
         ];
         //获取省市信息
         $.ajax({
@@ -220,6 +222,7 @@
             else {
                 $addressForm.addClass("hidden");
             }
+            validateForm();
         };
         //更改支付方式
         var paymentPluginChange = function () {
@@ -229,12 +232,13 @@
             if (!$container.data("val") || $container.data("val") != val) {
                 $container.data("val", val);
                 doCalculate();
+                validateForm();
             }
         };
         //检测提交按钮状态
         var validateForm = function () {
             var isValide = true;
-            if ($paymentRadio.filter(":checked").length == 0) {
+            if ($paymentRadio.find("input:checked").length == 0) {
                 $paymentRadio.parent().addClass("has-error");
                 isValide = false;
             }
@@ -261,7 +265,7 @@
             $btnBuy.addClass("calculating");
             var params = {
                 paymentMethodId: 1,
-                paymentPluginId: $paymentRadio.filter(":checked").val(),
+                paymentPluginId: $paymentRadio.find("input:checked").val(),
                 shippingMethodId: 1
             };
             $.ajax({
@@ -274,7 +278,7 @@
                 success: function (data) {
                     if (data && data.message && data.message.type == "success") {
                         var total = $purchase.find(".total dd");
-                        total.eq(0).text("￥" + (data.prive || "0.00"));
+                        total.eq(0).text("￥" + (data.price || "0.00"));
                         total.eq(1).text("￥" + (data.couponDiscount || "0.00"));
                         total.eq(2).text("￥" + (data.promotionDiscount || "0.00"));
                         total.eq(3).text("￥" + (data.freight || "0.00"));
@@ -300,7 +304,7 @@
                 cartToken: "",
                 receiverId: $addressId.val(),
                 paymentMethodId: 1,
-                paymentPluginId: $paymentRadio.filter(":checked").val(),
+                paymentPluginId: $paymentRadio.find("input:checked").val(),
                 shippingMethodId: 1
             };
             $btnBuy.addClass("loading");
@@ -326,10 +330,19 @@
                 $btnBuy.removeClass("loading");
             });
         };
-        $paymentRadio.click(paymentPluginChange);
+        $paymentRadio.find("input").click(paymentPluginChange);
         $province.change(getCityData);
         $addressId.change(addressChange);
         $btnBuy.click(doSubmit);
+        //选择默认地址
+        if (addressList && addressList.length) {
+            for (var i = 0; i < addressList.length; i++) {
+                var address = addressList[i];
+                if (address.isDefault) {
+                    $addressId.val(address.id);
+                }
+            }
+        }
     </script>
 </body>
 </html>
