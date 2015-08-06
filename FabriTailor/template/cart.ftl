@@ -301,7 +301,7 @@
             if (!validateForm() || $(this).hasClass("loading"))
                 return;
             var params = {
-                cartToken: "",
+                cartToken: "${cartToken}",
                 receiverId: $addressId.val(),
                 paymentMethodId: 1,
                 paymentPluginId: $paymentRadio.find("input:checked").val(),
@@ -336,12 +336,16 @@
         $btnBuy.click(doSubmit);
         //选择默认地址
         if (addressList && addressList.length) {
+            var hasDefault = false;
             for (var i = 0; i < addressList.length; i++) {
                 var address = addressList[i];
                 if (address.isDefault) {
-                    $addressId.val(address.id);
+                    $addressId.val(address.id).change();
+                    hasDefault = true;
                 }
             }
+            if(!hasDefault)
+                $addressId.val(addressList[0].id).change();
         }
     </script>
 </body>
