@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+    <a href="javascript:void(0);">test</a>
+    <script type="text/javascript">
+        $("a").click(function () {
+            if (document.createEvent) {
+                var a = $("<a href='http://www.test.com' target='_blank' >test</a>").get(0);
+                var e = document.createEvent('MouseEvents');
+                e.initEvent('click', true, true);
+                a.dispatchEvent(e);
+            }
+            else {
+                window.open("http://www.test.com");
+            }
+        });
+    </script>
+</body>
+</html>

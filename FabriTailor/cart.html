@@ -495,7 +495,8 @@
                 traditional: true,
                 success: function (data) {
                     if (data && data.type == "success") {
-                        window.location.href = "${base}/member/order/view.jhtml?sn=" + encodeURIComponent(data.content);
+                        orderId = data.content;
+                        doPayment();
                     }
                     else {
                         $.alert.error("提交订单失败。" + (data && data.content ? data.content : ""));
@@ -508,6 +509,64 @@
                 $btnBuy.removeClass("loading");
             });
         };
+        //进行支付
+        var doPayment = function () {
+            var paymentPluginId = $paymentRadio.find("input:checked").val();
+            if (paymentPluginId == "tenpayNativePlugin") {
+                openWindow("${base}/member/payment/submitv2?paymentPluginId=" + encodeURIComponent(paymentPluginId) + "&sn=" + encodeURIComponent(orderId));
+                checkOrderStatus();
+                checkOrderLock();
+            }
+        };
+        //检测订单状态
+        var statusTimer = null,
+            lockTimer = null,
+            orderId = null;
+        var checkOrderStatus = function () {
+            $.ajax({
+                url: "${base}/member/order/check_payment.jhtml",
+                type: "POST",
+                data: { sn: orderId },
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.href = "${base}/member/order/view.jhtml?sn=" + encodeURIComponent(orderId);
+                    }
+                }
+            }).always(function () {
+                statusTimer = setTimeout(checkOrderStatus, 3000);
+            });
+        };
+        var checkOrderLock = function () {
+            $.ajax({
+                url: "${base}/member/order/lock.jhtml",
+                type: "POST",
+                data: { sn: orderId },
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    if (data) {
+                        window.location.href = "${base}/member/order/view.jhtml?sn=" + encodeURIComponent(orderId);
+                    }
+                }
+            }).always(function () {
+                lockTimer = setTimeout(checkOrderLock, 3000);
+            });
+        };
+        //新页面打开链接
+        var openWindow = function (url) {
+            if (document.createEvent) {
+                var a = $("<a href='" + encodeURIComponent(url) + "' target='_blank' >test</a>").get(0);
+                var e = document.createEvent('MouseEvents');
+                e.initEvent('click', true, true);
+                a.dispatchEvent(e);
+            }
+            else {
+                window.open(url);
+            }
+        };
+        //注册事件
         $paymentRadio.find("input").click(paymentPluginChange);
         $province.change(getCityData);
         $addressId.change(addressChange);
