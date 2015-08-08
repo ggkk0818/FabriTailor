@@ -225,6 +225,13 @@
             </div>
         </div>
     </div>
+    <div class="wait-panel qr-code" style="display:block;">
+        <h2>在新窗口中完成支付</h2>
+        <img src="img/bookSuccess3.jpg" />
+        <a class="button" href="javascript:void(0);">已完成支付</a>
+        <a href="javascript:void(0);">支付遇到问题？</a>
+    </div>
+    <div class="wait-cover-black"></div>
     <footer>
         <div class="contact">
             <h3 class="hide-on-small">与凡布保持联系</h3>
@@ -339,7 +346,9 @@
             $addr = $addressForm.find("input[name=addr]"),
             $tel = $addressForm.find("input[name=tel]"),
             $weichat = $addressForm.find("input[name=weichat]"),
-            $btnBuy = $purchase.find(".total a.button");
+            $btnBuy = $purchase.find(".total a.button"),
+            $waitPanel = $("body .wait-panel"),
+            $waitPanelCover = $("body .wait-cover-black");
         var addressList = [
             {
                 id: 1,
@@ -456,12 +465,12 @@
                 success: function (data) {
                     if (data && data.message && data.message.type == "success") {
                         var total = $purchase.find(".total dd");
-                        total.eq(0).text("￥" + (data.price || "0.00"));
-                        total.eq(1).text("￥" + (data.couponDiscount || "0.00"));
-                        total.eq(2).text("￥" + (data.promotionDiscount || "0.00"));
-                        total.eq(3).text("￥" + (data.freight || "0.00"));
-                        total.eq(3).text("￥" + (data.tax || "0.00"));
-                        total.last().text("￥" + (data.amount || "0.00"));
+                        total.eq(0).text("￥" + (isNaN(parseFloat(data.price)) ? "0.00" : parseFloat(data.price).toFixed(2)));
+                        total.eq(1).text("￥" + (isNaN(parseFloat(data.couponDiscount)) ? "0.00" : parseFloat(data.couponDiscount).toFixed(2)));
+                        total.eq(2).text("￥" + (isNaN(parseFloat(data.promotionDiscount)) ? "0.00" : parseFloat(data.promotionDiscount).toFixed(2)));
+                        total.eq(3).text("￥" + (isNaN(parseFloat(data.freight)) ? "0.00" : parseFloat(data.freight).toFixed(2)));
+                        total.eq(3).text("￥" + (isNaN(parseFloat(data.tax)) ? "0.00" : parseFloat(data.tax).toFixed(2)));
+                        total.last().text("￥" + (isNaN(parseFloat(data.amount)) ? "0.00" : parseFloat(data.amount).toFixed(2)));
                     }
                     if (typeof callback === "function")
                         callback.call(this, data);
@@ -491,6 +500,7 @@
                 type: "POST",
                 data: params,
                 dataType: "json",
+                async:false,
                 cache: false,
                 traditional: true,
                 success: function (data) {
@@ -512,10 +522,52 @@
         //进行支付
         var doPayment = function () {
             var paymentPluginId = $paymentRadio.find("input:checked").val();
-            if (paymentPluginId == "tenpayNativePlugin") {
-                openWindow("${base}/member/payment/submitv2?paymentPluginId=" + encodeURIComponent(paymentPluginId) + "&sn=" + encodeURIComponent(orderId));
+            if (paymentPluginId == "alipayDirectPlugin" || paymentPluginId == "alipayWapPlugin") {
+                openWindow("${base}/payment/submit.jhtml?paymentPluginId=" + encodeURIComponent(paymentPluginId) + "&sn=" + encodeURIComponent(orderId));
                 checkOrderStatus();
-                checkOrderLock();
+                //checkOrderLock();
+                $waitPanel.children("a").attr("href", "${base}/member/order/view.jhtml?sn=" + encodeURIComponent(orderId));
+                $waitPanel.show();
+                $waitPanelCover.addClass("opened").fadeTo("normal", 0.5, EASING_NAME);
+            }
+            else if (paymentPluginId == "tenpayNativePlugin") {
+                $waitPanel.children("h2").text("正在生成二维码...");
+                $waitPanel.children("a").hide().attr("href", "${base}/member/order/view.jhtml?sn=" + encodeURIComponent(orderId));
+                $waitPanel.show();
+                $waitPanelCover.addClass("opened").fadeTo("normal", 0.5, EASING_NAME);
+                $.ajax({
+                    url: "${base}/payment/submitv2.jhtml",
+                    type: "GET",
+                    data: {
+                        paymentPluginId: "tenpayNativePlugin",
+                        sn: orderId
+                    },
+                    dataType: "json",
+                    cache: false,
+                    success: function (data) {
+                        if (data && data.type == "success") {
+                            var $qrImg = $("<img />");
+                            $qrImg.attr("src", data.content);
+                            $waitPanel.children("h2").after($qrImg);
+                            $waitPanel.children("h2").text("扫描二维码");
+                            $waitPanel.children("a").show();
+                            $waitPanel.addClass("qr-code");
+                            checkOrderStatus();
+                            //checkOrderLock();
+                        }
+                        else {
+                            $waitPanel.children("h2").text("支付遇到了问题");
+                            $waitPanel.children("a").first().show().text("重新支付");
+                        }
+                    },
+                    error: function () {
+                        $waitPanel.children("h2").text("支付遇到了问题");
+                        $waitPanel.children("a").first().show().text("重新支付");
+                    }
+                });
+            }
+            else {
+                window.location.href = "${base}/member/order/view.jhtml?sn=" + encodeURIComponent(orderId);
             }
         };
         //检测订单状态
@@ -556,21 +608,34 @@
         };
         //新页面打开链接
         var openWindow = function (url) {
-            if (document.createEvent) {
-                var a = $("<a href='" + encodeURIComponent(url) + "' target='_blank' >test</a>").get(0);
-                var e = document.createEvent('MouseEvents');
-                e.initEvent('click', true, true);
-                a.dispatchEvent(e);
-            }
-            else {
-                window.open(url);
-            }
+            window.open(url);
         };
         //注册事件
         $paymentRadio.find("input").click(paymentPluginChange);
         $province.change(getCityData);
         $addressId.change(addressChange);
         $btnBuy.click(doSubmit);
+        //过滤支付方式
+        if (isMobile()) {
+            $paymentRadio.find("input[value=alipayDirectPlugin]").parent().remove();
+            $paymentRadio.find("input[value=tenpayNativePlugin]").parent().remove();
+        }
+        else {
+            $paymentRadio.find("input[value=alipayWapPlugin]").parent().remove();
+        }
+        if (typeof WeixinJSBridge == "undefined") {
+            $paymentRadio.find("input[value=tenpayJsapiPlugin]").parent().addClass("hidden");
+            var onWeixinReaddy = function () {
+                $paymentRadio.find("input[value=tenpayJsapiPlugin]").parent().removeClass("hidden");
+            };
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', onWeixinReaddy, false);
+            } else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', onWeixinReaddy);
+                document.attachEvent('onWeixinJSBridgeReady', onWeixinReaddy);
+            }
+
+        }
         //选择默认地址
         if (addressList && addressList.length) {
             var hasDefault = false;

@@ -27,7 +27,7 @@
         <div class="account-container">
             <div class="accountOrderDetail">
                 <h1>订单 #${order.sn}</h1>
-                <p><a href="javascript:void(0);">« 全部订单</a></p>
+                <p><a href="${base}/member/order/list.jhtml">« 全部订单</a></p>
                 <h3 title="${order.createDate?string("yyyy-MM-dd HH:mm:ss")}">${message("shop.common.createDate")}:</h3>
                 <div class="products">
 				[#list order.orderItems as orderItem]
