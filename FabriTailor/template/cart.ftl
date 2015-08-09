@@ -22,23 +22,23 @@
         <div class="cart-categories">
             <h1>购物车</h1>
         </div>
-	[#if order?? && order.orderItems?has_content]
+	[#if cart?? && cart.cartItems?has_content]
         <div class="products">
-		[#list order.orderItems as orderItem]
-            <div class="product">
+		[#list cart.cartItems as cartItem]
+            <div class="product" data-id="${cartItem.id}" data-qty="${cartItem.quantity}" data-price="${cartItem.price}">
                 <div class="title clearfix">
-                    <h3 title="${orderItem.product.fullName}">${abbreviate(orderItem.product.name, 20, "...")}</h3>
+                    <h3 title="${cartItem.product.fullName}">${abbreviate(cartItem.product.name, 20, "...")}</h3>
                     <div class="image">
-                        <img src="[#if orderItem.product.thumbnail??]${orderItem.product.thumbnail}[#else]${setting.defaultThumbnailProductImage}[/#if]" />
+                        <img src="[#if cartItem.product.thumbnail??]${cartItem.product.thumbnail}[#else]${setting.defaultThumbnailProductImage}[/#if]" />
                     </div>
-                    <span>${orderItem.product.ingredient}</span>
+                    <span>${cartItem.product.ingredient}</span>
                     <a class="close" href="javascript:void(0);"></a>
                 </div>
                 <div class="detail">
                     <div class="build-name">
                         <ul class="clearfix">
                             <!--<li>我的版型</li>-->
-                            <li><a href="${base}${orderItem.product.path}?quantity=${orderItem.quantity}">编辑版型</a></li>
+                            <li><a href="${base}${cartItem.product.path}?quantity=${cartItem.quantity}">编辑版型</a></li>
                         </ul>
                     </div>
                     <div class="build-content">
@@ -48,19 +48,15 @@
                             <li>${specificationValue.name}</li>
 							[/#list]
 						[/#if]
-                            <li>无刺绣</li>
+                            <li>[#if cartItem.letters??]自定义(${cartItem.letters})[#else]无刺绣[/#if]</li>
                         </ul>
                     </div>
                     <div class="purchase-info">
                         <div class="qty">
-                            <span>数量</span><input name="qty" class="input" type="text" value="${orderItem.quantity}" />
+                            <span>数量</span><input name="qty" class="input" type="text" value="${cartItem.quantity}" />
                         </div>
                         <div class="price">
-                            [#if !orderItem.isGift]
-								${currency(orderItem.subtotal, true)}
-							[#else]
-								-
-							[/#if]
+							${currency(cartItem.subtotal, true)}
                         </div>
                     </div>
                 </div>
@@ -155,7 +151,8 @@
     <div class="wait-cover-black"></div>
     [#include "/shop/include/footer.ftl" /]
     <script type="text/javascript">
-        var $purchase = $(".main-container .purchase"),
+        var $products = $(".main-container .products"),
+            $purchase = $(".main-container .purchase"),
             $paymentRadio = $purchase.find(".radio"),
             $addressId = $purchase.find("select[name=address_id]"),
             $addressForm = $purchase.find(".address-form"),
@@ -181,6 +178,96 @@
             }[#if receiver_has_next],[/#if]
 		[/#list]
         ];
+        //修改商品数量
+        var changeProductQty = function () {
+            if ($(this).prop("disabled"))
+                return false;
+            var $input = $(this),
+                $purchaseInfo = $input.parent().parent(),
+                $price = $purchaseInfo.children(".price"),
+                $product = $purchaseInfo.parent().parent();
+            if (/^\d+$/.test($input.val())) {
+                if (parseInt($input.val()) == parseInt($product.data("qty")))
+                    return false;
+                $input.prop("disabled", true);
+                var params = {
+                    id: $product.data("id"),
+                    quantity: parseInt($input.val())
+                };
+                $.ajax({
+                    url: "${base}/cart/edit.jhtml",
+                    type: "POST",
+                    data: params,
+                    dataType: "json",
+                    cache: false,
+                    success: function (data) {
+                        if (data && data.message && data.message.type == "success") {
+                            if (typeof data.quantity === "number") {
+                                $input.val(data.quantity);
+                                $product.data("qty", data.quantity);
+                            }
+                            else {
+                                $product.data("qty", $input.val());
+                            }
+                            if (typeof data.subtotal === "number") {
+                                $price.text("￥" + data.subtotal.toFixed(2));
+                            }
+                            else {
+                                $price.text("￥" + (parseInt($product.data("qty")) * parseFloat($product.data("price"))).toFixed(2));
+                            }
+                            doCalculate();
+                        }
+                        else {
+                            $.alert.error("修改商品数量失败。" + (data && data.message && data.message.content ? data.message.content : ""));
+                            $input.val($product.data("qty"));
+                        }
+                    },
+                    error: function () {
+                        $.alert.error("修改商品数量失败。");
+                        $input.val($product.data("qty"));
+                    }
+                }).always(function () {
+                    $input.removeProp("disabled");
+                });
+            }
+            else {
+                $input.val($product.data("qty"));
+            }
+        };
+        //删除商品
+        var delProduct = function () {
+            if ($(this).prop("disabled"))
+                return false;
+            var $btnDel = $(this),
+                $product = $btnDel.parent().parent();
+            $btnDel.addClass("disabled");
+            $.ajax({
+                url: "${base}/cart/delete.jhtml",
+                type: "POST",
+                data: { id: $product.data("id") },
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    if (data && data.message && data.message.type == "success") {
+                        $product.fadeTo("normal", 0, function () {
+                            $(this).remove();
+                            if ($products.find(".product").length == 0) {
+                                window.location.reload();
+                            }
+                        });
+                        doCalculate();
+                    }
+                    else {
+                        $.alert.error("删除商品失败。" + (data && data.message && data.message.content ? data.message.content : ""));
+                        $btnDel.removeClass("disabled");
+                    }
+                },
+                error: function () {
+                    $.alert.error("删除商品失败。");
+                    $btnDel.removeClass("disabled");
+                }
+            });
+        };
         //获取省市信息
         $.ajax({
             url: "${base}/common/area.jhtml",
@@ -273,9 +360,14 @@
             $btnBuy.addClass("calculating");
             var params = {
                 paymentMethodId: 1,
-                paymentPluginId: $paymentRadio.find("input:checked").val(),
                 shippingMethodId: 1
             };
+            if ($paymentRadio.find("input:checked").length) {
+                params.paymentPluginId = $paymentRadio.find("input:checked").val();
+            }
+            else if ($paymentRadio.length) {
+                params.paymentPluginId = $paymentRadio.find("input").first().val();
+            }
             $.ajax({
                 url: "${base}/member/order/calculatev2.jhtml",
                 type: "POST",
@@ -347,13 +439,13 @@
                 openWindow("${base}/payment/submit.jhtml?paymentPluginId=" + encodeURIComponent(paymentPluginId) + "&sn=" + encodeURIComponent(orderId));
                 checkOrderStatus();
                 //checkOrderLock();
-                $waitPanel.children("a").attr("href", "${base}/member/order/view.jhtml?sn=" + encodeURIComponent(orderId));
+                $waitPanel.children("a").attr("href", "${base}/member/order/viewv2.jhtml?sn=" + encodeURIComponent(orderId));
                 $waitPanel.show();
                 $waitPanelCover.addClass("opened").fadeTo("normal", 0.5, EASING_NAME);
             }
             else if (paymentPluginId == "tenpayNativePlugin") {
                 $waitPanel.children("h2").text("正在生成二维码...");
-                $waitPanel.children("a").hide().attr("href", "${base}/member/order/view.jhtml?sn=" + encodeURIComponent(orderId));
+                $waitPanel.children("a").hide().attr("href", "${base}/member/order/viewv2.jhtml?sn=" + encodeURIComponent(orderId));
                 $waitPanel.show();
                 $waitPanelCover.addClass("opened").fadeTo("normal", 0.5, EASING_NAME);
                 $.ajax({
@@ -388,7 +480,7 @@
                 });
             }
             else {
-                window.location.href = "${base}/member/order/view.jhtml?sn=" + encodeURIComponent(orderId);
+                window.location.href = "${base}/member/order/viewv2.jhtml?sn=" + encodeURIComponent(orderId);
             }
         };
         //检测订单状态
@@ -404,7 +496,7 @@
                 cache: false,
                 success: function (data) {
                     if (data) {
-                        window.location.href = "${base}/member/order/view.jhtml?sn=" + encodeURIComponent(orderId);
+                        window.location.href = "${base}/member/order/viewv2.jhtml?sn=" + encodeURIComponent(orderId);
                     }
                 }
             }).always(function () {
@@ -436,6 +528,11 @@
         $province.change(getCityData);
         $addressId.change(addressChange);
         $btnBuy.click(doSubmit);
+        $products.find(".product").each(function (i, e) {
+            var $product = $(e);
+            $product.find(".detail .purchase-info input").change(changeProductQty);
+            $product.find(".title a.close").click(delProduct);
+        });
         //过滤支付方式
         if (isMobile()) {
             $paymentRadio.find("input[value=alipayDirectPlugin]").parent().remove();

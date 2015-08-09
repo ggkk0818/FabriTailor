@@ -98,7 +98,7 @@
             $orderTable.find("tbody tr").click(function () {
                 var $tr = $(this);
                 if ($tr.data("sn")) {
-                    window.location.href = "view.jhtml?sn=" + encodeURIComponent($tr.data("sn"));
+                    window.location.href = "viewv2.jhtml?sn=" + encodeURIComponent($tr.data("sn"));
                 }
             });
         }
