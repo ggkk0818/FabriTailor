@@ -402,7 +402,7 @@
             if (!validateForm() || $(this).hasClass("loading"))
                 return;
             var params = {
-                cartToken: "${cartToken}",
+                cartToken: cartToken,
                 receiverId: $addressId.val(),
                 paymentMethodId: 1,
                 paymentPluginId: $paymentRadio.find("input:checked").val(),
