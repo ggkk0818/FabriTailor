@@ -151,7 +151,8 @@
     <div class="wait-cover-black"></div>
     [#include "/shop/include/footer.ftl" /]
     <script type="text/javascript">
-        var $products = $(".main-container .products"),
+        var cartToken = "${cartToken}",
+            $products = $(".main-container .products"),
             $purchase = $(".main-container .purchase"),
             $paymentRadio = $purchase.find(".radio"),
             $addressId = $purchase.find("select[name=address_id]"),
@@ -174,7 +175,7 @@
                 cityId: [#if receiver.area??]${receiver.area.id}[#else]""[/#if],
                 address: "${receiver.address}",
                 phone: "${receiver.phone}",
-                isDefault: ${receiver.isDefault}
+                isDefault: [#if receiver.isDefault?? && receiver.isDefault != null]${receiver.isDefault}[#else]false[/#if]
             }[#if receiver_has_next],[/#if]
 		[/#list]
         ];
@@ -202,18 +203,15 @@
                     cache: false,
                     success: function (data) {
                         if (data && data.message && data.message.type == "success") {
-                            if (typeof data.quantity === "number") {
-                                $input.val(data.quantity);
-                                $product.data("qty", data.quantity);
-                            }
-                            else {
-                                $product.data("qty", $input.val());
-                            }
+                            $product.data("qty", $input.val());
                             if (typeof data.subtotal === "number") {
                                 $price.text("￥" + data.subtotal.toFixed(2));
                             }
                             else {
                                 $price.text("￥" + (parseInt($product.data("qty")) * parseFloat($product.data("price"))).toFixed(2));
+                            }
+                            if (data.cartToken) {
+                                cartToken = data.cartToken;
                             }
                             doCalculate();
                         }
@@ -255,6 +253,9 @@
                                 window.location.reload();
                             }
                         });
+                        if (data.cartToken) {
+                            cartToken = data.cartToken;
+                        }
                         doCalculate();
                     }
                     else {
