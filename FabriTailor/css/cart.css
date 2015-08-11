@@ -128,6 +128,37 @@
     font-size:14px;
     color:#b6b6b6;
 }
+.main-container div.checkbox{
+    height:25px;
+    position:relative;
+    margin-bottom:10px;
+}
+.main-container div.checkbox input.checkbox{
+    position: absolute;
+    opacity: 0;
+    width: 19px;
+    height: 19px;
+    margin: 3px 0 0;
+    cursor: pointer;
+    z-index:1;
+}
+.main-container div.checkbox label{
+}
+.main-container div.checkbox label:before{
+    content: ' ';
+    position:relative;
+    top:3px;
+    display:inline-block;
+    width: 19px;
+    height: 19px;
+    margin-right: 5px;
+    border:1px solid #040000;
+}
+.main-container div.checkbox input.checkbox:checked+label:before{
+    content: ' ';
+    background:url(../img/checkbox-ok.png) no-repeat center center;
+    background-size:contain;
+}
 /* ==========================================================================
    Cart Navigator
    ========================================================================== */
@@ -259,24 +290,34 @@
     font-size:18px;
     line-height:20px;
 }
-.purchase .order-info{
+.purchase .order-info,
+.purchase .address-info{
     background: #f6f6f6;
     padding: 18px 24px;
 }
-.purchase .order-info label{
+.purchase .order-info label,
+.purchase .address-info label{
     display: block;
     margin: 0 0 9px;
     font-size:14px;
     line-height:20px;
 }
-.purchase .order-info label.margin{
+.purchase .order-info label.has-error,
+.purchase .address-info label.has-error{
+    color: #ce8787;
+}
+.purchase .order-info label.margin,
+.purchase .address-info label.margin{
     margin-top:45px;
 }
 .purchase .order-info input.input,
-.purchase .order-info select.select{
+.purchase .address-info input.input,
+.purchase .order-info select.select,
+.purchase .address-info select.select{
     margin-bottom:15px;
 }
-.purchase .order-info a.button{
+.purchase .order-info a.button,
+.purchase .address-info a.button{
     float:right;
     margin:20px 0 43px;
     font-size:18px;

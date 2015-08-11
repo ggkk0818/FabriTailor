@@ -79,7 +79,7 @@
             </div>
             <div class="col-md-4 col-sm-12">
                 <h2>收货地址</h2>
-                <div class="order-info">
+                <div class="address-info">
                     <label>地址</label>
                     <select name="address_id" class="select">
                         <option value="">新建</option>
@@ -89,21 +89,25 @@
                     </select>
                     <div class="address-form">
                         <label>姓名</label>
-                        <input name="name" class="input" type="text" />
+                        <input name="name" class="input" type="text" required />
                         <label class="margin">省市</label>
-                        <select name="province" class="select">
+                        <select name="province" class="select" required>
                             <option value="">省市</option>
                         </select>
                         <label>区县</label>
-                        <select name="city" class="select">
+                        <select name="city" class="select" required>
                             <option value="">区县</option>
                         </select>
                         <label class="margin">地址</label>
-                        <input name="addr" class="input" type="text" />
+                        <input name="addr" class="input" type="text" required />
                         <label class="margin">联系电话</label>
-                        <input name="tel" class="input" type="text" />
+                        <input name="tel" class="input" type="text" required />
                         <label class="margin">微信</label>
                         <input name="weichat" class="input" type="text" />
+                        <div class="checkbox">
+                            <input id="accountAddressIsDefault" class="checkbox" type="checkbox" />
+                            <label for="accountAddressIsDefault">设为默认</label>
+                        </div>
                         <div class="clearfix">
                             <a class="button" href="javascript:void(0);">保存</a>
                         </div>
@@ -155,14 +159,16 @@
             $products = $(".main-container .products"),
             $purchase = $(".main-container .purchase"),
             $paymentRadio = $purchase.find(".radio"),
-            $addressId = $purchase.find("select[name=address_id]"),
-            $addressForm = $purchase.find(".address-form"),
+            $addressInfo = $purchase.find(".address-info"),
+            $addressId = $addressInfo.find("select[name=address_id]"),
+            $addressForm = $addressInfo.find(".address-form"),
             $name = $addressForm.find("input[name=name]"),
             $province = $addressForm.find("select[name=province]"),
             $city = $addressForm.find("select[name=city]"),
             $addr = $addressForm.find("input[name=addr]"),
             $tel = $addressForm.find("input[name=tel]"),
             $weichat = $addressForm.find("input[name=weichat]"),
+            $isDefault = $("#accountAddressIsDefault"),
             $btnBuy = $purchase.find(".total a.button"),
             $waitPanel = $("body .wait-panel"),
             $waitPanelCover = $("body .wait-cover-black");
@@ -309,16 +315,160 @@
                 });
             }
         };
+        //设置表格信息
+        var setFormValues = function (address) {
+            if (address) {
+                $name.val(address.consignee || "");
+                $province.val(address.provinceId || "");
+                $province.change();
+                $city.data("value", address.cityId || "");
+                $addr.val(address.address || "");
+                $tel.val(address.phone || "");
+                $isDefault.get(0).checked = address.isDefault;
+            }
+            else {
+                $name.val("");
+                $province.val("");
+                $city.val("");
+                $addr.val("");
+                $tel.val("");
+                $isDefault.get(0).checked = false;
+            }
+        };
         //更改地址选择
         var addressChange = function () {
             var id = $addressId.val();
             if (!id || id.length == 0) {
+                setFormValues();
                 $addressForm.removeClass("hidden");
             }
             else {
+                var isExists = false;
+                for (var i = 0; i < addressList.length; i++) {
+                    var address = addressList[i];
+                    if (address.id == parseInt(id)) {
+                        setFormValues(address);
+                        isExists = true;
+                        break;
+                    }
+                }
+                if (!isExists)
+                    setFormValues();
                 $addressForm.addClass("hidden");
             }
             validateForm();
+        };
+        //保存地址
+        var saveAddress = function () {
+            if ($(this).hasClass("disabled"))
+                return;
+            //表单验证
+            var hasError = 0;
+            $addressForm.find("input, select").each(function (i, e) {
+                var $this = $(this),
+                    $control = $this.is(".ckeckbox") ? $this.parent() : $this.prev("label");
+                if ($this.prop("required") && (!$this.val() || $this.val().length == 0)) {
+                    $control.addClass("has-error");
+                    hasError++;
+                }
+                else {
+                    $control.removeClass("has-error");
+                }
+            });
+            if (hasError == 0) {
+                var params = {
+                    consignee: $name.val(),
+                    areaName: $province.children("option:checked").text() + $city.children("option:checked").text(),
+                    areaId: $city.val(),
+                    address: $addr.val(),
+                    phone: $tel.val(),
+                    isDefault: $isDefault.get(0).checked
+                };
+                if ($weichat.val() && $weichat.val().length) {
+                    params.weichat = $weichat.val();
+                }
+                $(this).addClass("disabled");
+                if ($addressId.val() && $addressId.val().length) {
+                    params.id = $addressId.val();
+                    $.ajax({
+                        url: "${base}/member/receiver/updatev2.jhtml",
+                        type: "POST",
+                        data: params,
+                        dataType: "json",
+                        cache: false,
+                        traditional: true,
+                        success: function (data) {
+                            if (data && data.type == "success") {
+                                var address = {
+                                    id: parseInt($addressId.val(), 10),
+                                    consignee: $name.val(),
+                                    provinceId: parseInt($province.val(), 10),
+                                    cityId: parseInt($city.val(), 10),
+                                    address: $addr.val(),
+                                    phone: $tel.val(),
+                                    isDefault: $isDefault.get(0).checked
+                                };
+                                var isExists = false;
+                                for (var i = 0; i < addressList.length; i++) {
+                                    if (address.id == addressList[i].id) {
+                                        $.extend(addressList[i], address);
+                                        isExists = true;
+                                        break;
+                                    }
+                                }
+                                if (!isExists)
+                                    addressList.push(address);
+                                $addressId.val(address.id).change();
+                            }
+                            else {
+                                $.alert.error("保存失败。" + (data && data.content ? data.content : ""));
+                            }
+                        },
+                        error: function () {
+                            $.alert.error("保存失败。");
+                        }
+                    }).always(function () {
+                        $addressForm.find("a.button").removeClass("disabled");
+                    });
+                }
+                else {
+                    $.ajax({
+                        url: "${base}/member/receiver/savev2.jhtml",
+                        type: "POST",
+                        data: params,
+                        dataType: "json",
+                        cache: false,
+                        traditional: true,
+                        success: function (data) {
+                            if (data && data.type == "success") {
+                                var address = {
+                                    id: parseInt(data.content, 10),
+                                    consignee: $name.val(),
+                                    provinceId: parseInt($province.val(), 10),
+                                    cityId: parseInt($city.val(), 10),
+                                    address: $addr.val(),
+                                    phone: $tel.val(),
+                                    isDefault: $isDefault.get(0).checked
+                                };
+                                addressList.push(address);
+                                var $option = $('<option></option>');
+                                $option.attr("value", address.id);
+                                $option.text(address.consignee);
+                                $addressId.append($option);
+                                $addressId.val(address.id).change();
+                            }
+                            else {
+                                $.alert.error("保存失败。" + (data && data.content ? data.content : ""));
+                            }
+                        },
+                        error: function () {
+                            $.alert.error("保存失败。");
+                        }
+                    }).always(function () {
+                        $addressForm.find("a.button").removeClass("disabled");
+                    });
+                }
+            }
         };
         //更改支付方式
         var paymentPluginChange = function () {
@@ -342,11 +492,11 @@
                 $paymentRadio.parent().removeClass("has-error");
             }
             if (!$addressId.val() || $addressId.val().length == 0) {
-                $addressId.prev().addClass("has-error");
+                //$addressId.prev().addClass("has-error");
                 isValide = false;
             }
             else {
-                $addressId.prev().removeClass("has-error");
+                //$addressId.prev().removeClass("has-error");
             }
             if (isValide) {
                 $btnBuy.removeClass("disabled");
@@ -528,6 +678,7 @@
         $paymentRadio.find("input").click(paymentPluginChange);
         $province.change(getCityData);
         $addressId.change(addressChange);
+        $addressForm.find("a.button").click(saveAddress);
         $btnBuy.click(doSubmit);
         $products.find(".product").each(function (i, e) {
             var $product = $(e);
