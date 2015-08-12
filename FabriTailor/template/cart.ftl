@@ -87,6 +87,9 @@
 						<option value="${receiver.id}">${receiver.consignee}</option>
 					[/#list]
                     </select>
+                    <div class="address-edit hidden">
+                        <a href="javascript:void(0);">编辑地址</a>
+                    </div>
                     <div class="address-form">
                         <label>姓名</label>
                         <input name="name" class="input" type="text" required />
@@ -160,6 +163,7 @@
             $purchase = $(".main-container .purchase"),
             $paymentRadio = $purchase.find(".radio"),
             $addressInfo = $purchase.find(".address-info"),
+            $addressEdit = $purchase.find(".address-edit"),
             $addressId = $addressInfo.find("select[name=address_id]"),
             $addressForm = $addressInfo.find(".address-form"),
             $name = $addressForm.find("input[name=name]"),
@@ -287,6 +291,11 @@
                     for (var id in data) {
                         $province.append('<option value="' + id + '">' + data[id] + '</option>');
                     }
+                    if ($province.data("value")) {
+                        $province.val($province.data("value"));
+                        $province.removeData("value");
+                        $province.change();
+                    }
                 }
             }
         });
@@ -319,8 +328,13 @@
         var setFormValues = function (address) {
             if (address) {
                 $name.val(address.consignee || "");
-                $province.val(address.provinceId || "");
-                $province.change();
+                if ($province.children("option").length > 1) {
+                    $province.val(address.provinceId || "");
+                    $province.change();
+                }
+                else {
+                    $province.data("value", address.provinceId || "");
+                }
                 $city.data("value", address.cityId || "");
                 $addr.val(address.address || "");
                 $tel.val(address.phone || "");
@@ -340,6 +354,7 @@
             var id = $addressId.val();
             if (!id || id.length == 0) {
                 setFormValues();
+                $addressEdit.addClass("hidden");
                 $addressForm.removeClass("hidden");
             }
             else {
@@ -354,8 +369,15 @@
                 }
                 if (!isExists)
                     setFormValues();
+                $addressEdit.removeClass("hidden");
                 $addressForm.addClass("hidden");
             }
+            validateForm();
+        };
+        //编辑地址
+        var showAddressUpdate = function () {
+            $addressEdit.addClass("hidden");
+            $addressForm.removeClass("hidden");
             validateForm();
         };
         //保存地址
@@ -418,6 +440,7 @@
                                 }
                                 if (!isExists)
                                     addressList.push(address);
+                                $addressId.children("option[value=" + address.id + "]").text(address.consignee);
                                 $addressId.val(address.id).change();
                             }
                             else {
@@ -493,6 +516,9 @@
             }
             if (!$addressId.val() || $addressId.val().length == 0) {
                 //$addressId.prev().addClass("has-error");
+                isValide = false;
+            }
+            else if($addressId.val() && $addressId.val().length > 0 && !$addressForm.hasClass("hidden")){
                 isValide = false;
             }
             else {
@@ -678,6 +704,7 @@
         $paymentRadio.find("input").click(paymentPluginChange);
         $province.change(getCityData);
         $addressId.change(addressChange);
+        $addressEdit.click(showAddressUpdate);
         $addressForm.find("a.button").click(saveAddress);
         $btnBuy.click(doSubmit);
         $products.find(".product").each(function (i, e) {
