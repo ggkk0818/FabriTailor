@@ -12,6 +12,7 @@
     <script src="${base}/resources/shop/js/modernizr.js"></script>
     <script src="${base}/resources/shop/js/jquery-1.11.3.min.js"></script>
     <script src="${base}/resources/shop/js/jquery.easing.1.3.js"></script>
+	<script src="${base}/resources/shop/js/jquery.alert.js"></script>
     <script src="${base}/resources/shop/js/jquery.cookie.js"></script>
     <script src="${base}/resources/shop/js/jquery.lazyload.js"></script>
     <script src="${base}/resources/shop/js/f_common.js"></script>
@@ -226,6 +227,9 @@
                     }
                 });
             }
+            else if (paymentPluginId == "tenpayJsapiPlugin") {
+                window.location.href = "${base}/payment/code.jhtml?sn=" + encodeURIComponent(orderId);
+            }
             else {
                 window.location.reload();
             }
@@ -296,7 +300,11 @@
                 document.attachEvent('WeixinJSBridgeReady', onWeixinReaddy);
                 document.attachEvent('onWeixinJSBridgeReady', onWeixinReaddy);
             }
-
+        }
+        if (!checkWeixinPayment()) {
+            $paymentRadio.find("input[value=tenpayJsapiPlugin]").parent().off().prop("disabled", true)
+                .children("h4").css({ color: "#cccccc" }).end()
+                .children("p").css({ color: "red" }).text("需要微信5.0或更高版本");
         }
     </script>
 </body>

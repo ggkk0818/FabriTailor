@@ -11,3 +11,19 @@ var isMobile = function () {
         bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
     return bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM;
 };
+var checkWeixinPayment = function () {
+    var userAgent = navigator.userAgent,
+        reg = new RegExp("MicroMessenger/(\\d+).\\d+"),
+        arr = reg.exec(userAgent);
+    if (arr && arr.length > 0) {
+        var version = parseInt(arr[1], 10);
+        if (!isNaN(version) && version > 4) {
+            return true;
+        }
+    }
+    else if (userAgent.indexOf("Windows Phone") > -1) {
+        //WindowsPhone系统无法通过userAgent判断版本
+        return true;
+    }
+    return false;
+};

@@ -656,6 +656,9 @@
                     }
                 });
             }
+            else if (paymentPluginId == "tenpayJsapiPlugin") {
+                window.location.href = "${base}/payment/code.jhtml?sn=" + encodeURIComponent(orderId);
+            }
             else {
                 window.location.href = "${base}/member/order/viewv2.jhtml?sn=" + encodeURIComponent(orderId);
             }
@@ -731,7 +734,11 @@
                 document.attachEvent('WeixinJSBridgeReady', onWeixinReaddy);
                 document.attachEvent('onWeixinJSBridgeReady', onWeixinReaddy);
             }
-
+        }
+        if (!checkWeixinPayment()) {
+            $paymentRadio.find("input[value=tenpayJsapiPlugin]").parent().off().prop("disabled", true)
+                .children("h4").css({ color: "#cccccc" }).end()
+                .children("p").css({ color: "red" }).text("需要微信5.0或更高版本");
         }
         //选择默认地址
         if (addressList && addressList.length) {
