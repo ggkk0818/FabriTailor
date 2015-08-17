@@ -85,8 +85,8 @@
                         <div class="order-info">
 						[#if order.paymentStatus == "unpaid" || order.paymentStatus == "partialPayment"]
 							[#list paymentPlugins as paymentPlugin]
-								<div class="radio clearfix">
-									<input name="paymentPlugin" type="radio" value="${paymentPlugin.id}" />
+								<div class="radio clearfix" for="${paymentPlugin.id}">
+									<input id="${paymentPlugin.id}" name="paymentPlugin" type="radio" value="${paymentPlugin.id}" />
 									<span></span>
 									<h4>${paymentPlugin.name}</h4>
 									<p>${abbreviate(paymentPlugin.description, 80, "...")}</p>
@@ -171,9 +171,12 @@
         });
         //更改支付方式
         var paymentPluginChange = function () {
-            var $radio = $(this).parent(),
+            var $radio = $(this),
                 $container = $radio.parent(),
-                val = $(this).val();
+				$input = $radio.find("input"),
+                val = $input.val();
+			if(!$input.prop("checked"))
+				$input.prop("checked", true)
             if (!$container.data("val") || $container.data("val") != val) {
                 $container.data("val", val);
                 $btnBuy.removeClass("disabled")
@@ -278,7 +281,7 @@
             window.location.reload();
         };
         //注册事件
-        $paymentRadio.find("input").click(paymentPluginChange);
+        $paymentRadio.click(paymentPluginChange);
         $btnBuy.click(doPayment);
         $waitPanel.children("a").click(reload);
         //过滤支付方式

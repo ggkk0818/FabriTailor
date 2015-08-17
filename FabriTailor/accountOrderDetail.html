@@ -291,9 +291,12 @@
         });
         //更改支付方式
         var paymentPluginChange = function () {
-            var $radio = $(this).parent(),
+            var $radio = $(this),
                 $container = $radio.parent(),
-                val = $(this).val();
+				$input = $radio.find("input"),
+                val = $input.val();
+            if (!$input.prop("checked"))
+                $input.prop("checked", true)
             if (!$container.data("val") || $container.data("val") != val) {
                 $container.data("val", val);
                 $btnBuy.removeClass("disabled")
@@ -398,7 +401,7 @@
             window.location.reload();
         };
         //注册事件
-        $paymentRadio.find("input").click(paymentPluginChange);
+        $paymentRadio.click(paymentPluginChange);
         $btnBuy.click(doPayment);
         $waitPanel.children("a").click(reload);
         //过滤支付方式

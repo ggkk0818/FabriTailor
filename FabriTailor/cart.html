@@ -678,9 +678,12 @@
         };
         //更改支付方式
         var paymentPluginChange = function () {
-            var $radio = $(this).parent(),
+            var $radio = $(this),
                 $container = $radio.parent(),
-                val = $(this).val();
+				$input = $radio.find("input"),
+                val = $input.val();
+            if (!$input.prop("checked"))
+                $input.prop("checked", true)
             if (!$container.data("val") || $container.data("val") != val) {
                 $container.data("val", val);
                 doCalculate();
@@ -887,7 +890,7 @@
             window.open(url);
         };
         //注册事件
-        $paymentRadio.find("input").click(paymentPluginChange);
+        $paymentRadio.click(paymentPluginChange);
         $province.change(getCityData);
         $addressId.change(addressChange);
         $addressEdit.click(showAddressUpdate);

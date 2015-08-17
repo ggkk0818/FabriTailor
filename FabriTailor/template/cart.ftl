@@ -68,8 +68,8 @@
                 <h2>支付方式</h2>
                 <div class="order-info">
 				[#list paymentPlugins as paymentPlugin]
-                    <div class="radio clearfix">
-                        <input name="paymentPlugin" type="radio" value="${paymentPlugin.id}" />
+                    <div class="radio clearfix" for="${paymentPlugin.id}">
+                        <input id="${paymentPlugin.id}" name="paymentPlugin" type="radio" value="${paymentPlugin.id}" />
                         <span></span>
                         <h4>${paymentPlugin.name}</h4>
                         <p>${abbreviate(paymentPlugin.description, 80, "...")}</p>
@@ -495,9 +495,12 @@
         };
         //更改支付方式
         var paymentPluginChange = function () {
-            var $radio = $(this).parent(),
+            var $radio = $(this),
                 $container = $radio.parent(),
-                val = $(this).val();
+				$input = $radio.find("input"),
+                val = $input.val();
+            if (!$input.prop("checked"))
+                $input.prop("checked", true)
             if (!$container.data("val") || $container.data("val") != val) {
                 $container.data("val", val);
                 doCalculate();
@@ -704,7 +707,7 @@
             window.open(url);
         };
         //注册事件
-        $paymentRadio.find("input").click(paymentPluginChange);
+        $paymentRadio.click(paymentPluginChange);
         $province.change(getCityData);
         $addressId.change(addressChange);
         $addressEdit.click(showAddressUpdate);
