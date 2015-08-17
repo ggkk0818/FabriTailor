@@ -55,16 +55,11 @@
                     document.attachEvent('onWeixinJSBridgeReady', doPayment);
                 }
             } else {
-                if (apiParams) {
-                    for (var key in apiParams) {
-                        $("body").append('<p>' + key + ':' + apiParams[key] + '</p>');
-                    }
-                }
                 WeixinJSBridge.invoke(
                    'getBrandWCPayRequest', {
-                       "appId": apiParams.appid,     //公众号名称，由商户传入     
+                       "appId": apiParams.appId,     //公众号名称，由商户传入     
                        "timeStamp": apiParams.timeStamp,         //时间戳，自1970年以来的秒数     
-                       "nonceStr": apiParams.nonce_str, //随机串     
+                       "nonceStr": apiParams.nonceStr, //随机串     
                        "package": apiParams.packageStr,
                        "signType": apiParams.signType,         //微信签名方式：     
                        "paySign": apiParams.paySign //微信签名 
