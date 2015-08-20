@@ -681,26 +681,51 @@
             if (letters) {
                 params.letters = letters;
             }
-            $.ajax({
-                url: "${base}/cart/addv2.jhtml",
-                type: "POST",
-                data: params,
-                dataType: "json",
-                cache: false,
-                traditional: true,
-                success: function (data) {
-                    if (data && data.type == "success") {
-                        $(".main-container .product-customizations .customization").last().data("customization-ret", $customization.prevAll("div").length);
-                        productCustomizationTabShow(4);
+            var doAddCart = function () {
+                $.ajax({
+                    url: "${base}/cart/add.jhtml",
+                    type: "POST",
+                    data: params,
+                    dataType: "json",
+                    cache: false,
+                    traditional: true,
+                    success: function (data) {
+                        if (data && data.type == "success") {
+                            $(".main-container .product-customizations .customization").last().data("customization-ret", $customization.prevAll("div").length);
+                            productCustomizationTabShow(4);
+                        }
+                        else {
+                            $.alert.error("加入购物车失败。" + (data && data.content ? data.content : ""));
+                        }
+                    },
+                    error: function () {
+                        $.alert.error("加入购物车失败。");
                     }
-                    else {
-
+                });
+            };
+            if (cid) {
+                $.ajax({
+                    url: "${base}/cart/delete.jhtml",
+                    type: "POST",
+                    data: { id: cid },
+                    dataType: "json",
+                    cache: false,
+                    success: function (data) {
+                        if (data && data.message && data.message.type == "success") {
+                            doAddCart();
+                        }
+                        else {
+                            $.alert.error("更新购物车失败。" + (data && data.message && data.message.content ? data.message.content : ""));
+                        }
+                    },
+                    error: function () {
+                        $.alert.error("更新购物车失败。");
                     }
-                },
-                error: function () {
-
-                }
-            });
+                });
+            }
+            else {
+                doAddCart();
+            }
         };
         var productCustomizationBuildAddToCartReturn = function () {
             //现阶段直接刷新页面

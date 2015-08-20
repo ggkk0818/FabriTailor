@@ -38,7 +38,7 @@
                     <div class="build-name">
                         <ul class="clearfix">
                             <!--<li>我的版型</li>-->
-                            <li><a href="${base}${cartItem.product.path}?quantity=${cartItem.quantity}">编辑版型</a></li>
+                            <li><a href="${base}${cartItem.product.path}?cid=${cartItem.id}">编辑版型</a></li>
                         </ul>
                     </div>
                     <div class="build-content">
