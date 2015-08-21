@@ -47,10 +47,10 @@
 							</h5>
                             <div class="clearfix"></div>
                             <div class="text">${orderItem.product.ingredient}</div>
-                            <a class="show-build-info active" href="javascript:void(0);">查看详情<i class="showhide"></i></a>
-                            <ul class="build-info active">
-							[#if product.specificationValues?has_content]
-								[#list product.specificationValues as specificationValue]
+                            <a class="show-build-info" href="javascript:void(0);">查看详情<i class="showhide"></i></a>
+                            <ul class="build-info">
+							[#if orderItem.product.specificationValues?has_content]
+								[#list orderItem.product.specificationValues as specificationValue]
 								<li>${specificationValue.name}</li>
 								[/#list]
 							[/#if]

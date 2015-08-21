@@ -25,7 +25,7 @@
 	[#if cart?? && cart.cartItems?has_content]
         <div class="products">
 		[#list cart.cartItems as cartItem]
-            <div class="product" data-id="${cartItem.id}" data-qty="${cartItem.quantity}" data-price="${cartItem.price}">
+            <div class="product" data-id="${cartItem.id}" data-qty="${cartItem.quantity}" data-price="${cartItem.price}" data-path="${base}${cartItem.product.path}">
                 <div class="title clearfix">
                     <h3 title="${cartItem.product.fullName}">${abbreviate(cartItem.product.name, 20, "...")}</h3>
                     <div class="image">
@@ -38,13 +38,13 @@
                     <div class="build-name">
                         <ul class="clearfix">
                             <!--<li>我的版型</li>-->
-                            <li><a href="${base}${cartItem.product.path}?cid=${cartItem.id}">编辑版型</a></li>
+                            <li><a href="${base}${cartItem.product.path}?cid=${cartItem.id}&quantity=${cartItem.quantity}">编辑版型</a></li>
                         </ul>
                     </div>
                     <div class="build-content">
                         <ul class="clearfix">
-						[#if product.specificationValues?has_content]
-							[#list product.specificationValues as specificationValue]
+						[#if cartItem.product.specificationValues?has_content]
+							[#list cartItem.product.specificationValues as specificationValue]
                             <li>${specificationValue.name}</li>
 							[/#list]
 						[/#if]
@@ -214,6 +214,7 @@
                     success: function (data) {
                         if (data && data.message && data.message.type == "success") {
                             $product.data("qty", $input.val());
+                            $product.find(".detail .build-name a").attr("href", $product.data("path") + "?cid=" + $product.data("id") + "&quantity=" + $product.data("qty"));
                             if (typeof data.subtotal === "number") {
                                 $price.text("￥" + data.subtotal.toFixed(2));
                             }

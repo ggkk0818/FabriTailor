@@ -10,6 +10,7 @@
     <script src="${base}/resources/shop/js/modernizr.js"></script>
     <script src="${base}/resources/shop/js/jquery-1.11.3.min.js"></script>
     <script src="${base}/resources/shop/js/jquery.easing.1.3.js"></script>
+    <script src="${base}/resources/shop/js/jquery.alert.js"></script>
     <script src="${base}/resources/shop/js/jquery.cookie.js"></script>
     <script src="${base}/resources/shop/js/jquery.lazyload.js"></script>
     <script src="${base}/resources/shop/js/f_common.js"></script>
@@ -681,7 +682,10 @@
             if (letters) {
                 params.letters = letters;
             }
-            var doAddCart = function () {
+            var doAddCart = function (quantity) {
+                if (!isNaN(quantity) && quantity > 0) {
+                    params.quantity = quantity;
+                }
                 $.ajax({
                     url: "${base}/cart/add.jhtml",
                     type: "POST",
@@ -703,7 +707,11 @@
                     }
                 });
             };
-            if (cid) {
+            var cidReg = new RegExp(".*\\?cid=(\\d+)&quantity=(\\d+)");
+            if (cidReg.test(window.location.href)) {
+                var pattern = cidReg.exec(window.location.href),
+                    cid = pattern[1],
+                    quantity = parseInt(pattern[2], 10);
                 $.ajax({
                     url: "${base}/cart/delete.jhtml",
                     type: "POST",
@@ -712,7 +720,7 @@
                     cache: false,
                     success: function (data) {
                         if (data && data.message && data.message.type == "success") {
-                            doAddCart();
+                            doAddCart(quantity);
                         }
                         else {
                             $.alert.error("更新购物车失败。" + (data && data.message && data.message.content ? data.message.content : ""));

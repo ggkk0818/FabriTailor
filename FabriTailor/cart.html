@@ -397,6 +397,7 @@
                     success: function (data) {
                         if (data && data.message && data.message.type == "success") {
                             $product.data("qty", $input.val());
+                            $product.find(".detail .build-name a").attr("href", $product.data("path") + "?cid=" + $product.data("id") + "&quantity=" + $product.data("qty"));
                             if (typeof data.subtotal === "number") {
                                 $price.text("￥" + data.subtotal.toFixed(2));
                             }
