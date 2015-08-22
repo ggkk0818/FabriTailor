@@ -747,7 +747,7 @@
                         //    params.memberAttribute_9 = $weichat.val();
                         //}
                         if ($refer.val() && $refer.val().length) {
-                            params.memberAttribute_10 = $refer.val();
+                            params.invitedCode = $refer.val();
                         }
                         $.ajax({
                             url: "${base}/register/submitv2.jhtml",

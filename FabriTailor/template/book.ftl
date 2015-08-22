@@ -132,10 +132,10 @@
                     <input name="weichat" class="input" type="text" placeholder="微信" />
                     <div class="tooltip">微信错误</div>
                 </div>-->
-                <div class="form-control">
+                <!--<div class="form-control">
                     <input name="refer" class="input" type="text" placeholder="介绍人电子邮箱" />
                     <div class="tooltip">介绍人电子邮箱错误</div>
-                </div>
+                </div>-->
                 <p class="msg hidden"></p>
                 <a href="javascript:void(0);" class="button">保存</a>
             </div>
@@ -158,11 +158,11 @@
             //$email = $scheduleForm.find("input[name=email]"),
             $tel = $scheduleForm.find("input[name=tel]"),
             //$weichat = $scheduleForm.find("input[name=weichat]"),
-            $refer = $scheduleForm.find("input[name=refer]"),
+            //$refer = $scheduleForm.find("input[name=refer]"),
             $province = $scheduleForm.find("select[name=province]"),
             $city = $scheduleForm.find("select[name=city]"),
             $addr = $scheduleForm.find("input[name=addr]"),
-            today = new Date("2015/07/04 00:00:00");
+            today = new Date([#if today??]"${today?string("yyyy-MM-dd")}"[/#if]);
         var dayOfWeekName = {
             0: "星期天",
             1: "星期一",
@@ -267,9 +267,9 @@
                 //if ($weichat.val() && $weichat.val().length) {
                 //    params.wechat = $weichat.val();
                 //}
-                if ($refer.val() && $refer.val().length) {
-                    params.introducerEmail = $refer.val();
-                }
+                //if ($refer.val() && $refer.val().length) {
+                //    params.introducerEmail = $refer.val();
+                //}
                 $(this).addClass("disabled");
                 $.ajax({
                     url: "${base}/quantity/save.jhtml",

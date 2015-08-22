@@ -425,6 +425,12 @@
     bottom:50px;
     margin-left: -125px;
 }
+.product-customizations .customization.add-to-cart .zoom-container a.btn.left{
+    margin-left:-275px;
+}
+.product-customizations .customization.add-to-cart .zoom-container a.btn.right{
+    margin-left:25px;
+}
 .product-customizations .customization .zoom-container .btn-close:hover{
     background-position:-25px 0;
 }
@@ -850,6 +856,20 @@
     .product-customizations .customization .options .option{
         width: 44%;
         margin: 2.5%;
+    }
+    .product-customizations .customization.add-to-cart .zoom-container a.btn{
+        position:absolute;
+        left:50%;
+        right:auto;
+        bottom:50px;
+        margin-left: -125px;
+    }
+    .product-customizations .customization.add-to-cart .zoom-container a.btn.left{
+        margin-left: -125px;
+        bottom: 110px;
+    }
+    .product-customizations .customization.add-to-cart .zoom-container a.btn.right{
+        margin-left: -125px;
     }
     /* ==========================================================================
        Customization Build

@@ -302,8 +302,8 @@
                         <div class="tooltip">微信错误</div>
                     </div>-->
                     <div class="form-control">
-                        <input name="refer" class="input" type="text" placeholder="介绍人电子邮箱" />
-                        <div class="tooltip">介绍人电子邮箱错误</div>
+                        <input name="refer" class="input" type="text" placeholder="邀请码" />
+                        <div class="tooltip">邀请码</div>
                     </div>
                     <a href="javascript:void(0);" class="button">下一步</a>
                 </div>
@@ -869,7 +869,7 @@
                         //    params.memberAttribute_9 = $weichat.val();
                         //}
                         if ($refer.val() && $refer.val().length) {
-                            params.memberAttribute_10 = $refer.val();
+                            params.invitedCode = $refer.val();
                         }
                         $.ajax({
                             url: "${base}/register/submitv2.jhtml",
