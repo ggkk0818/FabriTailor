@@ -37,5 +37,17 @@
 		${article.content}
 	</div>
     [#include "/shop/include/footer.ftl" /]
+    <script type="text/javascript">
+        //分屏加载
+        $(".article-image-container > img[data-src]").lazyload({
+            failurelimit: 10,
+            data_attribute: "src",
+            load: function (elements_left, settings, img) {
+                $(this).parent().animate({ opacity: 1 }, 1000, EASING_NAME).removeClass("loading");
+            }
+        }).each(function (i, e) {
+            $(this).parent().animate({ opacity: 0 }, 0).addClass("loading");
+        });
+    </script>
 </body>
 </html>
