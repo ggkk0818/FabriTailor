@@ -18,6 +18,15 @@
     box-sizing: border-box;
     transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
 }
+.main-container input.input::-webkit-input-placeholder{
+    color:#d7ded6;
+}
+.main-container input.input::-moz-placeholder{
+    color:#d7ded6;
+}
+.main-container input.input:-ms-input-placeholder{
+    color:#d7ded6;
+}
 .main-container input.input:hover {
     border-left: 1px solid #d7ded6;
     padding-left: 10px;
@@ -325,6 +334,20 @@
     margin:20px 0 43px;
     font-size:18px;
     line-height:20px;
+}
+.purchase .coupon-info{
+    position:relative;
+    margin-top:20px;
+}
+.purchase .coupon-info .input-container{
+    margin-right: 110px;
+}
+.purchase .coupon-info a.button{
+    position:absolute;
+    top:0;
+    right:0;
+    width:100px;
+    margin:0;
 }
 .purchase .address-edit{
     text-align:right;

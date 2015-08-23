@@ -15,6 +15,7 @@
 	<script src="${base}/resources/shop/js/jquery.alert.js"></script>
     <script src="${base}/resources/shop/js/jquery.cookie.js"></script>
     <script src="${base}/resources/shop/js/jquery.lazyload.js"></script>
+	<script src="${base}/resources/shop/js/jquery.zeroclipboard.min.js"></script>
     <script src="${base}/resources/shop/js/f_common.js"></script>
 </head>
 <body>

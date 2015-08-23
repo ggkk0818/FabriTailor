@@ -15,6 +15,7 @@
     <script src="${base}/resources/shop/js/jquery.lazyload.js"></script>
     <script src="${base}/resources/shop/js/jquery.scrollTo-1.4.3.1.js"></script>
     <script src="${base}/resources/shop/js/Date.Format.js"></script>
+	<script src="${base}/resources/shop/js/jquery.zeroclipboard.min.js"></script>
     <script src="${base}/resources/shop/js/f_common.js"></script>
 </head>
 <body>

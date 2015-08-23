@@ -14,6 +14,7 @@
     <script src="js/jquery.alert.js"></script>
     <script src="js/jquery.cookie.js"></script>
     <script src="js/jquery.lazyload.js"></script>
+    <script src="js/jquery.zeroclipboard.min.js"></script>
     <script src="js/common.js"></script>
 </head>
 <body>
@@ -140,12 +141,14 @@
     </div>
     <footer>
         <div class="contact">
-            <h3 class="hide-on-small">与凡布保持联系</h3>
-            <div class="input-group hide-on-small">
-                <input class="input" type="text" placeholder="请输入您的邮件地址" />
-                <a href="javascript:void(0);" class="btn">»</a>
+            <h3 class="text-center-on-small hidden">邀请朋友购买双方各获得100元代金券</h3>
+            <div class="input-group hidden">
+                <input class="input" type="text" value="h2q6dh1" />
+                <a id="invitationCodeCopyBtn" class="btn" href="javascript:void(0);" data-refer-code="h2q6dh1">复制</a>
+                <div class="tip hidden">已复制到剪贴板</div>
             </div>
-            <div class="ico-link text-center-on-small">
+            <img class="qr-img" src="img/qr-img.png" />
+            <div class="ico-link text-center-on-small hidden">
                 <a href="javascript:void(0);"><img src="img/ico-email.jpg" /></a>
                 <a href="javascript:void(0);"><img src="img/ico-weibo.png" /></a>
                 <a href="javascript:void(0);"><img src="img/ico-weixin.png" /></a>
@@ -237,6 +240,20 @@
     <script src="js/rng.js"></script>
     <script src="js/rsa.js"></script>
     <script type="text/javascript">
+        $("footer .contact").children(".qr-img").addClass("hidden").end().children("h3, .input-group").removeClass("hidden").children("input.input").val("test");
+        $("footer .contact #invitationCodeCopyBtn").data("refer-code", "test").on({
+            "beforecopy": function () {
+                $(this).prev(".input").get(0).select();
+            },
+            "copy": function (e) {
+                e.clipboardData.clearData();
+                e.clipboardData.setData("text/plain", $(this).data("refer-code"));
+                e.preventDefault();
+            },
+            "aftercopy": function () {
+                $(this).next(".tip").stop(true, true).css({ opacity: 1 }).removeClass("hidden").delay(3000).fadeTo("normal", 0, function () { $(this).addClass("hidden"); });
+            }
+        });
         //这里应该用cookie中是否有username来判断是否已登录,memberUsername是用于记住曾经登录的用户名(记住我)
         //if ($.cookie("memberUsername")) {
         if ($.cookie("name")) {
@@ -253,7 +270,47 @@
             //$("header .btn-group .account").removeClass("hidden").children("span").text($.cookie("memberUsername"));
             $("header .btn-group .account").children("span").text($.cookie("name"));
             //侧边栏链接
-            $("body > aside ul li").filter(".login, .register").addClass("hidden").end().filter(".logout, .account").removeClass("hidden");
+            $("body > aside ul li").filter(".login, .register").addClass("hidden").end().filter(".logout, .cart, .account").removeClass("hidden");
+            //获取购物车商品数量
+            $.ajax({
+                url: "${base}/cart/count.jhtml",
+                type: "GET",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    if (data && data.message && data.message.type == "success") {
+                        if (data.quantity) {
+                            $("header .btn-group").children(".cart").text("购物车(" + data.quantity + ")");
+                            $("body > aside ul li.cart").children("a").text("购物车(" + data.quantity + ")");
+                        }
+                    }
+                }
+            });
+            //获取邀请码
+            $.ajax({
+                url: "${base}/member/invitationCode.jhtml",
+                type: "GET",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    if (data && data.message && data.message.type == "success") {
+                        $("footer .contact").children(".qr-img").addClass("hidden").end().children("h3, .input-group").removeClass("hidden").children("input.input").val(data.invitationCode);
+                        $("footer .contact #invitationCodeCopyBtn").data("refer-code", data.invitationCode).on({
+                            "beforecopy": function () {
+                                $(this).prev(".input").get(0).select();
+                            },
+                            "copy": function (e) {
+                                e.clipboardData.clearData();
+                                e.clipboardData.setData("text/plain", $(this).data("refer-code"));
+                                e.preventDefault();
+                            },
+                            "aftercopy": function () {
+                                $(this).next(".tip").stop(true, true).css({ opacity: 1 }).removeClass("hidden").delay(3000).fadeTo("normal", 0, function () { $(this).addClass("hidden"); });
+                            }
+                        });
+                    }
+                }
+            });
         }
         else {
             //登陆
@@ -305,9 +362,9 @@
                             if (data && data.type == "success") {
                                 $.cookie("memberUsername", $username.val(), { expires: 7 * 24 * 60 * 60 });
                                 //[#if redirectUrl??]
-                                    window.location.href = "${redirectUrl}";
+                                window.location.href = "${redirectUrl}";
                                 //[#else]
-                                    window.location.reload();
+                                window.location.reload();
                                 //[/#if]
                             }
                             else {

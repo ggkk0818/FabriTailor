@@ -1,11 +1,13 @@
     <footer>
         <div class="contact">
-            <h3 class="hide-on-small">与凡布保持联系</h3>
-            <div class="input-group hide-on-small">
-                <input class="input" type="text" placeholder="请输入您的邮件地址" />
-                <a href="javascript:void(0);" class="btn">»</a>
-            </div>
-            <div class="ico-link text-center-on-small">
+          <h3 class="text-center-on-small hidden">邀请朋友购买双方各获得100元代金券</h3>
+          <div class="input-group hidden">
+            <input class="input" type="text" value="" />
+            <a id="invitationCodeCopyBtn" class="btn" href="javascript:void(0);" data-refer-code="">复制</a>
+            <div class="tip hidden">已复制到剪贴板</div>
+          </div>
+          <img class="qr-img" src="${base}/resources/shop/img/qr-img.png" />
+          <div class="ico-link text-center-on-small hidden">
                 <a href="javascript:void(0);"><img src="${base}/resources/shop/img/ico-email.jpg" /></a>
                 <a href="javascript:void(0);"><img src="${base}/resources/shop/img/ico-weibo.png" /></a>
                 <a href="javascript:void(0);"><img src="${base}/resources/shop/img/ico-weixin.png" /></a>
@@ -115,6 +117,46 @@
             $("header .btn-group .account").children("span").text($.cookie("name"));
             //侧边栏链接
             $("body > aside ul li").filter(".login, .register").addClass("hidden").end().filter(".logout, .cart, .account").removeClass("hidden");
+            //获取购物车商品数量
+            $.ajax({
+                url: "${base}/cart/count.jhtml",
+                type: "GET",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    if (data && data.message && data.message.type == "success") {
+                        if (data.quantity) {
+                            $("header .btn-group").children(".cart").text("购物车(" + data.quantity + ")");
+                            $("body > aside ul li.cart").children("a").text("购物车(" + data.quantity + ")");
+                        }
+                    }
+                }
+            });
+            //获取邀请码
+            $.ajax({
+                url: "${base}/member/invitationCode.jhtml",
+                type: "GET",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    if (data && data.message && data.message.type == "success") {
+                        $("footer .contact").children(".qr-img").addClass("hidden").end().children("h3, .input-group").removeClass("hidden").children("input.input").val(data.invitationCode);
+                        $("footer .contact #invitationCodeCopyBtn").data("refer-code", data.invitationCode).on({
+                            "beforecopy": function () {
+                                $(this).prev(".input").get(0).select();
+                            },
+                            "copy": function (e) {
+                                e.clipboardData.clearData();
+                                e.clipboardData.setData("text/plain", $(this).data("refer-code"));
+                                e.preventDefault();
+                            },
+                            "aftercopy": function () {
+                                $(this).next(".tip").stop(true, true).css({ opacity: 1 }).removeClass("hidden").delay(3000).fadeTo("normal", 0, function () { $(this).addClass("hidden"); });
+                            }
+                        });
+                    }
+                }
+            });
         }
         else {
             //登陆

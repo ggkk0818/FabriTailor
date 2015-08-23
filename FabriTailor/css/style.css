@@ -1243,12 +1243,13 @@ footer .contact {
 }
 footer .contact h3{
     margin-left:10px;
+    font-size:16px;
 }
 footer .contact .input-group{
     position:relative;
 }
 footer .contact .input-group .input{
-    padding-right: 60px;  
+    padding-right: 90px;  
 }
 footer .contact .input-group .btn{
     display:block;
@@ -1256,12 +1257,12 @@ footer .contact .input-group .btn{
     right: 0px;
     top: 0px;
     z-index: 2;
-    width:50px;
+    width:75px;
     height:50px;
     font-size:14px;
     text-align:center;
-    line-height:10px;
-    padding: 18px;
+    line-height:20px;
+    padding: 15px 18px;
     border: 0;
     cursor: pointer;
     color: white;
@@ -1272,8 +1273,21 @@ footer .contact .input-group .btn{
     -moz-transition: all 400ms ease;
     transition: all 400ms ease;
 }
-footer .contact .input-group .btn:hover{
+footer .contact .input-group .btn:hover,
+footer .contact .input-group .btn.hover{
     background-color:#b6b6b6;
+}
+footer .contact .input-group .tip{
+    position:absolute;
+    top:10px;
+    left:47px;
+    width:120px;
+    height:30px;
+    padding:5px 10px;
+    line-height:20px;
+    font-size:14px;
+    color:#fff;
+    background:rgba(0,0,0,0.7);
 }
 footer .contact .ico-link{
     margin:30px 0 0 10px;
@@ -1281,6 +1295,12 @@ footer .contact .ico-link{
 footer .contact .ico-link a{
     display:inline-block;
     margin-right:20px;
+}
+footer .contact .qr-img{
+    display:block;
+    width:200px;
+    height:200px;
+    margin: 0 auto 25px;
 }
 footer .links {
     margin: 0 340px 0 15%;
@@ -1447,6 +1467,9 @@ div.messageBar a{
         right: 0;
         width: 280px;
         margin:0 auto;
+    }
+    footer .contact h3{
+        margin-left:0;
     }
     footer .links {
         margin: 0 auto;

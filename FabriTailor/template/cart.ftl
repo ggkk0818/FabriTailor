@@ -14,6 +14,7 @@
 	<script src="${base}/resources/shop/js/jquery.alert.js"></script>
     <script src="${base}/resources/shop/js/jquery.cookie.js"></script>
     <script src="${base}/resources/shop/js/jquery.lazyload.js"></script>
+	<script src="${base}/resources/shop/js/jquery.zeroclipboard.min.js"></script>
     <script src="${base}/resources/shop/js/f_common.js"></script>
 </head>
 <body>
@@ -76,6 +77,12 @@
                     </div>
 				[/#list]
                 </div>
+                <div class="coupon-info">
+                    <div class="input-container">
+                        <input name="coupon" class="input" type="text" placeholder="优惠券" />
+                    </div>
+                    <a class="button disabled" href="javascript:void(0);">使用</a>
+                </div>
             </div>
             <div class="col-md-4 col-sm-12">
                 <h2>收货地址</h2>
@@ -93,17 +100,17 @@
                     <div class="address-form">
                         <label>姓名</label>
                         <input name="name" class="input" type="text" required />
-                        <label class="margin">省市</label>
+                        <label class="margin">省市*</label>
                         <select name="province" class="select" required>
                             <option value="">省市</option>
                         </select>
-                        <label>区县</label>
+                        <label>区县*</label>
                         <select name="city" class="select" required>
                             <option value="">区县</option>
                         </select>
-                        <label class="margin">地址</label>
+                        <label class="margin">地址*</label>
                         <input name="addr" class="input" type="text" required />
-                        <label class="margin">联系电话</label>
+                        <label class="margin">联系电话*</label>
                         <input name="tel" class="input" type="text" required />
                         <label class="margin">微信</label>
                         <input name="weichat" class="input" type="text" />
@@ -159,9 +166,14 @@
     [#include "/shop/include/footer.ftl" /]
     <script type="text/javascript">
         var cartToken = "${cartToken}",
+            couponCode = null,
+            amount = null,
             $products = $(".main-container .products"),
             $purchase = $(".main-container .purchase"),
             $paymentRadio = $purchase.find(".radio"),
+            $couponInfo = $purchase.find(".coupon-info"),
+            $couponInput = $couponInfo.find("input[name=coupon]"),
+            $couponBtn = $couponInfo.find("a.button"),
             $addressInfo = $purchase.find(".address-info"),
             $addressEdit = $purchase.find(".address-edit"),
             $addressId = $addressInfo.find("select[name=address_id]"),
@@ -543,6 +555,9 @@
                 paymentMethodId: 1,
                 shippingMethodId: 1
             };
+            if (couponCode) {
+                params.code = couponCode;
+            }
             if ($paymentRadio.find("input:checked").length) {
                 params.paymentPluginId = $paymentRadio.find("input:checked").val();
             }
@@ -565,6 +580,7 @@
                         total.eq(3).text("￥" + (isNaN(parseFloat(data.freight)) ? "0.00" : parseFloat(data.freight).toFixed(2)));
                         total.eq(3).text("￥" + (isNaN(parseFloat(data.tax)) ? "0.00" : parseFloat(data.tax).toFixed(2)));
                         total.last().text("￥" + (isNaN(parseFloat(data.amount)) ? "0.00" : parseFloat(data.amount).toFixed(2)));
+                        amount = data.amount;
                     }
                     if (typeof callback === "function")
                         callback.call(this, data);
@@ -588,6 +604,9 @@
                 paymentPluginId: $paymentRadio.find("input:checked").val(),
                 shippingMethodId: 1
             };
+            if (couponCode) {
+                params.code = couponCode;
+            }
             $btnBuy.addClass("loading");
             $.ajax({
                 url: "${base}/member/order/createv2.jhtml",
@@ -600,7 +619,12 @@
                 success: function (data) {
                     if (data && data.type == "success") {
                         orderId = data.content;
-                        doPayment();
+                        if (amount <= 0) {
+                            window.location.href = "${base}/member/order/viewv2.jhtml?sn=" + encodeURIComponent(orderId);
+                        }
+                        else {
+                            doPayment();
+                        }
                     }
                     else {
                         $.alert.error("提交订单失败。" + (data && data.content ? data.content : ""));
@@ -703,6 +727,30 @@
                 lockTimer = setTimeout(checkOrderLock, 3000);
             });
         };
+        //优惠券
+        var onCouponInputChange = function () {
+            if ($couponInput.val() && $couponInput.val().length || couponCode != null) {
+                $couponBtn.removeClass("disabled");
+            }
+            else {
+                $couponBtn.addClass("disabled");
+            }
+        };
+        var useCoupon = function () {
+            if ($couponBtn.hasClass("disabled") || $couponBtn.hasClass("calculating"))
+                return;
+            $couponBtn.addClass("calculating");
+            if ($couponInput.val() && $couponInput.val().length) {
+                couponCode = $couponInput.val();
+            }
+            else {
+                couponCode = null;
+            }
+            doCalculate(function (data) {
+                $couponBtn.removeClass("calculating");
+                $couponInput.keyup();
+            });
+        };
         //新页面打开链接
         var openWindow = function (url) {
             window.open(url);
@@ -719,6 +767,8 @@
             $product.find(".detail .purchase-info input").change(changeProductQty);
             $product.find(".title a.close").click(delProduct);
         });
+        $couponInput.keyup(onCouponInputChange);
+        $couponBtn.click(useCoupon);
         //过滤支付方式
         if (isMobile()) {
             $paymentRadio.find("input[value=alipayDirectPlugin]").parent().remove();

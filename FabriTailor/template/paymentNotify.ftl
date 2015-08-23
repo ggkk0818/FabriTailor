@@ -11,6 +11,7 @@
     <script src="${base}/resources/shop/js/jquery-1.11.3.min.js"></script>
     <script src="${base}/resources/shop/js/jquery.easing.1.3.js"></script>
     <script src="${base}/resources/shop/js/jquery.cookie.js"></script>
+	<script src="${base}/resources/shop/js/jquery.zeroclipboard.min.js"></script>
     <script src="${base}/resources/shop/js/f_common.js"></script>
 </head>
 <body>
