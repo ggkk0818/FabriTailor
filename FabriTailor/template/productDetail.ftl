@@ -689,7 +689,7 @@
                     params.quantity = quantity;
                 }
                 $.ajax({
-                    url: "${base}/cart/add.jhtml",
+                    url: "${base}/cart/addv2.jhtml",
                     type: "POST",
                     data: params,
                     dataType: "json",
