@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>预约量体 - FabriTailor</title>
+    <title>预约量体[#if systemShowPowered] - FabriTailor[/#if]</title>
     <link href="${base}/resources/shop/css/style.css" rel="stylesheet" />
     <link href="${base}/resources/shop/css/book.css" rel="stylesheet" />
     <script src="${base}/resources/shop/js/modernizr.js"></script>

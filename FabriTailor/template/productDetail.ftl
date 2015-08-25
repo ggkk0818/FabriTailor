@@ -4,7 +4,21 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>FabriTailor</title>
+[@seo type = "productContent"]
+	<title>[#if product.seoTitle??]${product.seoTitle}[#elseif seo.title??][@seo.title?interpret /][/#if][#if systemShowPowered] - FabriTailor[/#if]</title>
+	
+	
+	[#if product.seoKeywords??]
+		<meta name="keywords" content="${product.seoKeywords}" />
+	[#elseif seo.keywords??]
+		<meta name="keywords" content="[@seo.keywords?interpret /]" />
+	[/#if]
+	[#if product.seoDescription??]
+		<meta name="description" content="${product.seoDescription}" />
+	[#elseif seo.description??]
+		<meta name="description" content="[@seo.description?interpret /]" />
+	[/#if]
+[/@seo]
     <link href="${base}/resources/shop/css/style.css" rel="stylesheet" />
     <link href="${base}/resources/shop/css/productDetail.css" rel="stylesheet" />
     <script src="${base}/resources/shop/js/modernizr.js"></script>
@@ -782,53 +796,59 @@
                 success: function (data) {
                     if (data && data.content == "true") {
                         $.getJSON("${base}/member/specification/listajax.jhtml", function (data) {
-                            if (data && data.specificationValues && data.specificationValues.length) {
-                                $(".main-container .product-customizations .customization").eq(1).find(".options .option").not(".monogram").each(function (i, e) {
-                                    var $option = $(e),
-                                        $template = $('<div class="option"><div class="image"><img /></div><div class="text">&nbsp;</div></div>'),
-                                        specification = null,
-                                        specificationValue = null;
-                                    for (var j = 0; j < data.specificationValues.length; j++) {
-                                        var val = data.specificationValues[j];
-                                        if (val.specification && val.specification.id == $option.data("specification-name")) {
-                                            specification = val.specification;
-                                            specificationValue = val;
-                                            break;
-                                        }
-                                    }
-                                    if (specification && specificationValue) {
-                                        $template.data("title", specificationValue.name);
-                                        $template.data("description", specificationValue.description);
-                                        $template.data("specification-name", specification.id);
-                                        $template.data("specification-value", specificationValue.id);
-                                        if (specification.id == 1)
-                                            $template.find(".image img").attr("src", "${base}/resources/shop/img/product-customizztion1.jpg");
-                                        else
-                                            $template.find(".image img").attr("src", specificationValue.image);
-                                        $template.children(".text").text(specificationValue.name);
-                                        $myCustomizations.find(".options .option.monogram").before($template);
-                                    }
-                                    else {
-                                        $myCustomizations.find(".options .option.monogram").before($option.clone());
-                                    }
-                                });
-                                $myCustomizations.removeClass("no-login").children(".zoom-container").last().remove();
+                            if (data && data.quantityStatus == "none") {
+                                $(".main-container .product-detail-container .product-info .build-btns-no-login a").attr("href", "${base}/quantity.jhtml").text("在线量体");
                             }
-                            if (data && data.letters) {
-                                $myCustomizations.find(".options .option.monogram").data("letters", data.letters);
-                                $myCustomizations.find(".options .option.monogram").children(".text").text("自定义(" + data.letters + ")");
-                                $myCustomizations.find(".options .option.monogram").find(".image img").attr("src", "${base}/resources/shop/img/product-customizztion-letters.jpg");
+                            else {
+                                if (data && data.specificationValues && data.specificationValues.length) {
+                                    $(".main-container .product-customizations .customization").eq(1).find(".options .option").not(".monogram").each(function (i, e) {
+                                        var $option = $(e),
+                                            $template = $('<div class="option"><div class="image"><img /></div><div class="text">&nbsp;</div></div>'),
+                                            specification = null,
+                                            specificationValue = null;
+                                        for (var j = 0; j < data.specificationValues.length; j++) {
+                                            var val = data.specificationValues[j];
+                                            if (val.specification && val.specification.id == $option.data("specification-name")) {
+                                                specification = val.specification;
+                                                specificationValue = val;
+                                                break;
+                                            }
+                                        }
+                                        if (specification && specificationValue) {
+                                            $template.data("title", specificationValue.name);
+                                            $template.data("description", specificationValue.description);
+                                            $template.data("specification-name", specification.id);
+                                            $template.data("specification-value", specificationValue.id);
+                                            if (specification.id == 1)
+                                                $template.find(".image img").attr("src", "${base}/resources/shop/img/product-customizztion1.jpg");
+                                            else
+                                                $template.find(".image img").attr("src", specificationValue.image);
+                                            $template.children(".text").text(specificationValue.name);
+                                            $myCustomizations.find(".options .option.monogram").before($template);
+                                        }
+                                        else {
+                                            $myCustomizations.find(".options .option.monogram").before($option.clone());
+                                        }
+                                    });
+                                    $myCustomizations.removeClass("no-login").children(".zoom-container").last().remove();
+                                }
+                                if (data && data.letters) {
+                                    $myCustomizations.find(".options .option.monogram").data("letters", data.letters);
+                                    $myCustomizations.find(".options .option.monogram").children(".text").text("自定义(" + data.letters + ")");
+                                    $myCustomizations.find(".options .option.monogram").find(".image img").attr("src", "${base}/resources/shop/img/product-customizztion-letters.jpg");
+                                }
+                                $(".main-container .product-detail-container .product-info .build-btns").removeClass("hidden");
+                                $(".main-container .product-detail-container .product-info .build-btns-no-login").addClass("hidden");
+                                $(".main-container .product-detail-container .product-info .build-info").removeClass("hidden");
+                                $(".main-container .product-detail-container .product-info .build-info-no-login").addClass("hidden");
                             }
                         }).fail(function () {
-                            
+                            $.alert.error("无法获取用户量体与版型信息，请刷新页面重试。");
                         });
-                        $(".main-container .product-detail-container .product-info .build-btns").removeClass("hidden");
-                        $(".main-container .product-detail-container .product-info .build-btns-no-login").addClass("hidden");
-                        $(".main-container .product-detail-container .product-info .build-info").removeClass("hidden");
-                        $(".main-container .product-detail-container .product-info .build-info-no-login").addClass("hidden");
                     }
                 },
                 error: function () {
+                    $.alert.error("无法获取用户量体与版型信息，请刷新页面重试。");
                 }
             });
         };

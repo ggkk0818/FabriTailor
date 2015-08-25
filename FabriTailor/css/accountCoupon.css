@@ -1,0 +1,73 @@
+﻿.accountCoupon{
+    margin:0 auto;
+    padding: 50px;
+}
+.accountCoupon h1{
+    font-size:30px;
+    text-align: center;
+}
+.accountCoupon p{
+    font-size:16px;
+    text-align:center;
+}
+.accountCoupon .coupon-image{
+    width:640px;
+    margin:45px auto 0;
+}
+.accountCoupon .coupon-image img{
+    width:100%;
+}
+.accountCoupon .coupon-table{
+    width: 100%;
+    border: none;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background: white;
+    margin-bottom: 1.25rem;
+    table-layout: auto;
+}
+.accountCoupon .coupon-table thead tr th{
+    text-align:left;
+    padding: 10px;
+    color: #b6b6b6;
+}
+.accountCoupon .coupon-table tbody tr {
+    /*cursor:pointer;*/
+}
+.accountCoupon .coupon-table tbody tr:nth-child(odd) {
+    background-color: #f6f6f6;
+}
+.accountCoupon .coupon-table tbody tr td {
+    position: relative;
+    padding: 10px;
+}
+.accountCoupon .coupon-table tbody tr td a.arrow-right{
+    display:none;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size:18px;
+}
+.accountCoupon .coupon-table tbody tr td a.arrow-right:hover{
+    text-decoration:none;
+}
+@media(max-width:1040px) {
+    .accountCoupon{
+        padding: 50px 25px;
+    }
+    .accountCoupon .order-image{
+        width:250px;
+    }
+}
+@media(max-width:563px) {
+    .accountCoupon .coupon-table thead{
+        display:none;
+    }
+    .accountCoupon .coupon-table tbody tr td {
+        display:block;
+        width:auto;
+    }
+    .accountCoupon .coupon-table tbody tr td a.arrow-right{
+        display:block;
+    }
+}
