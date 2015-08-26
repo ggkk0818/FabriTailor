@@ -55,7 +55,7 @@
         </div>
         <section class="products">
             <ul class="list">
-                [#list page.content as product]
+                [#list list as product]
                 <li data-href="${base}${product.path}">
                     <div class="img"><img src="[#if product.image??]${product.image}[#else]${setting.defaultThumbnailProductImage}[/#if]" /></div>
                     <h2 title="${product.name}">${abbreviate(product.name, 20)}</h2>
