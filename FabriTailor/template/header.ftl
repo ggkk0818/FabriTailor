@@ -49,6 +49,7 @@
                     <a href="${base}/member/size/list.jhtml">我的尺寸</a>
                     <a href="${base}/member/specification/list.jhtml">我的板型</a>
                     <a href="${base}/member/receiver/list.jhtml">地址簿</a>
+                    <a href="${base}/member/coupon_code/listv2.jhtml">优惠券</a>
                     <a href="javascript:void(0);">退换货</a>
                 </div>
             </li>

@@ -44,9 +44,9 @@
                     <ul>
                         <li><a href="${base}/article/content/201507/5/1.html">购物指南</a></li>
                         <li><a href="${base}/article/content/201507/4/1.html">关于量体定制</a></li>
-                        <li><a href="javascript:void(0);">常见问题解答</a></li>
+                        <li><a href="${base}/article/content/201507/2/1.html">常见问题解答</a></li>
                         <li><a href="${base}/article/content/201507/3/1.html">帮助与支持</a></li>
-                        <li><a href="javascript:void(0);">退换货信息</a></li>
+                        <li><a href="${base}/article/content/201507/2/1.html#goodsReject">退换货信息</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-12">
