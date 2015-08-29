@@ -4,49 +4,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>找回密码 - FabriTailor</title>
-    <link href="css/animate.css" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" />
-    <link href="css/findPassword.css" rel="stylesheet" />
-    <script src="js/modernizr.js"></script>
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/jquery.easing.1.3.js"></script>
-    <script src="js/jquery.alert.js"></script>
-    <script src="js/jquery.cookie.js"></script>
-    <script src="js/common.js"></script>
+    <title>找回密码[#if systemShowPowered] - FabriTailor[/#if]</title>
+    <link href="${base}/resources/shop/css/animate.css" rel="stylesheet" />
+    <link href="${base}/resources/shop/css/style.css" rel="stylesheet" />
+    <link href="${base}/resources/shop/css/findPassword.css" rel="stylesheet" />
+    <script src="${base}/resources/shop/js/modernizr.js"></script>
+    <script src="${base}/resources/shop/js/jquery-1.11.3.min.js"></script>
+    <script src="${base}/resources/shop/js/jquery.easing.1.3.js"></script>
+    <script src="${base}/resources/shop/js/jquery.alert.js"></script>
+    <script src="${base}/resources/shop/js/jquery.cookie.js"></script>
+    <script src="${base}/resources/shop/js/f_common.js"></script>
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <a class="menu-btn show-on-small" href="javascript:void(0);"><img src="img/menu-btn.png" /></a>
-            <div class="logo">
-                <img src="img/logo.png" />
-            </div>
-            <nav class="hide-on-small">
-                <ul>
-                    <li><a href="javascript:void(0);"><span>在线定制</span></a></li>
-                    <li><a href="javascript:void(0);"><span>关于我们</span></a></li>
-                    <li><a href="javascript:void(0);"><span>凡布风尚</span></a></li>
-                    <li><a href="javascript:void(0);"><span>休闲衬衫</span></a></li>
-                    <li><a href="javascript:void(0);"><span>我们的凡布</span></a></li>
-                </ul>
-            </nav>
-            <div class="btn-group hide-on-small">
-                <a href="javascript:void(0);" class="register">从这里开始</a><a href="javascript:void(0);" class="login">登录</a>
-            </div>
-        </div>
-    </header>
-    <aside class="show-on-small">
-        <a href="javascript:void(0);" class="btn-close"><img src="img/menu-btn-close.png" /></a>
-        <ul>
-            <li><a href="javascript:void(0);"><span>在线定制</span></a></li>
-            <li><a href="javascript:void(0);"><span>关于我们</span></a></li>
-            <li><a href="javascript:void(0);"><span>凡布风尚</span></a></li>
-            <li><a href="javascript:void(0);"><span>休闲衬衫</span></a></li>
-            <li><a href="javascript:void(0);"><span>我们的凡布</span></a></li>
-            <li><a class="button" href="javascript:void(0);">从这里开始</a></li>
-        </ul>
-    </aside>
+    [#include "/shop/include/header.ftl" /]
     <div class="main-container">
         <h1>找回密码</h1>
         <p>请输入联系电话和图片验证码，短信验证码会发送到你的手机上。</p>
@@ -61,7 +31,7 @@
                     <div class="tooltip">验证码错误</div>
                 </div>
                 <div class="form-control">
-                    <a class="captcha-img" href="javascript:void(0);"><img src="img/bookSuccess4.jpg" /></a>
+					<a class="captcha-img" href="javascript:void(0);"><img src="${base}/common/captcha.jhtml?captchaId=${captchaId}" /></a>
                 </div>
             </div>
             <div class="control-group">
@@ -76,77 +46,7 @@
             <a href="javascript:void(0);" class="button">下一步</a>
         </div>
     </div>
-    <footer>
-        <div class="contact">
-            <h3 class="hide-on-small">与凡布保持联系</h3>
-            <div class="input-group hide-on-small">
-                <input class="input" type="text" placeholder="请输入您的邮件地址" />
-                <a href="javascript:void(0);" class="btn">»</a>
-            </div>
-            <div class="ico-link text-center-on-small">
-                <a href="javascript:void(0);"><img src="img/ico-email.jpg" /></a>
-                <a href="javascript:void(0);"><img src="img/ico-weibo.png" /></a>
-                <a href="javascript:void(0);"><img src="img/ico-weixin.png" /></a>
-                <a href="javascript:void(0);"><img src="img/ico-taobao.png" /></a>
-            </div>
-        </div>
-        <div class="links text-center-on-small">
-            <div class="row">
-                <div class="col-md-3 col-sm-12">
-                    <h6>FabriTailor.com</h6>
-                    <ul>
-                        <li>
-                            <a href="javascript:void(0);">
-                                北京市<br />
-                                朝阳区<br />
-                                夏家园18号楼<br />
-                                2091室
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-12">
-                    <h6>凡布制衣</h6>
-                    <ul>
-                        <li><a href="javascript:void(0);">关于我们</a></li>
-                        <li><a href="javascript:void(0);">人才招聘</a></li>
-                        <li><a href="javascript:void(0);">成为凡布量体师</a></li>
-                        <li><a href="javascript:void(0);">服务条款</a></li>
-                        <li><a href="javascript:void(0);">隐私声明</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-12">
-                    <h6>帮助</h6>
-                    <ul>
-                        <li><a href="javascript:void(0);">购物指南</a></li>
-                        <li><a href="javascript:void(0);">关于量体定制</a></li>
-                        <li><a href="javascript:void(0);">常见问题解答</a></li>
-                        <li><a href="javascript:void(0);">帮助与支持</a></li>
-                        <li><a href="javascript:void(0);">退换货信息</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-12">
-                    <h6>在线商店</h6>
-                    <ul>
-                        <li><a href="javascript:void(0);">衬衫</a></li>
-                        <li><a href="javascript:void(0);">查看全部</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="logo">
-            <img src="img/logo-footer.png" />
-        </div>
-    </footer>
-    <div class="login-panel">
-        <h2>登录</h2>
-        <input class="input" type="text" placeholder="请输入电子邮件地址" />
-        <input class="input" type="password" placeholder="请输入密码" />
-        <a class="button" href="javascript:void(0);">登陆</a>
-        <a href="javascript:void(0);">忘记密码，或立即免费注册成为会员？</a>
-    </div>
-    <div class="cover-small-black"></div>
-    <div class="login-cover-black"></div>
+    [#include "/shop/include/footer.ftl" /]
     <script type="text/javascript">
         var $h1 = $(".main-container > h1"),
             $p = $(".main-container > p"),

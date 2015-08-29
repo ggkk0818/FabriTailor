@@ -797,7 +797,7 @@
                     if (data && data.content == "true") {
                         $.getJSON("${base}/member/specification/listajax.jhtml", function (data) {
                             if (data && data.quantityStatus == "none") {
-                                $(".main-container .product-detail-container .product-info .build-btns-no-login a").attr("href", "${base}/quantity.jhtml").text("在线量体");
+                                $(".main-container .product-detail-container .product-info .build-btns-no-login a").attr("href", "${base}/quantity.jhtml").text("预约量体");
                             }
                             else {
                                 if (data && data.specificationValues && data.specificationValues.length) {
