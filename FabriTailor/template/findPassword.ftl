@@ -34,15 +34,6 @@
 					<a class="captcha-img" href="javascript:void(0);"><img src="${base}/common/captcha.jhtml?captchaId=${captchaId}" /></a>
                 </div>
             </div>
-            <div class="control-group">
-                <div class="form-control">
-                    <input name="captcha" class="input" type="text" placeholder="验证码" required />
-                    <div class="tooltip">验证码错误</div>
-                </div>
-                <div class="form-control">
-                    <a class="button btn-captcha" href="javascript:void(0);">获取验证码</a>
-                </div>
-            </div>
             <a href="javascript:void(0);" class="button">下一步</a>
         </div>
     </div>
@@ -54,75 +45,6 @@
             $tel = $stepForm.find("input[name=tel]"),
             $captcha = $stepForm.find("input[name=captcha]"),
             $imgCaptcha = $stepForm.find("input[name=imgcaptcha]");
-        var stepCaptchaTimer = null;
-        var stepCaptchaBtnClick = function () {
-            if ($(this).hasClass("disabled"))
-                return;
-            if (!$tel.val() || $tel.val().length == 0) {
-                $tel.parent().addClass("has-error");
-                return;
-            }
-            else {
-                $tel.parent().removeClass("has-error");
-            }
-            if (!$imgCaptcha.val() || $imgCaptcha.val().length == 0) {
-                $imgCaptcha.parent().addClass("has-error");
-                return;
-            }
-            else {
-                $imgCaptcha.parent().removeClass("has-error");
-            }
-            var $this = $(this).addClass("disabled");
-            //验证图片验证码
-            //$.ajax({
-            //    url: "${base}/register/isImageValid.jhtml",
-            //    type: "GET",
-            //    data: { captchaId: "${captchaId}", captcha: $imgCaptcha.val() },
-            //    dataType: "json",
-            //    cache: false,
-            //    success: function (data) {
-            //        if (data && data.type == "success") {
-                        $.ajax({
-                            url: "${base}/password/findv2.jhtml",
-                            type: "POST",
-                            data: { username: $tel.val() },
-                            dataType: "json",
-                            cache: false,
-                            traditional: true,
-                            success: function (data) { },
-                            error: function () {
-                                $.alert.error("获取验证码失败");
-                            }
-                        }).always(function () {
-                            $this.addClass("disabled").data("timeout", 60);
-                            $this.text(60);
-                            step4CaptchaTimer = setInterval(function () {
-                                var timeout = parseInt($this.data("timeout")) - 1;
-                                if (timeout <= 0) {
-                                    $this.removeClass("disabled").text("获取验证码");
-                                    clearInterval(step4CaptchaTimer);
-                                }
-                                else {
-                                    $this.data("timeout", timeout);
-                                    $this.text(timeout);
-                                }
-                            }, 1000);
-                        });
-                        $imgCaptcha.parent().removeClass("has-error");
-            //        }
-            //        else {
-            //            $this.removeClass("disabled");
-            //            $imgCaptcha.parent().addClass("has-error");
-            //            stepImageCaptchaRefresh();
-            //        }
-            //    },
-            //    error: function () {
-            //        $this.removeClass("disabled");
-            //        $imgCaptcha.parent().addClass("has-error");
-            //        stepImageCaptchaRefresh();
-            //    }
-            //});
-        };
         var stepImageCaptchaRefresh = function () {
             $stepForm.find("a.captcha-img img").attr("src", "${base}/common/captcha.jhtml?captchaId=${captchaId}&timestamp=" + (new Date()).valueOf());
         };
@@ -150,15 +72,34 @@
                 }
             });
             if (hasError == 0) {
-                var $form = $('<form action="${base}/password/resetv2.jhtml" method="post" enctype="multipart/form-data"></form>'),
-                    $username = $('<input name="username" type="text" value="" />');
-                $form.append($username.val($tel.val()));
-                $("body").append($form);
-                $form.submit()
+                $.ajax({
+                    url: "${base}/password/findv2.jhtml",
+                    type: "POST",
+                    data: { username: $tel.val() },
+                    dataType: "json",
+                    cache: false,
+                    traditional: true,
+                    success: function (data) {
+                        if (data && data.type == "success") {
+                            window.location.href = "${base}/password/resetv2.jhtml?username=" + encodeURIComponent($tel.val());
+                        }
+                        else {
+                            $.alert.error("提交失败" + (data && data.content ? data.content : ""));
+                            $imgCaptcha.val("");
+                            stepImageCaptchaRefresh();
+                        }
+                    },
+                    error: function () {
+                        $.alert.error("提交失败");
+                        $imgCaptcha.val("");
+                        stepImageCaptchaRefresh();
+                    }
+                }).always(function () {
+                    $stepForm.find("a.button").removeClass("disabled");
+                });
             }
         };
-        $stepForm.find("a.btn-captcha").click(stepCaptchaBtnClick);
-        $stepForm.find("a.button").not(".btn-captcha").click(doSubmit);
+        $stepForm.find("a.button").click(doSubmit);
         $stepForm.find("a.captcha-img").click(stepImageCaptchaRefresh);
     </script>
 </body>

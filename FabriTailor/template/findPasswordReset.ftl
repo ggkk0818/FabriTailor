@@ -19,8 +19,12 @@
     [#include "/shop/include/header.ftl" /]
     <div class="main-container">
         <h1>设置新密码</h1>
-        <p>请输入你的新密码。</p>
+        <p>请输入验证码和你的新密码。</p>
         <div class="stepForm">
+            <div class="form-control">
+                <input name="captcha" class="input" type="text" placeholder="验证码" required />
+                <div class="tooltip">验证码错误</div>
+            </div>
             <div class="form-control">
                 <input name="newPassword" class="input" type="password" placeholder="创建新的密码" autocomplete="off" min="6" max="20" required />
                 <div class="tooltip">密码应由6-20位字符组成</div>
@@ -52,7 +56,8 @@
             $stepFormSuccess = $(".main-container .stepForm.success"),
             $newPassword = $stepForm.find("input[name=newPassword]"),
             $rePassword = $stepForm.find("input[name=rePassword]"),
-            $imgCaptcha = $stepForm.find("input[name=imgcaptcha]");
+            $imgCaptcha = $stepForm.find("input[name=imgcaptcha]"),
+            $captcha = $stepForm.find("input[name=captcha]");
         var stepImageCaptchaRefresh = function () {
             $stepForm.find("a.captcha-img img").attr("src", "${base}/common/captcha.jhtml?captchaId=${captchaId}&timestamp=" + (new Date()).valueOf());
         };
@@ -93,7 +98,8 @@
                 //    cache: false,
                 //    success: function (data) {
                         var params = {
-                            username: "${member.username}"
+                            username: "${member.username}",
+                            key: $captcha.val()
                         };
 					[#if setting.captchaTypes?? && setting.captchaTypes?seq_contains("resetPassword")]
                         params.captchaId = "${captchaId}";
@@ -104,7 +110,7 @@
                         //params.enPassword = hex2b64(rsaKey.encrypt($newPassword.val()));
 						params.enPassword = $newPassword.val();
                         $.ajax({
-                            url: "${base}/register/reset.jhtml",
+                            url: "${base}/password/reset.jhtml",
                             type: "POST",
                             data: params,
                             dataType: "json",
