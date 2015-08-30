@@ -99,6 +99,7 @@
                 //    success: function (data) {
                         var params = {
                             username: "${member.username}",
+                            newPassword: $newPassword.val(),
                             key: $captcha.val()
                         };
 					[#if setting.captchaTypes?? && setting.captchaTypes?seq_contains("resetPassword")]
@@ -108,7 +109,7 @@
                         //var rsaKey = new RSAKey();
                         //rsaKey.setPublic(b64tohex(data.modulus), b64tohex(data.exponent));
                         //params.enPassword = hex2b64(rsaKey.encrypt($newPassword.val()));
-						params.enPassword = $newPassword.val();
+                        params.newPassword = $newPassword.val();
                         $.ajax({
                             url: "${base}/password/reset.jhtml",
                             type: "POST",
