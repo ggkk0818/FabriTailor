@@ -14,6 +14,7 @@
     <script src="${base}/resources/shop/js/jquery.alert.js"></script>
     <script src="${base}/resources/shop/js/jquery.cookie.js"></script>
     <script src="${base}/resources/shop/js/jquery.lazyload.js"></script>
+	<script src="${base}/resources/shop/js/jquery.scrollTo-1.4.3.1.js"></script>
 	<script src="${base}/resources/shop/js/jquery.zeroclipboard.min.js"></script>
     <script src="${base}/resources/shop/js/f_common.js"></script>
 </head>
@@ -400,6 +401,7 @@
             if ($step.data("title")) {
                 $h1.text($step.data("title"));
             }
+            $(window).scrollTo(0, "normal");
         };
         var nextBtnClick = function () {
             showStep($steps.children(".step.active").prevAll().length + 1);
@@ -779,6 +781,13 @@
                 $step.removeClass("selected");
             }
         };
+        var onStepsImageLoaded = function () {
+            var $img = $(this),
+                $step = $img.parentsUntil(".step").last().parent();
+            if ($step.hasClass("active")) {
+                $steps.height($step.outerHeight());
+            }
+        };
         $steps.children(".step").eq(0).find(".options .option").on("click", "div.image,a", step1BtnClick);
         $steps.children(".step").eq(1).find(".options .option input").click(step2RadioClick);
         $steps.children(".step").eq(1).find(".option-none input").click(step2ResetRadioClick);
@@ -799,6 +808,7 @@
                 $steps.height($steps.children(".step.active").first().outerHeight());
             }
         });
+        $steps.find("img").load(onStepsImageLoaded);
         showStep(0);
     </script>
     <script type="text/javascript">
