@@ -308,9 +308,6 @@
                         <a class="button" href="${base}/product/list.jhtml">立即购买</a>
                     </div>
                 </div>
-                <div class="map">
-                    <img src="${base}/resources/shop/img/register-step6-1.jpg" />
-                </div>
             </div>
         </div>
         <a class="next-btn hidden" href="javascript:void(0);">下一步</a>

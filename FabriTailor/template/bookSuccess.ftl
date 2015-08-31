@@ -45,9 +45,6 @@
         <h1>等不及了吧？</h1>
         <p>请点击查看我们不同凡响的产品系列！</p>
         <a class="button go-shop" href="${base}/product/list.jhtml">马上去选购</a>
-        <div class="shop-image">
-            <img src="${base}/resources/shop/img/bookSuccess4.jpg" />
-        </div>
     </div>
     [#include "/shop/include/footer.ftl" /]
 </body>

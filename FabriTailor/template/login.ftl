@@ -25,7 +25,7 @@
             <input name="password" class="input" type="password" placeholder="请输入密码" />
             <p class="hidden"></p>
             <a class="button" href="javascript:void(0);">登录</a>
-            <a href="${base}/register.jhtml">忘记密码，或立即免费注册成为会员？</a>
+            <a href="${base}/password/forgot.jhtml">忘记密码</a>，或立即<a href="${base}/register.jhtml">免费注册</a>成为会员？
         </form>
     </div>
     [#include "/shop/include/footer.ftl" /]

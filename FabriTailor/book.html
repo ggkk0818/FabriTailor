@@ -368,8 +368,8 @@
             if (hasError == 0) {
                 var params = {
                     //email: $email.val(),
-                    firstname: $firstName.val(),
-                    lastname: $lastName.val(),
+                    firstname: $firstName.val() + $lastName.val(),
+                    //lastname: $lastName.val(),
                     address: $province.children(":checked").text() + $city.children(":checked").text() + " " + $addr.val(),
                     phone: $tel.val()
                 };

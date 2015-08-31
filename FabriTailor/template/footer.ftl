@@ -1,9 +1,9 @@
     <footer>
         <div class="contact">
-          <h3 class="text-center-on-small hidden">邀请朋友购买双方各获得100元代金券</h3>
+          <h3 class="text-center-on-small hidden">邀请好友购买，各得100元代金券</h3>
           <div class="input-group hidden">
             <input class="input" type="text" value="" />
-            <a id="invitationCodeCopyBtn" class="btn" href="javascript:void(0);" data-refer-code="">复制</a>
+            <a id="invitationCodeCopyBtn" class="btn" href="javascript:void(0);" data-refer-code="">复制邀请码</a>
             <div class="tip hidden">已复制到剪贴板</div>
           </div>
           <img class="qr-img" src="${base}/resources/shop/img/qr-img.png" />
@@ -68,7 +68,7 @@
         <input class="input" type="password" placeholder="请输入密码" />
         <p class="hidden"></p>
         <a class="button" href="javascript:void(0);">登录</a>
-        <a href="${base}/register.jhtml">忘记密码，或立即免费注册成为会员？</a>
+        <a href="${base}/password/forgot.jhtml">忘记密码</a>，或立即<a href="${base}/register.jhtml">免费注册</a>成为会员？
     </div>
     <div class="cover-small-black"></div>
     <div class="login-cover-black"></div>

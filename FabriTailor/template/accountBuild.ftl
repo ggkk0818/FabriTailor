@@ -23,7 +23,7 @@
     [#include "/shop/include/header.ftl" /]
     <div class="main-container clearfix">
         <div class="account-aside">
-            <div class="current">我的板型<i class="showhide"></i></div>
+            <div class="current">我的版型<i class="showhide"></i></div>
             [#include "/shop/member/include/navigation.ftl" /]
         </div>
 		[@current_member]
