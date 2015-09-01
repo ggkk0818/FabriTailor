@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>优惠券[#if systemShowPowered] - FabriTailor[/#if]</title>
+    <title>代金券[#if systemShowPowered] - FabriTailor[/#if]</title>
     <link href="${base}/resources/shop/css/animate.css" rel="stylesheet" />
     <link href="${base}/resources/shop/css/style.css" rel="stylesheet" />
     <link href="${base}/resources/shop/css/account.css" rel="stylesheet" />
@@ -22,12 +22,12 @@
     [#include "/shop/include/header.ftl" /]
     <div class="main-container">
         <div class="account-aside">
-            <div class="current">优惠券<i class="showhide"></i></div>
+            <div class="current">代金券<i class="showhide"></i></div>
             [#include "/shop/member/include/navigation.ftl" /]
         </div>
         <div class="account-container">
             <div class="accountCoupon">
-                <h1>优惠券</h1>
+                <h1>代金券</h1>
 			[#if !list?has_content]
                 <p>邀请朋友注册并购买后，双方各获得100元代金券。</p>
                 <div class="coupon-image">

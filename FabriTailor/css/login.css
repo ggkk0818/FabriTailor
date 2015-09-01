@@ -19,3 +19,10 @@
     font-size:16px;
     line-height:20px;
 }
+.loginForm .login-help{
+    /*color:#ccc;*/
+}
+.loginForm .login-help a{
+    /*color:#000;*/
+    text-decoration:underline;
+}

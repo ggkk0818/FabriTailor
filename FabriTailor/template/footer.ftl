@@ -68,7 +68,9 @@
         <input class="input" type="password" placeholder="请输入密码" />
         <p class="hidden"></p>
         <a class="button" href="javascript:void(0);">登录</a>
-        <a href="${base}/password/forgot.jhtml">忘记密码</a>，或立即<a href="${base}/register.jhtml">免费注册</a>成为会员？
+        <div class="login-help">
+				  <a href="${base}/password/forgot.jhtml">忘记密码</a>，或立即<a href="${base}/register.jhtml">免费注册</a>成为会员？
+        </div>
     </div>
     <div class="cover-small-black"></div>
     <div class="login-cover-black"></div>

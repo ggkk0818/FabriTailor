@@ -55,7 +55,7 @@
 								<li>${specificationValue.name}</li>
 								[/#list]
 							[/#if]
-								<li>无刺绣</li>
+								<li>[#if orderItem.letters??]自定义(${orderItem.letters})[#else]无刺绣[/#if]</li>
                             </ul>
                         </div>
                         <div class="status">

@@ -79,7 +79,7 @@
                 </div>
                 <div class="coupon-info">
                     <div class="input-container">
-                        <input name="coupon" class="input" type="text" placeholder="优惠券" />
+                        <input name="coupon" class="input" type="text" placeholder="代金券" />
                     </div>
                     <a class="button disabled" href="javascript:void(0);">使用</a>
                 </div>
@@ -781,6 +781,8 @@
             $paymentRadio.find("input[value=tenpayJsapiPlugin]").parent().addClass("hidden");
             var onWeixinReaddy = function () {
                 $paymentRadio.find("input[value=tenpayJsapiPlugin]").parent().removeClass("hidden");
+                $couponInput.off("keyup");
+                $couponBtn.removeClass("disabled");
             };
             if (document.addEventListener) {
                 document.addEventListener('WeixinJSBridgeReady', onWeixinReaddy, false);
@@ -788,6 +790,10 @@
                 document.attachEvent('WeixinJSBridgeReady', onWeixinReaddy);
                 document.attachEvent('onWeixinJSBridgeReady', onWeixinReaddy);
             }
+        }
+        else {
+            $couponInput.off("keyup");
+            $couponBtn.removeClass("disabled");
         }
         if (!checkWeixinPayment()) {
             $paymentRadio.find("input[value=tenpayJsapiPlugin]").parent().off().prop("disabled", true)

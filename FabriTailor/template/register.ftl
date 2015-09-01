@@ -401,7 +401,12 @@
             if ($step.data("title")) {
                 $h1.text($step.data("title"));
             }
-            $(window).scrollTo(0, "normal");
+            if (typeof WeixinJSBridge == "undefined") {
+                $(window).scrollTo(0, "normal");
+            }
+            else {
+                $(window).scrollTop(0);
+            }
         };
         var nextBtnClick = function () {
             showStep($steps.children(".step.active").prevAll().length + 1);

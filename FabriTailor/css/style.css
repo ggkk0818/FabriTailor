@@ -1367,6 +1367,13 @@ div.login-panel a.button.disabled,
 div.login-panel a.button.disabled:hover{
     background-color: #ccc;
 }
+div.login-panel .login-help{
+    /*color:#ccc;*/
+}
+div.login-panel .login-help a{
+    /*color:#000;*/
+    text-decoration:underline;
+}
 div.login-cover-black{
     position:fixed;
     top:0;
