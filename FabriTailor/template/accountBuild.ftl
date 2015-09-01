@@ -133,9 +133,9 @@
                                 <div class="text">无刺绣</div>
                             </div>
                             <div class="option-monogram">
-                                <input class="monogram" type="text" value="[#if currentMember.letters?? && currentMember.letters?size > 0]${currentMember.letters[0]}[/#if]" />
-                                <input class="monogram second" type="text" value="[#if currentMember.letters?? && currentMember.letters?size > 1]${currentMember.letters[1]}[/#if]" />
-                                <input class="monogram third" type="text" value="[#if currentMember.letters?? && currentMember.letters?size > 2]${currentMember.letters[2]}[/#if]" />
+                                <input class="monogram" type="text" value="[#if currentMember.letters?? && currentMember.letters?length > 0]${currentMember.letters[0]}[/#if]" />
+                                <input class="monogram second" type="text" value="[#if currentMember.letters?? && currentMember.letters?length > 1]${currentMember.letters[1]}[/#if]" />
+                                <input class="monogram third" type="text" value="[#if currentMember.letters?? && currentMember.letters?length > 2]${currentMember.letters[2]}[/#if]" />
                             </div>
                         </div>
                     </div>
