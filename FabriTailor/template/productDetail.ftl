@@ -27,6 +27,7 @@
     <script src="${base}/resources/shop/js/jquery.alert.js"></script>
     <script src="${base}/resources/shop/js/jquery.cookie.js"></script>
     <script src="${base}/resources/shop/js/jquery.lazyload.js"></script>
+	<script src="${base}/resources/shop/js/jquery.scrollTo-1.4.3.1.js"></script>
 	<script src="${base}/resources/shop/js/jquery.zeroclipboard.min.js"></script>
     <script src="${base}/resources/shop/js/f_common.js"></script>
 </head>
@@ -440,12 +441,24 @@
                     $productCustomizationTabs.children("div").eq(index).addClass("active").fadeTo("normal", 1, EASING_NAME, function () {
                         $productCustomizationTabs.removeClass("loading");
                     });
+                    if (typeof WeixinJSBridge == "undefined") {
+                        $(window).scrollTo($productCustomizationTabs.offset().top - 50, "normal");
+                    }
+                    else {
+                        $(window).scrollTop($productCustomizationTabs.offset().top - 50);
+                    }
                 });
             }
             else {
                 $productCustomizationTabs.addClass("loading").children("div").eq(index).addClass("active").fadeTo("normal", 1, EASING_NAME, function () {
                     $productCustomizationTabs.removeClass("loading");
                 });
+                if (typeof WeixinJSBridge == "undefined") {
+                    $(window).scrollTo($productCustomizationTabs.offset().top - 50, "normal");
+                }
+                else {
+                    $(window).scrollTop($productCustomizationTabs.offset().top - 50);
+                }
             }
             $productCustomizationTabBtns.find("li").removeClass("active").eq(index).addClass("active");
         };
@@ -752,15 +765,8 @@
             }
         };
         var productCustomizationBuildAddToCartReturn = function () {
-            //现阶段直接刷新页面
-            window.location.reload();
-            return;
-            var $customization = $(this).parent().parent(),
-                customizationId = 0;
-            if ($customization.data("customization-ret")) {
-                customizationId = $customization.data("customization-ret");
-            }
-            productCustomizationTabShow(customizationId);
+            //跳转到商城页
+            window.location.href = "${base}/login/welcome.jhtml";
         };
         var productCustomizationBuildInit = function () {
             $productCustomizationBuild.find("ol li a").click(productCustomizationBuildControlClick);

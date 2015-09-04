@@ -72,7 +72,7 @@
                     <div class="radio clearfix" for="${paymentPlugin.id}">
                         <input id="${paymentPlugin.id}" name="paymentPlugin" type="radio" value="${paymentPlugin.id}" />
                         <span></span>
-                        <h4>${paymentPlugin.name}</h4>
+                        <h4>${paymentPlugin.paymentName}</h4>
                         <p>${abbreviate(paymentPlugin.description, 80, "...")}</p>
                     </div>
 				[/#list]
@@ -170,7 +170,8 @@
             amount = null,
             $products = $(".main-container .products"),
             $purchase = $(".main-container .purchase"),
-            $paymentRadio = $purchase.find(".radio"),
+            $orderInfo = $purchase.find(".order-info"),
+            $paymentRadio = $orderInfo.find(".radio"),
             $couponInfo = $purchase.find(".coupon-info"),
             $couponInput = $couponInfo.find("input[name=coupon]"),
             $couponBtn = $couponInfo.find("a.button"),
@@ -767,7 +768,7 @@
             $product.find(".detail .purchase-info input").change(changeProductQty);
             $product.find(".title a.close").click(delProduct);
         });
-        $couponInput.keyup(onCouponInputChange);
+        $couponInput.on("keyup", onCouponInputChange);
         $couponBtn.click(useCoupon);
         //过滤支付方式
         if (isMobile()) {
@@ -780,7 +781,11 @@
         if (typeof WeixinJSBridge == "undefined") {
             $paymentRadio.find("input[value=tenpayJsapiPlugin]").parent().addClass("hidden");
             var onWeixinReaddy = function () {
-                $paymentRadio.find("input[value=tenpayJsapiPlugin]").parent().removeClass("hidden");
+                var $weixinRadio = $paymentRadio.find("input[value=tenpayJsapiPlugin]").parent();
+                $weixinRadio.removeClass("hidden").children("h4").text($weixinRadio.children("h4").text() + "（推荐）");
+                if ($orderInfo.children(".radio").first().not($weixinRadio)) {
+                    $orderInfo.children(".radio").first().before($weixinRadio);
+                }
                 $couponInput.off("keyup");
                 $couponBtn.removeClass("disabled");
             };
@@ -794,6 +799,11 @@
         else {
             $couponInput.off("keyup");
             $couponBtn.removeClass("disabled");
+            var $weixinRadio = $paymentRadio.find("input[value=tenpayJsapiPlugin]").parent();
+            $weixinRadio.children("h4").text($weixinRadio.children("h4").text() + "（推荐）");
+            if ($orderInfo.children(".radio").first().not($weixinRadio)) {
+                $orderInfo.children(".radio").first().before($weixinRadio);
+            }
         }
         if (!checkWeixinPayment()) {
             $paymentRadio.find("input[value=tenpayJsapiPlugin]").parent().off().prop("disabled", true)

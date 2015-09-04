@@ -297,16 +297,16 @@
             <div class="step step6" data-title="请留下你的联系方式完成注册">
                 <div class="options clearfix">
                     <div class="option">
-                        <h4>1.在线量体：您可以按照我们提供的视频方式进行量体，引导您正确量体。</h4>
+                        <h4>1.预约量体：凡布穿衣顾问会在您方便的时间地点上门为你进行量体。</h4>
                         <a class="button" href="${base}/quantity.jhtml">开始量体</a>
                     </div>
                     <div class="option">
-                        <h4>2.欢迎来访！如果您恰好在我们提供上门量体的城市，可与我们预约时间进行量体。</h4>
-                        <a class="button" href="javascript:void(0);">联系我们</a>
+                        <h4>2.联系我们：如果您所在的城市还没有开通上门量体，可以联系我们进行在线量体。</h4>
+                        <a class="button" href="${base}/article/content/201507/3/1.html#contactus">联系我们</a>
                     </div>
                     <div class="option">
-                        <h4>3.立即购物。您可以选择毛衣、领带或者其它别的物品，马上行动吧。</h4>
-                        <a class="button" href="${base}/product/list.jhtml">立即购买</a>
+                        <h4>3.立即购物：您可以选择凡布商城中不需要量体的商品，马上行动吧。</h4>
+                        <a class="button" href="${base}/login/welcome.jhtml">立即购买</a>
                     </div>
                 </div>
             </div>
