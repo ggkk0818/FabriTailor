@@ -61,6 +61,18 @@
         if ($.cookie("name")) {
             window.location.href = "/login/welcome.jhtml";
         }
+        var $video = $(".main-container video");
+        if ($video.length && isWeixin()) {
+            $video.removeProp("autoplay").each(function (i, el) {
+                var video = el;
+                if (video.controller) {
+                    video.controller.pause();
+                }
+                else if (typeof video.pause === "function") {
+                    video.pause();
+                }
+            });
+        }
     </script>
 </body>
 </html>

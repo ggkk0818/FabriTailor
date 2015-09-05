@@ -11,6 +11,11 @@ var isMobile = function () {
         bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
     return bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM;
 };
+var isWeixin = function () {
+    var userAgent = navigator.userAgent,
+        reg = new RegExp("MicroMessenger");
+    return reg.test(userAgent);
+};
 var checkWeixinPayment = function () {
     var userAgent = navigator.userAgent,
         reg = new RegExp("MicroMessenger/(\\d+).\\d+"),

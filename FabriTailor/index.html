@@ -88,7 +88,7 @@
         </section>
         <section class="index-image-container">
             <!--<img src="img/index2.jpg" style="width:100%;" />-->
-            <video poster="video/poster.jpg" width="100%" autoplay loop muted>
+            <video poster="video/poster.jpg" width="100%" autoplay loop muted controls>
                 <source src="video/index-video.webm" type="video/webm">
                 <source src="video/index-video.mp4" type="video/mp4">
                 <source src="video/index-video.ogv" type="video/ogv">
@@ -429,6 +429,18 @@
     <script type="text/javascript">
         if ($.cookie("name")) {
             window.location.href = "/login/welcome.jhtml";
+        }
+        var $video = $(".main-container video");
+        if ($video.length && isWeixin()) {
+            $video.removeProp("autoplay").each(function (i, el) {
+                var video = el;
+                if (video.controller) {
+                    video.controller.pause();
+                }
+                else if (typeof video.pause === "function") {
+                    video.pause();
+                }
+            });
         }
     </script>
 </body>

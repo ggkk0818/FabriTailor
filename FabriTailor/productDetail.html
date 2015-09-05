@@ -578,6 +578,8 @@
         var $productZoom = $(".main-container .product-detail-image-zoom"),
             $productZoomThumbs = $(".main-container .product-detail-image-zoom-thumbs");
         var productZoomImageShow = function (index) {
+            if ($(window).width() <= 1040)
+                return;
             if (typeof index !== "number")
                 index = parseInt(index, 10);
             if (index < 0 || $productZoom.hasClass("loading")

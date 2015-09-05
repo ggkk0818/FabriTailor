@@ -241,6 +241,8 @@
     text-align:center;
     -webkit-transition: height 200ms ease, font-size 200ms ease;
     -moz-transition: height 200ms ease, font-size 200ms ease;
+    -webkit-appearance:none;
+    -moz-appearance:none;
     transition: height 200ms ease, font-size 200ms ease;
 }
 .accountBuilder-content .step.normal .options .option-monogram .monogram.second{
