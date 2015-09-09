@@ -27,9 +27,6 @@
             <li><a href="javascript:void(0);">1</a></li>
             <li><a href="javascript:void(0);">2</a></li>
             <li><a href="javascript:void(0);">3</a></li>
-            <li><a href="javascript:void(0);">4</a></li>
-            <li><a href="javascript:void(0);">5</a></li>
-            <li><a href="javascript:void(0);">6</a></li>
         </ol>
         <div class="steps">
             <div class="step step4" data-title="请留下你的联系方式完成注册">
