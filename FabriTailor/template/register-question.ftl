@@ -21,7 +21,7 @@
 <body>
     [#include "/shop/include/header.ftl" /]
     <div class="main-container">
-        <h1>请留下你的联系方式完成注册</h1>
+        <h1>以下哪个描述更贴近你自己的感受？</h1>
         <p>为了给你制作最合身的衣服，请留下你的联系方式，以便预约穿衣顾问进行上门量体。</p>
         <ol>
             <li><a href="javascript:void(0);">1</a></li>
@@ -32,11 +32,216 @@
             <li><a href="javascript:void(0);">6</a></li>
         </ol>
         <div class="steps">
-            <div class="step step4" data-title="请留下你的联系方式完成注册">
+            <div class="step step1" data-name="穿衣风格" data-title="以下哪个描述更贴近你自己的感受？">
+                <div class="options clearfix">
+                    <div class="option" data-value="我不知道怎么穿更合适">
+                        <div class="image">
+                            <img src="${base}/resources/shop/img/register-step1-1.jpg" />
+                        </div>
+                        <h1>我不知道怎么穿更合适。</h1>
+                        <a href="javascript:void(0);">这就是我</a>
+                    </div>
+                    <div class="option" data-value="我没有时间购物">
+                        <div class="image">
+                            <img src="${base}/resources/shop/img/register-step1-2.jpg" />
+                        </div>
+                        <h1>我没有时间购物。</h1>
+                        <a href="javascript:void(0);">这就是我</a>
+                    </div>
+                    <div class="option" data-value="我很在意自己的穿着">
+                        <div class="image">
+                            <img src="${base}/resources/shop/img/register-step1-3.jpg" />
+                        </div>
+                        <h1>我很在意自己的穿着。</h1>
+                        <a href="javascript:void(0);">这就是我</a>
+                    </div>
+                </div>
+            </div>
+            <div class="step step2" data-show-next-btn="true" data-name="我通常感觉不合适的地方" data-title="你购买的衬衣时最常遇到的问题是？">
+                <div class="step-container clearfix">
+                    <div class="options">
+                        <div class="option" data-name="领口">
+                            <h3>衬衫领口</h3>
+                            <div class="radio-image">
+                                <img src="${base}/resources/shop/img/register-step2-2.jpg" />
+                            </div>
+                            <div class="radio clearfix">
+                                <input name="radio1" type="radio" value="tight" />
+                                <span></span>
+                                <h4>太紧</h4>
+                            </div>
+                            <div class="radio clearfix">
+                                <input name="radio1" type="radio" value="loose" />
+                                <span></span>
+                                <h4>太松</h4>
+                            </div>
+                        </div>
+                        <div class="option" data-name="袖子">
+                            <h3>衬衫袖子</h3>
+                            <div class="radio-image">
+                                <img src="${base}/resources/shop/img/register-step2-3.jpg" />
+                            </div>
+                            <div class="radio clearfix">
+                                <input name="radio2" type="radio" value="short" />
+                                <span></span>
+                                <h4>太短</h4>
+                            </div>
+                            <div class="radio clearfix">
+                                <input name="radio2" type="radio" value="long" />
+                                <span></span>
+                                <h4>太长</h4>
+                            </div>
+                        </div>
+                        <div class="option" data-name="袖口">
+                            <h3>衬衫袖口</h3>
+                            <div class="radio-image">
+                                <img src="${base}/resources/shop/img/register-step2-4.jpg" />
+                            </div>
+                            <div class="radio clearfix">
+                                <input name="radio3" type="radio" value="tight" />
+                                <span></span>
+                                <h4>太紧</h4>
+                            </div>
+                            <div class="radio clearfix">
+                                <input name="radio3" type="radio" value="loose" />
+                                <span></span>
+                                <h4>太松</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image">
+                        <img src="${base}/resources/shop/img/register-step2-1.jpg" />
+                    </div>
+                    <div class="options">
+                        <div class="option" data-name="胸围">
+                            <h3>衬衫胸围</h3>
+                            <div class="radio-image">
+                                <img src="${base}/resources/shop/img/register-step2-5.jpg" />
+                            </div>
+                            <div class="radio clearfix">
+                                <input name="radio4" type="radio" value="tight" />
+                                <span></span>
+                                <h4>太紧</h4>
+                            </div>
+                            <div class="radio clearfix">
+                                <input name="radio4" type="radio" value="loose" />
+                                <span></span>
+                                <h4>太松</h4>
+                            </div>
+                        </div>
+                        <div class="option" data-name="腰围">
+                            <h3>衬衫腰围</h3>
+                            <div class="radio-image">
+                                <img src="${base}/resources/shop/img/register-step2-6.jpg" />
+                            </div>
+                            <div class="radio clearfix">
+                                <input name="radio5" type="radio" value="tight" />
+                                <span></span>
+                                <h4>太紧</h4>
+                            </div>
+                            <div class="radio clearfix">
+                                <input name="radio5" type="radio" value="loose" />
+                                <span></span>
+                                <h4>太松</h4>
+                            </div>
+                        </div>
+                        <div class="option" data-name="衣长">
+                            <h3>衬衫衣长</h3>
+                            <div class="radio-image">
+                                <img src="${base}/resources/shop/img/register-step2-7.jpg" />
+                            </div>
+                            <div class="radio clearfix">
+                                <input name="radio6" type="radio" value="short" />
+                                <span></span>
+                                <h4>太短</h4>
+                            </div>
+                            <div class="radio clearfix">
+                                <input name="radio6" type="radio" value="long" />
+                                <span></span>
+                                <h4>太长</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option-none">
+                        <div class="radio clearfix">
+                            <input name="radio-none" type="radio" value="long" />
+                            <span></span>
+                            <h4>这些都不适用于我</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="step step3" data-show-next-btn="true" data-name="我对以下这些东西感兴趣" data-title="你对以下哪些品类感兴趣？">
+                <div class="options clearfix">
+                    <div class="option" data-value="休闲衬衫">
+                        <div class="image">
+                            <img src="${base}/resources/shop/img/register-step3-1.jpg" />
+                            <span class="cover"></span>
+                        </div>
+                        <h4>休闲衬衫</h4>
+                    </div>
+                    <div class="option" data-value="正装衬衫">
+                        <div class="image">
+                            <img src="${base}/resources/shop/img/register-step3-2.jpg" />
+                            <span class="cover"></span>
+                        </div>
+                        <h4>正装衬衫</h4>
+                    </div>
+                    <div class="option" data-value="西服">
+                        <div class="image">
+                            <img src="${base}/resources/shop/img/register-step3-3.jpg" />
+                            <span class="cover"></span>
+                        </div>
+                        <h4>西服</h4>
+                    </div>
+                    <div class="option" data-value="T-shirt">
+                        <div class="image">
+                            <img src="${base}/resources/shop/img/register-step3-5.jpg" />
+                            <span class="cover"></span>
+                        </div>
+                        <h4>T-shirt</h4>
+                    </div>
+                    <div class="option" data-value="休闲外套">
+                        <div class="image">
+                            <img src="${base}/resources/shop/img/register-step3-6.jpg" />
+                            <span class="cover"></span>
+                        </div>
+                        <h4>休闲外套</h4>
+                    </div>
+                    <div class="option" data-value="针织衫">
+                        <div class="image">
+                            <img src="${base}/resources/shop/img/register-step3-7.jpg" />
+                            <span class="cover"></span>
+                        </div>
+                        <h4>针织衫</h4>
+                    </div>
+                    <div class="option" data-value="配饰">
+                        <div class="image">
+                            <img src="${base}/resources/shop/img/register-step3-4.jpg" />
+                            <span class="cover"></span>
+                        </div>
+                        <h4>配饰</h4>
+                    </div>
+                    <div class="option select-all">
+                        <div class="image">
+                            <img src="${base}/resources/shop/img/register-step3-8.jpg" />
+                            <span class="cover"></span>
+                        </div>
+                        <h4>都感兴趣</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="step step4" data-show-info-confirm="true" data-title="请留下你的联系方式完成注册">
                 <div class="stepForm">
-                    <div class="form-control">
-                        <input name="fullName" class="input" type="text" placeholder="姓名" required />
-                        <div class="tooltip">姓名错误</div>
+                    <div class="control-group">
+                        <div class="form-control">
+                            <input name="firstName" class="input" type="text" placeholder="姓" required />
+                            <div class="tooltip">姓错误</div>
+                        </div>
+                        <div class="form-control">
+                            <input name="lastName" class="input" type="text" placeholder="名" required />
+                            <div class="tooltip">名错误</div>
+                        </div>
                     </div>
                     <!--<div class="form-control">
                         <input name="email" class="input" type="text" placeholder="邮件地址" required />
@@ -45,6 +250,15 @@
                     <div class="form-control">
                         <input name="tel" class="input" type="text" placeholder="联系电话" required />
                         <div class="tooltip">联系电话错误</div>
+                    </div>
+                    <div class="control-group">
+                        <div class="form-control">
+                            <input name="imgcaptcha" class="input" type="text" placeholder="图片验证码" required />
+                            <div class="tooltip">验证码错误</div>
+                        </div>
+                        <div class="form-control">
+                            <a class="captcha-img" href="javascript:void(0);"><img src="${base}/common/captcha.jhtml?captchaId=${captchaId}" /></a>
+                        </div>
                     </div>
                     <div class="control-group">
                         <div class="form-control">
@@ -66,7 +280,7 @@
                     <a href="javascript:void(0);" class="button">下一步</a>
                 </div>
             </div>
-            <div class="step step5" data-title="请留下你的联系方式完成注册">
+            <div class="step step5" data-show-info-confirm="true" data-title="请留下你的联系方式完成注册">
                 <div class="stepForm">
                     <div class="form-control">
                         <input name="newPassword" class="input" type="password" placeholder="创建新的密码" autocomplete="off" min="6" max="[#if setting.passwordMaxLength??]${setting.passwordMaxLength}[#else]20[/#if]" required />
@@ -147,7 +361,8 @@
             $infoConfirm = $(".main-container .info-confirm"),
             $step4Form = $steps.children(".step.step4").children(".stepForm"),
             $step5Form = $steps.children(".step.step5").children(".stepForm"),
-            $name = $step4Form.find("input[name=fullName]"),
+            $firstName = $step4Form.find("input[name=firstName]"),
+            $lastName = $step4Form.find("input[name=lastName]"),
             //$email = $step4Form.find("input[name=email]"),
             $tel = $step4Form.find("input[name=tel]"),
             $captcha = $step4Form.find("input[name=captcha]"),
@@ -196,11 +411,91 @@
         var nextBtnClick = function () {
             showStep($steps.children(".step.active").prevAll().length + 1);
         };
+        var step1BtnClick = function () {
+            var $option = $(this).parent(),
+                $step = $option.parent().parent();
+            $step.find(".options .option").removeClass("active").find("a").removeClass("active");
+            $option.addClass("active").children("a").addClass("active");
+            $step.addClass("selected");
+            $infoConfirm.find(".info-container .info").eq(0).children("h4").text($option.children("h1").text());
+            $infoConfirm.find(".info-container .info").eq(0).find(".image img").attr("src", $option.find(".image img").attr("src"));
+            showStep($step.prevAll().length + 1);
+        };
+        var step2RadioClick = function () {
+            var $radio = $(this).parent(),
+                $option = $radio.parent(),
+                $step = $option.parent().parent().parent();
+            $step.find(".option-none input").get(0).checked = false;
+            $step.addClass("selected");
+            step2SetSummaryValue();
+        };
+        var step2ResetRadioClick = function () {
+            var $step = $(this).parent().parent().parent().parent();
+            $step.find(".options .option input").each(function (i, e) {
+                e.checked = false;
+            });
+            $step.addClass("selected");
+            step2SetSummaryValue();
+        };
+        var step2SetSummaryValue = function () {
+            var $step = $steps.children(".step").eq(1),
+                $ul = $infoConfirm.find(".info-container .info").eq(2).children("ul.radio-info");
+            if ($step.find(".option-none input:checked").length) {
+                $ul.children("li").remove().end().append("<li>无</li>");
+            }
+            else {
+                $ul.children("li").remove();
+                $step.find(".options .option input:checked").each(function (i, e) {
+                    var $radio = $(e).parent(),
+                        $option = $radio.parent();
+                    $ul.append("<li>" + $option.data("name") + $radio.children("h4").text() + "</li>");
+                });
+            }
+        };
+        var step3OptionImageClick = function () {
+            var $option = $(this).parent(),
+                $step = $option.parent().parent();
+            $option.toggleClass("active");
+            if ($step.find(".options .option.active").not(".select-all").length == $step.find(".options .option").not(".select-all").length) {
+                $step.find(".options .option.select-all").addClass("active");
+            }
+            else {
+                $step.find(".options .option.select-all").removeClass("active");
+            }
+            if ($step.find(".options .option.active").length) {
+                $step.addClass("selected");
+            }
+            else {
+                $step.removeClass("selected");
+            }
+            step3SetSummaryValue();
+        };
+        var step3OptionSelectAll = function () {
+            var $option = $(this).parent(),
+                $step = $option.parent().parent();
+            if ($step.find(".options .option.active").not(".select-all").length >= $step.find(".options .option").not($option).length) {
+                $step.removeClass("selected").find(".options .option.active").removeClass("active");
+            }
+            else {
+                $step.addClass("selected").find(".options .option").addClass("active");
+            }
+            step3SetSummaryValue();
+        };
+        var step3SetSummaryValue = function () {
+            var $step = $steps.children(".step").eq(2),
+                $images = $infoConfirm.find(".info-container .info").eq(1).children(".images");
+            $images.children().remove();
+            $step.find(".options .option.active").not(".select-all").each(function (i, e) {
+                var $option = $(e),
+                    $image = $('<div class="image"><img /></div>');
+                $image.children("img").attr("src", $option.find(".image img").attr("src"));
+                $images.append($image);
+            });
+        };
         var step4CaptchaTimer = null;
         var step4CaptchaBtnClick = function () {
             if ($(this).hasClass("disabled"))
                 return;
-            $tel.next(".tooltip").text("联系电话错误");
             if (!$tel.val() || $tel.val().length == 0) {
                 $tel.parent().addClass("has-error");
                 return;
@@ -208,12 +503,19 @@
             else {
                 $tel.parent().removeClass("has-error");
             }
+            if (!$step4Form.find("input[name=imgcaptcha]").val() || $step4Form.find("input[name=imgcaptcha]").val().length == 0) {
+                $step4Form.find("input[name=imgcaptcha]").parent().addClass("has-error");
+                return;
+            }
+            else {
+                $step4Form.find("input[name=imgcaptcha]").parent().removeClass("has-error");
+            }
             var $this = $(this).addClass("disabled");
-            //验证手机号
+            //验证图片验证码
             $.ajax({
-                url: "${base}/register/isUsernameValid.jhtml",
-                type: "POST",
-                data: { username: $tel.val() },
+                url: "${base}/register/isImageValid.jhtml",
+                type: "GET",
+                data: { captchaId: "${captchaId}", captcha: $step4Form.find("input[name=imgcaptcha]").val() },
                 dataType: "json",
                 cache: false,
                 success: function (data) {
@@ -242,19 +544,18 @@
                                 }
                             }, 1000);
                         });
-                        $tel.parent().removeClass("has-error");
+                        $step4Form.find("input[name=imgcaptcha]").parent().removeClass("has-error");
                     }
                     else {
                         $this.removeClass("disabled");
-                        if (data && data.content) {
-                            $tel.next(".tooltip").text(data.content);
-                        }
-                        $tel.parent().addClass("has-error");
+                        $step4Form.find("input[name=imgcaptcha]").parent().addClass("has-error");
+                        step4ImageCaptchaRefresh();
                     }
                 },
                 error: function () {
                     $this.removeClass("disabled");
-                    $.alert.error("验证手机号码失败");
+                    $step4Form.find("input[name=imgcaptcha]").parent().addClass("has-error");
+                    step4ImageCaptchaRefresh();
                 }
             });
         };
@@ -391,6 +692,38 @@
                 hasError++;
             }
             if (hasError == 0) {
+                //获取调查问卷信息
+                var questionArr = [], optionArr = [], answerArr = [];
+                $steps.children(".step1, .step2, .step3").each(function (i, e) {
+                    var $step = $(e),
+                        option = [],
+                        answer = [];
+                    questionArr.push($step.data("name") || "无");
+                    if ($step.is(".step2")) {
+                        $step.find(".options .option").each(function (j, el) {
+                            var $option = $(el);
+                            if ($option.data("name")) {
+                                option.push($option.data("name"));
+                                if ($option.find("input:checked").length) {
+                                    answer.push($option.data("name") + $option.find("input:checked").parent().children("h4").text());
+                                }
+                            }
+                        });
+                    }
+                    else {
+                        $step.find(".options .option").each(function (j, el) {
+                            var $option = $(el);
+                            if ($option.data("value")) {
+                                option.push($option.data("value"));
+                                if ($option.hasClass("active")) {
+                                    answer.push($option.data("value"));
+                                }
+                            }
+                        });
+                    }
+                    optionArr.push(option.length ? option.join(",") : "无");
+                    answerArr.push(answer.length ? answer.join(",") : "无");
+                });
                 //提交注册信息
                 $stepForm.children("a.button").addClass("disabled");
                 $.ajax({
@@ -405,12 +738,12 @@
                             username: $tel.val(),
                             //email: $email.val(),
                             email: $tel.val() + "@fabritailor.com",
-                            memberAttribute_1: $name.val()
-                            //memberAttribute_11: $firstName.val(),
-                            //memberAttribute_12: $lastName.val(),
-                            //question: questionArr,
-                            //option: optionArr,
-                            //answer: answerArr
+                            memberAttribute_1: $firstName.val() + $lastName.val(),
+                            memberAttribute_11: $firstName.val(),
+                            memberAttribute_12: $lastName.val(),
+                            question: questionArr,
+                            option: optionArr,
+                            answer: answerArr
                         };
                         var rsaKey = new RSAKey();
                         rsaKey.setPublic(b64tohex(data.modulus), b64tohex(data.exponent));
@@ -460,17 +793,17 @@
                 $steps.height($step.outerHeight());
             }
         };
-        //$steps.children(".step").eq(0).find(".options .option").on("click", "div.image,a", step1BtnClick);
-        //$steps.children(".step").eq(1).find(".options .option input").click(step2RadioClick);
-        //$steps.children(".step").eq(1).find(".option-none input").click(step2ResetRadioClick);
-        //$steps.children(".step").eq(2).find(".options .option:not(.select-all) .image").click(step3OptionImageClick);
-        //$steps.children(".step").eq(2).find(".options .option.select-all .image").click(step3OptionSelectAll);
-        $steps.children(".step.step4").find(".stepForm .form-control input").change(step4InputChange);
-        $steps.children(".step.step4").find(".stepForm a.btn-captcha").click(step4CaptchaBtnClick);
-        $steps.children(".step.step4").find(".stepForm a.button").not(".btn-captcha").click(step4BtnClick);
-        $steps.children(".step.step4").find(".stepForm a.captcha-img").click(step4ImageCaptchaRefresh);
-        $steps.children(".step.step5").find(".stepForm .form-control input").change(step4InputChange);
-        $steps.children(".step.step5").find(".stepForm a.button").click(step5BtnClick);
+        $steps.children(".step").eq(0).find(".options .option").on("click", "div.image,a", step1BtnClick);
+        $steps.children(".step").eq(1).find(".options .option input").click(step2RadioClick);
+        $steps.children(".step").eq(1).find(".option-none input").click(step2ResetRadioClick);
+        $steps.children(".step").eq(2).find(".options .option:not(.select-all) .image").click(step3OptionImageClick);
+        $steps.children(".step").eq(2).find(".options .option.select-all .image").click(step3OptionSelectAll);
+        $steps.children(".step").eq(3).find(".stepForm .form-control input").change(step4InputChange);
+        $steps.children(".step").eq(3).find(".stepForm a.btn-captcha").click(step4CaptchaBtnClick);
+        $steps.children(".step").eq(3).find(".stepForm a.button").not(".btn-captcha").click(step4BtnClick);
+        $steps.children(".step").eq(3).find(".stepForm a.captcha-img").click(step4ImageCaptchaRefresh);
+        $steps.children(".step").eq(4).find(".stepForm .form-control input").change(step4InputChange);
+        $steps.children(".step").eq(4).find(".stepForm a.button").click(step5BtnClick);
         $btnNext.click(nextBtnClick);
         $ol.find("li a").click(function () {
             showStep($(this).parent().prevAll().length);

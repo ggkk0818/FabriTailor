@@ -30,7 +30,7 @@
         <div class="account-container">
             <div class="accountBuild">
                 <h1>我的版型</h1>
-                <p>当前网页中默认的是我们的推荐版型，你可点击任意部分进行查看和修改。</p>
+                <p>你可以点击任意部分查看和修改你的专属版型，以便在购物时一键应用于你选购的衬衫。除此之外，你也可以在购物时新建一个只应用于一款衬衫的临时版型。</p>
                 <div class="customization clearfix">
                     <div class="options">
 						[#if currentMember.specifications?has_content]

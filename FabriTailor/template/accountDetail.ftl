@@ -43,7 +43,11 @@
                 <h1>帐户信息</h1>
                 <p>在下面的信息栏里你可以更改你的名字以及账户密码。</p>
                 <div class="detailForm">
-                    <div class="control-group">
+                    <div class="form-control">
+                        <input name="fullName" class="input" type="text" placeholder="姓名" value="[#if currentMember?? && currentMember.name??]${currentMember.name}[/#if]" required />
+                        <div class="tooltip">姓名错误</div>
+                    </div>
+                    <!--<div class="control-group">
                         <div class="form-control">
                             <input name="firstName" class="input" type="text" placeholder="姓" value="[#if memberFirstName??]${memberFirstName}[/#if]" required />
                             <div class="tooltip">姓错误</div>
@@ -52,7 +56,7 @@
                             <input name="lastName" class="input" type="text" placeholder="名" value="[#if memberLastName??]${memberLastName}[/#if]" required />
                             <div class="tooltip">名错误</div>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="form-control" style="display:none;">
                         <input name="email" class="input" type="text" placeholder="邮箱" value="[#if currentMember?? && currentMember.email??]${currentMember.email}[/#if]" required />
                         <div class="tooltip">邮箱错误</div>
@@ -81,7 +85,7 @@
             </div>
         </div>
     </div>
-	[#include "/shop/include/footer.ftl" /]    
+	[#include "/shop/include/footer.ftl" /]
     <script type="text/javascript">
         //账号导航菜单
         $(".main-container .account-aside .current").click(function () {
@@ -91,8 +95,9 @@
     </script>
     <script type="text/javascript">
         var $detailForm = $(".main-container .account-container .detailForm"),
-            $firstName = $detailForm.find("input[name=firstName]"),
-            $lastName = $detailForm.find("input[name=lastName]"),
+        	$fullName = $detailForm.find("input[name=fullName]"),
+            //$firstName = $detailForm.find("input[name=firstName]"),
+            //$lastName = $detailForm.find("input[name=lastName]"),
             $email = $detailForm.find("input[name=email]"),
             $curPassword = $detailForm.find("input[name=curPassword]"),
             $newPassword = $detailForm.find("input[name=newPassword]"),
@@ -133,9 +138,9 @@
             if (hasError == 0) {
                 var params = {
                     email: $email.val(),
-                    memberAttribute_1: $firstName.val() + $lastName.val(),
-                    memberAttribute_11: $firstName.val(),
-                    memberAttribute_12: $lastName.val()
+                    memberAttribute_1: $fullName.val(),
+                    //memberAttribute_11: $firstName.val(),
+                    //memberAttribute_12: $lastName.val()
                 };
                 $detailForm.children("a.button").addClass("disabled");
                 $.getJSON("${base}/common/public_key.jhtml", function (data) {
