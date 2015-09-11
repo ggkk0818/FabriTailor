@@ -44,14 +44,14 @@
 								[/#list]
 							[/#if]
 							<div class="option" data-specification-id="${specification.id}" [#if chosenValue.id??]data-specification-value="${chosenValue.id}"[/#if]>
-								<div class="image"><img src="[#if specification.id == 1]${base}/resources/shop/img/product-customizztion1.jpg[#elseif chosenValue.image??]${chosenValue.image}[#else]${specification.specificationValues[0].image}[/#if]" /></div>
+								<div class="image"><img src="[#if specification.id == 1]${base}/resources/shop/img/product-customizztion1-[#if chosenValue.id??]${chosenValue.id}[#else]1[/#if].jpg[#elseif chosenValue.image??]${chosenValue.image}[#else]${specification.specificationValues[0].image}[/#if]" /></div>
 								<div class="text"><span>[#if chosenValue.name??]${chosenValue.name}[#else]无[/#if]</span><i class="edit"></i></div>
 							</div>
 							[/#list]
 						[/#if]
                         <div class="option monogram" [#if currentMember.letters??]data-letters="${currentMember.letters}"[/#if]>
                             <div class="image"><img src="${base}/resources/shop/img/product-customizztion-letters[#if !currentMember.letters??]-none[/#if].jpg" /></div>
-                            <div class="text">[#if currentMember.letters??]自定义(${currentMember.letters})[#else]无刺绣[/#if]<i class="edit"></i></div>
+                            <div class="text">[#if currentMember.letters??]自定义(${currentMember.letters})[#else]无绣字[/#if]<i class="edit"></i></div>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                         <li [#if currentMember.letters??]data-letters="${currentMember.letters}"[/#if]>
                             <a href="javascript:void(0);">
                                 <span>绣花选择</span>
-                                <span class="chosen">[#if currentMember.letters??]自定义(${currentMember.letters})[#else]无刺绣[/#if]</span>
+                                <span class="chosen">[#if currentMember.letters??]自定义(${currentMember.letters})[#else]无绣字[/#if]</span>
                             </a>
                         </li>
                     </ul>
@@ -101,7 +101,7 @@
 						[/#list]
 					[/#if]
                     <div class="step normal" data-bg-img-change="true" style="display:block;" data-specification-id="${specification.id}" [#if chosenValue.id??]data-specification-value="${chosenValue.id}"[/#if] data-title="${specification.name}" [#if specification.memo??]data-description="${specification.memo}"[/#if]>
-                        <img class="bg-img right" src="[#if specification.id == 1]${base}/resources/shop/img/product-customizztion1.jpg[#elseif chosenValue.image??]${chosenValue.image}[#else]${specification.specificationValues[0].image}[/#if]" />
+                        <img class="bg-img right" src="[#if specification.id == 1]${base}/resources/shop/img/product-customizztion1-[#if chosenValue.id??]${chosenValue.id}[#else]1[/#if].jpg[#elseif chosenValue.image??]${chosenValue.image}[#else]${specification.specificationValues[0].image}[/#if]" />
                         <div class="message">
                             <h2>${specification.name}</h2>
                             <p>${specification.memo}</p>
@@ -109,7 +109,7 @@
                         <div class="options">
 							[#list specification.specificationValues as specificationValue]
                             <div class="option [#if chosenValue.id?? && chosenValue.id == specificationValue.id]active[/#if]" data-specification-value="${specificationValue.id}" data-title="${specificationValue.name}" [#if specificationValue.description]data-description="${specificationValue.description}"[/#if]>
-                                <div class="image"><img src="[#if specification.id == 1]${base}/resources/shop/img/product-customizztion1.jpg[#else]${specificationValue.image}[/#if]" [#if specification.id == 1 && specificationValue.imagehd??]data-hover-image="${specificationValue.imagehd}"[/#if] /></div>
+                                <div class="image"><img src="[#if specification.id == 1]${base}/resources/shop/img/product-customizztion1-${specificationValue.id}.jpg[#else]${specificationValue.image}[/#if]" [#if specification.id == 1]${base}/resources/shop/img/product-customizztion1-${specificationValue.id}.jpg[#elseif specificationValue.imagehd??]data-hover-image="${specificationValue.imagehd}"[/#if] /></div>
                                 <div class="text">${specificationValue.name}</div>
                             </div>
 							[/#list]
@@ -118,10 +118,10 @@
 					[/#list]
 				[/#if]
                     <div class="step normal" data-bg-img-change="true" style="display:block;">
-                        <img class="bg-img right" src="${base}/resources/shop/img/product-customization-build3-0.jpg" />
+                        <img class="bg-img right" src="${base}/resources/shop/img/product-customizztion-letters[#if currentMember.letters?? && currentMember.letters?length > 0]-none[/#if].jpg" />
                         <div class="message">
-                            <h2>绣花</h2>
-                            <p>这个简单的工具能够帮助你迅速了解并且建立属于自己的衬衫版型。在每一个衬衫细节选择你喜欢的选项，然后点击下一步即可。保证每个细节都按照你的设想与喜好，一切就绪之后就可以把这件衬衫添加到购物车了。</p>
+                            <h2>绣字</h2>
+                            <p>你可以选择在衬衫上刺绣1-3个英文字母或数字。绣字位于左手袖口内侧，独特而不张扬。</p>
                         </div>
                         <div class="options">
                             <div class="option [#if currentMember.letters??]active[/#if]" data-monogram-value="custom">
@@ -130,7 +130,7 @@
                             </div>
                             <div class="option [#if !currentMember.letters??]active[/#if]" data-monogram-value="none">
                                 <div class="image"><img src="${base}/resources/shop/img/product-customizztion-letters-none.jpg" /></div>
-                                <div class="text">无刺绣</div>
+                                <div class="text">无绣字</div>
                             </div>
                             <div class="option-monogram">
                                 <input class="monogram" type="text" value="[#if currentMember.letters?? && currentMember.letters?length > 0]${currentMember.letters[0]}[/#if]" />
@@ -211,7 +211,7 @@
             if ($option.data("monogram-value")) {
                 if ($option.data("monogram-value") == "none") {
                     accountBuilderSidebar.find("ul li").last().removeData("letters").removeAttr("data-letters");
-                    accountBuilderSidebar.find("ul li").last().find("a span.chosen").text("无刺绣");
+                    accountBuilderSidebar.find("ul li").last().find("a span.chosen").text("无绣字");
                 }
                 else {
                     accountBuildMonogramChange();
@@ -260,7 +260,7 @@
             }
             else {
                 accountBuilderSidebar.find("ul li").last().removeData("letters").removeAttr("data-letters");
-                accountBuilderSidebar.find("ul li").last().find("a span.chosen").text("无刺绣");
+                accountBuilderSidebar.find("ul li").last().find("a span.chosen").text("无绣字");
             }
         };
         var saveAccountBuild = function () {

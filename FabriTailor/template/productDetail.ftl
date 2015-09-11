@@ -128,7 +128,7 @@
                 <div class="options clearfix">
                     <div class="option monogram">
                         <div class="image"><img src="${base}/resources/shop/img/product-customizztion-letters-none.jpg" /></div>
-                        <div class="text">无刺绣</div>
+                        <div class="text">无绣字</div>
                     </div>
                 </div>
                 <a class="btn" href="javascript:void(0);">加入购物车</a>
@@ -164,7 +164,7 @@
 					[/#if]
                     <div class="option monogram">
                         <div class="image"><img src="${base}/resources/shop/img/product-customizztion-letters-none.jpg" /></div>
-                        <div class="text">无刺绣</div>
+                        <div class="text">无绣字</div>
                     </div>
                 </div>
                 <a class="btn" href="javascript:void(0);">加入购物车</a>
@@ -222,8 +222,8 @@
                 <div class="step normal" data-bg-img-change="true">
                     <img class="bg-img right" src="${base}/resources/shop/img/product-customizztion-letters.jpg" />
                     <div class="message">
-                        <h2>刺绣</h2>
-                        <p>刺绣</p>
+                        <h2>绣字</h2>
+                        <p>你可以选择在衬衫上刺绣1-3个英文字母或数字。绣字位于左手袖口内侧，独特而不张扬。</p>
                     </div>
                     <div class="options clearfix">
                         <div class="option" data-monogram-value="custom">
@@ -232,7 +232,7 @@
                         </div>
                         <div class="option" data-monogram-value="none">
                             <div class="image"><img src="${base}/resources/shop/img/product-customizztion-letters-none.jpg" /></div>
-                            <div class="text">无刺绣</div>
+                            <div class="text">无绣字</div>
                         </div>
                         <div class="option-monogram">
                             <input class="monogram" type="text" value="" />
@@ -256,7 +256,7 @@
 				[/#if]
                     <div class="option monogram">
                         <div class="image"><img src="${base}/resources/shop/img/product-customizztion-letters-none.jpg" /></div>
-                        <div class="text">无刺绣</div>
+                        <div class="text">无绣字</div>
                     </div>
                 </div>
                 <a class="btn" href="javascript:void(0);">加入购物车</a>
@@ -616,7 +616,7 @@
             if ($option.data("monogram-value")) {
                 if ($option.data("monogram-value") == "none") {
                     $customizationBuildSummary.find(".options .option.monogram").removeData("letters").removeAttr("data-letters");
-                    $customizationBuildSummary.find(".options .option.monogram .text").text("无刺绣");
+                    $customizationBuildSummary.find(".options .option.monogram .text").text("无绣字");
                 }
                 else {
                     productCustomizationBuildMonogramChange();
@@ -648,7 +648,7 @@
             }
             else {
                 $customizationBuildSummary.find(".options .option.monogram").removeData("letters").removeAttr("data-letters");
-                $customizationBuildSummary.find(".options .option.monogram .text").text("无刺绣");
+                $customizationBuildSummary.find(".options .option.monogram .text").text("无绣字");
             }
         };
         var productCustomizationBuildSummaryOptionClick = function () {
