@@ -29,8 +29,11 @@
         <div class="account-container">
             <div class="accountOrderDetail">
                 <h1>订单 #${order.sn}</h1>
+			[#if !order.expired && order.orderStatus == "unconfirmed" && order.paymentStatus == "unpaid"]
+                <p class="cancel"><a href="javascript:void(0);">取消订单</a></p>
+			[/#if]
                 <p><a href="${base}/member/order/list.jhtml">« 全部订单</a></p>
-                <h3 title="${order.createDate?string("yyyy-MM-dd HH:mm:ss")}">${message("shop.common.createDate")}:</h3>
+                <h3 title="${order.createDate?string("yyyy-MM-dd HH:mm:ss")}">${message("shop.common.createDate")}: ${order.createDate}</h3>
                 <div class="products">
 				[#list order.orderItems as orderItem]
                     <div class="product clearfix">
@@ -55,7 +58,7 @@
 								<li>${specificationValue.name}</li>
 								[/#list]
 							[/#if]
-								<li>[#if orderItem.letters??]自定义(${orderItem.letters})[#else]无刺绣[/#if]</li>
+								<li>[#if orderItem.letters??]自定义(${orderItem.letters})[#else]无绣字[/#if]</li>
                             </ul>
                         </div>
                         <div class="status">
@@ -84,7 +87,11 @@
                     <div class="col-md-4 col-sm-12">
                         <h2>支付信息</h2>
                         <div class="order-info">
-						[#if order.paymentStatus == "unpaid" || order.paymentStatus == "partialPayment"]
+						[#if order.expired|| order.orderStatus == "cancelled"]
+							<ul>
+                                <li>不可用</li>
+                            </ul>
+						[#elseif order.paymentStatus == "unpaid" || order.paymentStatus == "partialPayment"]
 							[#list paymentPlugins as paymentPlugin]
 								<div class="radio clearfix" for="${paymentPlugin.id}">
 									<input id="${paymentPlugin.id}" name="paymentPlugin" type="radio" value="${paymentPlugin.id}" />
@@ -161,6 +168,7 @@
     </script>
     <script type="text/javascript">
         var orderId = "${order.sn}",
+            $btnCancel = $(".main-container p.cancel a"),
             $purchase = $(".main-container .purchase"),
             $paymentRadio = $purchase.find(".radio"),
             $btnBuy = $purchase.find(".order-info a.button"),
@@ -281,10 +289,32 @@
         var reload = function () {
             window.location.reload();
         };
+        //取消订单
+        var cancelOrder = function () {
+            if (confirm("是否取消订单？")) {
+                $.ajax({
+                    url: "${base}/member/order/cancel.jhtml?sn=${order.sn}",
+                    type: "POST",
+                    dataType: "json",
+                    cache: false,
+                    success: function (message) {
+                        if (message.type == "success") {
+                            location.reload(true);
+                        } else {
+                            $.alert.error(message);
+                        }
+                    },
+                    error: function () {
+                        $.alert.error("取消订单失败");
+                    }
+                });
+            }
+        };
         //注册事件
         $paymentRadio.click(paymentPluginChange);
         $btnBuy.click(doPayment);
         $waitPanel.children("a").click(reload);
+        $btnCancel.click(cancelOrder);
         //过滤支付方式
         if (isMobile()) {
             $paymentRadio.find("input[value=alipayDirectPlugin]").parent().remove();

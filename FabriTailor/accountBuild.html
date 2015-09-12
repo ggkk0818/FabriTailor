@@ -449,7 +449,7 @@
             accountBuilder = $(".accountBuilder"),
             accountBuilderSidebar = $(".accountBuilder .accountBuilder-sidebar"),
             accountBuilderContent = $(".accountBuilder .accountBuilder-content");
-
+        //版型编辑界面
         var showAccountBuild = function (index) {
             if (typeof index !== "number")
                 index = parseInt(index, 10);
@@ -469,6 +469,7 @@
             accountBuilder.removeClass("opened").fadeTo("normal", 0, EASING_NAME, function () { $(this).hide(); $("body").removeClass("noscroll"); });
             accountBuilderSidebar.find("ul li").removeClass("active");
         };
+        //选择版型
         var accountBuildOptionSelect = function () {
             var $option = $(this),
                 $step = $(this).parent().parent();
@@ -503,13 +504,14 @@
             if ($option.data("monogram-value")) {
                 if ($option.data("monogram-value") == "none") {
                     accountBuilderSidebar.find("ul li").last().removeData("letters").removeAttr("data-letters");
-                    accountBuilderSidebar.find("ul li").last().find("a span.chosen").text("无刺绣");
+                    accountBuilderSidebar.find("ul li").last().find("a span.chosen").text("无绣字");
                 }
                 else {
                     accountBuildMonogramChange();
                 }
             }
         };
+        //全部重置
         var accountBuildOptionReset = function () {
             accountBuilderContent.children("div.step").each(function (i, e) {
                 var $step = $(e);
@@ -526,6 +528,7 @@
                 }
             });
         };
+        //修改绣字
         var accountBuildMonogramKeydown = function (e) {
             if (e && e.keyCode != 8 && e.keyCode != 46
                 && e.keyCode < 38 && e.keyCode > 40
@@ -552,9 +555,10 @@
             }
             else {
                 accountBuilderSidebar.find("ul li").last().removeData("letters").removeAttr("data-letters");
-                accountBuilderSidebar.find("ul li").last().find("a span.chosen").text("无刺绣");
+                accountBuilderSidebar.find("ul li").last().find("a span.chosen").text("无绣字");
             }
         };
+        //保存版型
         var saveAccountBuild = function () {
             var $btnSave = $(this);
             if ($btnSave.hasClass("disalbed"))
@@ -632,20 +636,53 @@
                 $btnSave.removeClass("disabled").text("保存并退出");
             });
         };
-        accountBuildOptions.find(".option").click(function () {
-            showAccountBuild($(this).prevAll(".option").length);
-        });
-        accountBuilderSidebar.find("ul li a").click(function () {
-            showAccountBuild($(this).parent().prevAll().length);
-        });
-        accountBuilderContent.find(".step .options .option").click(accountBuildOptionSelect);
+        //注册事件
+        if (isMobile()) {
+            accountBuildOptions.find(".option").on({
+                "touchstart": function () {
+                    $(this).data("touchclick", true);
+                },
+                "touchmove": function () {
+                    $(this).data("touchclick", false);
+                },
+                "touchend": function () {
+                    if ($(this).data("touchclick"))
+                        showAccountBuild($(this).prevAll(".option").length);
+                }
+            });
+            accountBuilderSidebar.find("ul li a").on({
+                "touchstart": function () {
+                    $(this).data("touchclick", true);
+                },
+                "touchmove": function () {
+                    $(this).data("touchclick", false);
+                },
+                "touchend": function () {
+                    if ($(this).data("touchclick"))
+                        showAccountBuild($(this).parent().prevAll().length);
+                }
+            });
+            accountBuilderContent.find(".step .options .option").on("touchend", accountBuildOptionSelect);
+            accountBuilder.find("a.btn-close").on("touchend", hideAccountBuild);
+            accountBuilderSidebar.children("a.btn-save").on("touchend", saveAccountBuild);
+            accountBuilderSidebar.children("a.reset").on("touchend", accountBuildOptionReset);
+        }
+        else {
+            accountBuildOptions.find(".option").click(function () {
+                showAccountBuild($(this).prevAll(".option").length);
+            });
+            accountBuilderSidebar.find("ul li a").click(function () {
+                showAccountBuild($(this).parent().prevAll().length);
+            });
+            accountBuilderContent.find(".step .options .option").click(accountBuildOptionSelect);
+            accountBuilder.find("a.btn-close").click(hideAccountBuild);
+            accountBuilderSidebar.children("a.btn-save").click(saveAccountBuild);
+            accountBuilderSidebar.children("a.reset").click(accountBuildOptionReset);
+        }
         accountBuilderContent.children(".step").last().find(".options .option-monogram input")
                 .keydown(accountBuildMonogramKeydown)
                 .keyup(accountBuildMonogramKeyup)
                 .change(accountBuildMonogramChange);
-        accountBuilder.find("a.btn-close").click(hideAccountBuild);
-        accountBuilderSidebar.children("a.btn-save").click(saveAccountBuild);
-        accountBuilderSidebar.children("a.reset").click(accountBuildOptionReset);
     </script>
 </body>
 </html>

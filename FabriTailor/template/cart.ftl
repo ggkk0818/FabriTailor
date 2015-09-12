@@ -49,7 +49,7 @@
                             <li>${specificationValue.name}</li>
 							[/#list]
 						[/#if]
-                            <li>[#if cartItem.letters??]自定义(${cartItem.letters})[#else]无刺绣[/#if]</li>
+                            <li>[#if cartItem.letters??]自定义(${cartItem.letters})[#else]无绣字[/#if]</li>
                         </ul>
                     </div>
                     <div class="purchase-info">

@@ -66,6 +66,7 @@
         <div class="account-container">
             <div class="accountOrderDetail">
                 <h1>订单 #3EIKD0OGG</h1>
+                <p class="cancel"><a href="javascript:void(0);">取消订单</a></p>
                 <p><a href="javascript:void(0);">« 全部订单</a></p>
                 <h3>2015年7月30日</h3>
                 <div class="products">
@@ -280,6 +281,7 @@
     </script>
     <script type="text/javascript">
         var orderId = "${order.sn}",
+            $btnCancel = $(".main-container p.cancel a"),
             $purchase = $(".main-container .purchase"),
             $paymentRadio = $purchase.find(".radio"),
             $btnBuy = $purchase.find(".order-info a.button"),
@@ -400,10 +402,32 @@
         var reload = function () {
             window.location.reload();
         };
+        //取消订单
+        var cancelOrder = function () {
+            if (confirm("是否取消订单？")) {
+                $.ajax({
+                    url: "${base}/member/order/cancel.jhtml?sn=${order.sn}",
+                    type: "POST",
+                    dataType: "json",
+                    cache: false,
+                    success: function (message) {
+                        if (message.type == "success") {
+                            location.reload(true);
+                        } else {
+                            $.alert.error(message);
+                        }
+                    },
+                    error: function () {
+                        $.alert.error("取消订单失败");
+                    }
+                });
+            }
+        };
         //注册事件
         $paymentRadio.click(paymentPluginChange);
         $btnBuy.click(doPayment);
         $waitPanel.children("a").click(reload);
+        $btnCancel.click(cancelOrder);
         //过滤支付方式
         if (isMobile()) {
             $paymentRadio.find("input[value=alipayDirectPlugin]").parent().remove();

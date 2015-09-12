@@ -80,7 +80,7 @@
 						[/#if]
                         <li [#if currentMember.letters??]data-letters="${currentMember.letters}"[/#if]>
                             <a href="javascript:void(0);">
-                                <span>绣花选择</span>
+                                <span>绣字选择</span>
                                 <span class="chosen">[#if currentMember.letters??]自定义(${currentMember.letters})[#else]无绣字[/#if]</span>
                             </a>
                         </li>
@@ -157,7 +157,7 @@
             accountBuilder = $(".accountBuilder"),
             accountBuilderSidebar = $(".accountBuilder .accountBuilder-sidebar"),
             accountBuilderContent = $(".accountBuilder .accountBuilder-content");
-
+        //版型编辑界面
         var showAccountBuild = function (index) {
             if (typeof index !== "number")
                 index = parseInt(index, 10);
@@ -177,6 +177,7 @@
             accountBuilder.removeClass("opened").fadeTo("normal", 0, EASING_NAME, function () { $(this).hide(); $("body").removeClass("noscroll"); });
             accountBuilderSidebar.find("ul li").removeClass("active");
         };
+        //选择版型
         var accountBuildOptionSelect = function () {
             var $option = $(this),
                 $step = $(this).parent().parent();
@@ -218,6 +219,7 @@
                 }
             }
         };
+        //全部重置
         var accountBuildOptionReset = function () {
             accountBuilderContent.children("div.step").each(function (i, e) {
                 var $step = $(e);
@@ -234,6 +236,7 @@
                 }
             });
         };
+        //修改绣字
         var accountBuildMonogramKeydown = function (e) {
             if (e && e.keyCode != 8 && e.keyCode != 46
                 && e.keyCode < 38 && e.keyCode > 40
@@ -263,6 +266,7 @@
                 accountBuilderSidebar.find("ul li").last().find("a span.chosen").text("无绣字");
             }
         };
+        //保存版型
         var saveAccountBuild = function () {
             var $btnSave = $(this);
             if ($btnSave.hasClass("disalbed"))
@@ -302,7 +306,7 @@
                         //同步所选信息
                         accountBuilderContent.children(".step").each(function (i, e) {
                             var $step = $(e),
-                                $option = $step.find(".options .option.active").first();
+                                $option = $step.find(".options .option");
                             if ($step.data("specification-id")) {
                                 var $optionSummary = accountBuildOptions.find(".option[data-specification-id=" + $step.data("specification-id") + "]");
                                 if ($optionSummary.length) {
@@ -340,20 +344,53 @@
                 $btnSave.removeClass("disabled").text("保存并退出");
             });
         };
-        accountBuildOptions.find(".option").click(function () {
-            showAccountBuild($(this).prevAll(".option").length);
-        });
-        accountBuilderSidebar.find("ul li a").click(function () {
-            showAccountBuild($(this).parent().prevAll().length);
-        });
-        accountBuilderContent.find(".step .options .option").click(accountBuildOptionSelect);
+        //注册事件
+        if (isMobile()) {
+            accountBuildOptions.find(".option").on({
+                "touchstart": function () {
+                    $(this).data("touchclick", true);
+                },
+                "touchmove": function () {
+                    $(this).data("touchclick", false);
+                },
+                "touchend": function () {
+                    if ($(this).data("touchclick"))
+                        showAccountBuild($(this).prevAll(".option").length);
+                }
+            });
+            accountBuilderSidebar.find("ul li a").on({
+                "touchstart": function () {
+                    $(this).data("touchclick", true);
+                },
+                "touchmove": function () {
+                    $(this).data("touchclick", false);
+                },
+                "touchend": function () {
+                    if ($(this).data("touchclick"))
+                        showAccountBuild($(this).parent().prevAll().length);
+                }
+            });
+            accountBuilderContent.find(".step .options .option").on("touchend", accountBuildOptionSelect);
+            accountBuilder.find("a.btn-close").on("touchend", hideAccountBuild);
+            accountBuilderSidebar.children("a.btn-save").on("touchend", saveAccountBuild);
+            accountBuilderSidebar.children("a.reset").on("touchend", accountBuildOptionReset);
+        }
+        else {
+            accountBuildOptions.find(".option").click(function () {
+                showAccountBuild($(this).prevAll(".option").length);
+            });
+            accountBuilderSidebar.find("ul li a").click(function () {
+                showAccountBuild($(this).parent().prevAll().length);
+            });
+            accountBuilderContent.find(".step .options .option").click(accountBuildOptionSelect);
+            accountBuilder.find("a.btn-close").click(hideAccountBuild);
+            accountBuilderSidebar.children("a.btn-save").click(saveAccountBuild);
+            accountBuilderSidebar.children("a.reset").click(accountBuildOptionReset);
+        }
         accountBuilderContent.children(".step").last().find(".options .option-monogram input")
                 .keydown(accountBuildMonogramKeydown)
                 .keyup(accountBuildMonogramKeyup)
                 .change(accountBuildMonogramChange);
-        accountBuilder.find("a.btn-close").click(hideAccountBuild);
-        accountBuilderSidebar.children("a.btn-save").click(saveAccountBuild);
-        accountBuilderSidebar.children("a.reset").click(accountBuildOptionReset);
     </script>
 </body>
 </html>

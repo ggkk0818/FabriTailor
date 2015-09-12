@@ -13,6 +13,14 @@
 .accountOrderDetail p a{
     color: #b6b6b6;
 }
+.accountOrderDetail p.cancel{
+    margin-top:-10px;
+    padding-top:0;
+}
+.accountOrderDetail p.cancel a{
+    color:#000;
+    text-decoration:underline;
+}
 .accountOrderDetail h3{
     max-width:900px;
     margin:0 auto;

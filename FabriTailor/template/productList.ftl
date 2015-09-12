@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     [#if productCategory??]
         [@seo type = "productList"]
-            <title>[#if productCategory.seoTitle??]${productCategory.seoTitle}[#elseif seo.title??][@seo.title?interpret /] - FabriTailor[/#if][#if systemShowPowered] - Powered By Zaders[/#if]</title>
+            <title>[#if productCategory.seoTitle??]${productCategory.seoTitle}[#elseif seo.title??][@seo.title?interpret /][/#if][#if systemShowPowered] - FabriTailor[/#if]</title>
             <meta name="author" content="Zaders Team" />
             <meta name="copyright" content="FabriTailor" />
             [#if productCategory.seoKeywords??]
@@ -21,7 +21,7 @@
             [/#if]
         [/@seo]
     [#else]
-        <title>${message("shop.product.title")} - FabriTailor[#if systemShowPowered] - Powered By Zaders[/#if]</title>
+        <title>${message("shop.product.title")}[#if systemShowPowered] - FabriTailor[/#if]</title>
         <meta name="author" content="Zaders Team" />
         <meta name="copyright" content="FabriTailor" />
     [/#if]
