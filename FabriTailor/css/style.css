@@ -1239,10 +1239,10 @@ footer .contact {
     position: absolute;
     top: 50px;
     right: 50px;
-    width: 290px;
+    width: 260px;
 }
 footer .contact h3{
-    margin-left:10px;
+    margin-left:12px;
     font-size:16px;
 }
 footer .contact .input-group{
@@ -1298,8 +1298,8 @@ footer .contact .ico-link a{
 }
 footer .contact .qr-img{
     display:block;
-    width:200px;
-    height:200px;
+    width:100px;
+    height:100px;
     margin: 0 auto 25px;
 }
 footer .links {
@@ -1327,6 +1327,22 @@ footer .logo {
     left: 30px;
     width: 132px;
     height: 100px;
+}
+a.footer-button{
+    position:fixed;
+    left:50%;
+    bottom:10px;
+    display:none;
+    width:290px;
+    margin:0 0 0 -145px;
+    color:#fff;
+    background-color: #6f95a9;
+    font-size:16px;
+    line-height:20px;
+    z-index:1;
+}
+a.footer-button:hover{
+    background-color: #668291;
 }
 /* ==========================================================================
    Login Panel
