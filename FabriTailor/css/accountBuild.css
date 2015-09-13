@@ -235,15 +235,16 @@
     left:0;
     width:26.6666667%;
     height:100px;
+    padding:0;
     border:1px solid #dae0d9;
     font-size:60px;
     line-height:166.6666667%;
     text-align:center;
     -webkit-transition: height 200ms ease, font-size 200ms ease;
     -moz-transition: height 200ms ease, font-size 200ms ease;
+    transition: height 200ms ease, font-size 200ms ease;
     -webkit-appearance:none;
     -moz-appearance:none;
-    transition: height 200ms ease, font-size 200ms ease;
 }
 .accountBuilder-content .step.normal .options .option-monogram .monogram.second{
     left:50%;

@@ -7,8 +7,15 @@
     text-align: center;
 }
 .accountSize p{
+    max-width:500px;
+    margin:16px auto;
     font-size:16px;
     text-align:center;
+}
+.accountSize a.button{
+    display:block;
+    width:290px;
+    margin:10px auto;
 }
 .accountSize .size-image{
     width:351px;
@@ -22,6 +29,9 @@
         padding: 50px 25px;
     }
     .accountSize .size-image{
+        width:250px;
+    }
+    .accountSize a.button{
         width:250px;
     }
 }
