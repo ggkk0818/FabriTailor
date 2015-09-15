@@ -31,8 +31,8 @@
 		[/#list]
 	[/#if]
     <div class="main-container">
-        <h1>预约量体时间。</h1>
-        <p>和穿衣顾问预约一个你方便的时间。</p>
+        <h1>预约量体时间</h1>
+        <p>选择一个方便的时间，穿衣顾问将上门为你进行量体</p>
         <select class="select date">
             <option value="">请选择预约日期</option>
         </select>
@@ -85,11 +85,12 @@
         </div>
         <p class="contact">
             或致电我们<br />
-            400-1234-567
+            400-838-6595<br />
+            你也可致电预约来我们位于北京太阳宫的工作室量体
         </p>
         <div class="schedule">
             <hr />
-            <h1><span>在你选择的时间</span>，穿衣顾问将登门拜访？</h1>
+            <h1><span>在你选择的时间</span>，穿衣顾问将登门拜访</h1>
             <h4><a class="change-date" href="javascript:void(0);">&lt;&lt; 返回修改时间</a></h4>
             <div class="scheduleForm">
                 <div class="control-group">
@@ -142,7 +143,6 @@
             </div>
         </div>
         <hr />
-        <h1>请确认你的量体信息。</h1>
         <div class="footer-img">
             <img src="${base}/resources/shop/img/index2.jpg" />
         </div>
@@ -173,7 +173,7 @@
             5: "星期五",
             6: "星期六"
         };
-        for (var i = 1; i <= 7; i++) {
+        for (var i = 1; i <= 30; i++) {
             today.setDate(today.getDate() + 1);
             $dateSelect.append('<option value="' + today.Format("yyyy-mm-dd") + '">' + (today.getMonth() + 1) + '月' + today.getDate() + '日 ' + dayOfWeekName[today.getDay()] + '</option>');
         }
@@ -288,9 +288,9 @@
                             $.alert.error("保存失败。" + (data && data.content ? data.content : ""));
                         }
                     },
-                    error: function () {
+                    error: function (xhr, status, err) {
                         //$scheduleForm.children("p.msg").removeClass("hidden").text("保存失败。");
-                        $.alert.error("保存失败。");
+                        $.alert.error("保存失败。" + (status ? status : "") + (err ? err : ""));
                     }
                 }).always(function () {
                     $scheduleForm.children("a.button").removeClass("disabled");
