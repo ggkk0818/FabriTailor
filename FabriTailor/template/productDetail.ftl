@@ -211,7 +211,7 @@
                         <div class="options clearfix">                            
                             [#list specification.specificationValues as specificationValue]
                             <div class="option" data-specification-value="${specificationValue.id}" data-title="${specificationValue.name}" [#if specificationValue.description??]data-description="${specificationValue.description}"[/#if]>
-                                <div class="image"><img src="${specificationValue.image}" [#if specification.id!=1 && specificationValue.imagehd??]data-hover-image="${specificationValue.imagehd}"[/#if] /></div>
+                                <div class="image"><img src="${specificationValue.image}" [#if specification.id==1 && specificationValue.imagehd??]data-hover-image="${specificationValue.imagehd}"[/#if] /></div>
                                 <div class="text">${specificationValue.name}</div>
                             </div>
                             [/#list]
