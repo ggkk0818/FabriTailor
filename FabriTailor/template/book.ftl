@@ -149,6 +149,9 @@
     </div>
     [#include "/shop/include/footer.ftl" /]
     <script type="text/javascript">
+        if (!$.cookie("name")) {
+            window.location.href = "${base}/login.jhtml";
+        }
         var $dateSelect = $(".main-container select.select.date"),
             $period = $(".main-container .period"),
             $timeSelection = $(".main-container .time-selection"),
