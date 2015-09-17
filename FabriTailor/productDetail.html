@@ -657,7 +657,7 @@
                     return;
                 $zoomContainer.find(".description h2").text($(this).data("title") || "");
                 $zoomContainer.find(".description p").text($(this).data("description") || "");
-                $zoomContainer.find(".image").attr("src", $(this).find(".image img").attr("src"));
+                $zoomContainer.find(".image").attr("src", $(this).find(".image img").data("image-hd") || $(this).find(".image img").attr("src"));
                 $zoomContainer.fadeTo("normal", 1, EASING_NAME);
             });
             $zoomContainer.click(function () {
@@ -820,7 +820,7 @@
             $step.find(".options .option").removeClass("active");
             $(this).addClass("active");
             if ($step.data("bg-img-change")) {
-                var src = $(this).find(".image img").attr("src");
+                var src = $(this).find(".image img").data("image-hd") || $(this).find(".image img").attr("src");
                 $bgImg = $step.children(".bg-img");
                 if ($bgImg.attr("src") != src) {
                     var $newImg = $('<img class="bg-img" />');

@@ -157,7 +157,7 @@
 					[#if product.specificationValues?has_content]
 						[#list product.specificationValues as specificationValue]
 						<div class="option" data-title="${specificationValue.name}" data-description="${specificationValue.description}" data-specification-name="${specificationValue.specification.id}" data-specification-value="${specificationValue.id}">
-							<div class="image"><img src="[#if specificationValue.specification.id == 1]${base}/resources/shop/img/product-customizztion1.jpg[#else]${specificationValue.image}[/#if]" /></div>
+							<div class="image"><img src="[#if specificationValue.specification.id == 1]${base}/resources/shop/img/product-customizztion1.jpg[#else]${specificationValue.image}[/#if]" [#if specificationValue.specification.id != 1 && specificationValue.imagehd??]data-image-hd="${specificationValue.imagehd}"[/#if] /></div>
 							<div class="text">${specificationValue.name}</div>
 						</div>
 						[/#list]
@@ -211,7 +211,7 @@
                         <div class="options clearfix">                            
                             [#list specification.specificationValues as specificationValue]
                             <div class="option" data-specification-value="${specificationValue.id}" data-title="${specificationValue.name}" [#if specificationValue.description??]data-description="${specificationValue.description}"[/#if]>
-                                <div class="image"><img src="${specificationValue.image}" [#if specification.id==1 && specificationValue.imagehd??]data-hover-image="${specificationValue.imagehd}"[/#if] /></div>
+                                <div class="image"><img src="${specificationValue.image}" [#if specification.id==1 && specificationValue.imagehd??]data-hover-image="${specificationValue.imagehd}"[#elseif specificationValue.imagehd??]data-image-hd="${specificationValue.imagehd}"[/#if] /></div>
                                 <div class="text">${specificationValue.name}</div>
                             </div>
                             [/#list]
@@ -406,7 +406,7 @@
                     return;
                 $zoomContainer.find(".description h2").text($(this).data("title") || "");
                 $zoomContainer.find(".description p").text($(this).data("description") || "");
-                $zoomContainer.find(".image").attr("src", $(this).find(".image img").attr("src"));
+                $zoomContainer.find(".image").attr("src", $(this).find(".image img").data("image-hd") || $(this).find(".image img").attr("src"));
                 $zoomContainer.fadeTo("normal", 1, EASING_NAME);
             });
             $zoomContainer.click(function () {
@@ -577,7 +577,7 @@
             $step.find(".options .option").removeClass("active");
             $(this).addClass("active");
             if ($step.data("bg-img-change")) {
-                var src = $(this).find(".image img").attr("src");
+                var src = $(this).find(".image img").data("image-hd") || $(this).find(".image img").attr("src");
                 $bgImg = $step.children(".bg-img");
                 if ($bgImg.attr("src") != src) {
                     var $newImg = $('<img class="bg-img" />');
