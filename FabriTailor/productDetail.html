@@ -65,7 +65,7 @@
                         <div class="product-image">
                             <div class="product-image">
                                 <div class="images">
-                                    <div class="image"><img src="img/product-detail1.jpg" /></div>
+                                    <div class="image" data-image-hd="img/product-detail1.jpg"><img src="img/product-detail1.jpg" /></div>
                                     <div class="image"><img src="img/product-detail2.jpg" /></div>
                                     <div class="image"><img src="img/product-detail3.jpg" /></div>
                                     <div class="image"><img src="img/product-detail4.jpg" /></div>
@@ -76,7 +76,7 @@
                             <a class="arrow-right" href="javascript:void(0);">Next</a>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-6">
+                    <div class="col-sm-12 col-md-6 product-detail-image-zoom-container">
                         <div class="product-info">
                             <h2>休斯顿 - 蓝色</h2>
                             <div class="price">
@@ -107,26 +107,12 @@
                                 <a href="javascript:void(0);">从这里开始</a>
                             </div>
                         </div>
+                        <div class="product-detail-image-zoom">
+                            <img class="image" src="img/product-detail1.jpg" />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="product-detail-image-zoom">
-            <div class="zoom-container">
-                <a class="btn-close" href="javascript:void(0);"></a>
-                <a class="arrow-left" href="javascript:void(0);">Prev</a>
-                <a class="arrow-right" href="javascript:void(0);">Next</a>
-                <img class="image" src="img/product-detail1.jpg" />
-            </div>
-        </div>
-        <div class="product-detail-image-zoom-thumbs">
-            <ul>
-                <li><a href="javascript:void(0);"><img src="img/product-detail-thumb1.jpg" data-origin-src="img/product-detail1.jpg" /></a></li>
-                <li><a href="javascript:void(0);"><img src="img/product-detail-thumb2.jpg" data-origin-src="img/product-detail2.jpg" /></a></li>
-                <li><a href="javascript:void(0);"><img src="img/product-detail-thumb3.jpg" data-origin-src="img/product-detail3.jpg" /></a></li>
-                <li><a href="javascript:void(0);"><img src="img/product-detail-thumb4.jpg" data-origin-src="img/product-detail4.jpg" /></a></li>
-                <li><a href="javascript:void(0);"><img src="img/product-detail-thumb5.jpg" data-origin-src="img/product-detail5.jpg" /></a></li>
-            </ul>
         </div>
         <div class="product-customizations">
             <div class="customization clearfix no-login">
@@ -572,81 +558,64 @@
         $productImage.find(".arrow-left").click(productImagePrev);
         $productImage.find(".arrow-right").click(productImageNext);
         productImageShow(0);
-    </script>
-    <script type="text/javascript">
+
         //产品图片放大
         var $productZoom = $(".main-container .product-detail-image-zoom"),
-            $productZoomThumbs = $(".main-container .product-detail-image-zoom-thumbs");
-        var productZoomImageShow = function (index) {
-            if ($(window).width() <= 1040)
-                return;
-            if (typeof index !== "number")
-                index = parseInt(index, 10);
-            if (index < 0 || $productZoom.hasClass("loading")
-                || $productZoomThumbs.find("ul li").length <= index
-                || $productZoomThumbs.find("ul li").eq(index).hasClass("active")) {
+            $productZoomImage = $productZoom.children(".image");
+        var productZoomImageShow = function (src) {
+            if (!src || $productZoom.hasClass("active")) {
                 return;
             }
-            if (!$productZoom.hasClass("active")) {
-                $productZoom.stop(true, false).addClass("active").fadeTo("slow", 1, EASING_NAME).find(".zoom-container .image").remove();
-                $productZoomThumbs.stop(true, false).addClass("active").fadeTo("slow", 1, EASING_NAME);
-                $("body").addClass("noscroll");
-            }
-            var src = $productZoomThumbs.find("ul li").eq(index).find("a img").data("origin-src");
-            if ($productZoom.find(".zoom-container .image").length) {
-                $productZoom.addClass("loading").find(".zoom-container .image").fadeTo("normal", 0, EASING_NAME, function () {
-                    $(this).attr("src", src);
-                    $(this).fadeTo("normal", 1, EASING_NAME, function () { $productZoom.removeClass("loading"); });
-                });
-            }
-            else {
-                var $img = $('<img class="image" />');
-                $img.attr("src", src);
-                $productZoom.find(".zoom-container").append($img);
-            }
-            $productZoomThumbs.find("ul li").removeClass("active").eq(index).addClass("active")
+            $productZoomImage.attr("src", src);
+            $productZoom.stop(true, false).addClass("active").fadeTo("normal", 1, EASING_NAME);
         };
         var productZoomImageHide = function () {
-            $productZoom.stop(true, false).fadeTo("slow", 0, EASING_NAME, function () {
-                $(this).removeClass("active").hide();
-                $productZoomThumbs.find("ul li").removeClass("active");
-                $("body").removeClass("noscroll");
-            });
-            $productZoomThumbs.stop(true, false).fadeTo("slow", 0, EASING_NAME, function () {
+            $productZoom.stop(true, false).fadeTo("normal", 0, EASING_NAME, function () {
                 $(this).removeClass("active").hide();
             });
         };
-        var productZoomImagePrev = function () {
-            var index = 0;
-            if ($productZoomThumbs.find("ul li.active").length) {
-                index = $productZoomThumbs.find("ul li.active").first().prevAll().length - 1;
-                if (index < 0)
-                    index = $productZoomThumbs.find("ul li").length - 1;
+        var productZoomImageMouseMove = function (e) {
+            if ($(window).width() <= 1040)
+                return;
+            var $image = $productImage.find(".images .image.active");
+            if ($image.data("image-hd") && ($image.data("image-hd") != $productZoomImage.attr("src") || !$productZoom.hasClass("active"))) {
+                productZoomImageShow($image.data("image-hd"));
             }
-            productZoomImageShow(index);
-        };
-        var productZoomImageNext = function () {
-            var index = 0;
-            if ($productZoomThumbs.find("ul li.active").length) {
-                index = $productZoomThumbs.find("ul li.active").first().prevAll().length + 1;
-                if (index >= $productZoomThumbs.find("ul li").length)
-                    index = 0;
+            if (e) {
+                var thumbWidth = 450,
+                    thumbHeight = 450,
+                    fullWidth = 950,
+                    fullHeight = 950,
+                    displayWidth = $productZoom.width(),
+                    displayHeight = $productZoom.height(),
+                    thumbDisplayWidth = thumbWidth / fullWidth * displayWidth,
+                    thumbDisplayHeight = thumbHeight / fullHeight * displayHeight,
+                    offsetX = e.offsetX,
+                    offsetY = e.offsetY;
+                var left = 0,
+                    top = 0;
+                if (offsetX + thumbDisplayWidth / 2 >= thumbWidth) {
+                    left = fullWidth - displayWidth;
+                }
+                else if (offsetX - thumbDisplayWidth / 2 > 0) {
+                    left = (offsetX - thumbDisplayWidth / 2) / thumbWidth * fullWidth;
+                }
+                if (offsetY + thumbDisplayHeight / 2 >= thumbHeight) {
+                    top = fullHeight - displayHeight;
+                }
+                else if(offsetY - thumbDisplayHeight / 2 > 0){
+                    top = (offsetY - thumbDisplayHeight / 2) / thumbHeight * fullHeight;
+                }
+                $productZoomImage.css({
+                    left: -left,
+                    top: -top
+                });
             }
-            productZoomImageShow(index);
         };
-        var productZoomImageThumbClick = function () {
-            productZoomImageShow($(this).parent().prevAll().length);
-        };
-        var productZoomImageInit = function () {
-            $(".main-container .product-detail .product-detail-container .product-image .images .image").click(function () {
-                productZoomImageShow($(this).prevAll(".image").length);
-            });
-            $productZoomThumbs.find("ul li a").click(productZoomImageThumbClick);
-            $productZoom.find(".arrow-left").click(productZoomImagePrev);
-            $productZoom.find(".arrow-right").click(productZoomImageNext);
-            $productZoom.find(".btn-close").click(productZoomImageHide);
-        };
-        productZoomImageInit();
+        $productImage.find(".images").on({
+            mousemove: productZoomImageMouseMove,
+            mouseleave: productZoomImageHide
+        })
     </script>
     <script type="text/javascript">
         //版型图片放大

@@ -58,7 +58,7 @@
                                 <div class="images">
                                     [#if product.productImages?has_content]
                                         [#list product.productImages as productImage]
-                                            <div class="image" data-image-hd="${productImage.large}"><img src="${productImage.medium}" title="${productImage.title}" /></div>
+                                            <div class="image"><img src="${productImage.medium}" title="${productImage.title}" /></div>
                                         [/#list]
                                     [#else]
                                         <div class="image"><img src="${setting.defaultThumbnailProductImage}" /></div>
@@ -98,12 +98,28 @@
                                 <a href="${base}/register.jhtml">从这里开始</a>
                             </div>
                         </div>
-                        <div class="product-detail-image-zoom">
-                            <img class="image" />
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="product-detail-image-zoom">
+            <div class="zoom-container">
+                <a class="btn-close" href="javascript:void(0);"></a>
+                <a class="arrow-left" href="javascript:void(0);">Prev</a>
+                <a class="arrow-right" href="javascript:void(0);">Next</a>
+                <img class="image" src="${base}/resources/shop/img/product-detail1.jpg" />
+            </div>
+        </div>
+        <div class="product-detail-image-zoom-thumbs">
+            <ul>
+                [#if product.productImages?has_content]
+					[#list product.productImages as productImage]
+						<li><a href="javascript:void(0);"><img src="${productImage.thumbnail}" data-origin-src="${productImage.large}" /></a></li>
+					[/#list]
+				[#else]
+					<li><a href="javascript:void(0);"><img src="${setting.defaultThumbnailProductImage}" data-origin-src="${setting.defaultThumbnailProductImage}" /></a></li>
+                [/#if]
+            </ul>
         </div>
         <div class="product-customizations">
             <div class="customization clearfix no-login">
@@ -305,64 +321,81 @@
         $productImage.find(".arrow-left").click(productImagePrev);
         $productImage.find(".arrow-right").click(productImageNext);
         productImageShow(0);
-
+    </script>
+    <script type="text/javascript">
         //产品图片放大
         var $productZoom = $(".main-container .product-detail-image-zoom"),
-            $productZoomImage = $productZoom.children(".image");
-        var productZoomImageShow = function (src) {
-            if (!src || $productZoom.hasClass("active")) {
+            $productZoomThumbs = $(".main-container .product-detail-image-zoom-thumbs");
+        var productZoomImageShow = function (index) {
+            if ($(window).width() <= 1040)
+                return;
+            if (typeof index !== "number")
+                index = parseInt(index, 10);
+            if (index < 0 || $productZoom.hasClass("loading")
+                || $productZoomThumbs.find("ul li").length <= index
+                || $productZoomThumbs.find("ul li").eq(index).hasClass("active")) {
                 return;
             }
-            $productZoomImage.attr("src", src);
-            $productZoom.stop(true, false).addClass("active").fadeTo("normal", 1, EASING_NAME);
+            if (!$productZoom.hasClass("active")) {
+                $productZoom.stop(true, false).addClass("active").fadeTo("slow", 1, EASING_NAME).find(".zoom-container .image").remove();
+                $productZoomThumbs.stop(true, false).addClass("active").fadeTo("slow", 1, EASING_NAME);
+                $("body").addClass("noscroll");
+            }
+            var src = $productZoomThumbs.find("ul li").eq(index).find("a img").data("origin-src");
+            if ($productZoom.find(".zoom-container .image").length) {
+                $productZoom.addClass("loading").find(".zoom-container .image").fadeTo("normal", 0, EASING_NAME, function () {
+                    $(this).attr("src", src);
+                    $(this).fadeTo("normal", 1, EASING_NAME, function () { $productZoom.removeClass("loading"); });
+                });
+            }
+            else {
+                var $img = $('<img class="image" />');
+                $img.attr("src", src);
+                $productZoom.find(".zoom-container").append($img);
+            }
+            $productZoomThumbs.find("ul li").removeClass("active").eq(index).addClass("active")
         };
         var productZoomImageHide = function () {
-            $productZoom.stop(true, false).fadeTo("normal", 0, EASING_NAME, function () {
+            $productZoom.stop(true, false).fadeTo("slow", 0, EASING_NAME, function () {
+                $(this).removeClass("active").hide();
+                $productZoomThumbs.find("ul li").removeClass("active");
+                $("body").removeClass("noscroll");
+            });
+            $productZoomThumbs.stop(true, false).fadeTo("slow", 0, EASING_NAME, function () {
                 $(this).removeClass("active").hide();
             });
         };
-        var productZoomImageMouseMove = function (e) {
-            if ($(window).width() <= 1040)
-                return;
-            var $image = $productImage.find(".images .image.active");
-            if ($image.data("image-hd") && ($image.data("image-hd") != $productZoomImage.attr("src") || !$productZoom.hasClass("active"))) {
-                productZoomImageShow($image.data("image-hd"));
+        var productZoomImagePrev = function () {
+            var index = 0;
+            if ($productZoomThumbs.find("ul li.active").length) {
+                index = $productZoomThumbs.find("ul li.active").first().prevAll().length - 1;
+                if (index < 0)
+                    index = $productZoomThumbs.find("ul li").length - 1;
             }
-            if (e) {
-                var thumbWidth = 450,
-                    thumbHeight = 450,
-                    fullWidth = 950,
-                    fullHeight = 950,
-                    displayWidth = $productZoom.width(),
-                    displayHeight = $productZoom.height(),
-                    thumbDisplayWidth = thumbWidth / fullWidth * displayWidth,
-                    thumbDisplayHeight = thumbHeight / fullHeight * displayHeight,
-                    offsetX = e.offsetX,
-                    offsetY = e.offsetY;
-                var left = 0,
-                    top = 0;
-                if (offsetX + thumbDisplayWidth / 2 >= thumbWidth) {
-                    left = fullWidth - displayWidth;
-                }
-                else if (offsetX - thumbDisplayWidth / 2 > 0) {
-                    left = (offsetX - thumbDisplayWidth / 2) / thumbWidth * fullWidth;
-                }
-                if (offsetY + thumbDisplayHeight / 2 >= thumbHeight) {
-                    top = fullHeight - displayHeight;
-                }
-                else if(offsetY - thumbDisplayHeight / 2 > 0){
-                    top = (offsetY - thumbDisplayHeight / 2) / thumbHeight * fullHeight;
-                }
-                $productZoomImage.css({
-                    left: -left,
-                    top: -top
-                });
-            }
+            productZoomImageShow(index);
         };
-        $productImage.find(".images").on({
-            mousemove: productZoomImageMouseMove,
-            mouseleave: productZoomImageHide
-        })
+        var productZoomImageNext = function () {
+            var index = 0;
+            if ($productZoomThumbs.find("ul li.active").length) {
+                index = $productZoomThumbs.find("ul li.active").first().prevAll().length + 1;
+                if (index >= $productZoomThumbs.find("ul li").length)
+                    index = 0;
+            }
+            productZoomImageShow(index);
+        };
+        var productZoomImageThumbClick = function () {
+            productZoomImageShow($(this).parent().prevAll().length);
+        };
+        var productZoomImageInit = function () {
+            $(".main-container .product-detail .product-detail-container .product-image .images .image").click(function () {
+                productZoomImageShow($(this).prevAll(".image").length);
+            });
+            $productZoomThumbs.find("ul li a").click(productZoomImageThumbClick);
+            $productZoom.find(".arrow-left").click(productZoomImagePrev);
+            $productZoom.find(".arrow-right").click(productZoomImageNext);
+            $productZoom.find(".btn-close").click(productZoomImageHide);
+        };
+        productZoomImageInit();
     </script>
     <script type="text/javascript">
         //版型图片放大
