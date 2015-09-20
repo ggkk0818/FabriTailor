@@ -439,13 +439,24 @@
         if (typeof WeixinJSBridge == "undefined") {
             $paymentRadio.find("input[value=tenpayJsapiPlugin]").parent().addClass("hidden");
             var onWeixinReaddy = function () {
-                $paymentRadio.find("input[value=tenpayJsapiPlugin]").parent().removeClass("hidden");
+                var $weixinRadio = $paymentRadio.find("input[value=tenpayJsapiPlugin]").parent();
+                $weixinRadio.removeClass("hidden").children("h4").text($weixinRadio.children("h4").text() + "（推荐）");
+                if ($purchase.find(".radio").first().not($weixinRadio)) {
+                    $purchase.find(".radio").first().before($weixinRadio);
+                }
             };
             if (document.addEventListener) {
                 document.addEventListener('WeixinJSBridgeReady', onWeixinReaddy, false);
             } else if (document.attachEvent) {
                 document.attachEvent('WeixinJSBridgeReady', onWeixinReaddy);
                 document.attachEvent('onWeixinJSBridgeReady', onWeixinReaddy);
+            }
+        }
+        else {
+            var $weixinRadio = $paymentRadio.find("input[value=tenpayJsapiPlugin]").parent();
+            $weixinRadio.children("h4").text($weixinRadio.children("h4").text() + "（推荐）");
+            if ($purchase.find(".radio").first().not($weixinRadio)) {
+                $purchase.find(".radio").first().before($weixinRadio);
             }
         }
         if (!checkWeixinPayment()) {

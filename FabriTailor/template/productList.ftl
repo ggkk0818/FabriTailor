@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     [#if productCategory??]
         [@seo type = "productList"]
-            <title>[#if productCategory.seoTitle??]${productCategory.seoTitle}[#elseif seo.title??][@seo.title?interpret /][/#if][#if systemShowPowered] - FabriTailor[/#if]</title>
+            <title>[#if productCategory.seoTitle??]${productCategory.seoTitle}[#elseif seo.title??][@seo.title?interpret /][/#if][#if systemShowPowered] - 凡布[/#if]</title>
             <meta name="author" content="Zaders Team" />
             <meta name="copyright" content="FabriTailor" />
             [#if productCategory.seoKeywords??]
