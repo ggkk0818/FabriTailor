@@ -57,7 +57,7 @@
                         <div class="tooltip">微信错误</div>
                     </div>-->
                     <div class="form-control">
-                        <input name="refer" class="input" type="text" placeholder="邀请码" />
+                        <input name="refer" class="input" type="text" placeholder="邀请码（选填）" />
                         <div class="tooltip">邀请码错误</div>
                     </div>
                     <a href="javascript:void(0);" class="button">下一步</a>
