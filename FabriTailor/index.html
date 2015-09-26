@@ -352,41 +352,47 @@
                 if ($loginPanel.children(".has-error").length)
                     return;
                 $loginPanel.children("a.button").addClass("disabled");
-                $.getJSON("${base}/common/public_key.jhtml", function (data) {
-                    var rsaKey = new RSAKey();
-                    rsaKey.setPublic(b64tohex(data.modulus), b64tohex(data.exponent));
-                    var enPassword = hex2b64(rsaKey.encrypt($password.val()));
-                    $.ajax({
-                        url: "${base}/login/submit.jhtml",
-                        type: "POST",
-                        data: {
-                            username: $username.val(),
-                            enPassword: enPassword
-                        },
-                        dataType: "json",
-                        cache: false,
-                        success: function (data) {
-                            if (data && data.type == "success") {
-                                $.cookie("memberUsername", $username.val(), { expires: 7 * 24 * 60 * 60 });
-                                //[#if redirectUrl??]
-                                window.location.href = "${redirectUrl}";
-                                //[#else]
-                                window.location.reload();
-                                //[/#if]
+                $.ajax({
+                    url: "${base}/common/public_key.jhtml",
+                    type: "GET",
+                    cache: false,
+                    success: function (data) {
+                        var rsaKey = new RSAKey();
+                        rsaKey.setPublic(b64tohex(data.modulus), b64tohex(data.exponent));
+                        var enPassword = hex2b64(rsaKey.encrypt($password.val()));
+                        $.ajax({
+                            url: "${base}/login/submit.jhtml",
+                            type: "POST",
+                            data: {
+                                username: $username.val(),
+                                enPassword: enPassword
+                            },
+                            dataType: "json",
+                            cache: false,
+                            success: function (data) {
+                                if (data && data.type == "success") {
+                                    $.cookie("memberUsername", $username.val(), { expires: 7 * 24 * 60 * 60 });
+                                    //[#if redirectUrl??]
+                                    window.location.href = "${redirectUrl}";
+                                    //[#else]
+                                    window.location.reload();
+                                    //[/#if]
+                                }
+                                else {
+                                    $loginPanel.children("p").removeClass("hidden").text("登录失败。" + data.content);
+                                }
+                            },
+                            error: function () {
+                                $loginPanel.children("p").removeClass("hidden").text("登录失败");
                             }
-                            else {
-                                $loginPanel.children("p").removeClass("hidden").text("登录失败。" + data.content);
-                            }
-                        },
-                        error: function () {
-                            $loginPanel.children("p").removeClass("hidden").text("登录失败");
-                        }
-                    }).always(function () {
+                        }).always(function () {
+                            $loginPanel.children("a.button").removeClass("disabled");
+                        });
+                    },
+                    error: function () {
+                        $loginPanel.children("p").removeClass("hidden").text("获取登录凭证失败");
                         $loginPanel.children("a.button").removeClass("disabled");
-                    });
-                }).fail(function () {
-                    $loginPanel.children("p").removeClass("hidden").text("获取登录凭证失败");
-                    $loginPanel.children("a.button").removeClass("disabled");
+                    }
                 });
             };
             $("div.login-cover-black").click(hideLogin);

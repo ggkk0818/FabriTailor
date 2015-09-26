@@ -455,7 +455,7 @@
 		[/#if]
         var $productCustomizationBuild = $(".main-container .product-customizations .customization-build"),
             $customizationBuildSummary = $(".main-container .product-customizations .customization-build-summary");
-        var productCustomizationBuildShow = function (index) {
+        var productCustomizationBuildShow = function (index, scroll) {
             if (typeof index !== "number")
                 index = parseInt(index, 10);
             if ($productCustomizationBuild.children(".btn.next").hasClass("disabled") && index > $productCustomizationBuild.children(".step.active").first().prevAll(".step").length
@@ -489,6 +489,15 @@
             else {
                 $productCustomizationBuild.children(".btn.next").removeClass("disabled");
             }
+            //滚动到选项顶部
+            if (scroll) {
+                if (typeof WeixinJSBridge == "undefined") {
+                    $(window).scrollTo($productCustomizationTabs.offset().top - 50, "normal");
+                }
+                else {
+                    $(window).scrollTop($productCustomizationTabs.offset().top - 50);
+                }
+            }
             $productCustomizationBuild.find("ol li").removeClass("active").eq(index).addClass("active");
             productCustomizationBuildCheckHeight(true);
         };
@@ -499,7 +508,7 @@
                 if (index < 0)
                     index = 0;
             }
-            productCustomizationBuildShow(index);
+            productCustomizationBuildShow(index, true);
         };
         var productCustomizationBuildNext = function () {
             var index = 0;
@@ -508,10 +517,10 @@
                 if (index >= $productCustomizationBuild.find("ol li").length)
                     index = $productCustomizationBuild.find("ol li").length - 1;
             }
-            productCustomizationBuildShow(index);
+            productCustomizationBuildShow(index, true);
         };
         var productCustomizationBuildControlClick = function () {
-            productCustomizationBuildShow($(this).parent().prevAll().length);
+            productCustomizationBuildShow($(this).parent().prevAll().length, true);
         };
         var productCustomizationBuildCheckHeight = function (animate) {
             if ($(window).width() > 1040) {
@@ -543,7 +552,7 @@
                 $step = $(this).parent().parent();
             $step.find(".options .option").removeClass("active");
             $(this).addClass("active");
-            if ($step.data("bg-img-change")) {
+            if ($step.data("bg-img-change") && $(window).width() > 1040) {
                 var src = $(this).find(".image img").data("image-hd") || $(this).find(".image img").attr("src");
                 $bgImg = $step.children(".bg-img");
                 if ($bgImg.attr("src") != src) {
