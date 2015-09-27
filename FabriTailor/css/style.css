@@ -1317,6 +1317,8 @@ footer .links ul {
 }
 footer .links ul li {
     display: block;
+    color: #000;
+    font-size:12px;
 }
 footer .links ul li a {
     color: #000;

@@ -31,10 +31,10 @@
             <div class="accountSize">
                 <h1>我的尺寸</h1>
 			[#if currentMember.quantityStatus?? && currentMember.quantityStatus == "confirmed"]
-                <p>人的身材通常在上下5公斤波动，通常我们的衬衫都是可以适应您体重的正常波动的。当然如果您瘦了很多，首先祝贺您减肥成功，或者胖了很多，这也没什么不好的，都可以联系您的穿衣顾问，我们的穿衣顾问会提供免费的上门量体。不过对于在第二次量体之前的衬衫，凡布不负责修改和退换，请您理解。</p>
+                <p>您已确认尺寸，可以按照自己的尺码在我们的网站上轻松选购衬衫。如果您的身材发生了很大的变化，需要重新量体，请您按照页面右侧的信息联系您的穿衣顾问。</p>
 			[#elseif currentMember.quantityStatus?? && currentMember.quantityStatus == "finished"]
-                <p>如尺寸不合请勿确认，直接联系穿衣顾问量体改衣。</p>
-                <a class="button" href="javascript:void(0);">确认合身</a>
+                <p>收到您的第一件衬衫以后，如果试穿合身，请您在下方选择确认尺寸，我们将按照这个尺寸来制作您以后的衬衫；<br />如果试穿后发现有不合身的地方，请您不要确认尺寸，按照页面右侧的信息联系您的穿衣顾问，我们会调整您满意为止。<br />如果您在收到衬衫14天后仍未选择确认尺寸，我们会默认该尺寸合身。</p>
+                <a class="button" href="javascript:void(0);">确认尺寸合身</a>
 			[#else]
                 <p>当你得到你的第一件定制衬衣后，你可以保存你的尺码。</p>
 			[/#if]
@@ -42,6 +42,7 @@
                     <img src="${base}/resources/shop/img/accountSize.jpg" />
                 </div>
             </div>
+			[#include "/shop/member/include/daDetail.ftl" /]
         </div>
     </div>
     [#include "/shop/include/footer.ftl" /]

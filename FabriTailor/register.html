@@ -307,11 +307,11 @@
             <div class="step step5" data-show-info-confirm="true" data-title="请留下你的联系方式完成注册">
                 <div class="stepForm">
                     <div class="form-control">
-                        <input name="newPassword" class="input" type="password" placeholder="创建新的密码" autocomplete="off" min="6" max="20" required />
+                        <input name="newPassword" class="input" type="password" placeholder="创建密码(至少6位，字母区分大小写)" autocomplete="off" min="6" max="20" required />
                         <div class="tooltip">密码应由6-20位字符组成</div>
                     </div>
                     <div class="form-control">
-                        <input name="rePassword" class="input" type="password" placeholder="确认新密码" autocomplete="off" required />
+                        <input name="rePassword" class="input" type="password" placeholder="确认密码(至少6位，字母区分大小写)" autocomplete="off" required />
                         <div class="tooltip">确认新密码错误</div>
                     </div>
                     <p class="msg hidden"></p>
@@ -518,6 +518,9 @@
             }
             if ($step.data("title")) {
                 $h1.text($step.data("title"));
+            }
+            if ($step.data("description")) {
+                $p.text($step.data("description"));
             }
             if (typeof WeixinJSBridge == "undefined") {
                 $(window).scrollTo(0, "normal");

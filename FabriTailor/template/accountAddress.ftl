@@ -20,6 +20,7 @@
 <body>
 	[#assign current = "addressList" /]
     [#include "/shop/include/header.ftl" /]
+	[@current_member]
     <div class="main-container clearfix">
         <div class="account-aside">
             <div class="current">地址簿<i class="showhide"></i></div>
@@ -89,6 +90,7 @@
                     <a href="javascript:void(0);" class="button">保存</a>
                 </div>
             </div>
+			[#include "/shop/member/include/daDetail.ftl" /]
         </div>
     </div>
     [#include "/shop/include/footer.ftl" /]
@@ -307,5 +309,6 @@
         $province.change(getCityData);
         $detailForm.children("a.button").click(submit);
     </script>
+	[/@current_member]
 </body>
 </html>

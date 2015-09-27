@@ -1,5 +1,5 @@
 ﻿.accountAddress{
-    margin:0 auto;
+    margin:0 200px 0 auto;
     padding: 50px;
 }
 .accountAddress h1{
@@ -254,6 +254,7 @@
 }
 @media(max-width:1040px) {
     .accountAddress{
+        margin:0 auto;
         padding: 50px 25px;
     }
 }

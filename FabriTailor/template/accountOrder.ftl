@@ -20,6 +20,7 @@
 <body>
     [#assign current = "orderList" /]
     [#include "/shop/include/header.ftl" /]
+	[@current_member]
     <div class="main-container">
         <div class="account-aside">
             <div class="current">我的订单<i class="showhide"></i></div>
@@ -82,6 +83,7 @@
                 </table>
 			[/#if]
             </div>
+			[#include "/shop/member/include/daDetail.ftl" /]
         </div>
     </div>
     [#include "/shop/include/footer.ftl" /]
@@ -104,5 +106,6 @@
             });
         }
     </script>
+	[/@current_member]
 </body>
 </html>

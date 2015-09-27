@@ -1,5 +1,5 @@
 ﻿.accountSize{
-    margin:0 auto;
+    margin:0 200px 0 auto;
     padding: 50px;
 }
 .accountSize h1{
@@ -26,6 +26,7 @@
 }
 @media(max-width:1040px) {
     .accountSize{
+        margin:0 auto;
         padding: 50px 25px;
     }
     .accountSize .size-image{

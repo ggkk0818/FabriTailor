@@ -1,0 +1,63 @@
+﻿.accountReturns{
+    margin:0 200px 0 auto;
+    padding: 50px;
+}
+.accountReturns h1{
+    font-size:30px;
+    text-align: center;
+}
+.accountReturns h5{
+    max-width:500px;
+    margin: 0 auto;
+    text-align: left;
+    color: #b6b6b6;
+}
+.accountReturns p{
+    max-width:500px;
+    margin:5px auto 16px;
+    font-size:16px;
+    text-align:left;
+}
+.accountReturns p.margin{
+    margin-top:25px;
+}
+.accountReturns p.text-center{
+    text-align:center;
+}
+.accountReturns p span.medium{
+    font-size:18px;
+}
+.accountReturns p span.large{
+    font-size:24px;
+}
+.accountReturns a.button{
+    display:block;
+    width:290px;
+    margin:10px auto;
+}
+.accountReturns .size-image{
+    width:351px;
+    margin:45px auto 0;
+}
+.accountReturns hr{
+    max-width:500px;
+    height: 0;
+    margin: 15px auto;
+    border:none;
+    border-top:1px solid #f6f6f6;
+    font-size:0;
+    line-height:0;
+}
+
+@media(max-width:1040px) {
+    .accountReturns{
+        margin:0 auto;
+        padding: 50px 25px;
+    }
+    .accountReturns hr{
+        width: 100%;
+    }
+    .accountReturns a.button{
+        width:250px;
+    }
+}

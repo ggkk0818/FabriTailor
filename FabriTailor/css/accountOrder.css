@@ -1,5 +1,5 @@
 ﻿.accountOrder{
-    margin:0 auto;
+    margin:0 200px 0 auto;
     padding: 50px;
 }
 .accountOrder h1{
@@ -53,6 +53,7 @@
 }
 @media(max-width:1040px) {
     .accountOrder{
+        margin:0 auto;
         padding: 50px 25px;
     }
     .accountOrder .order-image{

@@ -86,6 +86,7 @@
         <p class="contact">
             或致电我们<br />
             400-838-6595<br />
+			<br />
             你也可致电预约来我们位于北京太阳宫的工作室量体
         </p>
         <div class="schedule">
@@ -93,15 +94,9 @@
             <h1><span>在你选择的时间</span>，穿衣顾问将登门拜访</h1>
             <h4><a class="change-date" href="javascript:void(0);">&lt;&lt; 返回修改时间</a></h4>
             <div class="scheduleForm">
-                <div class="control-group">
-                    <div class="form-control">
-                        <input name="firstName" class="input" type="text" placeholder="姓" value="[#if memberFirstName??]${memberFirstName}[/#if]" required />
-                        <div class="tooltip">姓错误</div>
-                    </div>
-                    <div class="form-control">
-                        <input name="lastName" class="input" type="text" placeholder="名" value="[#if memberLastName??]${memberLastName}[/#if]" required />
-                        <div class="tooltip">名错误</div>
-                    </div>
+                <div class="form-control">
+                    <input name="fullName" class="input" type="text" placeholder="姓名" value="[#if currentMember?? && currentMember.name??]${currentMember.name}[/#if]" required />
+                    <div class="tooltip">姓名错误</div>
                 </div>
                 <div class="control-group">
                     <div class="form-control" style="width:120px;">
@@ -157,8 +152,7 @@
             $timeSelection = $(".main-container .time-selection"),
             $schedule = $(".main-container .schedule"),
             $scheduleForm = $schedule.children(".scheduleForm"),
-            $firstName = $scheduleForm.find("input[name=firstName]"),
-            $lastName = $scheduleForm.find("input[name=lastName]"),
+            $fullName = $scheduleForm.find("input[name=fullName]"),
             //$email = $scheduleForm.find("input[name=email]"),
             $tel = $scheduleForm.find("input[name=tel]"),
             //$weichat = $scheduleForm.find("input[name=weichat]"),
@@ -260,7 +254,7 @@
             if (hasError == 0) {
                 var params = {
                     //email: $email.val(),
-                    firstname: $firstName.val() + $lastName.val(),
+                    firstname: $fullName.val(),
                     //lastname: $lastName.val(),
                     address: $province.children(":checked").text() + $city.children(":checked").text() + " " + $addr.val(),
                     phone: $tel.val()

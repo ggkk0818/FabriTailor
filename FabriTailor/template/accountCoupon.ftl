@@ -20,6 +20,7 @@
 <body>
     [#assign current = "coupon" /]
     [#include "/shop/include/header.ftl" /]
+	[@current_member]
     <div class="main-container">
         <div class="account-aside">
             <div class="current">代金券<i class="showhide"></i></div>
@@ -77,6 +78,7 @@
                 </table>
 			[/#if]
             </div>
+			[#include "/shop/member/include/daDetail.ftl" /]
         </div>
     </div>
     [#include "/shop/include/footer.ftl" /]
@@ -87,5 +89,6 @@
             $(".main-container .account-aside ul").toggleClass("opened");
         });
     </script>
+	[/@current_member]
 </body>
 </html>

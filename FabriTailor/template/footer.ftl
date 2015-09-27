@@ -20,12 +20,10 @@
                     <h6>FabriTailor.com</h6>
                     <ul>
                         <li>
-                            <a href="javascript:void(0);">
-                                北京市<br />
-                                朝阳区<br />
-                                太阳宫金星园5单元<br />
-                                2号楼1层5012
-                            </a>
+                              北京市<br />
+                              朝阳区<br />
+                              太阳宫金星园5单元<br />
+                              2号楼1层5012
                         </li>
                     </ul>
                 </div>

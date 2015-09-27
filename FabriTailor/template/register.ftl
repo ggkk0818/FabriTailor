@@ -29,7 +29,7 @@
             <li><a href="javascript:void(0);">3</a></li>
         </ol>
         <div class="steps">
-            <div class="step step4" data-title="请留下你的联系方式完成注册">
+            <div class="step step4" data-title="请留下你的联系方式完成注册" data-description="为了给你制作最合身的衣服，请留下你的联系方式，以便预约穿衣顾问进行上门量体。">
                 <div class="stepForm">
                     <div class="form-control">
                         <input name="fullName" class="input" type="text" placeholder="姓名" required />
@@ -63,21 +63,21 @@
                     <a href="javascript:void(0);" class="button">下一步</a>
                 </div>
             </div>
-            <div class="step step5" data-title="请留下你的联系方式完成注册">
+            <div class="step step5" data-title="请留下你的联系方式完成注册" data-description="为了给你制作最合身的衣服，请留下你的联系方式，以便预约穿衣顾问进行上门量体。">
                 <div class="stepForm">
                     <div class="form-control">
-                        <input name="newPassword" class="input" type="password" placeholder="创建新的密码" autocomplete="off" min="6" max="[#if setting.passwordMaxLength??]${setting.passwordMaxLength}[#else]20[/#if]" required />
+                        <input name="newPassword" class="input" type="password" placeholder="创建密码(至少6位，字母区分大小写)" autocomplete="off" min="6" max="[#if setting.passwordMaxLength??]${setting.passwordMaxLength}[#else]20[/#if]" required />
                         <div class="tooltip">密码应由6-[#if setting.passwordMaxLength??]${setting.passwordMaxLength}[#else]20[/#if]位字符组成</div>
                     </div>
                     <div class="form-control">
-                        <input name="rePassword" class="input" type="password" placeholder="确认新密码" autocomplete="off" required />
+                        <input name="rePassword" class="input" type="password" placeholder="确认密码(至少6位，字母区分大小写)" autocomplete="off" required />
                         <div class="tooltip">确认新密码错误</div>
                     </div>
                     <p class="msg hidden"></p>
                     <a href="javascript:void(0);" class="button">下一步</a>
                 </div>
             </div>
-            <div class="step step6" data-title="请留下你的联系方式完成注册">
+            <div class="step step6" data-title="注册完成" data-description="接下来您可以：">
                 <div class="options clearfix">
                     <div class="option">
                         <h4>1.预约量体：凡布穿衣顾问会在您方便的时间地点上门为你进行量体。</h4>
@@ -182,6 +182,9 @@
             }
             if ($step.data("title")) {
                 $h1.text($step.data("title"));
+            }
+            if ($step.data("description")) {
+                $p.text($step.data("description"));
             }
             if (typeof WeixinJSBridge == "undefined") {
                 $(window).scrollTo(0, "normal");
