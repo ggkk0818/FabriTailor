@@ -82,6 +82,10 @@
     width:124px;
     margin:0 auto 50px;
 }
+.daDetail .info img.phone{
+    width:auto;
+    margin:0 auto 30px;
+}
 .daDetail .info h5{
     margin-bottom: 30px;
     margin-top: 0;

@@ -7,6 +7,7 @@
                 </div>
 			[#if currentMember.daContact??]
                 <div class="info">
+					<img class="phone" alt="" src="${base}/resources/shop/img/da-contact.png" />
                     ${currentMember.daContact}
                 </div>
                 <div class="info">
