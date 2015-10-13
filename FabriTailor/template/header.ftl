@@ -1,4 +1,4 @@
-﻿    <header>
+    <header>
         <div class="header-container">
             <a class="menu-btn show-on-small" href="javascript:void(0);"><img src="${base}/resources/shop/img/menu-btn.png" /></a>
             <div class="logo">
@@ -56,3 +56,13 @@
             <li class="register"><a class="button" href="${base}/register.jhtml">从这里开始</a></li>
         </ul>
     </aside>
+
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?6356944a8605f399f129bd559ee8c40d";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
